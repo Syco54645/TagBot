@@ -3,15 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagBot.Api", "TagBot.Api\TagBot.Api.csproj", "{E4D71DB6-6A63-4913-8FCB-EE534E62B9B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TagBot.Api", "TagBot.Api\TagBot.Api.csproj", "{E4D71DB6-6A63-4913-8FCB-EE534E62B9B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tagbot.Service", "Tagbot.Service\Tagbot.Service.csproj", "{56B2C60E-B5BF-4E1F-9CFC-AFDB6638A9C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tagbot.Service", "Tagbot.Service\Tagbot.Service.csproj", "{56B2C60E-B5BF-4E1F-9CFC-AFDB6638A9C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagBot.App", "TagBot.App\TagBot.App.csproj", "{D1F721BE-1E32-4148-91B9-4432FB2671D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TagBot.App", "TagBot.App\TagBot.App.csproj", "{D1F721BE-1E32-4148-91B9-4432FB2671D2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{52C19F10-8067-4E3F-A663-DB19550306C8}"
 	ProjectSection(SolutionItems) = preProject
 		database.sql = database.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EE4FDA15-55B8-4C35-B6A0-D229B708C68F}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
