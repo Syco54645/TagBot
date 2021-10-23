@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Tagbot.Service1;
+using Tagbot.Service;
 
 namespace TagBot.Api1.Controllers
 {

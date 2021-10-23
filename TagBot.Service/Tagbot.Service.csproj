@@ -40,6 +40,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="FlacLibSharp, Version=3.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FlacLibSharp.3.2.1\lib\net20\FlacLibSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -88,8 +91,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="contracts\DateCheckResponseContract.cs" />
     <Compile Include="contracts\ShowSearchRequestContract.cs" />
     <Compile Include="contracts\ShowSearchResponseContract.cs" />
+    <Compile Include="Flac.cs" />
+    <Compile Include="models\FlacFileInfo.cs" />
+    <Compile Include="models\Metadata.cs" />
     <Compile Include="models\Setlist.cs" />
     <Compile Include="models\Show.cs" />
     <Compile Include="models\Track.cs" />
