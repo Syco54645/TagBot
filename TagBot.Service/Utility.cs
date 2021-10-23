@@ -63,6 +63,18 @@ namespace Tagbot.Service
             return supportedAudioFormats.Contains(extension);
         }
 
+        public static bool isInfoFile(string extension)
+        {
+            List<string> supportedInfoFileFormats = new List<string>
+            {
+                ".txt",
+                ".md5",
+                ".ffp",
+            };
+
+            return supportedInfoFileFormats.Contains(extension);
+        }
+
         public static string UpperFirst(string str)
         {
             if (String.IsNullOrEmpty(str))
