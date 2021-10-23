@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -98,7 +99,8 @@ namespace TagBot.App
         private void tvDirectories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode newSelected = e.Node;
-            lvFiles.Items.Clear();
+            lvAudioFiles.Items.Clear();
+            lvTextFiles.Items.Clear();
             DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
             ListViewItem.ListViewSubItem[] subItems;
             ListViewItem item = null;
@@ -124,32 +126,42 @@ namespace TagBot.App
                     new ListViewItem.ListViewSubItem(item, dir.LastAccessTime.ToShortDateString())
                 };
                 item.SubItems.AddRange(subItems);
-                lvFiles.Items.Add(item);
+                lvAudioFiles.Items.Add(item);
             }
             foreach (FileInfo file in nodeDirInfo.GetFiles())
             {
                 string extension = file.Extension;
-                item = new ListViewItem(file.Name, Utility.getIconType(extension));
-                subItems = new ListViewItem.ListViewSubItem[]
-                { 
+                if (Utility.isSupportedAudio(extension))
+                {
+                    item = new ListViewItem(file.Name, Utility.getIconType(extension));
+                    subItems = new ListViewItem.ListViewSubItem[]
+                    {
                     new ListViewItem.ListViewSubItem(item, "File"),
                     new ListViewItem.ListViewSubItem(item, file.LastAccessTime.ToShortDateString())
-                };
+                    };
 
-                item.SubItems.AddRange(subItems);
-                lvFiles.Items.Add(item);
+                    item.SubItems.AddRange(subItems);
+                    lvAudioFiles.Items.Add(item);
+                }
+                else if (Utility.isInfoFile(extension))
+                {
+                    item = new ListViewItem(file.Name, Utility.getIconType(extension));
+
+
+                    lvTextFiles.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    lvTextFiles.Items.Add(item);
+                }
             }
 
-            lvFiles.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            lvAudioFiles.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
-        private void lvFiles_SelectedIndexChanged(object sender, EventArgs e)
+        private void lvAudioFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var foo = lvFiles.SelectedItems;
-            //foo[0].Name;
-            if (foo.Count > 0)
+            var selectedFiles = lvAudioFiles.SelectedItems;
+            if (selectedFiles.Count > 0)
             {
-                string fileName = foo[0].Text;
+                string fileName = selectedFiles[0].Text;
 
                 Flac flac = new Flac();
                 FlacFileInfo flacInfo = flac.getFlacFileInfo(this.currentPath + "\\" + fileName);
@@ -172,8 +184,9 @@ namespace TagBot.App
 
         private void btnAutomate_Click(object sender, EventArgs e)
         {
+            pbTagProgress.Value = 0;
             List<Track> tracks = showData.Setlist;
-            var files = lvFiles.Items;
+            var files = lvAudioFiles.Items;
             List<string> audioFiles = new List<string>();
             foreach (ListViewItem f in files)
             {
@@ -199,16 +212,34 @@ namespace TagBot.App
                         Album = showData.Date + " " + showData.Venue + ", " + showData.City + ", " + showData.State
                     };
                     Flac.writeFlacTags(path, metadata);
+                    int incrementAmount = 100 / audioFiles.Count;
+                    pbTagProgress.Increment(incrementAmount * (i));
                 }
+                MessageBox.Show("Tagging Complete");
             }
             else
             {
                 // scary needs to match stuff here
             }
-            foreach (Track t in tracks)
+            /*foreach (Track t in tracks)
             {
 
-            }
+            }*/
+            
+        }
+
+        private void lvTextFiles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void lvTextFiles_DoubleClick(object sender, EventArgs e)
+        {
+            var selectedFiles = lvTextFiles.SelectedItems;
+            string fileName = selectedFiles[0].Text;
+            frmText frmText = new frmText(this.currentPath + "\\" + fileName);
+            frmText.Show();
         }
     }
 }
