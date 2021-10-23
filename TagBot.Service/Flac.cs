@@ -43,5 +43,39 @@ namespace TagBot.Service
            
             return response;
         }
+
+        public static bool writeFlacTags(string path, Metadata metadata)
+        {
+            try
+            {
+                using (FlacFile flac = new FlacFile(path))
+                {
+                    var comment = flac.VorbisComment;
+                    if (comment == null)
+                    {
+                        // Create a new vorbis comment metadata block
+                        comment = new VorbisComment();
+                        // Add it to the flac file
+                        flac.Metadata.Add(comment);
+                    }
+
+                    // Update the fields
+                    comment.Artist.Value = metadata.Artist;
+                    comment.Album.Value = metadata.Album;
+                    comment.Date.Value = metadata.Date;
+                    comment.Title.Value = metadata.Title;
+                    comment.TrackNumber.Value = metadata.Tracknumber;
+
+                    // Write the changes back to the FLAC file
+                    flac.Save();
+                }
+            }
+            catch (Exception e)
+            {
+                // todo figure out a nice way to handle errors in the service.
+            }
+
+            return true;
+        }
     }
 }

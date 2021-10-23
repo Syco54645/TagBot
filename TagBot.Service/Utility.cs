@@ -72,5 +72,10 @@ namespace Tagbot.Service
             str = str.ToLower();
             return str.First().ToString().ToUpper() + String.Join("", str.Skip(1));
         }
+
+        public static T DeserializeObject<T>(string json)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
+        }
     }
 }

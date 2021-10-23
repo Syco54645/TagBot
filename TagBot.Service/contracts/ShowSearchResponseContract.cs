@@ -5,7 +5,7 @@ using Tagbot.Service.models;
 
 namespace Tagbot.Service.contracts
 {
-    class ShowSearchResponseContract : Show
+    public class ShowSearchResponseContract : Show
     {
     }
 }

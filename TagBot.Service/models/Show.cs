@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tagbot.Service.models
 {
-    class Show
+    public class Show
     {
 
         public int ShowId { get; set; }
