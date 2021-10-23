@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 
-using Tagbot.Service1.contracts;
-using Tagbot.Service1.models;
+using Tagbot.Service.contracts;
+using Tagbot.Service.models;
 
-namespace Tagbot.Service1
+namespace Tagbot.Service
 {
     public class Sqlite
     {
