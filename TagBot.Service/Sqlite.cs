@@ -122,7 +122,7 @@ namespace Tagbot.Service
                         Track temp = new Track
                         {
                             TrackName = (string)reader["title"],
-                            TrackNumber = (decimal)reader["track_number"],
+                            TrackNumber = (int)(Int64)reader["track_number"],
                         };
 
                         tracks.Add(temp);

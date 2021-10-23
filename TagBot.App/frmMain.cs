@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Tagbot.Service;
+using Tagbot.Service.contracts;
+using Tagbot.Service.models;
 using TagBot.Service;
 using TagBot.Service.contracts;
 using TagBot.Service.models;
@@ -13,6 +16,7 @@ namespace TagBot.App
     public partial class frmMain : Form
     {
         private string currentPath;
+        private ShowSearchResponseContract showData;
 
         public frmMain()
         {
@@ -27,11 +31,14 @@ namespace TagBot.App
             txtDate.Text = "dmb2009-09-19";
         }
 
-        private void btnLoad_Click(object sender, EventArgs e)
+        private void btnGetShowData_Click(object sender, EventArgs e)
         {
             Sqlite sqlite = new Sqlite();
             sqlite.databasePath = AppDomain.CurrentDomain.BaseDirectory + "../../../";
-            rtfResult.Text = sqlite.getShow(txtDate.Text);
+            string showDataJson = sqlite.getShow(txtDate.Text);
+
+            showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
+            rtfResult.Text = showDataJson;
         }
 
         // tree view sample lifted from https://docs.microsoft.com/en-us/dotnet/desktop/winforms/controls/creating-an-explorer-style-interface-with-the-listview-and-treeview?view=netframeworkdesktop-4.8
@@ -158,9 +165,50 @@ namespace TagBot.App
                 txtMetadataAlbum.Text = flacInfo.Metadata.Album;
                 txtMetadataDate.Text = flacInfo.Metadata.Date;
                 txtMetadataTitle.Text = flacInfo.Metadata.Title;
-                txtMetadataTrackNumber.Text = flacInfo.Metadata.TrackNumber;
+                txtMetadataTrackNumber.Text = flacInfo.Metadata.Tracknumber;
             }
             
+        }
+
+        private void btnAutomate_Click(object sender, EventArgs e)
+        {
+            List<Track> tracks = showData.Setlist;
+            var files = lvFiles.Items;
+            List<string> audioFiles = new List<string>();
+            foreach (ListViewItem f in files)
+            {
+                string fileName = f.Text;
+                string ext = fileName.Substring(Math.Max(0, fileName.Length - 5));
+                if (ext == ".flac")
+                {
+                    audioFiles.Add(fileName);
+                }
+            }
+
+            if (tracks.Count == audioFiles.Count)
+            {
+                // we can do this automatically more than likely
+                for (int i = 0; i < audioFiles.Count; i++)
+                {
+                    string fileName = audioFiles[i];
+                    string path = this.currentPath + "\\" + fileName;
+                    Metadata metadata = new Metadata
+                    {
+                        Title = tracks[i].TrackName,
+                        Tracknumber = Convert.ToString(tracks[i].TrackNumber),
+                        Album = showData.Date + " " + showData.Venue + ", " + showData.City + ", " + showData.State
+                    };
+                    Flac.writeFlacTags(path, metadata);
+                }
+            }
+            else
+            {
+                // scary needs to match stuff here
+            }
+            foreach (Track t in tracks)
+            {
+
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tagbot.Service.models
 {
-    class Setlist
+    public class Setlist
     {
         List<Track> Tracks { get; set; } = new List<Track>();
     }

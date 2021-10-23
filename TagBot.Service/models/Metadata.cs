@@ -13,7 +13,7 @@ namespace TagBot.Service.models
         public string Album { get; set; }
         public string Date { get; set; }
         public string Title { get; set; }
-        public string TrackNumber { get; set; }
+        public string Tracknumber { get; set; }
 
         public object this[string name]
         {
