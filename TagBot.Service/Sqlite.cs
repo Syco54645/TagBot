@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Data.Sqlite;
-using Tagbot.Service.contracts;
-using Tagbot.Service.models;
+using System.Data.SQLite;
 
-namespace Tagbot.Service
+using Tagbot.Service1.contracts;
+using Tagbot.Service1.models;
+
+namespace Tagbot.Service1
 {
     public class Sqlite
     {
-        private string databasePath = AppDomain.CurrentDomain.BaseDirectory + "../../../../";
+        public string databasePath { get; set; }// = AppDomain.CurrentDomain.BaseDirectory + "../";
 
         public string test(string date)
         {
             ShowSearchResponseContract response = new ShowSearchResponseContract();
-            using (var connection = new SqliteConnection("Data Source=" + databasePath + "database.sql"))
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath + "database.sql"))
             {
                 connection.Open();
 
@@ -64,8 +65,8 @@ namespace Tagbot.Service
         public string getShowInfo(string date)
         {
             ShowSearchResponseContract response = new ShowSearchResponseContract();
-            
-            using (var connection = new SqliteConnection("Data Source=" + databasePath + "database.sql"))
+            //https://localhost:44341/api/values/dmb2009-09-19
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath + "database.sql"))
             {
                 connection.Open();
 
@@ -98,7 +99,7 @@ namespace Tagbot.Service
         public string getShowSongs(int showId)
         {
             List<Track> tracks = new List<Track>();
-            using (var connection = new SqliteConnection("Data Source=" + databasePath + "database.sql"))
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath + "database.sql"))
             {
                 connection.Open();
 
@@ -121,7 +122,7 @@ namespace Tagbot.Service
                         Track temp = new Track
                         {
                             TrackName = (string)reader["title"],
-                            TrackNumber = (long)reader["track_number"],
+                            TrackNumber = (decimal)reader["track_number"],
                         };
 
                         tracks.Add(temp);

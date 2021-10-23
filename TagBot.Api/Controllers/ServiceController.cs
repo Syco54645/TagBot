@@ -1,36 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Tagbot.Service;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using Tagbot.Service1;
 
-namespace TagBotApi.Controllers
+namespace TagBot.Api1.Controllers
 {
-    [ApiController]
-    [Route("[controller]/{date}")]
-
-    public class ServiceController : ControllerBase
+    public class ServiceController : ApiController
     {
-        private readonly ILogger<ServiceController> _logger;
-
-        public ServiceController(ILogger<ServiceController> logger)
-        {
-            _logger = logger;
-        }
-
-        [HttpGet]
-        public string Get(string date)
-        {
-            string response = _sqlite(date);
-            return response;
-        }
-
         private string _sqlite(string date)
         {
             Sqlite sqlite = new Sqlite();
+            sqlite.databasePath = AppDomain.CurrentDomain.BaseDirectory + "../";
             return sqlite.getShow(date);
         }
+
+        // GET api/values
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
+        // GET api/values/5
+        public string Get(string id)
+        {
+            string response = _sqlite(id);
+            return response;
+        }
+
     }
 }

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tagbot.Service.models
+namespace Tagbot.Service1.models
 {
     class Track
     {
-        public long TrackNumber { get; set; }
+        public decimal TrackNumber { get; set; }
         public string TrackName { get; set; }
     }
 }

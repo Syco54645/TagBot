@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TagBot.Api", "TagBot.Api\TagBot.Api.csproj", "{E4D71DB6-6A63-4913-8FCB-EE534E62B9B9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tagbot.Service", "Tagbot.Service\Tagbot.Service.csproj", "{56B2C60E-B5BF-4E1F-9CFC-AFDB6638A9C0}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TagBot.App", "TagBot.App\TagBot.App.csproj", "{D1F721BE-1E32-4148-91B9-4432FB2671D2}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{52C19F10-8067-4E3F-A663-DB19550306C8}"
 	ProjectSection(SolutionItems) = preProject
 		database.sql = database.sql
@@ -19,24 +13,30 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagBot.Api", "TagBot.Api\TagBot.Api.csproj", "{6E705BDE-8EDC-480B-94A7-E6A039C8AB63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagBot.Service", "TagBot.Service\TagBot.Service.csproj", "{011D8A2A-35D7-4FE1-82CE-A9CAB5656C41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TagBot.App", "TagBot.App\TagBot.App.csproj", "{B8635EBE-FF1F-4B33-BB34-07CFD54A2B63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E4D71DB6-6A63-4913-8FCB-EE534E62B9B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E4D71DB6-6A63-4913-8FCB-EE534E62B9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E4D71DB6-6A63-4913-8FCB-EE534E62B9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E4D71DB6-6A63-4913-8FCB-EE534E62B9B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56B2C60E-B5BF-4E1F-9CFC-AFDB6638A9C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56B2C60E-B5BF-4E1F-9CFC-AFDB6638A9C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56B2C60E-B5BF-4E1F-9CFC-AFDB6638A9C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56B2C60E-B5BF-4E1F-9CFC-AFDB6638A9C0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D1F721BE-1E32-4148-91B9-4432FB2671D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D1F721BE-1E32-4148-91B9-4432FB2671D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D1F721BE-1E32-4148-91B9-4432FB2671D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D1F721BE-1E32-4148-91B9-4432FB2671D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E705BDE-8EDC-480B-94A7-E6A039C8AB63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E705BDE-8EDC-480B-94A7-E6A039C8AB63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E705BDE-8EDC-480B-94A7-E6A039C8AB63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E705BDE-8EDC-480B-94A7-E6A039C8AB63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{011D8A2A-35D7-4FE1-82CE-A9CAB5656C41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{011D8A2A-35D7-4FE1-82CE-A9CAB5656C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{011D8A2A-35D7-4FE1-82CE-A9CAB5656C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{011D8A2A-35D7-4FE1-82CE-A9CAB5656C41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8635EBE-FF1F-4B33-BB34-07CFD54A2B63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8635EBE-FF1F-4B33-BB34-07CFD54A2B63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8635EBE-FF1F-4B33-BB34-07CFD54A2B63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8635EBE-FF1F-4B33-BB34-07CFD54A2B63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
