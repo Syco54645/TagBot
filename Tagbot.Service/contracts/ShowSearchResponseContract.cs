@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Tagbot.Service.models;
+using Tagbot.Service1.models;
 
-namespace Tagbot.Service.contracts
+namespace Tagbot.Service1.contracts
 {
     class ShowSearchResponseContract : Show
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tagbot.Service.contracts
+namespace Tagbot.Service1.contracts
 {
     class ShowSearchRequestContract
     {

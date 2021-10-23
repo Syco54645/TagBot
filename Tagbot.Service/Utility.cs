@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tagbot.Service
+namespace Tagbot.Service1
 {
     public static class Utility
     {

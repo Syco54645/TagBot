@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tagbot.Service.models
+namespace Tagbot.Service1.models
 {
     class Setlist
     {
