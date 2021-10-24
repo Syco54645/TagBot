@@ -26,16 +26,22 @@ namespace TagBot.App
         {
             InitializeComponent();
 
+            this.StartPosition = FormStartPosition.CenterScreen;
             PopulateTreeView();
             this.tvDirectories.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.tvDirectories_NodeMouseClick);
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            txtDate.Text = "dmb2009-09-19";
+            //txtDate.Text = "dmb2009-09-19";
         }
 
         private void btnGetShowData_Click(object sender, EventArgs e)
+        {
+            getShowData();
+        }
+
+        private void getShowData()
         {
             Sqlite sqlite = new Sqlite();
             sqlite.databasePath = AppDomain.CurrentDomain.BaseDirectory + "../../../";
@@ -103,6 +109,7 @@ namespace TagBot.App
         private void tvDirectories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode newSelected = e.Node;
+            lvAudioFiles.SelectedIndices.Clear();
             lvAudioFiles.Items.Clear();
             lvTextFiles.Items.Clear();
             DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
@@ -132,6 +139,16 @@ namespace TagBot.App
                 item.SubItems.AddRange(subItems);
                 lvAudioFiles.Items.Add(item);
             }*/
+            List<string> files = new List<string>();
+            foreach (FileInfo file in nodeDirInfo.GetFiles())
+            {
+                if (Utility.isSupportedAudio(file.Extension))
+                {
+                    files.Add(file.Name);
+                }
+            }
+            createContentionVariables(files);
+
             foreach (FileInfo file in nodeDirInfo.GetFiles())
             {
                 string extension = file.Extension;
@@ -140,8 +157,10 @@ namespace TagBot.App
                     item = new ListViewItem(file.Name, Utility.getIconType(extension));
                     subItems = new ListViewItem.ListViewSubItem[]
                     {
-                        new ListViewItem.ListViewSubItem(item, "File"),
-                        new ListViewItem.ListViewSubItem(item, file.LastAccessTime.ToShortDateString())
+                        new ListViewItem.ListViewSubItem(item, proposedMetadata[file.Name].Metadata.Tracknumber),
+                        new ListViewItem.ListViewSubItem(item, proposedMetadata[file.Name].Metadata.Title),
+                        new ListViewItem.ListViewSubItem(item, proposedMetadata[file.Name].Metadata.Artist),
+                        new ListViewItem.ListViewSubItem(item, proposedMetadata[file.Name].Metadata.Album),
                     };
 
                     item.SubItems.AddRange(subItems);
@@ -157,16 +176,19 @@ namespace TagBot.App
             }
 
             lvAudioFiles.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
 
+        private void createContentionVariables(List<string> files)
+        {
             originalMetadata = new Dictionary<string, FlacFileInfo>();
             proposedMetadata = new Dictionary<string, FlacFileInfo>();
 
-            foreach (ListViewItem i in lvAudioFiles.Items)
+            foreach (string filename in files)
             {
-                FlacFileInfo flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + i.Text);
-                originalMetadata.Add(i.Text, flacInfo);
-                proposedMetadata.Add(i.Text, flacInfo);
-            }            
+                FlacFileInfo flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + filename);
+                originalMetadata.Add(filename, flacInfo);
+                proposedMetadata.Add(filename, flacInfo);
+            }
             frmDebug.originalMetadata = Utility.SerializeObject(originalMetadata, true);
             frmDebug.proposedMetadata = Utility.SerializeObject(proposedMetadata, true);
         }
@@ -194,11 +216,27 @@ namespace TagBot.App
                 txtMetadataTitle.Text = flacInfo.Metadata.Title;
                 txtMetadataTrackNumber.Text = flacInfo.Metadata.Tracknumber;
             }
+            else
+            {
+                lblEncoder.Text = "";
+                lblBitrate.Text = "";
+                lblSampleRate.Text = "";
+                lblChannels.Text = "";
+                lblSize.Text = "";
+                lblDuration.Text = "";
+                txtMetadataTitle.Text = "";
+                txtMetadataArtist.Text = "";
+                txtMetadataAlbum.Text = "";
+                txtMetadataDate.Text = "";
+                txtMetadataTitle.Text = "";
+                txtMetadataTrackNumber.Text = "";
+            }
         }
         #endregion
 
-        private void btnAutomate_Click(object sender, EventArgs e)
+        private void btnAutomate_Click_Original(object sender, EventArgs e)
         {
+            getShowData();
             pbTagProgress.Value = 0;
             List<Track> tracks = showData.Setlist;
             var files = lvAudioFiles.Items;
@@ -243,10 +281,47 @@ namespace TagBot.App
             
         }
 
-        private void lvTextFiles_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnAutomate_Click(object sender, EventArgs e)
         {
-            
+            getShowData();
+            pbTagProgress.Value = 0;
+            lvAudioFiles.SelectedIndices.Clear();
+            List<Track> tracks = showData.Setlist;
+            var files = lvAudioFiles.Items;
+            List<string> audioFiles = new List<string>();
+            foreach (ListViewItem f in files)
+            {
+                string fileName = f.Text;
+                string ext = fileName.Substring(Math.Max(0, fileName.Length - 5));
+                if (Utility.isSupportedAudio(ext))
+                {
+                    audioFiles.Add(fileName);
+                }
+            }
 
+            if (tracks.Count == audioFiles.Count)
+            {
+                // we can do this automatically more than likely
+                for (int i = 0; i < audioFiles.Count; i++)
+                {
+                    string filename = audioFiles[i];
+                    Metadata metadata = new Metadata
+                    {
+                        Title = tracks[i].TrackName,
+                        Tracknumber = Convert.ToString(tracks[i].TrackNumber),
+                        Album = showData.Date + " " + showData.Venue + ", " + showData.City + ", " + showData.State
+                    };
+                    proposedMetadata[filename].Metadata = metadata;
+                    
+                    int incrementAmount = 100 / audioFiles.Count;
+                    pbTagProgress.Increment(incrementAmount * (i));
+                }
+                MessageBox.Show("Please verify and save your files.", "Tagging Complete");
+            }
+            else
+            {
+                // scary needs to match stuff here
+            }
         }
 
         private void lvTextFiles_DoubleClick(object sender, EventArgs e)
@@ -274,6 +349,43 @@ namespace TagBot.App
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Made with love for the DMB community by Syco54645");
+        }
+
+        private void tsbSave_Click(object sender, EventArgs e)
+        {
+            var files = lvAudioFiles.SelectedItems;
+            int incrementAmount = 100 / files.Count;
+            pbTagProgress.Value = 0;
+
+            List<string> audioFiles = new List<string>();
+            for (int i = 0; i < files.Count; i++)
+            {
+                ListViewItem f = files[i];
+                string filename = f.Text;
+                string ext = filename.Substring(Math.Max(0, filename.Length - 5));
+                if (ext == ".flac")
+                {
+                    audioFiles.Add(filename);
+
+                    string path = this.currentPath + "\\" + filename;
+                    Metadata metadata = proposedMetadata[filename].Metadata;
+                    Flac.writeFlacTags(path, metadata);
+                    pbTagProgress.Increment(incrementAmount * (i));
+                }
+            }
+            MessageBox.Show("Flac tags saved.", "Saving Complete");
+        }
+
+        private void lvAudioFiles_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.A && e.Control)
+            {
+                lvAudioFiles.MultiSelect = true;
+                foreach (ListViewItem item in lvAudioFiles.Items)
+                {
+                    item.Selected = true;
+                }
+            }
         }
     }
 }

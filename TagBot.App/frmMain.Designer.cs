@@ -35,10 +35,10 @@ namespace TagBot.App
             this.scNested = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lvAudioFiles = new System.Windows.Forms.ListView();
-            this.Name1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.LastModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.MetaTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvAudioFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvAudioTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvAudioArtist = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvAudioTrackNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvTextFiles = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -84,6 +84,9 @@ namespace TagBot.App
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lvAudioAlbum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsbSave = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.scNested)).BeginInit();
             this.scNested.Panel1.SuspendLayout();
             this.scNested.Panel2.SuspendLayout();
@@ -103,6 +106,7 @@ namespace TagBot.App
             this.scOuter.Panel2.SuspendLayout();
             this.scOuter.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // imgListFileIcons
@@ -140,6 +144,7 @@ namespace TagBot.App
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.toolStrip1);
             this.splitContainer1.Panel1.Controls.Add(this.lvAudioFiles);
             // 
             // splitContainer1.Panel2
@@ -152,43 +157,46 @@ namespace TagBot.App
             // lvAudioFiles
             // 
             this.lvAudioFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Name1,
-            this.Type,
-            this.LastModified,
-            this.MetaTitle});
-            this.lvAudioFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvAudioFilename,
+            this.lvAudioTrackNumber,
+            this.lvAudioTitle,
+            this.lvAudioArtist,
+            this.lvAudioAlbum});
+            this.lvAudioFiles.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lvAudioFiles.FullRowSelect = true;
             this.lvAudioFiles.HideSelection = false;
-            this.lvAudioFiles.Location = new System.Drawing.Point(0, 0);
-            this.lvAudioFiles.MultiSelect = false;
+            this.lvAudioFiles.Location = new System.Drawing.Point(0, 24);
             this.lvAudioFiles.Name = "lvAudioFiles";
-            this.lvAudioFiles.Size = new System.Drawing.Size(608, 329);
+            this.lvAudioFiles.Size = new System.Drawing.Size(608, 305);
             this.lvAudioFiles.SmallImageList = this.imgListFileIcons;
             this.lvAudioFiles.TabIndex = 10;
             this.lvAudioFiles.UseCompatibleStateImageBehavior = false;
             this.lvAudioFiles.View = System.Windows.Forms.View.Details;
             this.lvAudioFiles.SelectedIndexChanged += new System.EventHandler(this.lvAudioFiles_SelectedIndexChanged);
+            this.lvAudioFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvAudioFiles_KeyDown);
             // 
-            // Name1
+            // lvAudioFilename
             // 
-            this.Name1.Text = "Name";
+            this.lvAudioFilename.Text = "Filename";
             // 
-            // Type
+            // lvAudioTitle
             // 
-            this.Type.Text = "Type";
+            this.lvAudioTitle.Text = "Title";
             // 
-            // LastModified
+            // lvAudioArtist
             // 
-            this.LastModified.Text = "LastModified";
+            this.lvAudioArtist.Text = "Artist";
             // 
-            // MetaTitle
+            // lvAudioTrackNumber
             // 
-            this.MetaTitle.Text = "Title";
+            this.lvAudioTrackNumber.Text = "#";
             // 
             // lvTextFiles
             // 
             this.lvTextFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.lvTextFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvTextFiles.FullRowSelect = true;
             this.lvTextFiles.HideSelection = false;
             this.lvTextFiles.Location = new System.Drawing.Point(0, 0);
             this.lvTextFiles.MultiSelect = false;
@@ -198,7 +206,6 @@ namespace TagBot.App
             this.lvTextFiles.TabIndex = 11;
             this.lvTextFiles.UseCompatibleStateImageBehavior = false;
             this.lvTextFiles.View = System.Windows.Forms.View.Details;
-            this.lvTextFiles.SelectedIndexChanged += new System.EventHandler(this.lvTextFiles_SelectedIndexChanged);
             this.lvTextFiles.DoubleClick += new System.EventHandler(this.lvTextFiles_DoubleClick);
             // 
             // columnHeader1
@@ -567,13 +574,13 @@ namespace TagBot.App
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -590,14 +597,15 @@ namespace TagBot.App
             // debugToolStripMenuItem
             // 
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.debugToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.debugToolStripMenuItem.Text = "Debug";
             this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(106, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // aboutToolStripMenuItem
             // 
@@ -605,6 +613,30 @@ namespace TagBot.App
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // lvAudioAlbum
+            // 
+            this.lvAudioAlbum.Text = "Album";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbSave});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(608, 25);
+            this.toolStrip1.TabIndex = 11;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tsbSave
+            // 
+            this.tsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSave.Image = ((System.Drawing.Image)(resources.GetObject("tsbSave.Image")));
+            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSave.Name = "tsbSave";
+            this.tsbSave.Size = new System.Drawing.Size(23, 22);
+            this.tsbSave.Text = "Save";
+            this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
             // frmMain
             // 
@@ -622,6 +654,7 @@ namespace TagBot.App
             ((System.ComponentModel.ISupportInitialize)(this.scNested)).EndInit();
             this.scNested.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -643,6 +676,8 @@ namespace TagBot.App
             this.scOuter.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -653,10 +688,10 @@ namespace TagBot.App
         private System.Windows.Forms.SplitContainer scNested;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListView lvAudioFiles;
-        private System.Windows.Forms.ColumnHeader Name1;
-        private System.Windows.Forms.ColumnHeader Type;
-        private System.Windows.Forms.ColumnHeader LastModified;
-        private System.Windows.Forms.ColumnHeader MetaTitle;
+        private System.Windows.Forms.ColumnHeader lvAudioFilename;
+        private System.Windows.Forms.ColumnHeader lvAudioTitle;
+        private System.Windows.Forms.ColumnHeader lvAudioArtist;
+        private System.Windows.Forms.ColumnHeader lvAudioTrackNumber;
         private System.Windows.Forms.ListView lvTextFiles;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -702,6 +737,9 @@ namespace TagBot.App
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader lvAudioAlbum;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton tsbSave;
     }
 }
 
