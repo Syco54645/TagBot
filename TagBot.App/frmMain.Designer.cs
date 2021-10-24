@@ -34,11 +34,14 @@ namespace TagBot.App
             this.imgListFileIcons = new System.Windows.Forms.ImageList(this.components);
             this.scNested = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.lvAudioFiles = new System.Windows.Forms.ListView();
             this.lvAudioFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvAudioTrackNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvAudioTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvAudioArtist = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvAudioTrackNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvAudioAlbum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvTextFiles = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -84,9 +87,9 @@ namespace TagBot.App
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lvAudioAlbum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tsbSave = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.tslLocation = new System.Windows.Forms.ToolStripLabel();
             ((System.ComponentModel.ISupportInitialize)(this.scNested)).BeginInit();
             this.scNested.Panel1.SuspendLayout();
             this.scNested.Panel2.SuspendLayout();
@@ -95,6 +98,7 @@ namespace TagBot.App
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -106,7 +110,7 @@ namespace TagBot.App
             this.scOuter.Panel2.SuspendLayout();
             this.scOuter.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // imgListFileIcons
@@ -154,6 +158,26 @@ namespace TagBot.App
             this.splitContainer1.SplitterDistance = 329;
             this.splitContainer1.TabIndex = 10;
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbSave});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(608, 25);
+            this.toolStrip1.TabIndex = 11;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tsbSave
+            // 
+            this.tsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSave.Image = ((System.Drawing.Image)(resources.GetObject("tsbSave.Image")));
+            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSave.Name = "tsbSave";
+            this.tsbSave.Size = new System.Drawing.Size(23, 22);
+            this.tsbSave.Text = "Save";
+            this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
+            // 
             // lvAudioFiles
             // 
             this.lvAudioFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -179,6 +203,10 @@ namespace TagBot.App
             // 
             this.lvAudioFilename.Text = "Filename";
             // 
+            // lvAudioTrackNumber
+            // 
+            this.lvAudioTrackNumber.Text = "#";
+            // 
             // lvAudioTitle
             // 
             this.lvAudioTitle.Text = "Title";
@@ -187,9 +215,9 @@ namespace TagBot.App
             // 
             this.lvAudioArtist.Text = "Artist";
             // 
-            // lvAudioTrackNumber
+            // lvAudioAlbum
             // 
-            this.lvAudioTrackNumber.Text = "#";
+            this.lvAudioAlbum.Text = "Album";
             // 
             // lvTextFiles
             // 
@@ -525,13 +553,13 @@ namespace TagBot.App
             // 
             // tvDirectories
             // 
-            this.tvDirectories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvDirectories.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tvDirectories.ImageIndex = 0;
             this.tvDirectories.ImageList = this.imgListFileIcons;
-            this.tvDirectories.Location = new System.Drawing.Point(0, 0);
+            this.tvDirectories.Location = new System.Drawing.Point(0, 24);
             this.tvDirectories.Name = "tvDirectories";
             this.tvDirectories.SelectedImageIndex = 0;
-            this.tvDirectories.Size = new System.Drawing.Size(237, 432);
+            this.tvDirectories.Size = new System.Drawing.Size(237, 408);
             this.tvDirectories.TabIndex = 4;
             // 
             // scOuter
@@ -542,6 +570,7 @@ namespace TagBot.App
             // 
             // scOuter.Panel1
             // 
+            this.scOuter.Panel1.Controls.Add(this.toolStrip2);
             this.scOuter.Panel1.Controls.Add(this.tvDirectories);
             // 
             // scOuter.Panel2
@@ -574,13 +603,13 @@ namespace TagBot.App
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -614,29 +643,31 @@ namespace TagBot.App
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // lvAudioAlbum
+            // toolStrip2
             // 
-            this.lvAudioAlbum.Text = "Album";
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.tslLocation});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(237, 25);
+            this.toolStrip2.TabIndex = 9;
+            this.toolStrip2.Text = "toolStrip2";
             // 
-            // toolStrip1
+            // toolStripButton1
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbSave});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(608, 25);
-            this.toolStrip1.TabIndex = 11;
-            this.toolStrip1.Text = "toolStrip1";
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
             // 
-            // tsbSave
+            // tslLocation
             // 
-            this.tsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbSave.Image = ((System.Drawing.Image)(resources.GetObject("tsbSave.Image")));
-            this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSave.Name = "tsbSave";
-            this.tsbSave.Size = new System.Drawing.Size(23, 22);
-            this.tsbSave.Text = "Save";
-            this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
+            this.tslLocation.Name = "tslLocation";
+            this.tslLocation.Size = new System.Drawing.Size(86, 22);
+            this.tslLocation.Text = "toolStripLabel1";
             // 
             // frmMain
             // 
@@ -658,6 +689,8 @@ namespace TagBot.App
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -671,13 +704,14 @@ namespace TagBot.App
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.scOuter.Panel1.ResumeLayout(false);
+            this.scOuter.Panel1.PerformLayout();
             this.scOuter.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scOuter)).EndInit();
             this.scOuter.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -740,6 +774,9 @@ namespace TagBot.App
         private System.Windows.Forms.ColumnHeader lvAudioAlbum;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbSave;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripLabel tslLocation;
     }
 }
 
