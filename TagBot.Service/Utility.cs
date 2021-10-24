@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -88,6 +89,20 @@ namespace Tagbot.Service
         public static T DeserializeObject<T>(string json)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
+        }
+
+        public static string SerializeObject<T>(T obj, bool format = false)
+        {
+            if (format)
+            {
+                return Newtonsoft.Json.JsonConvert.SerializeObject(obj, Formatting.Indented);
+            }
+            else
+            {
+                return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
+            }
+            
+            
         }
     }
 }

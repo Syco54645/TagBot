@@ -31,17 +31,16 @@ namespace TagBot.App
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.rtfResult = new System.Windows.Forms.RichTextBox();
             this.imgListFileIcons = new System.Windows.Forms.ImageList(this.components);
-            this.scOuter = new System.Windows.Forms.SplitContainer();
-            this.tvDirectories = new System.Windows.Forms.TreeView();
             this.scNested = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lvAudioFiles = new System.Windows.Forms.ListView();
             this.Name1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.LastModified = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MetaTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvTextFiles = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pbTagProgress = new System.Windows.Forms.ProgressBar();
             this.btnAutomate = new System.Windows.Forms.Button();
@@ -75,12 +74,16 @@ namespace TagBot.App
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtMetadataTitle = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.MetaTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            ((System.ComponentModel.ISupportInitialize)(this.scOuter)).BeginInit();
-            this.scOuter.Panel1.SuspendLayout();
-            this.scOuter.Panel2.SuspendLayout();
-            this.scOuter.SuspendLayout();
+            this.tvDirectories = new System.Windows.Forms.TreeView();
+            this.scOuter = new System.Windows.Forms.SplitContainer();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.scNested)).BeginInit();
             this.scNested.Panel1.SuspendLayout();
             this.scNested.Panel2.SuspendLayout();
@@ -95,15 +98,12 @@ namespace TagBot.App
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scOuter)).BeginInit();
+            this.scOuter.Panel1.SuspendLayout();
+            this.scOuter.Panel2.SuspendLayout();
+            this.scOuter.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // rtfResult
-            // 
-            this.rtfResult.Location = new System.Drawing.Point(8, 392);
-            this.rtfResult.Name = "rtfResult";
-            this.rtfResult.Size = new System.Drawing.Size(912, 104);
-            this.rtfResult.TabIndex = 2;
-            this.rtfResult.Text = "";
             // 
             // imgListFileIcons
             // 
@@ -113,34 +113,6 @@ namespace TagBot.App
             this.imgListFileIcons.Images.SetKeyName(1, "audio");
             this.imgListFileIcons.Images.SetKeyName(2, "file");
             this.imgListFileIcons.Images.SetKeyName(3, "text");
-            // 
-            // scOuter
-            // 
-            this.scOuter.Dock = System.Windows.Forms.DockStyle.Top;
-            this.scOuter.Location = new System.Drawing.Point(0, 0);
-            this.scOuter.Name = "scOuter";
-            // 
-            // scOuter.Panel1
-            // 
-            this.scOuter.Panel1.Controls.Add(this.tvDirectories);
-            // 
-            // scOuter.Panel2
-            // 
-            this.scOuter.Panel2.Controls.Add(this.scNested);
-            this.scOuter.Size = new System.Drawing.Size(1155, 376);
-            this.scOuter.SplitterDistance = 208;
-            this.scOuter.TabIndex = 6;
-            // 
-            // tvDirectories
-            // 
-            this.tvDirectories.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tvDirectories.ImageIndex = 0;
-            this.tvDirectories.ImageList = this.imgListFileIcons;
-            this.tvDirectories.Location = new System.Drawing.Point(0, 0);
-            this.tvDirectories.Name = "tvDirectories";
-            this.tvDirectories.SelectedImageIndex = 0;
-            this.tvDirectories.Size = new System.Drawing.Size(208, 376);
-            this.tvDirectories.TabIndex = 4;
             // 
             // scNested
             // 
@@ -155,8 +127,8 @@ namespace TagBot.App
             // scNested.Panel2
             // 
             this.scNested.Panel2.Controls.Add(this.groupBox1);
-            this.scNested.Size = new System.Drawing.Size(943, 376);
-            this.scNested.SplitterDistance = 518;
+            this.scNested.Size = new System.Drawing.Size(1037, 432);
+            this.scNested.SplitterDistance = 608;
             this.scNested.TabIndex = 7;
             // 
             // splitContainer1
@@ -173,8 +145,8 @@ namespace TagBot.App
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.lvTextFiles);
-            this.splitContainer1.Size = new System.Drawing.Size(518, 376);
-            this.splitContainer1.SplitterDistance = 287;
+            this.splitContainer1.Size = new System.Drawing.Size(608, 432);
+            this.splitContainer1.SplitterDistance = 329;
             this.splitContainer1.TabIndex = 10;
             // 
             // lvAudioFiles
@@ -189,7 +161,7 @@ namespace TagBot.App
             this.lvAudioFiles.Location = new System.Drawing.Point(0, 0);
             this.lvAudioFiles.MultiSelect = false;
             this.lvAudioFiles.Name = "lvAudioFiles";
-            this.lvAudioFiles.Size = new System.Drawing.Size(518, 287);
+            this.lvAudioFiles.Size = new System.Drawing.Size(608, 329);
             this.lvAudioFiles.SmallImageList = this.imgListFileIcons;
             this.lvAudioFiles.TabIndex = 10;
             this.lvAudioFiles.UseCompatibleStateImageBehavior = false;
@@ -208,6 +180,10 @@ namespace TagBot.App
             // 
             this.LastModified.Text = "LastModified";
             // 
+            // MetaTitle
+            // 
+            this.MetaTitle.Text = "Title";
+            // 
             // lvTextFiles
             // 
             this.lvTextFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -217,13 +193,18 @@ namespace TagBot.App
             this.lvTextFiles.Location = new System.Drawing.Point(0, 0);
             this.lvTextFiles.MultiSelect = false;
             this.lvTextFiles.Name = "lvTextFiles";
-            this.lvTextFiles.Size = new System.Drawing.Size(518, 85);
+            this.lvTextFiles.Size = new System.Drawing.Size(608, 99);
             this.lvTextFiles.SmallImageList = this.imgListFileIcons;
             this.lvTextFiles.TabIndex = 11;
             this.lvTextFiles.UseCompatibleStateImageBehavior = false;
             this.lvTextFiles.View = System.Windows.Forms.View.Details;
             this.lvTextFiles.SelectedIndexChanged += new System.EventHandler(this.lvTextFiles_SelectedIndexChanged);
             this.lvTextFiles.DoubleClick += new System.EventHandler(this.lvTextFiles_DoubleClick);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Name";
+            this.columnHeader1.Width = 300;
             // 
             // groupBox1
             // 
@@ -254,16 +235,16 @@ namespace TagBot.App
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.groupBox1.Size = new System.Drawing.Size(421, 376);
+            this.groupBox1.Size = new System.Drawing.Size(425, 432);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
             // pbTagProgress
             // 
             this.pbTagProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pbTagProgress.Location = new System.Drawing.Point(5, 353);
+            this.pbTagProgress.Location = new System.Drawing.Point(5, 409);
             this.pbTagProgress.Name = "pbTagProgress";
-            this.pbTagProgress.Size = new System.Drawing.Size(411, 23);
+            this.pbTagProgress.Size = new System.Drawing.Size(415, 23);
             this.pbTagProgress.TabIndex = 28;
             // 
             // btnAutomate
@@ -535,29 +516,107 @@ namespace TagBot.App
             this.label1.TabIndex = 2;
             this.label1.Text = "Title";
             // 
-            // columnHeader1
+            // tvDirectories
             // 
-            this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 300;
+            this.tvDirectories.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvDirectories.ImageIndex = 0;
+            this.tvDirectories.ImageList = this.imgListFileIcons;
+            this.tvDirectories.Location = new System.Drawing.Point(0, 0);
+            this.tvDirectories.Name = "tvDirectories";
+            this.tvDirectories.SelectedImageIndex = 0;
+            this.tvDirectories.Size = new System.Drawing.Size(237, 432);
+            this.tvDirectories.TabIndex = 4;
             // 
-            // MetaTitle
+            // scOuter
             // 
-            this.MetaTitle.Text = "Title";
+            this.scOuter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.scOuter.Location = new System.Drawing.Point(0, 24);
+            this.scOuter.Name = "scOuter";
+            // 
+            // scOuter.Panel1
+            // 
+            this.scOuter.Panel1.Controls.Add(this.tvDirectories);
+            // 
+            // scOuter.Panel2
+            // 
+            this.scOuter.Panel2.Controls.Add(this.scNested);
+            this.scOuter.Size = new System.Drawing.Size(1278, 432);
+            this.scOuter.SplitterDistance = 237;
+            this.scOuter.TabIndex = 6;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1278, 24);
+            this.menuStrip1.TabIndex = 7;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.preferencesToolStripMenuItem,
+            this.quitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.preferencesToolStripMenuItem.Text = "Preferences";
+            // 
+            // quitToolStripMenuItem
+            // 
+            this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.quitToolStripMenuItem.Text = "Quit";
+            this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.debugToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // debugToolStripMenuItem
+            // 
+            this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.debugToolStripMenuItem.Text = "Debug";
+            this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(106, 6);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1155, 589);
+            this.ClientSize = new System.Drawing.Size(1278, 589);
             this.Controls.Add(this.scOuter);
-            this.Controls.Add(this.rtfResult);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
-            this.Text = "Form1";
+            this.Text = "TagBot";
             this.Load += new System.EventHandler(this.frmMain_Load);
-            this.scOuter.Panel1.ResumeLayout(false);
-            this.scOuter.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.scOuter)).EndInit();
-            this.scOuter.ResumeLayout(false);
             this.scNested.Panel1.ResumeLayout(false);
             this.scNested.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scNested)).EndInit();
@@ -578,16 +637,28 @@ namespace TagBot.App
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.scOuter.Panel1.ResumeLayout(false);
+            this.scOuter.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scOuter)).EndInit();
+            this.scOuter.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.RichTextBox rtfResult;
         private System.Windows.Forms.ImageList imgListFileIcons;
-        private System.Windows.Forms.SplitContainer scOuter;
-        private System.Windows.Forms.TreeView tvDirectories;
         private System.Windows.Forms.SplitContainer scNested;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.ListView lvAudioFiles;
+        private System.Windows.Forms.ColumnHeader Name1;
+        private System.Windows.Forms.ColumnHeader Type;
+        private System.Windows.Forms.ColumnHeader LastModified;
+        private System.Windows.Forms.ColumnHeader MetaTitle;
+        private System.Windows.Forms.ListView lvTextFiles;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ProgressBar pbTagProgress;
         private System.Windows.Forms.Button btnAutomate;
@@ -621,14 +692,16 @@ namespace TagBot.App
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox txtMetadataTitle;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ListView lvAudioFiles;
-        private System.Windows.Forms.ColumnHeader Name1;
-        private System.Windows.Forms.ColumnHeader Type;
-        private System.Windows.Forms.ColumnHeader LastModified;
-        private System.Windows.Forms.ListView lvTextFiles;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader MetaTitle;
+        private System.Windows.Forms.TreeView tvDirectories;
+        private System.Windows.Forms.SplitContainer scOuter;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem quitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
     }
 }
 

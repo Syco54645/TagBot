@@ -18,6 +18,9 @@ namespace TagBot.App
     {
         private string currentPath;
         private ShowSearchResponseContract showData;
+        private Dictionary<string, FlacFileInfo> originalMetadata;
+        private Dictionary<string, FlacFileInfo> proposedMetadata;
+        frmDebug frmDebug = new frmDebug();
 
         public frmMain()
         {
@@ -39,9 +42,10 @@ namespace TagBot.App
             string showDataJson = sqlite.getShow(txtDate.Text);
 
             showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
-            rtfResult.Text = showDataJson;
+            frmDebug.ShowData = showDataJson;
         }
 
+        #region File List
         // tree view sample lifted from https://docs.microsoft.com/en-us/dotnet/desktop/winforms/controls/creating-an-explorer-style-interface-with-the-listview-and-treeview?view=netframeworkdesktop-4.8
         private void PopulateTreeView()
         {
@@ -116,7 +120,7 @@ namespace TagBot.App
                 txtDate.Text = string.Empty;
             }
 
-            foreach (DirectoryInfo dir in nodeDirInfo.GetDirectories())
+            /*foreach (DirectoryInfo dir in nodeDirInfo.GetDirectories())
             {
                 item = new ListViewItem(dir.Name, "folder");
                 
@@ -127,7 +131,7 @@ namespace TagBot.App
                 };
                 item.SubItems.AddRange(subItems);
                 lvAudioFiles.Items.Add(item);
-            }
+            }*/
             foreach (FileInfo file in nodeDirInfo.GetFiles())
             {
                 string extension = file.Extension;
@@ -136,8 +140,8 @@ namespace TagBot.App
                     item = new ListViewItem(file.Name, Utility.getIconType(extension));
                     subItems = new ListViewItem.ListViewSubItem[]
                     {
-                    new ListViewItem.ListViewSubItem(item, "File"),
-                    new ListViewItem.ListViewSubItem(item, file.LastAccessTime.ToShortDateString())
+                        new ListViewItem.ListViewSubItem(item, "File"),
+                        new ListViewItem.ListViewSubItem(item, file.LastAccessTime.ToShortDateString())
                     };
 
                     item.SubItems.AddRange(subItems);
@@ -147,13 +151,24 @@ namespace TagBot.App
                 {
                     item = new ListViewItem(file.Name, Utility.getIconType(extension));
 
-
                     lvTextFiles.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
                     lvTextFiles.Items.Add(item);
                 }
             }
 
             lvAudioFiles.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+            originalMetadata = new Dictionary<string, FlacFileInfo>();
+            proposedMetadata = new Dictionary<string, FlacFileInfo>();
+
+            foreach (ListViewItem i in lvAudioFiles.Items)
+            {
+                FlacFileInfo flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + i.Text);
+                originalMetadata.Add(i.Text, flacInfo);
+                proposedMetadata.Add(i.Text, flacInfo);
+            }            
+            frmDebug.originalMetadata = Utility.SerializeObject(originalMetadata, true);
+            frmDebug.proposedMetadata = Utility.SerializeObject(proposedMetadata, true);
         }
 
         private void lvAudioFiles_SelectedIndexChanged(object sender, EventArgs e)
@@ -163,8 +178,8 @@ namespace TagBot.App
             {
                 string fileName = selectedFiles[0].Text;
 
-                Flac flac = new Flac();
-                FlacFileInfo flacInfo = flac.getFlacFileInfo(this.currentPath + "\\" + fileName);
+                FlacFileInfo flacInfo = originalMetadata[fileName];
+                //FlacFileInfo flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + fileName);
                 lblEncoder.Text = flacInfo.Encoder;
                 lblBitrate.Text = flacInfo.Bitrate;
                 lblSampleRate.Text = flacInfo.SampleRate;
@@ -179,8 +194,8 @@ namespace TagBot.App
                 txtMetadataTitle.Text = flacInfo.Metadata.Title;
                 txtMetadataTrackNumber.Text = flacInfo.Metadata.Tracknumber;
             }
-            
         }
+        #endregion
 
         private void btnAutomate_Click(object sender, EventArgs e)
         {
@@ -240,6 +255,25 @@ namespace TagBot.App
             string fileName = selectedFiles[0].Text;
             frmText frmText = new frmText(this.currentPath + "\\" + fileName);
             frmText.Show();
+        }
+
+        private void quitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void debugToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmDebug.IsDisposed == true)
+            {
+                frmDebug = new frmDebug();
+            }
+            frmDebug.Show();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Made with love for the DMB community by Syco54645");
         }
     }
 }
