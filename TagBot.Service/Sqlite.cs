@@ -14,7 +14,7 @@ namespace Tagbot.Service
         public string test(string date)
         {
             ShowSearchResponseContract response = new ShowSearchResponseContract();
-            using (var connection = new SQLiteConnection("Data Source=" + databasePath + "database.sql"))
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath + "database.db"))
             {
                 connection.Open();
 
@@ -66,7 +66,7 @@ namespace Tagbot.Service
         {
             ShowSearchResponseContract response = new ShowSearchResponseContract();
             //https://localhost:44341/api/values/dmb2009-09-19
-            using (var connection = new SQLiteConnection("Data Source=" + databasePath + "database.sql"))
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath + "database.db"))
             {
                 connection.Open();
 
@@ -99,7 +99,7 @@ namespace Tagbot.Service
         public string getShowSongs(int showId)
         {
             List<Track> tracks = new List<Track>();
-            using (var connection = new SQLiteConnection("Data Source=" + databasePath + "database.sql"))
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath + "database.db"))
             {
                 connection.Open();
 

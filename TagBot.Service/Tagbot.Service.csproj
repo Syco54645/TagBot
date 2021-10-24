@@ -92,11 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="contracts\DateCheckResponseContract.cs" />
-    <Compile Include="contracts\SaveFlacRequestContract.cs" />
     <Compile Include="contracts\ShowSearchRequestContract.cs" />
     <Compile Include="contracts\ShowSearchResponseContract.cs" />
     <Compile Include="Flac.cs" />
-    <Compile Include="models\ContentionFlacFIleInfo.cs" />
     <Compile Include="models\FlacFileInfo.cs" />
     <Compile Include="models\Metadata.cs" />
     <Compile Include="models\Setlist.cs" />
