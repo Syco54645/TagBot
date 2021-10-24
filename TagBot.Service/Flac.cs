@@ -5,9 +5,9 @@ using TagBot.Service.models;
 
 namespace TagBot.Service
 {
-    public class Flac
+    public static class Flac
     {
-        public FlacFileInfo getFlacFileInfo(string path)
+        public static FlacFileInfo getFlacFileInfo(string path)
         {
             FlacFileInfo response = new FlacFileInfo();
             try
