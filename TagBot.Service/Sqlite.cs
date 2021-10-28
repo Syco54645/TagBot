@@ -106,7 +106,7 @@ namespace Tagbot.Service
                 var command = connection.CreateCommand();
                 command.CommandText =
                 @"
-                    SELECT s.*, ss.track_number
+                    SELECT s.title, ss.track_number, ss.modifier
                     FROM song s
                     JOIN show_song ss
                     ON ss.song_id = s.song_id
@@ -123,8 +123,8 @@ namespace Tagbot.Service
                         {
                             TrackName = (string)reader["title"],
                             TrackNumber = (decimal)reader["track_number"],
+                            Modifier = (string)reader["Modifier"],
                         };
-
                         tracks.Add(temp);
                     }
                 }
