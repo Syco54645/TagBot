@@ -8,8 +8,8 @@
     <ProjectGuid>{011D8A2A-35D7-4FE1-82CE-A9CAB5656C41}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TagBot.Service1</RootNamespace>
-    <AssemblyName>TagBot.Service1</AssemblyName>
+    <RootNamespace>TagBot.Service</RootNamespace>
+    <AssemblyName>TagBot.Service</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

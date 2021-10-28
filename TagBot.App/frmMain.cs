@@ -281,13 +281,9 @@ namespace TagBot.App
             
         }
 
-        private void btnAutomate_Click(object sender, EventArgs e)
+        
+        private List<string> _getAudioFilesInCurrentDirector(ListView.ListViewItemCollection files)
         {
-            getShowData();
-            pbTagProgress.Value = 0;
-            lvAudioFiles.SelectedIndices.Clear();
-            List<Track> tracks = showData.Setlist;
-            var files = lvAudioFiles.Items;
             List<string> audioFiles = new List<string>();
             foreach (ListViewItem f in files)
             {
@@ -298,6 +294,16 @@ namespace TagBot.App
                     audioFiles.Add(fileName);
                 }
             }
+
+            return audioFiles;
+        }
+        private void btnAutomate_Click(object sender, EventArgs e)
+        {
+            getShowData();
+            pbTagProgress.Value = 0;
+            lvAudioFiles.SelectedIndices.Clear();
+            List<Track> tracks = showData.Setlist;
+            List<string> audioFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
 
             if (tracks.Count == audioFiles.Count)
             {
@@ -386,6 +392,14 @@ namespace TagBot.App
                     item.Selected = true;
                 }
             }
+        }
+
+        private void btnMatch_Click(object sender, EventArgs e)
+        {
+            frmMatch frmMatch = new frmMatch();
+            frmMatch.workingFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
+            frmMatch.showData = showData;
+            frmMatch.Show();
         }
     }
 }

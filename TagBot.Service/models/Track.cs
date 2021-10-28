@@ -8,5 +8,6 @@ namespace Tagbot.Service.models
     {
         public decimal TrackNumber { get; set; }
         public string TrackName { get; set; }
+        public string Modifier { get; set; }
     }
 }
