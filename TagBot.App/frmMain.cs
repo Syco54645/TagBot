@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Tagbot.Service;
 using Tagbot.Service.contracts;
 using Tagbot.Service.models;
+using TagBot.App.usercontrols;
 using TagBot.Service;
 using TagBot.Service.contracts;
 using TagBot.Service.models;
@@ -16,24 +17,27 @@ namespace TagBot.App
 {
     public partial class frmMain : Form
     {
-        private string currentPath;
+        public string currentPath;
         private ShowSearchResponseContract showData;
-        private Dictionary<string, FlacFileInfo> originalMetadata;
-        private Dictionary<string, FlacFileInfo> proposedMetadata;
+        public Dictionary<string, FlacFileInfo> originalMetadata;
+        public Dictionary<string, FlacFileInfo> proposedMetadata;
         frmDebug frmDebug = new frmDebug();
+        ucManualMatch ucManualMatch = new ucManualMatch();
 
         public frmMain()
         {
             InitializeComponent();
 
             this.StartPosition = FormStartPosition.CenterScreen;
-            PopulateTreeView();
-            this.tvDirectories.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.tvDirectories_NodeMouseClick);
         }
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //txtDate.Text = "dmb2009-09-19";
+            ucManualMatch.frmMain = this;
+            pnlTagView.Controls.Add(ucManualMatch);
+
+            PopulateTreeView();
+            this.tvDirectories.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.tvDirectories_NodeMouseClick);
         }
 
         private void btnGetShowData_Click(object sender, EventArgs e)
@@ -193,6 +197,24 @@ namespace TagBot.App
             frmDebug.proposedMetadata = Utility.SerializeObject(proposedMetadata, true);
         }
 
+        public void loadFlacTagsInEditor(FlacFileInfo flacInfo)
+        {
+            //FlacFileInfo flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + fileName);
+            lblEncoder.Text = flacInfo.Encoder;
+            lblBitrate.Text = flacInfo.Bitrate;
+            lblSampleRate.Text = flacInfo.SampleRate;
+            lblChannels.Text = flacInfo.Channels;
+            lblSize.Text = flacInfo.Size.ToString();
+            lblDuration.Text = flacInfo.Duration.ToString();
+
+            txtMetadataTitle.Text = flacInfo.Metadata.Title;
+            txtMetadataArtist.Text = flacInfo.Metadata.Artist;
+            txtMetadataAlbum.Text = flacInfo.Metadata.Album;
+            txtMetadataDate.Text = flacInfo.Metadata.Date;
+            txtMetadataTitle.Text = flacInfo.Metadata.Title;
+            txtMetadataTrackNumber.Text = flacInfo.Metadata.Tracknumber;
+        }
+
         private void lvAudioFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
             var selectedFiles = lvAudioFiles.SelectedItems;
@@ -201,20 +223,7 @@ namespace TagBot.App
                 string fileName = selectedFiles[0].Text;
 
                 FlacFileInfo flacInfo = originalMetadata[fileName];
-                //FlacFileInfo flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + fileName);
-                lblEncoder.Text = flacInfo.Encoder;
-                lblBitrate.Text = flacInfo.Bitrate;
-                lblSampleRate.Text = flacInfo.SampleRate;
-                lblChannels.Text = flacInfo.Channels;
-                lblSize.Text = flacInfo.Size.ToString();
-                lblDuration.Text = flacInfo.Duration.ToString();
-
-                txtMetadataTitle.Text = flacInfo.Metadata.Title;
-                txtMetadataArtist.Text = flacInfo.Metadata.Artist;
-                txtMetadataAlbum.Text = flacInfo.Metadata.Album;
-                txtMetadataDate.Text = flacInfo.Metadata.Date;
-                txtMetadataTitle.Text = flacInfo.Metadata.Title;
-                txtMetadataTrackNumber.Text = flacInfo.Metadata.Tracknumber;
+                loadFlacTagsInEditor(flacInfo);
             }
             else
             {
@@ -396,10 +405,28 @@ namespace TagBot.App
 
         private void btnMatch_Click(object sender, EventArgs e)
         {
-            frmMatch frmMatch = new frmMatch();
+            /*frmMatch frmMatch = new frmMatch();
             frmMatch.workingFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
             frmMatch.showData = showData;
-            frmMatch.Show();
+            frmMatch.Show();*/
+
+            ucManualMatch.workingFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
+            ucManualMatch.showData = showData;
+            ucManualMatch.initControl();
+
+            matchMode();
+        }
+
+        public void fileMode()
+        {
+            pnlFileView.Visible = true;
+            pnlTagView.Visible = false;
+        }
+
+        public void matchMode()
+        {
+            pnlFileView.Visible = false;
+            pnlTagView.Visible = true;
         }
     }
 }

@@ -10,20 +10,37 @@ using System.Windows.Forms;
 using Tagbot.Service.contracts;
 using Tagbot.Service.models;
 
-namespace TagBot.App
+namespace TagBot.App.usercontrols
 {
-    public partial class frmMatch : Form
+    public partial class ucManualMatch : UserControl
     {
         public List<string> workingFiles = new List<string>();
         public ShowSearchResponseContract showData;
+        public frmMain frmMain;
 
-        public frmMatch()
+        public ucManualMatch()
         {
             InitializeComponent();
         }
 
-        private void frmMatch_Load(object sender, EventArgs e)
+        private void manualMatch_Load(object sender, EventArgs e)
         {
+            initControl();
+        }
+
+        public void initControl()
+        {
+            lblOriginalArtist.Text = "";
+            lblOriginalAlbum.Text = "";
+            lblOriginalTitle.Text = "";
+            lblOriginalNumber.Text = "";
+            lblOriginalDate.Text = "";
+            lvMatchTags.Clear();
+            tvMatchFiles.Nodes.Clear();
+
+            this.Dock = DockStyle.Fill;
+            this.AutoSize = true;
+
             tvMatchFiles.AllowDrop = true;
 
             // populate tvMatchFiles with the files
@@ -41,7 +58,7 @@ namespace TagBot.App
             header.Name = "col1";
             lvMatchTags.Columns.Add(header);
             lvMatchTags.View = View.Details;
-            
+
             if (showData != null)
             {
                 foreach (Track track in showData.Setlist)
@@ -54,7 +71,7 @@ namespace TagBot.App
                     }
                     else
                     {
-                        formattedName = string.Format("{0} - {1} [{2}]", track.TrackNumber,  track.TrackName, track.Modifier);
+                        formattedName = string.Format("{0} - {1} [{2}]", track.TrackNumber, track.TrackName, track.Modifier);
                     }
                     ListViewItem tempLVI = new ListViewItem(formattedName);
                     tempLVI.Tag = track;
@@ -182,13 +199,39 @@ namespace TagBot.App
                 {
                     targetNodeList.Add(draggedNode);
                 }
-                
+
                 if (draggedNode.Level != 0)
                 {
                     // expand only if we didnt drag a main level node  
                     targetNode.Expand();
                 }
             }
+        }
+
+        private void tvMatchFiles_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode clickedNode = e.Node;
+
+            if (clickedNode.Level != 0)
+            {
+                return;
+            }
+
+            //MessageBox.Show(clickedNode.Text);
+            var oTrackInfo = frmMain.originalMetadata[clickedNode.Text];
+            lblOriginalArtist.Text = oTrackInfo.Metadata.Artist;
+            lblOriginalAlbum.Text = oTrackInfo.Metadata.Album;
+            lblOriginalTitle.Text = oTrackInfo.Metadata.Title;
+            lblOriginalNumber.Text = oTrackInfo.Metadata.Tracknumber;
+            lblOriginalDate.Text = oTrackInfo.Metadata.Date;
+            //lblOriginalComment.Text = oTrackInfo.Metadata.Comment;
+
+            frmMain.loadFlacTagsInEditor(frmMain.proposedMetadata[clickedNode.Text]);
+        }
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            frmMain.fileMode();
         }
     }
 }
