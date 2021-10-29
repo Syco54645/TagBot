@@ -72,6 +72,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="usercontrols\ucManualMatch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="usercontrols\ucManualMatch.Designer.cs">
+      <DependentUpon>ucManualMatch.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmDebug.resx">
       <DependentUpon>frmDebug.cs</DependentUpon>
     </EmbeddedResource>
@@ -93,6 +99,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="usercontrols\ucManualMatch.resx">
+      <DependentUpon>ucManualMatch.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
