@@ -69,8 +69,8 @@ namespace TagBot.App
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.pnlFileView = new System.Windows.Forms.Panel();
             this.scFileView = new System.Windows.Forms.SplitContainer();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.tsDirectoryBrowser = new System.Windows.Forms.ToolStrip();
+            this.tsbSelectDirectory = new System.Windows.Forms.ToolStripButton();
             this.tslLocation = new System.Windows.Forms.ToolStripLabel();
             this.tvDirectories = new System.Windows.Forms.TreeView();
             this.scFlacText = new System.Windows.Forms.SplitContainer();
@@ -80,7 +80,7 @@ namespace TagBot.App
             this.lvAudioTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvAudioArtist = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvAudioAlbum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsAudioBrowser = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.pnlTagView = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -106,11 +106,11 @@ namespace TagBot.App
             this.scFileView.Panel1.SuspendLayout();
             this.scFileView.Panel2.SuspendLayout();
             this.scFileView.SuspendLayout();
-            this.toolStrip2.SuspendLayout();
+            this.tsDirectoryBrowser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scFlacText)).BeginInit();
             this.scFlacText.Panel1.SuspendLayout();
             this.scFlacText.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.tsAudioBrowser.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -122,6 +122,7 @@ namespace TagBot.App
             this.imgListFileIcons.Images.SetKeyName(1, "audio");
             this.imgListFileIcons.Images.SetKeyName(2, "file");
             this.imgListFileIcons.Images.SetKeyName(3, "text");
+            this.imgListFileIcons.Images.SetKeyName(4, "save");
             // 
             // groupBox1
             // 
@@ -479,42 +480,44 @@ namespace TagBot.App
             // 
             // scFileView.Panel1
             // 
-            this.scFileView.Panel1.Controls.Add(this.toolStrip2);
+            this.scFileView.Panel1.Controls.Add(this.tsDirectoryBrowser);
             this.scFileView.Panel1.Controls.Add(this.tvDirectories);
             // 
             // scFileView.Panel2
             // 
             this.scFileView.Panel2.Controls.Add(this.scFlacText);
-            this.scFileView.Panel2.Controls.Add(this.toolStrip1);
+            this.scFileView.Panel2.Controls.Add(this.tsAudioBrowser);
             this.scFileView.Size = new System.Drawing.Size(904, 432);
             this.scFileView.SplitterDistance = 301;
             this.scFileView.TabIndex = 10;
             // 
-            // toolStrip2
+            // tsDirectoryBrowser
             // 
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
+            this.tsDirectoryBrowser.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbSelectDirectory,
             this.tslLocation});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(301, 25);
-            this.toolStrip2.TabIndex = 10;
-            this.toolStrip2.Text = "toolStrip2";
+            this.tsDirectoryBrowser.Location = new System.Drawing.Point(0, 0);
+            this.tsDirectoryBrowser.Name = "tsDirectoryBrowser";
+            this.tsDirectoryBrowser.Size = new System.Drawing.Size(301, 25);
+            this.tsDirectoryBrowser.TabIndex = 10;
+            this.tsDirectoryBrowser.Text = "toolStrip2";
             // 
-            // toolStripButton1
+            // tsbSelectDirectory
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.tsbSelectDirectory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSelectDirectory.Image = ((System.Drawing.Image)(resources.GetObject("tsbSelectDirectory.Image")));
+            this.tsbSelectDirectory.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSelectDirectory.Name = "tsbSelectDirectory";
+            this.tsbSelectDirectory.Size = new System.Drawing.Size(23, 22);
+            this.tsbSelectDirectory.Text = "toolStripButton1";
+            this.tsbSelectDirectory.Click += new System.EventHandler(this.tsbSelectDirectory_Click);
             // 
             // tslLocation
             // 
             this.tslLocation.Name = "tslLocation";
-            this.tslLocation.Size = new System.Drawing.Size(86, 22);
-            this.tslLocation.Text = "toolStripLabel1";
+            this.tslLocation.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
+            this.tslLocation.Size = new System.Drawing.Size(65, 22);
+            this.tslLocation.Text = "tslLocation";
             // 
             // tvDirectories
             // 
@@ -582,15 +585,15 @@ namespace TagBot.App
             // 
             this.lvAudioAlbum.Text = "Album";
             // 
-            // toolStrip1
+            // tsAudioBrowser
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsAudioBrowser.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbSave});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(599, 25);
-            this.toolStrip1.TabIndex = 12;
-            this.toolStrip1.Text = "toolStrip1";
+            this.tsAudioBrowser.Location = new System.Drawing.Point(0, 0);
+            this.tsAudioBrowser.Name = "tsAudioBrowser";
+            this.tsAudioBrowser.Size = new System.Drawing.Size(599, 25);
+            this.tsAudioBrowser.TabIndex = 12;
+            this.tsAudioBrowser.Text = "toolStrip1";
             // 
             // tsbSave
             // 
@@ -706,13 +709,13 @@ namespace TagBot.App
             this.scFileView.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scFileView)).EndInit();
             this.scFileView.ResumeLayout(false);
-            this.toolStrip2.ResumeLayout(false);
-            this.toolStrip2.PerformLayout();
+            this.tsDirectoryBrowser.ResumeLayout(false);
+            this.tsDirectoryBrowser.PerformLayout();
             this.scFlacText.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scFlacText)).EndInit();
             this.scFlacText.ResumeLayout(false);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.tsAudioBrowser.ResumeLayout(false);
+            this.tsAudioBrowser.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -767,8 +770,8 @@ namespace TagBot.App
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlFileView;
         private System.Windows.Forms.SplitContainer scFileView;
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStrip tsDirectoryBrowser;
+        private System.Windows.Forms.ToolStripButton tsbSelectDirectory;
         private System.Windows.Forms.ToolStripLabel tslLocation;
         private System.Windows.Forms.TreeView tvDirectories;
         private System.Windows.Forms.SplitContainer scFlacText;
@@ -778,7 +781,7 @@ namespace TagBot.App
         private System.Windows.Forms.ColumnHeader lvAudioTitle;
         private System.Windows.Forms.ColumnHeader lvAudioArtist;
         private System.Windows.Forms.ColumnHeader lvAudioAlbum;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip tsAudioBrowser;
         private System.Windows.Forms.ToolStripButton tsbSave;
         private System.Windows.Forms.Panel pnlTagView;
     }

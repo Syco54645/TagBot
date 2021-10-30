@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Windows.Forms;
 using Tagbot.Service;
 using Tagbot.Service.contracts;
 using Tagbot.Service.models;
+using TagBot.App.Properties;
 using TagBot.App.usercontrols;
 using TagBot.Service;
 using TagBot.Service.contracts;
@@ -39,8 +41,14 @@ namespace TagBot.App
             pnlTagView.Controls.Add(ucManualMatch);
             scFlacText.Panel2.Controls.Add(ucTextFiles);
             ucTextFiles.frmMain = this;
+            tsbSelectDirectory.Image = imgListFileIcons.Images["folder"];
+            tsbSave.Image = imgListFileIcons.Images["save"];
 
-            PopulateTreeView();
+            if (!string.IsNullOrEmpty(Settings.Default.startingDirectory))
+            {
+                UpdateCurrentPath(Settings.Default.startingDirectory);
+                PopulateTreeView();
+            }
             this.tvDirectories.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.tvDirectories_NodeMouseClick);
         }
 
@@ -63,9 +71,9 @@ namespace TagBot.App
         // tree view sample lifted from https://docs.microsoft.com/en-us/dotnet/desktop/winforms/controls/creating-an-explorer-style-interface-with-the-listview-and-treeview?view=netframeworkdesktop-4.8
         private void PopulateTreeView()
         {
+            tvDirectories.Nodes.Clear();
             TreeNode rootNode;
-
-            DirectoryInfo info = new DirectoryInfo(@"C:\dmb");
+            DirectoryInfo info = new DirectoryInfo(Settings.Default.startingDirectory);
             if (info.Exists)
             {
                 rootNode = new TreeNode(info.Name);
@@ -99,7 +107,14 @@ namespace TagBot.App
 
             TreeNode node = tvDirectories.GetNodeAt(point);
             var parentNodes = GetParentNodes(node);
-            this.currentPath = "c:\\" + String.Join("\\", parentNodes.Select(x => x.Text));
+            DirectoryInfo tag = (DirectoryInfo)node.Tag;
+            UpdateCurrentPath(tag.FullName);
+        }
+
+        private void UpdateCurrentPath(string path)
+        {
+            this.currentPath = path;
+            tslLocation.Text = this.currentPath;
         }
 
         private TreeNode[] GetParentNodes(TreeNode node_)
@@ -421,6 +436,19 @@ namespace TagBot.App
         {
             pnlFileView.Visible = false;
             pnlTagView.Visible = true;
+        }
+
+        private void tsbSelectDirectory_Click(object sender, EventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
+            {
+                Properties.Settings.Default.startingDirectory = dialog.FileName;
+                Properties.Settings.Default.Save();
+                PopulateTreeView();
+                UpdateCurrentPath(dialog.FileName);
+            }
         }
     }
 }
