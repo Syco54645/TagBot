@@ -159,6 +159,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\TagBot.Service\TagBot.Service.csproj">
       <Project>{011d8a2a-35d7-4fe1-82ce-a9cab5656c41}</Project>
       <Name>TagBot.Service</Name>

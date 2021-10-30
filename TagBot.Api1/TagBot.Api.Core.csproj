@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tagbot.Service\Tagbot.Service.csproj" />
+    <ProjectReference Include="..\TagBot.Service\TagBot.Service.csproj" />
   </ItemGroup>
 
 
