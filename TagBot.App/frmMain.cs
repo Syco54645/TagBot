@@ -17,10 +17,12 @@ namespace TagBot.App
 {
     public partial class frmMain : Form
     {
-        public string currentPath;
-        private ShowSearchResponseContract showData;
+        public string currentPath = "";
+        public ShowSearchResponseContract showData;
         public Dictionary<string, FlacFileInfo> originalMetadata;
         public Dictionary<string, FlacFileInfo> proposedMetadata;
+        public ucTextFiles ucTextFiles = new ucTextFiles();
+        
         frmDebug frmDebug = new frmDebug();
         ucManualMatch ucManualMatch = new ucManualMatch();
 
@@ -35,6 +37,8 @@ namespace TagBot.App
         {
             ucManualMatch.frmMain = this;
             pnlTagView.Controls.Add(ucManualMatch);
+            scFlacText.Panel2.Controls.Add(ucTextFiles);
+            ucTextFiles.frmMain = this;
 
             PopulateTreeView();
             this.tvDirectories.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.tvDirectories_NodeMouseClick);
@@ -115,7 +119,7 @@ namespace TagBot.App
             TreeNode newSelected = e.Node;
             lvAudioFiles.SelectedIndices.Clear();
             lvAudioFiles.Items.Clear();
-            lvTextFiles.Items.Clear();
+            ucTextFiles.clearListView();
             DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
             ListViewItem.ListViewSubItem[] subItems;
             ListViewItem item = null;
@@ -174,8 +178,7 @@ namespace TagBot.App
                 {
                     item = new ListViewItem(file.Name, Utility.getIconType(extension));
 
-                    lvTextFiles.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                    lvTextFiles.Items.Add(item);
+                    ucTextFiles.addItem(item);
                 }
             }
 
@@ -339,14 +342,6 @@ namespace TagBot.App
             }
         }
 
-        private void lvTextFiles_DoubleClick(object sender, EventArgs e)
-        {
-            var selectedFiles = lvTextFiles.SelectedItems;
-            string fileName = selectedFiles[0].Text;
-            frmText frmText = new frmText(this.currentPath + "\\" + fileName);
-            frmText.Show();
-        }
-
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -411,7 +406,6 @@ namespace TagBot.App
             frmMatch.Show();*/
 
             ucManualMatch.workingFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
-            ucManualMatch.showData = showData;
             ucManualMatch.initControl();
 
             matchMode();
