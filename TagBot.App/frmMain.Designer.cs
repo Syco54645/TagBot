@@ -33,6 +33,14 @@ namespace TagBot.App
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.imgListFileIcons = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lvArtists = new System.Windows.Forms.ListView();
+            this.lblLoadedDatabaseVersion = new System.Windows.Forms.Label();
+            this.lblLoadedDatabase = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnLoadDatabase = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtMetadataArtist = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -91,7 +99,9 @@ namespace TagBot.App
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -126,6 +136,7 @@ namespace TagBot.App
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.btnMatch);
@@ -158,11 +169,95 @@ namespace TagBot.App
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lvArtists);
+            this.groupBox2.Controls.Add(this.lblLoadedDatabaseVersion);
+            this.groupBox2.Controls.Add(this.lblLoadedDatabase);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.btnLoadDatabase);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Location = new System.Drawing.Point(8, 8);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(352, 88);
+            this.groupBox2.TabIndex = 52;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Database";
+            // 
+            // lvArtists
+            // 
+            this.lvArtists.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.lvArtists.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lvArtists.HideSelection = false;
+            this.lvArtists.Location = new System.Drawing.Point(64, 48);
+            this.lvArtists.Name = "lvArtists";
+            this.lvArtists.Size = new System.Drawing.Size(128, 32);
+            this.lvArtists.TabIndex = 6;
+            this.lvArtists.UseCompatibleStateImageBehavior = false;
+            this.lvArtists.View = System.Windows.Forms.View.List;
+            // 
+            // lblLoadedDatabaseVersion
+            // 
+            this.lblLoadedDatabaseVersion.AutoSize = true;
+            this.lblLoadedDatabaseVersion.Location = new System.Drawing.Point(64, 32);
+            this.lblLoadedDatabaseVersion.Name = "lblLoadedDatabaseVersion";
+            this.lblLoadedDatabaseVersion.Size = new System.Drawing.Size(98, 13);
+            this.lblLoadedDatabaseVersion.TabIndex = 5;
+            this.lblLoadedDatabaseVersion.Text = "lblDatabaseVersion";
+            // 
+            // lblLoadedDatabase
+            // 
+            this.lblLoadedDatabase.AutoSize = true;
+            this.lblLoadedDatabase.Location = new System.Drawing.Point(64, 16);
+            this.lblLoadedDatabase.Name = "lblLoadedDatabase";
+            this.lblLoadedDatabase.Size = new System.Drawing.Size(99, 13);
+            this.lblLoadedDatabase.TabIndex = 4;
+            this.lblLoadedDatabase.Text = "lblLoadedDatabase";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(26, 48);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(35, 13);
+            this.label15.TabIndex = 3;
+            this.label15.Text = "Artists";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(19, 32);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(42, 13);
+            this.label14.TabIndex = 2;
+            this.label14.Text = "Version";
+            // 
+            // btnLoadDatabase
+            // 
+            this.btnLoadDatabase.Location = new System.Drawing.Point(272, 56);
+            this.btnLoadDatabase.Name = "btnLoadDatabase";
+            this.btnLoadDatabase.Size = new System.Drawing.Size(75, 23);
+            this.btnLoadDatabase.TabIndex = 1;
+            this.btnLoadDatabase.Text = "Load";
+            this.btnLoadDatabase.UseVisualStyleBackColor = true;
+            this.btnLoadDatabase.Click += new System.EventHandler(this.btnLoadDatabase_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(8, 16);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Database";
+            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.txtMetadataArtist);
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Location = new System.Drawing.Point(48, 176);
+            this.panel2.Location = new System.Drawing.Point(48, 264);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(264, 32);
             this.panel2.TabIndex = 51;
@@ -187,7 +282,7 @@ namespace TagBot.App
             // 
             this.panel1.Controls.Add(this.txtMetadataTitle);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(48, 103);
+            this.panel1.Location = new System.Drawing.Point(48, 191);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(264, 32);
             this.panel1.TabIndex = 45;
@@ -210,7 +305,7 @@ namespace TagBot.App
             // 
             // btnMatch
             // 
-            this.btnMatch.Location = new System.Drawing.Point(192, 288);
+            this.btnMatch.Location = new System.Drawing.Point(192, 376);
             this.btnMatch.Name = "btnMatch";
             this.btnMatch.Size = new System.Drawing.Size(75, 23);
             this.btnMatch.TabIndex = 50;
@@ -228,7 +323,7 @@ namespace TagBot.App
             // 
             // btnAutomate
             // 
-            this.btnAutomate.Location = new System.Drawing.Point(48, 280);
+            this.btnAutomate.Location = new System.Drawing.Point(48, 368);
             this.btnAutomate.Name = "btnAutomate";
             this.btnAutomate.Size = new System.Drawing.Size(75, 23);
             this.btnAutomate.TabIndex = 49;
@@ -239,7 +334,7 @@ namespace TagBot.App
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(10, 12);
+            this.label12.Location = new System.Drawing.Point(10, 112);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(60, 13);
             this.label12.TabIndex = 48;
@@ -247,7 +342,7 @@ namespace TagBot.App
             // 
             // btnGetShowData
             // 
-            this.btnGetShowData.Location = new System.Drawing.Point(232, 11);
+            this.btnGetShowData.Location = new System.Drawing.Point(232, 111);
             this.btnGetShowData.Name = "btnGetShowData";
             this.btnGetShowData.Size = new System.Drawing.Size(75, 20);
             this.btnGetShowData.TabIndex = 47;
@@ -257,7 +352,7 @@ namespace TagBot.App
             // 
             // txtDate
             // 
-            this.txtDate.Location = new System.Drawing.Point(72, 11);
+            this.txtDate.Location = new System.Drawing.Point(72, 111);
             this.txtDate.Name = "txtDate";
             this.txtDate.Size = new System.Drawing.Size(160, 20);
             this.txtDate.TabIndex = 46;
@@ -266,7 +361,7 @@ namespace TagBot.App
             // 
             this.panel5.Controls.Add(this.txtMetadataDate);
             this.panel5.Controls.Add(this.label11);
-            this.panel5.Location = new System.Drawing.Point(48, 239);
+            this.panel5.Location = new System.Drawing.Point(48, 327);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(264, 32);
             this.panel5.TabIndex = 45;
@@ -291,7 +386,7 @@ namespace TagBot.App
             // 
             this.panel4.Controls.Add(this.txtMetadataTrackNumber);
             this.panel4.Controls.Add(this.label10);
-            this.panel4.Location = new System.Drawing.Point(48, 143);
+            this.panel4.Location = new System.Drawing.Point(48, 231);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(264, 32);
             this.panel4.TabIndex = 44;
@@ -316,7 +411,7 @@ namespace TagBot.App
             // 
             this.panel3.Controls.Add(this.txtMetadataAlbum);
             this.panel3.Controls.Add(this.label9);
-            this.panel3.Location = new System.Drawing.Point(48, 207);
+            this.panel3.Location = new System.Drawing.Point(48, 295);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(264, 32);
             this.panel3.TabIndex = 43;
@@ -340,7 +435,7 @@ namespace TagBot.App
             // lblBitrate
             // 
             this.lblBitrate.AutoSize = true;
-            this.lblBitrate.Location = new System.Drawing.Point(90, 60);
+            this.lblBitrate.Location = new System.Drawing.Point(90, 148);
             this.lblBitrate.Name = "lblBitrate";
             this.lblBitrate.Size = new System.Drawing.Size(47, 13);
             this.lblBitrate.TabIndex = 41;
@@ -349,7 +444,7 @@ namespace TagBot.App
             // lblSampleRate
             // 
             this.lblSampleRate.AutoSize = true;
-            this.lblSampleRate.Location = new System.Drawing.Point(90, 76);
+            this.lblSampleRate.Location = new System.Drawing.Point(90, 164);
             this.lblSampleRate.Name = "lblSampleRate";
             this.lblSampleRate.Size = new System.Drawing.Size(75, 13);
             this.lblSampleRate.TabIndex = 40;
@@ -358,7 +453,7 @@ namespace TagBot.App
             // lblChannels
             // 
             this.lblChannels.AutoSize = true;
-            this.lblChannels.Location = new System.Drawing.Point(250, 44);
+            this.lblChannels.Location = new System.Drawing.Point(250, 132);
             this.lblChannels.Name = "lblChannels";
             this.lblChannels.Size = new System.Drawing.Size(61, 13);
             this.lblChannels.TabIndex = 39;
@@ -367,7 +462,7 @@ namespace TagBot.App
             // lblSize
             // 
             this.lblSize.AutoSize = true;
-            this.lblSize.Location = new System.Drawing.Point(250, 60);
+            this.lblSize.Location = new System.Drawing.Point(250, 148);
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(37, 13);
             this.lblSize.TabIndex = 38;
@@ -376,7 +471,7 @@ namespace TagBot.App
             // lblDuration
             // 
             this.lblDuration.AutoSize = true;
-            this.lblDuration.Location = new System.Drawing.Point(250, 76);
+            this.lblDuration.Location = new System.Drawing.Point(250, 164);
             this.lblDuration.Name = "lblDuration";
             this.lblDuration.Size = new System.Drawing.Size(57, 13);
             this.lblDuration.TabIndex = 37;
@@ -385,7 +480,7 @@ namespace TagBot.App
             // lblEncoder
             // 
             this.lblEncoder.AutoSize = true;
-            this.lblEncoder.Location = new System.Drawing.Point(90, 44);
+            this.lblEncoder.Location = new System.Drawing.Point(90, 132);
             this.lblEncoder.Name = "lblEncoder";
             this.lblEncoder.Size = new System.Drawing.Size(57, 13);
             this.lblEncoder.TabIndex = 36;
@@ -394,7 +489,7 @@ namespace TagBot.App
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(194, 76);
+            this.label7.Location = new System.Drawing.Point(194, 164);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 13);
             this.label7.TabIndex = 35;
@@ -403,7 +498,7 @@ namespace TagBot.App
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(190, 44);
+            this.label6.Location = new System.Drawing.Point(190, 132);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 13);
             this.label6.TabIndex = 34;
@@ -412,7 +507,7 @@ namespace TagBot.App
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 76);
+            this.label5.Location = new System.Drawing.Point(18, 164);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 13);
             this.label5.TabIndex = 33;
@@ -421,7 +516,7 @@ namespace TagBot.App
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(214, 60);
+            this.label4.Location = new System.Drawing.Point(214, 148);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(27, 13);
             this.label4.TabIndex = 32;
@@ -430,7 +525,7 @@ namespace TagBot.App
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 60);
+            this.label3.Location = new System.Drawing.Point(44, 148);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 31;
@@ -439,7 +534,7 @@ namespace TagBot.App
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 44);
+            this.label2.Location = new System.Drawing.Point(34, 132);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 30;
@@ -675,6 +770,10 @@ namespace TagBot.App
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = -1;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -688,6 +787,8 @@ namespace TagBot.App
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -784,6 +885,15 @@ namespace TagBot.App
         private System.Windows.Forms.ToolStrip tsAudioBrowser;
         private System.Windows.Forms.ToolStripButton tsbSave;
         private System.Windows.Forms.Panel pnlTagView;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lblLoadedDatabaseVersion;
+        private System.Windows.Forms.Label lblLoadedDatabase;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btnLoadDatabase;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ListView lvArtists;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }
 

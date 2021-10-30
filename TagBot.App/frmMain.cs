@@ -49,6 +49,10 @@ namespace TagBot.App
                 UpdateCurrentPath(Settings.Default.startingDirectory);
                 PopulateTreeView();
             }
+            if (!string.IsNullOrEmpty(Settings.Default.databaseLocation))
+            {
+                getDatabaseMeta();
+            }
             this.tvDirectories.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.tvDirectories_NodeMouseClick);
         }
 
@@ -60,7 +64,7 @@ namespace TagBot.App
         private void getShowData()
         {
             Sqlite sqlite = new Sqlite();
-            sqlite.databasePath = AppDomain.CurrentDomain.BaseDirectory + "../../../";
+            sqlite.databasePath = Settings.Default.databaseLocation;
             string showDataJson = sqlite.getShow(txtDate.Text);
 
             showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
@@ -448,6 +452,34 @@ namespace TagBot.App
                 Properties.Settings.Default.Save();
                 PopulateTreeView();
                 UpdateCurrentPath(dialog.FileName);
+            }
+        }
+
+        private void btnLoadDatabase_Click(object sender, EventArgs e)
+        {
+            // C:\Users\Frank\source\repos\TagBot\database.db
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Title = "Open Database File";
+            dialog.Filter = "sqlite files|*.db";
+            dialog.InitialDirectory = @"C:\";
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Default.databaseLocation = dialog.FileName;
+                Settings.Default.Save();
+                getDatabaseMeta();
+            }
+        }
+
+        private void getDatabaseMeta()
+        {
+            Sqlite sqlite = new Sqlite();
+            sqlite.databasePath = Settings.Default.databaseLocation;
+            DatabaseMeta databaseMeta = Utility.DeserializeObject<DatabaseMeta>(sqlite.getDatabaseMeta());
+            lblLoadedDatabase.Text = Settings.Default.databaseLocation;
+            lblLoadedDatabaseVersion.Text = databaseMeta.Version;
+            foreach(string artist in databaseMeta.Artists)
+            {
+                lvArtists.Items.Add(new ListViewItem(artist));
             }
         }
     }

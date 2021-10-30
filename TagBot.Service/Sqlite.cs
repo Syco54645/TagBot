@@ -4,6 +4,7 @@ using System.Data.SQLite;
 
 using Tagbot.Service.contracts;
 using Tagbot.Service.models;
+using TagBot.Service.models;
 
 namespace Tagbot.Service
 {
@@ -14,7 +15,7 @@ namespace Tagbot.Service
         public string test(string date)
         {
             ShowSearchResponseContract response = new ShowSearchResponseContract();
-            using (var connection = new SQLiteConnection("Data Source=" + databasePath + "database.db"))
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath))
             {
                 connection.Open();
 
@@ -66,7 +67,7 @@ namespace Tagbot.Service
         {
             ShowSearchResponseContract response = new ShowSearchResponseContract();
             //https://localhost:44341/api/values/dmb2009-09-19
-            using (var connection = new SQLiteConnection("Data Source=" + databasePath + "database.db"))
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath))
             {
                 connection.Open();
 
@@ -99,7 +100,7 @@ namespace Tagbot.Service
         public string getShowSongs(int showId)
         {
             List<Track> tracks = new List<Track>();
-            using (var connection = new SQLiteConnection("Data Source=" + databasePath + "database.db"))
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath))
             {
                 connection.Open();
 
@@ -130,6 +131,63 @@ namespace Tagbot.Service
                 }
             }
             string stringResponse = Newtonsoft.Json.JsonConvert.SerializeObject(tracks);
+            return stringResponse;
+        }
+
+        public string getArtists()
+        {
+            List<string> artists = new List<string>();
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath))
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText =
+                @"
+                    SELECT DISTINCT(artist)
+                    FROM show
+                ";
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        artists.Add((string)reader["artist"]);
+                    }
+                }
+            }
+            string stringResponse = Newtonsoft.Json.JsonConvert.SerializeObject(artists);
+            return stringResponse;
+        }
+
+        public string getDatabaseMeta()
+        {
+            DatabaseMeta meta = new DatabaseMeta();
+            meta.Artists = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(getArtists());
+
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath))
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText =
+                @"
+                    SELECT meta_key, meta_value
+                    FROM meta
+                ";
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        if ((string)reader["meta_key"] == "version")
+                        {
+                            meta.Version = (string)reader["meta_value"];
+                        }
+                    }
+                }
+            }
+            string stringResponse = Newtonsoft.Json.JsonConvert.SerializeObject(meta);
             return stringResponse;
         }
     }
