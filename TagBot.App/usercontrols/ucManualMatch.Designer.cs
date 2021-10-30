@@ -44,19 +44,20 @@ namespace TagBot.App.usercontrols
             this.txtOverallArtist = new System.Windows.Forms.TextBox();
             this.txtOverallAlbum = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.lblOriginalComment = new System.Windows.Forms.Label();
             this.lblOriginalDate = new System.Windows.Forms.Label();
             this.lblOriginalAlbum = new System.Windows.Forms.Label();
             this.lblOriginalArtist = new System.Windows.Forms.Label();
             this.lblOriginalTitle = new System.Windows.Forms.Label();
             this.lblOriginalNumber = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.scAudioText = new System.Windows.Forms.SplitContainer();
+            this.pnlTextFiles = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.scFileMatch)).BeginInit();
             this.scFileMatch.Panel1.SuspendLayout();
             this.scFileMatch.Panel2.SuspendLayout();
@@ -68,6 +69,7 @@ namespace TagBot.App.usercontrols
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scAudioText)).BeginInit();
             this.scAudioText.Panel1.SuspendLayout();
+            this.scAudioText.Panel2.SuspendLayout();
             this.scAudioText.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -249,60 +251,6 @@ namespace TagBot.App.usercontrols
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Existing Track Info";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 104);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 13);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Comment:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(45, 88);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(33, 13);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "Date:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(39, 72);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 13);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Album:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(45, 56);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(33, 13);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "Artist:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(48, 24);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(30, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Title:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(61, 40);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(17, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "#:";
-            // 
             // lblOriginalComment
             // 
             this.lblOriginalComment.AutoSize = true;
@@ -357,6 +305,60 @@ namespace TagBot.App.usercontrols
             this.lblOriginalNumber.TabIndex = 9;
             this.lblOriginalNumber.Text = "#";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(24, 104);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(54, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Comment:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(45, 88);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(33, 13);
+            this.label11.TabIndex = 3;
+            this.label11.Text = "Date:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(39, 72);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(39, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Album:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(45, 56);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(33, 13);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Artist:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(48, 24);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(30, 13);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Title:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(61, 40);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(17, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "#:";
+            // 
             // scAudioText
             // 
             this.scAudioText.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -367,9 +369,21 @@ namespace TagBot.App.usercontrols
             // scAudioText.Panel1
             // 
             this.scAudioText.Panel1.Controls.Add(this.scFileMatch);
+            // 
+            // scAudioText.Panel2
+            // 
+            this.scAudioText.Panel2.Controls.Add(this.pnlTextFiles);
             this.scAudioText.Size = new System.Drawing.Size(785, 426);
             this.scAudioText.SplitterDistance = 317;
             this.scAudioText.TabIndex = 3;
+            // 
+            // pnlTextFiles
+            // 
+            this.pnlTextFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTextFiles.Location = new System.Drawing.Point(0, 0);
+            this.pnlTextFiles.Name = "pnlTextFiles";
+            this.pnlTextFiles.Size = new System.Drawing.Size(785, 105);
+            this.pnlTextFiles.TabIndex = 0;
             // 
             // ucManualMatch
             // 
@@ -391,6 +405,7 @@ namespace TagBot.App.usercontrols
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.scAudioText.Panel1.ResumeLayout(false);
+            this.scAudioText.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scAudioText)).EndInit();
             this.scAudioText.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -427,5 +442,6 @@ namespace TagBot.App.usercontrols
         private System.Windows.Forms.Label lblOriginalTitle;
         private System.Windows.Forms.Label lblOriginalNumber;
         private System.Windows.Forms.SplitContainer scAudioText;
+        private System.Windows.Forms.Panel pnlTextFiles;
     }
 }

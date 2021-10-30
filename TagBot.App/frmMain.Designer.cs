@@ -80,8 +80,6 @@ namespace TagBot.App
             this.lvAudioTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvAudioArtist = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvAudioAlbum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvTextFiles = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.pnlTagView = new System.Windows.Forms.Panel();
@@ -111,7 +109,6 @@ namespace TagBot.App
             this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scFlacText)).BeginInit();
             this.scFlacText.Panel1.SuspendLayout();
-            this.scFlacText.Panel2.SuspendLayout();
             this.scFlacText.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -540,10 +537,6 @@ namespace TagBot.App
             // scFlacText.Panel1
             // 
             this.scFlacText.Panel1.Controls.Add(this.lvAudioFiles);
-            // 
-            // scFlacText.Panel2
-            // 
-            this.scFlacText.Panel2.Controls.Add(this.lvTextFiles);
             this.scFlacText.Size = new System.Drawing.Size(599, 407);
             this.scFlacText.SplitterDistance = 284;
             this.scFlacText.TabIndex = 10;
@@ -588,28 +581,6 @@ namespace TagBot.App
             // lvAudioAlbum
             // 
             this.lvAudioAlbum.Text = "Album";
-            // 
-            // lvTextFiles
-            // 
-            this.lvTextFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.lvTextFiles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvTextFiles.FullRowSelect = true;
-            this.lvTextFiles.HideSelection = false;
-            this.lvTextFiles.Location = new System.Drawing.Point(0, 0);
-            this.lvTextFiles.MultiSelect = false;
-            this.lvTextFiles.Name = "lvTextFiles";
-            this.lvTextFiles.Size = new System.Drawing.Size(599, 119);
-            this.lvTextFiles.SmallImageList = this.imgListFileIcons;
-            this.lvTextFiles.TabIndex = 11;
-            this.lvTextFiles.UseCompatibleStateImageBehavior = false;
-            this.lvTextFiles.View = System.Windows.Forms.View.Details;
-            this.lvTextFiles.DoubleClick += new System.EventHandler(this.lvTextFiles_DoubleClick);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Name";
-            this.columnHeader1.Width = 300;
             // 
             // toolStrip1
             // 
@@ -738,7 +709,6 @@ namespace TagBot.App
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.scFlacText.Panel1.ResumeLayout(false);
-            this.scFlacText.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scFlacText)).EndInit();
             this.scFlacText.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
@@ -808,8 +778,6 @@ namespace TagBot.App
         private System.Windows.Forms.ColumnHeader lvAudioTitle;
         private System.Windows.Forms.ColumnHeader lvAudioArtist;
         private System.Windows.Forms.ColumnHeader lvAudioAlbum;
-        private System.Windows.Forms.ListView lvTextFiles;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbSave;
         private System.Windows.Forms.Panel pnlTagView;

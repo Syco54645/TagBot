@@ -15,7 +15,6 @@ namespace TagBot.App.usercontrols
     public partial class ucManualMatch : UserControl
     {
         public List<string> workingFiles = new List<string>();
-        public ShowSearchResponseContract showData;
         public frmMain frmMain;
 
         public ucManualMatch()
@@ -59,9 +58,9 @@ namespace TagBot.App.usercontrols
             lvMatchTags.Columns.Add(header);
             lvMatchTags.View = View.Details;
 
-            if (showData != null)
+            if (frmMain.showData != null)
             {
-                foreach (Track track in showData.Setlist)
+                foreach (Track track in frmMain.showData.Setlist)
                 {
                     string format = "%n %t [%m]";
                     string formattedName = "";
@@ -82,6 +81,8 @@ namespace TagBot.App.usercontrols
             lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             lvMatchTags.HeaderStyle = ColumnHeaderStyle.None;
+
+            pnlTextFiles.Controls.Add(frmMain.ucTextFiles);
         }
 
         private void lvMatchTags_ItemDrag(object sender, ItemDragEventArgs e)
