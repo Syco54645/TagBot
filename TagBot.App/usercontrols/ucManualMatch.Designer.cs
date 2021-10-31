@@ -108,17 +108,20 @@ namespace TagBot.App.usercontrols
             this.lvMatchTags.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.lvMatchTags.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvMatchTags.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lvMatchTags.HideSelection = false;
             this.lvMatchTags.Location = new System.Drawing.Point(0, 0);
             this.lvMatchTags.Name = "lvMatchTags";
             this.lvMatchTags.Size = new System.Drawing.Size(422, 317);
             this.lvMatchTags.TabIndex = 0;
             this.lvMatchTags.UseCompatibleStateImageBehavior = false;
+            this.lvMatchTags.View = System.Windows.Forms.View.Details;
             this.lvMatchTags.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.lvMatchTags_ItemDrag);
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "";
+            this.columnHeader1.Width = 25;
             // 
             // scMain
             // 

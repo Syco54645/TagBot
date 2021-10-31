@@ -34,7 +34,9 @@ namespace TagBot.App
             this.imgListFileIcons = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtLoadedDatabase = new System.Windows.Forms.TextBox();
             this.lvArtists = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblLoadedDatabaseVersion = new System.Windows.Forms.Label();
             this.lblLoadedDatabase = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -79,7 +81,6 @@ namespace TagBot.App
             this.scFileView = new System.Windows.Forms.SplitContainer();
             this.tsDirectoryBrowser = new System.Windows.Forms.ToolStrip();
             this.tsbSelectDirectory = new System.Windows.Forms.ToolStripButton();
-            this.tslLocation = new System.Windows.Forms.ToolStripLabel();
             this.tvDirectories = new System.Windows.Forms.TreeView();
             this.scFlacText = new System.Windows.Forms.SplitContainer();
             this.lvAudioFiles = new System.Windows.Forms.ListView();
@@ -99,7 +100,7 @@ namespace TagBot.App
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tstbLocation = new System.Windows.Forms.ToolStripTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -171,6 +172,7 @@ namespace TagBot.App
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtLoadedDatabase);
             this.groupBox2.Controls.Add(this.lvArtists);
             this.groupBox2.Controls.Add(this.lblLoadedDatabaseVersion);
             this.groupBox2.Controls.Add(this.lblLoadedDatabase);
@@ -185,6 +187,14 @@ namespace TagBot.App
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Database";
             // 
+            // txtLoadedDatabase
+            // 
+            this.txtLoadedDatabase.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtLoadedDatabase.Location = new System.Drawing.Point(64, 16);
+            this.txtLoadedDatabase.Name = "txtLoadedDatabase";
+            this.txtLoadedDatabase.Size = new System.Drawing.Size(280, 13);
+            this.txtLoadedDatabase.TabIndex = 7;
+            // 
             // lvArtists
             // 
             this.lvArtists.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -197,6 +207,10 @@ namespace TagBot.App
             this.lvArtists.TabIndex = 6;
             this.lvArtists.UseCompatibleStateImageBehavior = false;
             this.lvArtists.View = System.Windows.Forms.View.List;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = -1;
             // 
             // lblLoadedDatabaseVersion
             // 
@@ -590,12 +604,13 @@ namespace TagBot.App
             // 
             this.tsDirectoryBrowser.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbSelectDirectory,
-            this.tslLocation});
+            this.tstbLocation});
             this.tsDirectoryBrowser.Location = new System.Drawing.Point(0, 0);
             this.tsDirectoryBrowser.Name = "tsDirectoryBrowser";
             this.tsDirectoryBrowser.Size = new System.Drawing.Size(301, 25);
             this.tsDirectoryBrowser.TabIndex = 10;
             this.tsDirectoryBrowser.Text = "toolStrip2";
+            this.tsDirectoryBrowser.Resize += new System.EventHandler(this.tsDirectoryBrowser_Resize);
             // 
             // tsbSelectDirectory
             // 
@@ -606,13 +621,6 @@ namespace TagBot.App
             this.tsbSelectDirectory.Size = new System.Drawing.Size(23, 22);
             this.tsbSelectDirectory.Text = "toolStripButton1";
             this.tsbSelectDirectory.Click += new System.EventHandler(this.tsbSelectDirectory_Click);
-            // 
-            // tslLocation
-            // 
-            this.tslLocation.Name = "tslLocation";
-            this.tslLocation.Overflow = System.Windows.Forms.ToolStripItemOverflow.Never;
-            this.tslLocation.Size = new System.Drawing.Size(65, 22);
-            this.tslLocation.Text = "tslLocation";
             // 
             // tvDirectories
             // 
@@ -770,9 +778,14 @@ namespace TagBot.App
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // columnHeader1
+            // tstbLocation
             // 
-            this.columnHeader1.Width = -1;
+            this.tstbLocation.AutoSize = false;
+            this.tstbLocation.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tstbLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tstbLocation.Name = "tstbLocation";
+            this.tstbLocation.ReadOnly = true;
+            this.tstbLocation.Size = new System.Drawing.Size(100, 25);
             // 
             // frmMain
             // 
@@ -873,7 +886,6 @@ namespace TagBot.App
         private System.Windows.Forms.SplitContainer scFileView;
         private System.Windows.Forms.ToolStrip tsDirectoryBrowser;
         private System.Windows.Forms.ToolStripButton tsbSelectDirectory;
-        private System.Windows.Forms.ToolStripLabel tslLocation;
         private System.Windows.Forms.TreeView tvDirectories;
         private System.Windows.Forms.SplitContainer scFlacText;
         private System.Windows.Forms.ListView lvAudioFiles;
@@ -894,6 +906,8 @@ namespace TagBot.App
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ListView lvArtists;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.TextBox txtLoadedDatabase;
+        private System.Windows.Forms.ToolStripTextBox tstbLocation;
     }
 }
 
