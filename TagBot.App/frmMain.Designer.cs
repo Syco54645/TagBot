@@ -101,6 +101,8 @@ namespace TagBot.App
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tstbLocation = new System.Windows.Forms.ToolStripTextBox();
+            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
+            this.scTopBottom = new System.Windows.Forms.SplitContainer();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -123,6 +125,10 @@ namespace TagBot.App
             this.scFlacText.SuspendLayout();
             this.tsAudioBrowser.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.scTopBottom)).BeginInit();
+            this.scTopBottom.Panel1.SuspendLayout();
+            this.scTopBottom.Panel2.SuspendLayout();
+            this.scTopBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // imgListFileIcons
@@ -166,7 +172,7 @@ namespace TagBot.App
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.groupBox1.Size = new System.Drawing.Size(370, 432);
+            this.groupBox1.Size = new System.Drawing.Size(370, 438);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
@@ -330,7 +336,7 @@ namespace TagBot.App
             // pbTagProgress
             // 
             this.pbTagProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pbTagProgress.Location = new System.Drawing.Point(5, 409);
+            this.pbTagProgress.Location = new System.Drawing.Point(5, 415);
             this.pbTagProgress.Name = "pbTagProgress";
             this.pbTagProgress.Size = new System.Drawing.Size(360, 23);
             this.pbTagProgress.TabIndex = 28;
@@ -556,8 +562,8 @@ namespace TagBot.App
             // 
             // scMain
             // 
-            this.scMain.Dock = System.Windows.Forms.DockStyle.Top;
-            this.scMain.Location = new System.Drawing.Point(0, 24);
+            this.scMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scMain.Location = new System.Drawing.Point(0, 0);
             this.scMain.Name = "scMain";
             // 
             // scMain.Panel1
@@ -568,7 +574,7 @@ namespace TagBot.App
             // scMain.Panel2
             // 
             this.scMain.Panel2.Controls.Add(this.groupBox1);
-            this.scMain.Size = new System.Drawing.Size(1278, 432);
+            this.scMain.Size = new System.Drawing.Size(1278, 438);
             this.scMain.SplitterDistance = 904;
             this.scMain.TabIndex = 6;
             // 
@@ -578,7 +584,7 @@ namespace TagBot.App
             this.pnlFileView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlFileView.Location = new System.Drawing.Point(0, 0);
             this.pnlFileView.Name = "pnlFileView";
-            this.pnlFileView.Size = new System.Drawing.Size(904, 432);
+            this.pnlFileView.Size = new System.Drawing.Size(904, 438);
             this.pnlFileView.TabIndex = 0;
             // 
             // scFileView
@@ -596,7 +602,7 @@ namespace TagBot.App
             // 
             this.scFileView.Panel2.Controls.Add(this.scFlacText);
             this.scFileView.Panel2.Controls.Add(this.tsAudioBrowser);
-            this.scFileView.Size = new System.Drawing.Size(904, 432);
+            this.scFileView.Size = new System.Drawing.Size(904, 438);
             this.scFileView.SplitterDistance = 301;
             this.scFileView.TabIndex = 10;
             // 
@@ -627,7 +633,7 @@ namespace TagBot.App
             this.tvDirectories.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tvDirectories.ImageIndex = 0;
             this.tvDirectories.ImageList = this.imgListFileIcons;
-            this.tvDirectories.Location = new System.Drawing.Point(0, 24);
+            this.tvDirectories.Location = new System.Drawing.Point(0, 30);
             this.tvDirectories.Name = "tvDirectories";
             this.tvDirectories.SelectedImageIndex = 0;
             this.tvDirectories.Size = new System.Drawing.Size(301, 408);
@@ -643,8 +649,8 @@ namespace TagBot.App
             // scFlacText.Panel1
             // 
             this.scFlacText.Panel1.Controls.Add(this.lvAudioFiles);
-            this.scFlacText.Size = new System.Drawing.Size(599, 407);
-            this.scFlacText.SplitterDistance = 284;
+            this.scFlacText.Size = new System.Drawing.Size(599, 413);
+            this.scFlacText.SplitterDistance = 288;
             this.scFlacText.TabIndex = 10;
             // 
             // lvAudioFiles
@@ -660,7 +666,7 @@ namespace TagBot.App
             this.lvAudioFiles.HideSelection = false;
             this.lvAudioFiles.Location = new System.Drawing.Point(0, 0);
             this.lvAudioFiles.Name = "lvAudioFiles";
-            this.lvAudioFiles.Size = new System.Drawing.Size(599, 284);
+            this.lvAudioFiles.Size = new System.Drawing.Size(599, 288);
             this.lvAudioFiles.SmallImageList = this.imgListFileIcons;
             this.lvAudioFiles.TabIndex = 10;
             this.lvAudioFiles.UseCompatibleStateImageBehavior = false;
@@ -712,7 +718,7 @@ namespace TagBot.App
             this.pnlTagView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTagView.Location = new System.Drawing.Point(0, 0);
             this.pnlTagView.Name = "pnlTagView";
-            this.pnlTagView.Size = new System.Drawing.Size(904, 432);
+            this.pnlTagView.Size = new System.Drawing.Size(904, 438);
             this.pnlTagView.TabIndex = 1;
             // 
             // menuStrip1
@@ -787,12 +793,40 @@ namespace TagBot.App
             this.tstbLocation.ReadOnly = true;
             this.tstbLocation.Size = new System.Drawing.Size(100, 25);
             // 
+            // srtfLog
+            // 
+            this.srtfLog.BackColor = System.Drawing.Color.Black;
+            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.srtfLog.Location = new System.Drawing.Point(0, 0);
+            this.srtfLog.Name = "srtfLog";
+            this.srtfLog.Size = new System.Drawing.Size(1278, 54);
+            this.srtfLog.TabIndex = 53;
+            this.srtfLog.Text = "";
+            // 
+            // scTopBottom
+            // 
+            this.scTopBottom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scTopBottom.Location = new System.Drawing.Point(0, 24);
+            this.scTopBottom.Name = "scTopBottom";
+            this.scTopBottom.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // scTopBottom.Panel1
+            // 
+            this.scTopBottom.Panel1.Controls.Add(this.scMain);
+            // 
+            // scTopBottom.Panel2
+            // 
+            this.scTopBottom.Panel2.Controls.Add(this.srtfLog);
+            this.scTopBottom.Size = new System.Drawing.Size(1278, 496);
+            this.scTopBottom.SplitterDistance = 438;
+            this.scTopBottom.TabIndex = 8;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1278, 520);
-            this.Controls.Add(this.scMain);
+            this.Controls.Add(this.scTopBottom);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";
@@ -832,6 +866,10 @@ namespace TagBot.App
             this.tsAudioBrowser.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.scTopBottom.Panel1.ResumeLayout(false);
+            this.scTopBottom.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.scTopBottom)).EndInit();
+            this.scTopBottom.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -908,6 +946,8 @@ namespace TagBot.App
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.TextBox txtLoadedDatabase;
         private System.Windows.Forms.ToolStripTextBox tstbLocation;
+        private ScrollingRichTextBox srtfLog;
+        private System.Windows.Forms.SplitContainer scTopBottom;
     }
 }
 

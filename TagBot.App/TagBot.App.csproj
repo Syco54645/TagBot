@@ -76,8 +76,12 @@
     <Compile Include="frmText.Designer.cs">
       <DependentUpon>frmText.cs</DependentUpon>
     </Compile>
+    <Compile Include="logger\Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScrollingRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="usercontrols\ucManualMatch.cs">
       <SubType>UserControl</SubType>
     </Compile>
