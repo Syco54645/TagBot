@@ -81,6 +81,7 @@ namespace TagBot.App
             this.scFileView = new System.Windows.Forms.SplitContainer();
             this.tsDirectoryBrowser = new System.Windows.Forms.ToolStrip();
             this.tsbSelectDirectory = new System.Windows.Forms.ToolStripButton();
+            this.tstbLocation = new System.Windows.Forms.ToolStripTextBox();
             this.tvDirectories = new System.Windows.Forms.TreeView();
             this.scFlacText = new System.Windows.Forms.SplitContainer();
             this.lvAudioFiles = new System.Windows.Forms.ListView();
@@ -100,7 +101,6 @@ namespace TagBot.App
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tstbLocation = new System.Windows.Forms.ToolStripTextBox();
             this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.scTopBottom = new System.Windows.Forms.SplitContainer();
             this.groupBox1.SuspendLayout();
@@ -628,15 +628,26 @@ namespace TagBot.App
             this.tsbSelectDirectory.Text = "toolStripButton1";
             this.tsbSelectDirectory.Click += new System.EventHandler(this.tsbSelectDirectory_Click);
             // 
+            // tstbLocation
+            // 
+            this.tstbLocation.AutoSize = false;
+            this.tstbLocation.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tstbLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tstbLocation.Name = "tstbLocation";
+            this.tstbLocation.ReadOnly = true;
+            this.tstbLocation.Size = new System.Drawing.Size(100, 25);
+            // 
             // tvDirectories
             // 
-            this.tvDirectories.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tvDirectories.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tvDirectories.ImageIndex = 0;
             this.tvDirectories.ImageList = this.imgListFileIcons;
-            this.tvDirectories.Location = new System.Drawing.Point(0, 30);
+            this.tvDirectories.Location = new System.Drawing.Point(0, 24);
             this.tvDirectories.Name = "tvDirectories";
             this.tvDirectories.SelectedImageIndex = 0;
-            this.tvDirectories.Size = new System.Drawing.Size(301, 408);
+            this.tvDirectories.Size = new System.Drawing.Size(301, 420);
             this.tvDirectories.TabIndex = 4;
             // 
             // scFlacText
@@ -783,15 +794,6 @@ namespace TagBot.App
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // tstbLocation
-            // 
-            this.tstbLocation.AutoSize = false;
-            this.tstbLocation.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tstbLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.tstbLocation.Name = "tstbLocation";
-            this.tstbLocation.ReadOnly = true;
-            this.tstbLocation.Size = new System.Drawing.Size(100, 25);
             // 
             // srtfLog
             // 
