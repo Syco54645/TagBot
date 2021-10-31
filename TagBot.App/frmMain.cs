@@ -448,6 +448,7 @@ namespace TagBot.App
         {
             pnlFileView.Visible = true;
             pnlTagView.Visible = false;
+            scFlacText.Panel2.Controls.Add(ucTextFiles);
         }
 
         public void matchMode()
