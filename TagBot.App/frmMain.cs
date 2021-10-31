@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,6 +12,7 @@ using Tagbot.Service.contracts;
 using Tagbot.Service.models;
 using TagBot.App.Properties;
 using TagBot.App.usercontrols;
+using TagBot.Log;
 using TagBot.Service;
 using TagBot.Service.contracts;
 using TagBot.Service.models;
@@ -23,8 +25,13 @@ namespace TagBot.App
         public ShowSearchResponseContract showData;
         public Dictionary<string, FlacFileInfo> originalMetadata;
         public Dictionary<string, FlacFileInfo> proposedMetadata;
+
+        private Logger _log = new Logger(100u);
+        private List<Color> _randomColors = new List<Color> { Color.Red, Color.SkyBlue, Color.Green };
+        private Random _r = new Random((int)DateTime.Now.Ticks);
+
+
         public ucTextFiles ucTextFiles = new ucTextFiles();
-        
         frmDebug frmDebug = new frmDebug();
         ucManualMatch ucManualMatch = new ucManualMatch();
 
@@ -39,6 +46,7 @@ namespace TagBot.App
         {
             ucManualMatch.frmMain = this;
             pnlTagView.Controls.Add(ucManualMatch);
+            ucTextFiles.Dock = DockStyle.Fill;
             scFlacText.Panel2.Controls.Add(ucTextFiles);
             ucTextFiles.frmMain = this;
             tsbSelectDirectory.Image = imgListFileIcons.Images["folder"];
@@ -431,6 +439,9 @@ namespace TagBot.App
             ucManualMatch.initControl();
 
             matchMode();
+            _log.AddToLog("Some event to log.", _randomColors[_r.Next(3)]);
+            srtfLog.Rtf = _log.GetLogAsRichText(true);
+            srtfLog.ScrollToBottom();
         }
 
         public void fileMode()
@@ -493,5 +504,6 @@ namespace TagBot.App
         {
             tstbLocation.Width = tsDirectoryBrowser.Width - (tsbSelectDirectory.Width + 50);
         }
+
     }
 }
