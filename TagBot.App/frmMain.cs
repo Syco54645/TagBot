@@ -54,6 +54,8 @@ namespace TagBot.App
                 getDatabaseMeta();
             }
             this.tvDirectories.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.tvDirectories_NodeMouseClick);
+
+            tsDirectoryBrowser_Resize(this, e);
         }
 
         private void btnGetShowData_Click(object sender, EventArgs e)
@@ -69,6 +71,7 @@ namespace TagBot.App
 
             showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
             frmDebug.ShowData = showDataJson;
+            ucManualMatch.populateMatchTags(showData);
         }
 
         #region File List
@@ -118,7 +121,7 @@ namespace TagBot.App
         private void UpdateCurrentPath(string path)
         {
             this.currentPath = path;
-            tslLocation.Text = this.currentPath;
+            tstbLocation.Text = this.currentPath;
         }
 
         private TreeNode[] GetParentNodes(TreeNode node_)
@@ -461,7 +464,8 @@ namespace TagBot.App
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Open Database File";
             dialog.Filter = "sqlite files|*.db";
-            dialog.InitialDirectory = @"C:\";
+            string initialDirectory = string.IsNullOrEmpty(Settings.Default.databaseLocation) ? AppDomain.CurrentDomain.BaseDirectory : Settings.Default.databaseLocation;
+            dialog.InitialDirectory = initialDirectory;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 Settings.Default.databaseLocation = dialog.FileName;
@@ -475,12 +479,19 @@ namespace TagBot.App
             Sqlite sqlite = new Sqlite();
             sqlite.databasePath = Settings.Default.databaseLocation;
             DatabaseMeta databaseMeta = Utility.DeserializeObject<DatabaseMeta>(sqlite.getDatabaseMeta());
-            lblLoadedDatabase.Text = Settings.Default.databaseLocation;
+            txtLoadedDatabase.Text = Settings.Default.databaseLocation;
+            txtLoadedDatabase.ReadOnly = true;
+            txtLoadedDatabase.BorderStyle = BorderStyle.None;
             lblLoadedDatabaseVersion.Text = databaseMeta.Version;
             foreach(string artist in databaseMeta.Artists)
             {
                 lvArtists.Items.Add(new ListViewItem(artist));
             }
+        }
+
+        private void tsDirectoryBrowser_Resize(object sender, EventArgs e)
+        {
+            tstbLocation.Width = tsDirectoryBrowser.Width - (tsbSelectDirectory.Width + 50);
         }
     }
 }
