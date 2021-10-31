@@ -103,6 +103,7 @@ namespace TagBot.App
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.scTopBottom = new System.Windows.Forms.SplitContainer();
+            this.pnlShowSearch = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -129,6 +130,7 @@ namespace TagBot.App
             this.scTopBottom.Panel1.SuspendLayout();
             this.scTopBottom.Panel2.SuspendLayout();
             this.scTopBottom.SuspendLayout();
+            this.pnlShowSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // imgListFileIcons
@@ -146,12 +148,8 @@ namespace TagBot.App
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.panel1);
-            this.groupBox1.Controls.Add(this.btnMatch);
             this.groupBox1.Controls.Add(this.pbTagProgress);
             this.groupBox1.Controls.Add(this.btnAutomate);
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.btnGetShowData);
-            this.groupBox1.Controls.Add(this.txtDate);
             this.groupBox1.Controls.Add(this.panel5);
             this.groupBox1.Controls.Add(this.panel4);
             this.groupBox1.Controls.Add(this.panel3);
@@ -325,7 +323,8 @@ namespace TagBot.App
             // 
             // btnMatch
             // 
-            this.btnMatch.Location = new System.Drawing.Point(192, 376);
+            this.btnMatch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMatch.Location = new System.Drawing.Point(226, 27);
             this.btnMatch.Name = "btnMatch";
             this.btnMatch.Size = new System.Drawing.Size(75, 23);
             this.btnMatch.TabIndex = 50;
@@ -354,7 +353,7 @@ namespace TagBot.App
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(10, 112);
+            this.label12.Location = new System.Drawing.Point(2, 8);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(60, 13);
             this.label12.TabIndex = 48;
@@ -362,9 +361,10 @@ namespace TagBot.App
             // 
             // btnGetShowData
             // 
-            this.btnGetShowData.Location = new System.Drawing.Point(232, 111);
+            this.btnGetShowData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGetShowData.Location = new System.Drawing.Point(226, 4);
             this.btnGetShowData.Name = "btnGetShowData";
-            this.btnGetShowData.Size = new System.Drawing.Size(75, 20);
+            this.btnGetShowData.Size = new System.Drawing.Size(75, 23);
             this.btnGetShowData.TabIndex = 47;
             this.btnGetShowData.Text = "Search";
             this.btnGetShowData.UseVisualStyleBackColor = true;
@@ -372,7 +372,9 @@ namespace TagBot.App
             // 
             // txtDate
             // 
-            this.txtDate.Location = new System.Drawing.Point(72, 111);
+            this.txtDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDate.Location = new System.Drawing.Point(64, 4);
             this.txtDate.Name = "txtDate";
             this.txtDate.Size = new System.Drawing.Size(160, 20);
             this.txtDate.TabIndex = 46;
@@ -595,6 +597,7 @@ namespace TagBot.App
             // 
             // scFileView.Panel1
             // 
+            this.scFileView.Panel1.Controls.Add(this.pnlShowSearch);
             this.scFileView.Panel1.Controls.Add(this.tsDirectoryBrowser);
             this.scFileView.Panel1.Controls.Add(this.tvDirectories);
             // 
@@ -647,7 +650,7 @@ namespace TagBot.App
             this.tvDirectories.Location = new System.Drawing.Point(0, 24);
             this.tvDirectories.Name = "tvDirectories";
             this.tvDirectories.SelectedImageIndex = 0;
-            this.tvDirectories.Size = new System.Drawing.Size(301, 420);
+            this.tvDirectories.Size = new System.Drawing.Size(301, 352);
             this.tvDirectories.TabIndex = 4;
             // 
             // scFlacText
@@ -823,6 +826,19 @@ namespace TagBot.App
             this.scTopBottom.SplitterDistance = 438;
             this.scTopBottom.TabIndex = 8;
             // 
+            // pnlShowSearch
+            // 
+            this.pnlShowSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlShowSearch.Controls.Add(this.label12);
+            this.pnlShowSearch.Controls.Add(this.btnGetShowData);
+            this.pnlShowSearch.Controls.Add(this.txtDate);
+            this.pnlShowSearch.Controls.Add(this.btnMatch);
+            this.pnlShowSearch.Location = new System.Drawing.Point(0, 376);
+            this.pnlShowSearch.Name = "pnlShowSearch";
+            this.pnlShowSearch.Size = new System.Drawing.Size(304, 64);
+            this.pnlShowSearch.TabIndex = 51;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -872,6 +888,8 @@ namespace TagBot.App
             this.scTopBottom.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scTopBottom)).EndInit();
             this.scTopBottom.ResumeLayout(false);
+            this.pnlShowSearch.ResumeLayout(false);
+            this.pnlShowSearch.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -950,6 +968,7 @@ namespace TagBot.App
         private System.Windows.Forms.ToolStripTextBox tstbLocation;
         private ScrollingRichTextBox srtfLog;
         private System.Windows.Forms.SplitContainer scTopBottom;
+        private System.Windows.Forms.Panel pnlShowSearch;
     }
 }
 
