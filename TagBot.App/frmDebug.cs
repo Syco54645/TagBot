@@ -67,5 +67,12 @@ namespace TagBot.App
         {
             InitializeComponent();
         }
+
+        private void btnResetConfig_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.startingDirectory = null;
+            Properties.Settings.Default.databaseLocation = null;
+            Properties.Settings.Default.Save();
+        }
     }
 }

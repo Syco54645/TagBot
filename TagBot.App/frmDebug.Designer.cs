@@ -32,6 +32,7 @@ namespace TagBot.App
             this.rtfResult = new System.Windows.Forms.RichTextBox();
             this.rtfOriginal = new System.Windows.Forms.RichTextBox();
             this.rtfProposed = new System.Windows.Forms.RichTextBox();
+            this.btnResetConfig = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // rtfResult
@@ -58,11 +59,22 @@ namespace TagBot.App
             this.rtfProposed.TabIndex = 5;
             this.rtfProposed.Text = "";
             // 
+            // btnResetConfig
+            // 
+            this.btnResetConfig.Location = new System.Drawing.Point(360, 296);
+            this.btnResetConfig.Name = "btnResetConfig";
+            this.btnResetConfig.Size = new System.Drawing.Size(75, 23);
+            this.btnResetConfig.TabIndex = 6;
+            this.btnResetConfig.Text = "Reset Config";
+            this.btnResetConfig.UseVisualStyleBackColor = true;
+            this.btnResetConfig.Click += new System.EventHandler(this.btnResetConfig_Click);
+            // 
             // frmDebug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 450);
+            this.Controls.Add(this.btnResetConfig);
             this.Controls.Add(this.rtfProposed);
             this.Controls.Add(this.rtfOriginal);
             this.Controls.Add(this.rtfResult);
@@ -77,5 +89,6 @@ namespace TagBot.App
         private System.Windows.Forms.RichTextBox rtfResult;
         private System.Windows.Forms.RichTextBox rtfOriginal;
         private System.Windows.Forms.RichTextBox rtfProposed;
+        private System.Windows.Forms.Button btnResetConfig;
     }
 }
