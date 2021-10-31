@@ -244,7 +244,6 @@ namespace TagBot.App
             txtMetadataArtist.Text = flacInfo.Metadata.Artist;
             txtMetadataAlbum.Text = flacInfo.Metadata.Album;
             txtMetadataDate.Text = flacInfo.Metadata.Date;
-            txtMetadataTitle.Text = flacInfo.Metadata.Title;
             txtMetadataTrackNumber.Text = flacInfo.Metadata.Tracknumber;
         }
 
@@ -270,7 +269,6 @@ namespace TagBot.App
                 txtMetadataArtist.Text = "";
                 txtMetadataAlbum.Text = "";
                 txtMetadataDate.Text = "";
-                txtMetadataTitle.Text = "";
                 txtMetadataTrackNumber.Text = "";
             }
         }
