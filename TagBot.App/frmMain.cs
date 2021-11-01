@@ -66,6 +66,10 @@ namespace TagBot.App
             this.tvDirectories.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.tvDirectories_NodeMouseClick);
 
             tsDirectoryBrowser_Resize(this, e);
+            if (databaseMeta == null)
+            {
+                btnDbInfo.Enabled = false;
+            }
         }
 
         private void btnGetShowData_Click(object sender, EventArgs e)
@@ -492,6 +496,7 @@ namespace TagBot.App
             sqlite.databasePath = Settings.Default.databaseLocation;
             databaseMeta = Utility.DeserializeObject<DatabaseMeta>(sqlite.getDatabaseMeta());
             txtLoadedDatabase.Text = Settings.Default.databaseLocation;
+            btnDbInfo.Enabled = true;
         }
 
         private void tsDirectoryBrowser_Resize(object sender, EventArgs e)
