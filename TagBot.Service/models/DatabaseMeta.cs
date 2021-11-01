@@ -10,5 +10,7 @@ namespace TagBot.Service.models
     {
         public string Version { get; set; }
         public List<string> Artists { get; set; }
+        public int ShowCount { get; set; }
+        public int SongCount { get; set; }
     }
 }

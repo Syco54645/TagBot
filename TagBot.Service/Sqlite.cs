@@ -186,6 +186,36 @@ namespace Tagbot.Service
                         }
                     }
                 }
+
+                command = connection.CreateCommand();
+                command.CommandText =
+                @"
+                    SELECT COUNT(*) AS ct FROM song 
+                ";
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        meta.SongCount = Convert.ToInt32(reader["ct"]);
+                    }
+                }
+
+                command = connection.CreateCommand();
+                command.CommandText =
+                @"
+                    SELECT COUNT(*) AS ct FROM show
+                ";
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        meta.ShowCount = Convert.ToInt32(reader["ct"]);
+                    }
+                }
+
+
             }
             string stringResponse = Newtonsoft.Json.JsonConvert.SerializeObject(meta);
             return stringResponse;

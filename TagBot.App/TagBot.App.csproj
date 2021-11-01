@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmDbInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDbInfo.Designer.cs">
+      <DependentUpon>frmDbInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDebug.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +100,9 @@
     <Compile Include="usercontrols\ucTextFiles.Designer.cs">
       <DependentUpon>ucTextFiles.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmDbInfo.resx">
+      <DependentUpon>frmDbInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDebug.resx">
       <DependentUpon>frmDebug.cs</DependentUpon>
     </EmbeddedResource>

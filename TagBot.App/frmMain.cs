@@ -25,6 +25,7 @@ namespace TagBot.App
         public ShowSearchResponseContract showData;
         public Dictionary<string, FlacFileInfo> originalMetadata;
         public Dictionary<string, FlacFileInfo> proposedMetadata;
+        public DatabaseMeta databaseMeta;
 
         private Logger _log = new Logger(100u);
         private List<Color> _randomColors = new List<Color> { Color.Red, Color.SkyBlue, Color.Green };
@@ -34,6 +35,7 @@ namespace TagBot.App
         public ucTextFiles ucTextFiles = new ucTextFiles();
         frmDebug frmDebug = new frmDebug();
         ucManualMatch ucManualMatch = new ucManualMatch();
+        frmDbInfo frmDbInfo = new frmDbInfo();
 
         public frmMain()
         {
@@ -488,15 +490,8 @@ namespace TagBot.App
         {
             Sqlite sqlite = new Sqlite();
             sqlite.databasePath = Settings.Default.databaseLocation;
-            DatabaseMeta databaseMeta = Utility.DeserializeObject<DatabaseMeta>(sqlite.getDatabaseMeta());
+            databaseMeta = Utility.DeserializeObject<DatabaseMeta>(sqlite.getDatabaseMeta());
             txtLoadedDatabase.Text = Settings.Default.databaseLocation;
-            txtLoadedDatabase.ReadOnly = true;
-            txtLoadedDatabase.BorderStyle = BorderStyle.None;
-            lblLoadedDatabaseVersion.Text = databaseMeta.Version;
-            foreach(string artist in databaseMeta.Artists)
-            {
-                lvArtists.Items.Add(new ListViewItem(artist));
-            }
         }
 
         private void tsDirectoryBrowser_Resize(object sender, EventArgs e)
@@ -504,5 +499,14 @@ namespace TagBot.App
             tstbLocation.Width = tsDirectoryBrowser.Width - (tsbSelectDirectory.Width + 50);
         }
 
+        private void btnDbInfo_Click(object sender, EventArgs e)
+        {
+            if (frmDbInfo.IsDisposed)
+            {
+                frmDbInfo = new frmDbInfo();
+            }
+            frmDbInfo.displayDbMeta(databaseMeta);
+            frmDbInfo.Show();
+        }
     }
 }
