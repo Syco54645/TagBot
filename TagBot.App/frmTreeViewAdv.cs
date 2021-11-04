@@ -1,4 +1,5 @@
 ﻿using Aga.Controls.Tree;
+using Aga.Controls.Tree.NodeControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,10 +39,100 @@ namespace TagBot.App
             tvDirectoriesAdv.BeginUpdate();
             PopulateTreeView();
             tvDirectoriesAdv.EndUpdate();
+
+            // setup handlers for drag drop
+            tvDirectoriesAdv.DragDrop += tvDirectoriesAdv_DragDrop;
+            tvDirectoriesAdv.DragOver += tvDirectoriesAdv_DragOver;
+            tvDirectoriesAdv.ItemDrag += tvDirectoriesAdv_ItemDrag;
+            tvDirectoriesAdv.NodeMouseDoubleClick += tvDirectoriesAdv_NodeMouseDoubleClick;
+            tvDirectoriesAdv.AllowDrop = true;
+        }
+
+        private void tvDirectoriesAdv_NodeMouseDoubleClick(object sender, TreeNodeAdvMouseEventArgs e)
+        {
+            if (e.Control is NodeTextBox)
+                MessageBox.Show(e.Node.Tag.ToString());
+        }
+
+        private void tvDirectoriesAdv_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            tvDirectoriesAdv.DoDragDropSelectedNodes(DragDropEffects.Move);
+        }
+
+        private bool CheckNodeParent(TreeNodeAdv parent, TreeNodeAdv node)
+        {
+            while (parent != null)
+            {
+                if (node == parent)
+                    return false;
+                else
+                    parent = parent.Parent;
+            }
+            return true;
+        }
+
+        private void tvDirectoriesAdv_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])) && tvDirectoriesAdv.DropPosition.Node != null)
+            {
+                TreeNodeAdv[] nodes = e.Data.GetData(typeof(TreeNodeAdv[])) as TreeNodeAdv[];
+                TreeNodeAdv parent = tvDirectoriesAdv.DropPosition.Node;
+                if (tvDirectoriesAdv.DropPosition.Position != NodePosition.Inside)
+                    parent = parent.Parent;
+
+                foreach (TreeNodeAdv node in nodes)
+                    if (!CheckNodeParent(parent, node))
+                    {
+                        e.Effect = DragDropEffects.None;
+                        return;
+                    }
+
+                e.Effect = e.AllowedEffect;
+            }
         }
 
 
+        private void tvDirectoriesAdv_DragDrop(object sender, DragEventArgs e)
+        {
+            tvDirectoriesAdv.BeginUpdate();
 
+            TreeNodeAdv[] nodes = (TreeNodeAdv[])e.Data.GetData(typeof(TreeNodeAdv[]));
+            Node dropNode = tvDirectoriesAdv.DropPosition.Node.Tag as Node;
+            if (tvDirectoriesAdv.DropPosition.Position == NodePosition.Inside)
+            {
+                foreach (TreeNodeAdv n in nodes)
+                {
+                    (n.Tag as Node).Parent = dropNode;
+                }
+                tvDirectoriesAdv.DropPosition.Node.IsExpanded = true;
+            }
+            else
+            {
+                Node parent = dropNode.Parent;
+                Node nextItem = dropNode;
+                if (tvDirectoriesAdv.DropPosition.Position == NodePosition.After)
+                    nextItem = dropNode.NextNode;
+
+                foreach (TreeNodeAdv node in nodes)
+                    (node.Tag as Node).Parent = null;
+
+                int index = -1;
+                index = parent.Nodes.IndexOf(nextItem);
+                foreach (TreeNodeAdv node in nodes)
+                {
+                    Node item = node.Tag as Node;
+                    if (index == -1)
+                        parent.Nodes.Add(item);
+                    else
+                    {
+                        parent.Nodes.Insert(index, item);
+                        index++;
+                    }
+                }
+            }
+
+            tvDirectoriesAdv.EndUpdate();
+        }
 
 
 
