@@ -513,5 +513,12 @@ namespace TagBot.App
             frmDbInfo.displayDbMeta(databaseMeta);
             frmDbInfo.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            frmTreeViewAdv frmTreeViewAdv = new frmTreeViewAdv();
+            frmTreeViewAdv.frmMain = this;
+            frmTreeViewAdv.Show();
+        }
     }
 }

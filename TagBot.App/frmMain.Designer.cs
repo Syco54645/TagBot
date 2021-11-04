@@ -35,14 +35,14 @@ namespace TagBot.App
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnDbInfo = new System.Windows.Forms.Button();
             this.txtLoadedDatabase = new System.Windows.Forms.TextBox();
-            this.btnLoadDatabase = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.txtMetadataArtist = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.btnLoadDatabase = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtMetadataTitle = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.pbTagProgress = new System.Windows.Forms.ProgressBar();
             this.btnAutomate = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -98,6 +98,7 @@ namespace TagBot.App
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scTopBottom = new System.Windows.Forms.SplitContainer();
             this.srtfLog = new TagBot.App.ScrollingRichTextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -189,26 +190,6 @@ namespace TagBot.App
             this.txtLoadedDatabase.Size = new System.Drawing.Size(224, 20);
             this.txtLoadedDatabase.TabIndex = 7;
             // 
-            // btnLoadDatabase
-            // 
-            this.btnLoadDatabase.Location = new System.Drawing.Point(304, 16);
-            this.btnLoadDatabase.Name = "btnLoadDatabase";
-            this.btnLoadDatabase.Size = new System.Drawing.Size(24, 20);
-            this.btnLoadDatabase.TabIndex = 1;
-            this.btnLoadDatabase.Text = "...";
-            this.btnLoadDatabase.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnLoadDatabase.UseVisualStyleBackColor = true;
-            this.btnLoadDatabase.Click += new System.EventHandler(this.btnLoadDatabase_Click);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(16, 20);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(53, 13);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Database";
-            // 
             // panel2
             // 
             this.panel2.Controls.Add(this.txtMetadataArtist);
@@ -234,6 +215,17 @@ namespace TagBot.App
             this.label8.TabIndex = 2;
             this.label8.Text = "Artist";
             // 
+            // btnLoadDatabase
+            // 
+            this.btnLoadDatabase.Location = new System.Drawing.Point(304, 16);
+            this.btnLoadDatabase.Name = "btnLoadDatabase";
+            this.btnLoadDatabase.Size = new System.Drawing.Size(24, 20);
+            this.btnLoadDatabase.TabIndex = 1;
+            this.btnLoadDatabase.Text = "...";
+            this.btnLoadDatabase.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnLoadDatabase.UseVisualStyleBackColor = true;
+            this.btnLoadDatabase.Click += new System.EventHandler(this.btnLoadDatabase_Click);
+            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.txtMetadataTitle);
@@ -258,6 +250,15 @@ namespace TagBot.App
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Title";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(16, 20);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(53, 13);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Database";
             // 
             // pbTagProgress
             // 
@@ -551,6 +552,7 @@ namespace TagBot.App
             // 
             this.pnlShowSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlShowSearch.Controls.Add(this.button1);
             this.pnlShowSearch.Controls.Add(this.label12);
             this.pnlShowSearch.Controls.Add(this.btnGetShowData);
             this.pnlShowSearch.Controls.Add(this.txtDate);
@@ -586,6 +588,7 @@ namespace TagBot.App
             // 
             this.tstbLocation.AutoSize = false;
             this.tstbLocation.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tstbLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tstbLocation.Name = "tstbLocation";
             this.tstbLocation.ReadOnly = true;
             this.tstbLocation.Size = new System.Drawing.Size(100, 25);
@@ -776,6 +779,16 @@ namespace TagBot.App
             this.srtfLog.TabIndex = 53;
             this.srtfLog.Text = "";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(96, 32);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 51;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -831,7 +844,7 @@ namespace TagBot.App
         }
 
         #endregion
-        private System.Windows.Forms.ImageList imgListFileIcons;
+        public System.Windows.Forms.ImageList imgListFileIcons;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ProgressBar pbTagProgress;
         private System.Windows.Forms.Button btnAutomate;
@@ -898,6 +911,7 @@ namespace TagBot.App
         private System.Windows.Forms.SplitContainer scTopBottom;
         private System.Windows.Forms.Panel pnlShowSearch;
         private System.Windows.Forms.Button btnDbInfo;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aga.Controls, Version=1.7.0.0, Culture=neutral, PublicKeyToken=fcc90fbf924463a3, processorArchitecture=MSIL">
+      <HintPath>..\packages\TreeViewAdv.1.7.0.0\lib\net\Aga.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
@@ -82,6 +85,12 @@
     <Compile Include="frmText.Designer.cs">
       <DependentUpon>frmText.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTreeViewAdv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTreeViewAdv.Designer.cs">
+      <DependentUpon>frmTreeViewAdv.cs</DependentUpon>
+    </Compile>
     <Compile Include="logger\Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,6 +123,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmText.resx">
       <DependentUpon>frmText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTreeViewAdv.resx">
+      <DependentUpon>frmTreeViewAdv.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
