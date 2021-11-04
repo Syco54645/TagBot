@@ -29,98 +29,61 @@ namespace TagBot.App
         /// </summary>
         private void InitializeComponent()
         {
-            this.tvDirectoriesAdv = new Aga.Controls.Tree.TreeViewAdv();
-            this.lvMatchTags = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tvMatchFiles = new Aga.Controls.Tree.TreeViewAdv();
             this.tcFilename = new Aga.Controls.Tree.TreeColumn();
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tcNumber = new Aga.Controls.Tree.TreeColumn();
-            this.ntbFile = new Aga.Controls.Tree.NodeControls.NodeTextBox();
-            this.nodeIcon1 = new Aga.Controls.Tree.NodeControls.NodeIcon();
             this.tcTitle = new Aga.Controls.Tree.TreeColumn();
             this.tcArtist = new Aga.Controls.Tree.TreeColumn();
             this.tcAlbum = new Aga.Controls.Tree.TreeColumn();
+            this.nodeIcon1 = new Aga.Controls.Tree.NodeControls.NodeIcon();
+            this.ntbFile = new Aga.Controls.Tree.NodeControls.NodeTextBox();
             this.ntbNumber = new Aga.Controls.Tree.NodeControls.NodeTextBox();
             this.ntbTitle = new Aga.Controls.Tree.NodeControls.NodeTextBox();
             this.ntbArtist = new Aga.Controls.Tree.NodeControls.NodeTextBox();
             this.ntbAlbum = new Aga.Controls.Tree.NodeControls.NodeTextBox();
+            this.lvMatchTags = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
-            // tvDirectoriesAdv
+            // tvMatchFiles
             // 
-            this.tvDirectoriesAdv.BackColor = System.Drawing.SystemColors.Window;
-            this.tvDirectoriesAdv.Columns.Add(this.tcFilename);
-            this.tvDirectoriesAdv.Columns.Add(this.tcNumber);
-            this.tvDirectoriesAdv.Columns.Add(this.tcTitle);
-            this.tvDirectoriesAdv.Columns.Add(this.tcArtist);
-            this.tvDirectoriesAdv.Columns.Add(this.tcAlbum);
-            this.tvDirectoriesAdv.DefaultToolTipProvider = null;
-            this.tvDirectoriesAdv.DragDropMarkColor = System.Drawing.Color.Black;
-            this.tvDirectoriesAdv.LineColor = System.Drawing.SystemColors.ControlDark;
-            this.tvDirectoriesAdv.Location = new System.Drawing.Point(432, 8);
-            this.tvDirectoriesAdv.Model = null;
-            this.tvDirectoriesAdv.Name = "tvDirectoriesAdv";
-            this.tvDirectoriesAdv.NodeControls.Add(this.nodeIcon1);
-            this.tvDirectoriesAdv.NodeControls.Add(this.ntbFile);
-            this.tvDirectoriesAdv.NodeControls.Add(this.ntbNumber);
-            this.tvDirectoriesAdv.NodeControls.Add(this.ntbTitle);
-            this.tvDirectoriesAdv.NodeControls.Add(this.ntbArtist);
-            this.tvDirectoriesAdv.NodeControls.Add(this.ntbAlbum);
-            this.tvDirectoriesAdv.SelectedNode = null;
-            this.tvDirectoriesAdv.Size = new System.Drawing.Size(512, 320);
-            this.tvDirectoriesAdv.TabIndex = 8;
-            this.tvDirectoriesAdv.Text = "treeViewAdv1";
-            this.tvDirectoriesAdv.UseColumns = true;
-            // 
-            // lvMatchTags
-            // 
-            this.lvMatchTags.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.lvMatchTags.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            this.lvMatchTags.HideSelection = false;
-            this.lvMatchTags.Location = new System.Drawing.Point(8, 8);
-            this.lvMatchTags.Name = "lvMatchTags";
-            this.lvMatchTags.Size = new System.Drawing.Size(422, 317);
-            this.lvMatchTags.TabIndex = 9;
-            this.lvMatchTags.UseCompatibleStateImageBehavior = false;
-            this.lvMatchTags.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "";
-            this.columnHeader1.Width = 25;
+            this.tvMatchFiles.BackColor = System.Drawing.SystemColors.Window;
+            this.tvMatchFiles.Columns.Add(this.tcFilename);
+            this.tvMatchFiles.Columns.Add(this.tcNumber);
+            this.tvMatchFiles.Columns.Add(this.tcTitle);
+            this.tvMatchFiles.Columns.Add(this.tcArtist);
+            this.tvMatchFiles.Columns.Add(this.tcAlbum);
+            this.tvMatchFiles.DefaultToolTipProvider = null;
+            this.tvMatchFiles.DragDropMarkColor = System.Drawing.Color.Black;
+            this.tvMatchFiles.LineColor = System.Drawing.SystemColors.ControlDark;
+            this.tvMatchFiles.Location = new System.Drawing.Point(432, 8);
+            this.tvMatchFiles.Model = null;
+            this.tvMatchFiles.Name = "tvMatchFiles";
+            this.tvMatchFiles.NodeControls.Add(this.nodeIcon1);
+            this.tvMatchFiles.NodeControls.Add(this.ntbFile);
+            this.tvMatchFiles.NodeControls.Add(this.ntbNumber);
+            this.tvMatchFiles.NodeControls.Add(this.ntbTitle);
+            this.tvMatchFiles.NodeControls.Add(this.ntbArtist);
+            this.tvMatchFiles.NodeControls.Add(this.ntbAlbum);
+            this.tvMatchFiles.SelectedNode = null;
+            this.tvMatchFiles.Size = new System.Drawing.Size(512, 320);
+            this.tvMatchFiles.TabIndex = 8;
+            this.tvMatchFiles.Text = "treeViewAdv1";
+            this.tvMatchFiles.UseColumns = true;
             // 
             // tcFilename
             // 
             this.tcFilename.Header = "Filename";
             this.tcFilename.SortOrder = System.Windows.Forms.SortOrder.None;
             this.tcFilename.TooltipText = null;
-            this.tcFilename.Width = 500;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = global::TagBot.App.Properties.Settings.Default.databaseLocation;
+            this.tcFilename.Width = 100;
             // 
             // tcNumber
             // 
             this.tcNumber.Header = "#";
             this.tcNumber.SortOrder = System.Windows.Forms.SortOrder.None;
             this.tcNumber.TooltipText = null;
-            // 
-            // ntbFile
-            // 
-            this.ntbFile.DataPropertyName = "Text";
-            this.ntbFile.IncrementalSearchEnabled = true;
-            this.ntbFile.LeftMargin = 3;
-            this.ntbFile.ParentColumn = this.tcFilename;
-            // 
-            // nodeIcon1
-            // 
-            this.nodeIcon1.DataPropertyName = "Icon";
-            this.nodeIcon1.LeftMargin = 1;
-            this.nodeIcon1.ParentColumn = this.tcFilename;
-            this.nodeIcon1.ScaleMode = Aga.Controls.Tree.ImageScaleMode.Clip;
             // 
             // tcTitle
             // 
@@ -139,6 +102,20 @@ namespace TagBot.App
             this.tcAlbum.Header = "Album";
             this.tcAlbum.SortOrder = System.Windows.Forms.SortOrder.None;
             this.tcAlbum.TooltipText = null;
+            // 
+            // nodeIcon1
+            // 
+            this.nodeIcon1.DataPropertyName = "Icon";
+            this.nodeIcon1.LeftMargin = 1;
+            this.nodeIcon1.ParentColumn = this.tcFilename;
+            this.nodeIcon1.ScaleMode = Aga.Controls.Tree.ImageScaleMode.Clip;
+            // 
+            // ntbFile
+            // 
+            this.ntbFile.DataPropertyName = "Text";
+            this.ntbFile.IncrementalSearchEnabled = true;
+            this.ntbFile.LeftMargin = 3;
+            this.ntbFile.ParentColumn = this.tcFilename;
             // 
             // ntbNumber
             // 
@@ -168,13 +145,36 @@ namespace TagBot.App
             this.ntbAlbum.LeftMargin = 3;
             this.ntbAlbum.ParentColumn = this.tcAlbum;
             // 
+            // lvMatchTags
+            // 
+            this.lvMatchTags.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.lvMatchTags.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lvMatchTags.HideSelection = false;
+            this.lvMatchTags.Location = new System.Drawing.Point(8, 8);
+            this.lvMatchTags.Name = "lvMatchTags";
+            this.lvMatchTags.Size = new System.Drawing.Size(422, 317);
+            this.lvMatchTags.TabIndex = 9;
+            this.lvMatchTags.UseCompatibleStateImageBehavior = false;
+            this.lvMatchTags.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "";
+            this.columnHeader1.Width = 25;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = global::TagBot.App.Properties.Settings.Default.databaseLocation;
+            // 
             // frmTreeViewAdv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(948, 450);
             this.Controls.Add(this.lvMatchTags);
-            this.Controls.Add(this.tvDirectoriesAdv);
+            this.Controls.Add(this.tvMatchFiles);
             this.Name = "frmTreeViewAdv";
             this.Text = "frmTreeViewAdv";
             this.Load += new System.EventHandler(this.frmTreeViewAdv_Load);
@@ -184,7 +184,7 @@ namespace TagBot.App
 
         #endregion
 
-        private Aga.Controls.Tree.TreeViewAdv tvDirectoriesAdv;
+        private Aga.Controls.Tree.TreeViewAdv tvMatchFiles;
         private System.Windows.Forms.ListView lvMatchTags;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private Aga.Controls.Tree.TreeColumn tcFilename;
