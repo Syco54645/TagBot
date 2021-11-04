@@ -70,6 +70,7 @@ namespace TagBot.App
             {
                 btnDbInfo.Enabled = false;
             }
+            tvDirectories.ExpandAll();
         }
 
         private void btnGetShowData_Click(object sender, EventArgs e)
