@@ -36,16 +36,17 @@ namespace TagBot.App
             ShowSearchResponseContract showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
             populateMatchTags(showData);
 
-            tvDirectoriesAdv.BeginUpdate();
+            tvMatchFiles.BeginUpdate();
             PopulateTreeView();
-            tvDirectoriesAdv.EndUpdate();
+            tvMatchFiles.EndUpdate();
 
             // setup handlers for drag drop
-            tvDirectoriesAdv.DragDrop += tvDirectoriesAdv_DragDrop;
-            tvDirectoriesAdv.DragOver += tvDirectoriesAdv_DragOver;
-            tvDirectoriesAdv.ItemDrag += tvDirectoriesAdv_ItemDrag;
-            tvDirectoriesAdv.NodeMouseDoubleClick += tvDirectoriesAdv_NodeMouseDoubleClick;
-            tvDirectoriesAdv.AllowDrop = true;
+            tvMatchFiles.DragDrop += tvDirectoriesAdv_DragDrop;
+            tvMatchFiles.DragOver += tvDirectoriesAdv_DragOver;
+            tvMatchFiles.ItemDrag += tvDirectoriesAdv_ItemDrag;
+            tvMatchFiles.NodeMouseDoubleClick += tvDirectoriesAdv_NodeMouseDoubleClick;
+            tvMatchFiles.AllowDrop = true;
+            lvMatchTags.ItemDrag += lvMatchTags_ItemDrag;
         }
 
         private void tvDirectoriesAdv_NodeMouseDoubleClick(object sender, TreeNodeAdvMouseEventArgs e)
@@ -56,7 +57,7 @@ namespace TagBot.App
 
         private void tvDirectoriesAdv_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            tvDirectoriesAdv.DoDragDropSelectedNodes(DragDropEffects.Move);
+            tvMatchFiles.DoDragDropSelectedNodes(DragDropEffects.Move);
         }
 
         private bool CheckNodeParent(TreeNodeAdv parent, TreeNodeAdv node)
@@ -73,11 +74,11 @@ namespace TagBot.App
 
         private void tvDirectoriesAdv_DragOver(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])) && tvDirectoriesAdv.DropPosition.Node != null)
+            if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])) && tvMatchFiles.DropPosition.Node != null)
             {
                 TreeNodeAdv[] nodes = e.Data.GetData(typeof(TreeNodeAdv[])) as TreeNodeAdv[];
-                TreeNodeAdv parent = tvDirectoriesAdv.DropPosition.Node;
-                if (tvDirectoriesAdv.DropPosition.Position != NodePosition.Inside)
+                TreeNodeAdv parent = tvMatchFiles.DropPosition.Node;
+                if (tvMatchFiles.DropPosition.Position != NodePosition.Inside)
                     parent = parent.Parent;
 
                 foreach (TreeNodeAdv node in nodes)
@@ -89,49 +90,106 @@ namespace TagBot.App
 
                 e.Effect = e.AllowedEffect;
             }
+            else
+            {
+                e.Effect = e.AllowedEffect;
+
+            }
+        }
+
+        private void lvMatchTags_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            DoDragDrop(lvMatchTags.SelectedItems, DragDropEffects.Move);
         }
 
 
+        private void reorderFiles(object sender, DragEventArgs e)
+        {
+
+        }
+
         private void tvDirectoriesAdv_DragDrop(object sender, DragEventArgs e)
         {
-            tvDirectoriesAdv.BeginUpdate();
+            tvMatchFiles.BeginUpdate();
 
-            TreeNodeAdv[] nodes = (TreeNodeAdv[])e.Data.GetData(typeof(TreeNodeAdv[]));
-            Node dropNode = tvDirectoriesAdv.DropPosition.Node.Tag as Node;
-            if (tvDirectoriesAdv.DropPosition.Position == NodePosition.Inside)
+
+            if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])))
             {
-                foreach (TreeNodeAdv n in nodes)
+                reorderFiles(sender, e);
+                TreeNodeAdv[] nodes = (TreeNodeAdv[])e.Data.GetData(typeof(TreeNodeAdv[]));
+                Node dropNode = tvMatchFiles.DropPosition.Node.Tag as Node;
+                if (tvMatchFiles.DropPosition.Position == NodePosition.Inside)
                 {
-                    (n.Tag as Node).Parent = dropNode;
-                }
-                tvDirectoriesAdv.DropPosition.Node.IsExpanded = true;
-            }
-            else
-            {
-                Node parent = dropNode.Parent;
-                Node nextItem = dropNode;
-                if (tvDirectoriesAdv.DropPosition.Position == NodePosition.After)
-                    nextItem = dropNode.NextNode;
-
-                foreach (TreeNodeAdv node in nodes)
-                    (node.Tag as Node).Parent = null;
-
-                int index = -1;
-                index = parent.Nodes.IndexOf(nextItem);
-                foreach (TreeNodeAdv node in nodes)
-                {
-                    Node item = node.Tag as Node;
-                    if (index == -1)
-                        parent.Nodes.Add(item);
-                    else
+                    while (dropNode.Parent != null)
                     {
-                        parent.Nodes.Insert(index, item);
-                        index++;
+                        dropNode = dropNode.Parent;
+                    }
+                    //return;
+                    foreach (TreeNodeAdv n in nodes)
+                    {
+                        (n.Tag as Node).Parent = dropNode;
+                    }
+                    tvMatchFiles.DropPosition.Node.IsExpanded = true;
+                }
+                else
+                {
+                    Node parent = dropNode.Parent;
+                    Node nextItem = dropNode;
+                    if (tvMatchFiles.DropPosition.Position == NodePosition.After)
+                        nextItem = dropNode.NextNode;
+
+                    foreach (TreeNodeAdv node in nodes)
+                        (node.Tag as Node).Parent = null;
+
+                    int index = -1;
+                    index = parent.Nodes.IndexOf(nextItem);
+                    foreach (TreeNodeAdv node in nodes)
+                    {
+                        Node item = node.Tag as Node;
+                        if (index == -1)
+                            parent.Nodes.Add(item);
+                        else
+                        {
+                            parent.Nodes.Insert(index, item);
+                            index++;
+                        }
                     }
                 }
             }
+            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
+            {
 
-            tvDirectoriesAdv.EndUpdate();
+                Point targetPoint = tvMatchFiles.PointToClient(new Point(e.X, e.Y));
+                TreeNodeAdv targetNode = tvMatchFiles.GetNodeAt(targetPoint);
+                TreeNodeAdv tnNew;
+                if (targetNode == null) return;
+
+                while (targetNode.Level > 1)
+                {
+                    targetNode = targetNode.Parent;
+                }
+
+                ListView.SelectedListViewItemCollection lstViewColl = (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof(ListView.SelectedListViewItemCollection));
+                foreach (ListViewItem lvItem in lstViewColl)
+                {
+                    string trackName = lvItem.Text;
+                    Track track = (Track)lvItem.Tag;
+                    tnNew = new TreeNodeAdv(lvItem.Text);
+                    //tnNew.Tag = track;
+
+                    //targetNode.
+                    //targetNode.Nodes.Insert(targetNode.Index + 1, tnNew);
+                    targetNode.Expand();
+
+                    // lvItem.Remove();
+                    _model.Nodes[targetNode.Index].Nodes.Add(new Node(trackName));
+                    lvItem.Font = new Font(lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Regular);
+                    lvItem.ForeColor = Color.LightGray;
+                }
+            }
+
+
+            tvMatchFiles.EndUpdate();
         }
 
 
@@ -140,7 +198,7 @@ namespace TagBot.App
         private void PopulateTreeView()
         {
             _model = new TreeModel();
-            tvDirectoriesAdv.Model = _model;
+            tvMatchFiles.Model = _model;
             
             //tvDirectoriesAdv.AllNodes.Clear();
             //TreeNode rootNode;
@@ -192,9 +250,9 @@ namespace TagBot.App
 
 
 
-        private Node AddChild(Node parent)
+        private Node AddChild(Node parent, string text)
         {
-            Node node = new Node("Child Node " + parent.Nodes.Count.ToString());
+            Node node = new Node(text);
             parent.Nodes.Add(node);
             return node;
         }
