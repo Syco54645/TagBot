@@ -74,10 +74,14 @@ namespace TagBot.App
 
         private void tvDirectoriesAdv_DragOver(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])) && tvMatchFiles.DropPosition.Node != null)
+            /*if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])) && tvMatchFiles.DropPosition.Node != null)
             {
                 TreeNodeAdv[] nodes = e.Data.GetData(typeof(TreeNodeAdv[])) as TreeNodeAdv[];
                 TreeNodeAdv parent = tvMatchFiles.DropPosition.Node;
+                if (nodes.FirstOrDefault().Level == 2 && parent.Level == 2) // we have a child level drug in to a child leve so do not allow dragging
+                {
+                    e.Effect = DragDropEffects.None;
+                }
                 if (tvMatchFiles.DropPosition.Position != NodePosition.Inside)
                     parent = parent.Parent;
 
@@ -92,9 +96,9 @@ namespace TagBot.App
             }
             else
             {
-                e.Effect = e.AllowedEffect;
 
-            }
+            }*/
+                e.Effect = e.AllowedEffect;
         }
 
         private void lvMatchTags_ItemDrag(object sender, ItemDragEventArgs e)
@@ -115,35 +119,40 @@ namespace TagBot.App
 
             if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])))
             {
+                // dropping a node that already exists
                 reorderFiles(sender, e);
-                TreeNodeAdv[] nodes = (TreeNodeAdv[])e.Data.GetData(typeof(TreeNodeAdv[]));
-                Node dropNode = tvMatchFiles.DropPosition.Node.Tag as Node;
+                TreeNodeAdv[] drugNodes = (TreeNodeAdv[])e.Data.GetData(typeof(TreeNodeAdv[]));
+                TreeNodeAdv drugNode = drugNodes.FirstOrDefault();
+                Point targetPoint = tvMatchFiles.PointToClient(new Point(e.X, e.Y));
+                Node targetNode = tvMatchFiles.DropPosition.Node.Tag as Node;
                 if (tvMatchFiles.DropPosition.Position == NodePosition.Inside)
                 {
-                    while (dropNode.Parent != null)
+                    if (drugNode.Level == 2 || (drugNode.Level == 1 && tvMatchFiles.GetNodeAt(targetPoint).Level == 1))
                     {
-                        dropNode = dropNode.Parent;
+                        while (targetNode.Parent != null)
+                        {
+                            targetNode = targetNode.Parent;
+                        }
                     }
-                    //return;
-                    foreach (TreeNodeAdv n in nodes)
-                    {
-                        (n.Tag as Node).Parent = dropNode;
-                    }
+                    
+                    (drugNode.Tag as Node).Parent = targetNode;
+                    
+                    //_model.Nodes[targetNode.Index].Nodes.Add(new Node(trackName));
                     tvMatchFiles.DropPosition.Node.IsExpanded = true;
                 }
                 else
                 {
-                    Node parent = dropNode.Parent;
-                    Node nextItem = dropNode;
+                    Node parent = targetNode.Parent;
+                    Node nextItem = targetNode;
                     if (tvMatchFiles.DropPosition.Position == NodePosition.After)
-                        nextItem = dropNode.NextNode;
+                        nextItem = targetNode.NextNode;
 
-                    foreach (TreeNodeAdv node in nodes)
+                    foreach (TreeNodeAdv node in drugNodes)
                         (node.Tag as Node).Parent = null;
 
                     int index = -1;
                     index = parent.Nodes.IndexOf(nextItem);
-                    foreach (TreeNodeAdv node in nodes)
+                    foreach (TreeNodeAdv node in drugNodes)
                     {
                         Node item = node.Tag as Node;
                         if (index == -1)
@@ -200,46 +209,50 @@ namespace TagBot.App
             _model = new TreeModel();
             tvMatchFiles.Model = _model;
             
-            //tvDirectoriesAdv.AllNodes.Clear();
-            //TreeNode rootNode;
-            DirectoryInfo info = new DirectoryInfo(@"C:\dmb\dmb2021-10-09.ck61.naiant.flac16");
-            if (info.Exists)
+            foreach (KeyValuePair<string, FlacFileInfo> entry in frmMain.originalMetadata)
             {
-                //Node rootNode = AddRoot(info.Name);
-                //rootNode = new TreeNode(info.Name);
-                //rootNode.Tag = info;
-                
-                foreach (KeyValuePair<string, FlacFileInfo> entry in frmMain.originalMetadata)
-                {
-                    Node rootNode = AddRoot(entry.Key, entry.Value);
-                    if (false) { }
-                }
+                Node rootNode = AddRoot(entry.Key, entry.Value);
+                if (false) { }
             }
-            if (false) { }
+            ResizeCols();
         }
 
-        private void GetDirectories(DirectoryInfo[] subDirs, Node nodeToAddTo)
+        private void ResizeCols()
         {
-            Node aNode;
-            DirectoryInfo[] subSubDirs;
-            foreach (DirectoryInfo subDir in subDirs)
+            // taken from https://sourceforge.net/p/treeviewadv/discussion/568369/thread/b9e687fa/
+            DrawContext _measureContext = new DrawContext();
+            _measureContext.Graphics = Graphics.FromImage(new Bitmap(1, 1));
+            _measureContext.Font = this.tvMatchFiles.Font;
+            // On the first column take head for the plus/minus and lines. The 7 is the LeftMargin of the PlusMinus. 
+            int newWidth = (this.tvMatchFiles.ShowPlusMinus ? 20 : 0) + 7;
+            foreach (TreeColumn col in this.tvMatchFiles.Columns)
             {
-                aNode = new Node(subDir.Name);
-                aNode.Tag = subDir;
-                //aNode.ImageKey = "folder";
-                subSubDirs = subDir.GetDirectories();
-                if (subSubDirs.Length != 0)
+                foreach (Aga.Controls.Tree.NodeControls.NodeControl nc in this.tvMatchFiles.NodeControls)
                 {
-                    GetDirectories(subSubDirs, aNode);
+                    if (nc.ParentColumn == col)
+                    {
+                        // Many controls can be displayed in the same column
+                        int maxControlWidth = 0;
+                        foreach (TreeNodeAdv tna in this.tvMatchFiles.AllNodes)
+                        {
+                            Size s = nc.MeasureSize(tna, _measureContext);
+                            maxControlWidth = Math.Max(maxControlWidth, (s.Width + nc.LeftMargin));
+                            if (false) { }
+                        }
+                        newWidth += maxControlWidth;
+                    }
                 }
-                nodeToAddTo.Nodes.Add(aNode);
+                col.Width = newWidth + 100;
+                newWidth = 0;
             }
         }
+
 
         private Node AddRoot(string text, FlacFileInfo flacFileInfo)
         {
             SongNode node = new SongNode();
             node.Text = text;
+            node.Filename = text;
             node.Image = frmMain.imgListFileIcons.Images["folder"];
             node.Artist = flacFileInfo.Metadata.Artist;
             node.Title = flacFileInfo.Metadata.Title;
@@ -309,6 +322,7 @@ namespace TagBot.App
         
         public class SongNode : Node
         {
+            public string Filename { get; set; }
             public string Artist { get; set; }
             public string Title { get; set; }
             public string Tracknumber { get; set; }
