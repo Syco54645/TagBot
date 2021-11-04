@@ -98,18 +98,38 @@ namespace TagBot.App
             {
 
             }*/
-                e.Effect = e.AllowedEffect;
+            if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])) && tvMatchFiles.DropPosition.Node != null)
+            {
+                TreeNodeAdv[] drugNodes = (TreeNodeAdv[])e.Data.GetData(typeof(TreeNodeAdv[]));
+                TreeNodeAdv drugNode = drugNodes.FirstOrDefault();
+                Point targetPoint = tvMatchFiles.PointToClient(new Point(e.X, e.Y));
+                int targetNodeLevel = tvMatchFiles.GetNodeAt(targetPoint).Level;
+                if (
+                    (drugNode.Level == 1 && targetNodeLevel > 1) ||
+                    (drugNode.Level == 1 && targetNodeLevel == 1 && tvMatchFiles.DropPosition.Position == NodePosition.Inside) ||
+                    (drugNode.Level == 2 && targetNodeLevel == 1 && tvMatchFiles.DropPosition.Position != NodePosition.Inside) ||
+                    (drugNode.Level == 2 && targetNodeLevel == 2 && tvMatchFiles.DropPosition.Position == NodePosition.Inside)
+                   )
+                {
+                    e.Effect = DragDropEffects.None;
+                    return;
+                }
+            }
+            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
+            {
+                Point targetPoint = tvMatchFiles.PointToClient(new Point(e.X, e.Y));
+                if (tvMatchFiles.DropPosition.Position != NodePosition.Inside)
+                {
+                    e.Effect = DragDropEffects.None;
+                    return;
+                }
+            }
+            e.Effect = e.AllowedEffect;
         }
 
         private void lvMatchTags_ItemDrag(object sender, ItemDragEventArgs e)
         {
             DoDragDrop(lvMatchTags.SelectedItems, DragDropEffects.Move);
-        }
-
-
-        private void reorderFiles(object sender, DragEventArgs e)
-        {
-
         }
 
         private void tvDirectoriesAdv_DragDrop(object sender, DragEventArgs e)
@@ -120,21 +140,27 @@ namespace TagBot.App
             if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])))
             {
                 // dropping a node that already exists
-                reorderFiles(sender, e);
                 TreeNodeAdv[] drugNodes = (TreeNodeAdv[])e.Data.GetData(typeof(TreeNodeAdv[]));
                 TreeNodeAdv drugNode = drugNodes.FirstOrDefault();
                 Point targetPoint = tvMatchFiles.PointToClient(new Point(e.X, e.Y));
                 Node targetNode = tvMatchFiles.DropPosition.Node.Tag as Node;
+                int targetNodeLevel = tvMatchFiles.GetNodeAt(targetPoint).Level;
+                // add a break point here to easily debug levels and drop positions for tuning the drag over event
                 if (tvMatchFiles.DropPosition.Position == NodePosition.Inside)
                 {
-                    if (drugNode.Level == 2 || (drugNode.Level == 1 && tvMatchFiles.GetNodeAt(targetPoint).Level == 1))
+                    
+                    if (drugNode.Level == 2 && targetNodeLevel == 2)
+                    {
+                        targetNode = targetNode.Parent;
+                    }
+
+                    if (drugNode.Level == 1 && targetNodeLevel == 1)
                     {
                         while (targetNode.Parent != null)
                         {
                             targetNode = targetNode.Parent;
                         }
                     }
-                    
                     (drugNode.Tag as Node).Parent = targetNode;
                     
                     //_model.Nodes[targetNode.Index].Nodes.Add(new Node(trackName));
