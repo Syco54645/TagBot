@@ -60,18 +60,6 @@ namespace TagBot.App
             tvMatchFiles.DoDragDropSelectedNodes(DragDropEffects.Move);
         }
 
-        private bool CheckNodeParent(TreeNodeAdv parent, TreeNodeAdv node)
-        {
-            while (parent != null)
-            {
-                if (node == parent)
-                    return false;
-                else
-                    parent = parent.Parent;
-            }
-            return true;
-        }
-
         private void tvDirectoriesAdv_DragOver(object sender, DragEventArgs e)
         {
             /*if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])) && tvMatchFiles.DropPosition.Node != null)
@@ -117,7 +105,6 @@ namespace TagBot.App
             }
             else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
             {
-                Point targetPoint = tvMatchFiles.PointToClient(new Point(e.X, e.Y));
                 if (tvMatchFiles.DropPosition.Position != NodePosition.Inside)
                 {
                     e.Effect = DragDropEffects.None;
@@ -207,13 +194,9 @@ namespace TagBot.App
                 ListView.SelectedListViewItemCollection lstViewColl = (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof(ListView.SelectedListViewItemCollection));
                 foreach (ListViewItem lvItem in lstViewColl)
                 {
-                    string trackName = lvItem.Text;
                     Track track = (Track)lvItem.Tag;
-                    tnNew = new TreeNodeAdv(lvItem.Text);
-                    //tnNew.Tag = track;
-
-                    //targetNode.
-                    //targetNode.Nodes.Insert(targetNode.Index + 1, tnNew);
+                    string trackName = track.TrackName;
+                    
                     targetNode.Expand();
 
                     // lvItem.Remove();
@@ -222,9 +205,21 @@ namespace TagBot.App
                     lvItem.ForeColor = Color.LightGray;
                 }
             }
-
-
             tvMatchFiles.EndUpdate();
+            //UpdateContention();
+        }
+
+        private void UpdateContention()
+        {
+            foreach (SongNode node in _model.Nodes)
+            {
+                //frmMain.proposedMetadata[node.Filename].Metadata.Title = node.
+                string combinedTitle = string.Join(" > ", node.Nodes.Select(x => x.Text).ToArray());
+                int trackNumber = node.Index + 1;
+                frmMain.proposedMetadata[node.Filename].Metadata.Title = combinedTitle;
+                frmMain.proposedMetadata[node.Filename].Metadata.Tracknumber = trackNumber.ToString();
+                if (false) { }
+            }
         }
 
 
@@ -268,7 +263,7 @@ namespace TagBot.App
                         newWidth += maxControlWidth;
                     }
                 }
-                col.Width = newWidth + 100;
+                col.Width = newWidth;
                 newWidth = 0;
             }
         }
@@ -279,7 +274,7 @@ namespace TagBot.App
             SongNode node = new SongNode();
             node.Text = text;
             node.Filename = text;
-            node.Image = frmMain.imgListFileIcons.Images["folder"];
+            node.Image = frmMain.imgListFileIcons.Images["audio"];
             node.Artist = flacFileInfo.Metadata.Artist;
             node.Title = flacFileInfo.Metadata.Title;
             node.Tracknumber = flacFileInfo.Metadata.Tracknumber;
@@ -288,17 +283,13 @@ namespace TagBot.App
         }
 
 
-
-        private Node AddChild(Node parent, string text)
+        public class SongNode : Node
         {
-            Node node = new Node(text);
-            parent.Nodes.Add(node);
-            return node;
+            public string Filename { get; set; }
+            public string Artist { get; set; }
+            public string Title { get; set; }
+            public string Tracknumber { get; set; }
         }
-
-
-
-
 
 
 
@@ -345,17 +336,14 @@ namespace TagBot.App
             lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
-        
-        public class SongNode : Node
-        {
-            public string Filename { get; set; }
-            public string Artist { get; set; }
-            public string Title { get; set; }
-            public string Tracknumber { get; set; }
-        }
-        
+       
+
 
         #endregion
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UpdateContention();
+        }
     }
 }
