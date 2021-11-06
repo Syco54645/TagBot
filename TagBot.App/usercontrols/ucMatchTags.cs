@@ -18,23 +18,23 @@ using TagBot.Service.models;
 
 namespace TagBot.App
 {
-    public partial class ucLvMatchTags : UserControl
+    public partial class ucMatchTags : UserControl
     {
         public frmMain frmMain;
         private TreeModel tvMatchFilesModel;
-        public ucLvMatchTags()
+        public ucMatchTags()
         {
             InitializeComponent();
         }
 
         private void ucMatchTags_Load(object sender, EventArgs e)
         {
-            Sqlite sqlite = new Sqlite();
+            /*Sqlite sqlite = new Sqlite();
             sqlite.databasePath = Settings.Default.databaseLocation;
             string showDataJson = sqlite.getShow("2021-09-03");
 
             ShowSearchResponseContract showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
-            populateMatchTags(showData);
+            populateMatchTags(showData);*/
             lvMatchTags.ItemDrag += lvMatchTags_ItemDrag;
 
             lvMatchTags.View = View.Details;
@@ -57,6 +57,7 @@ namespace TagBot.App
         #region forklift
         public void populateMatchTags(ShowSearchResponseContract showData)
         {
+            lvMatchTags.Items.Clear();
             if (showData != null)
             {
                 foreach (Track track in showData.Setlist)
@@ -80,9 +81,14 @@ namespace TagBot.App
             lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
-       
+
 
 
         #endregion
+
+        private void btnMatchDone_Click(object sender, EventArgs e)
+        {
+            frmMain.fileMode();
+        }
     }
 }

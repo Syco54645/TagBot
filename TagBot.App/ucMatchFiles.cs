@@ -198,7 +198,7 @@ namespace TagBot.App
 
                     // lvItem.Remove();
                     tvMatchFilesModel.Nodes[targetNode.Index].Nodes.Add(new Node(trackName));
-                    lvItem.Font = new Font(frmMain.ucLvMatchTags.lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Regular);
+                    lvItem.Font = new Font(frmMain.ucMatchTags.lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Regular);
                     lvItem.ForeColor = Color.LightGray;
                 }
             }

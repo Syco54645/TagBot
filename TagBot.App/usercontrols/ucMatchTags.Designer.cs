@@ -1,7 +1,7 @@
 ﻿
 namespace TagBot.App
 {
-    partial class ucLvMatchTags
+    partial class ucMatchTags
     {
         /// <summary>
         /// Required designer variable.
@@ -41,6 +41,7 @@ namespace TagBot.App
             this.ntbArtist = new Aga.Controls.Tree.NodeControls.NodeTextBox();
             this.ntbAlbum = new Aga.Controls.Tree.NodeControls.NodeTextBox();
             this.lvMatchTags = new System.Windows.Forms.ListView();
+            this.btnMatchDone = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tcFilename
@@ -124,17 +125,29 @@ namespace TagBot.App
             this.lvMatchTags.HideSelection = false;
             this.lvMatchTags.Location = new System.Drawing.Point(0, 0);
             this.lvMatchTags.Name = "lvMatchTags";
-            this.lvMatchTags.Size = new System.Drawing.Size(952, 334);
+            this.lvMatchTags.Size = new System.Drawing.Size(372, 320);
             this.lvMatchTags.TabIndex = 9;
             this.lvMatchTags.UseCompatibleStateImageBehavior = false;
             // 
-            // ucLvMatchTags
+            // btnMatchDone
+            // 
+            this.btnMatchDone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMatchDone.Location = new System.Drawing.Point(288, 376);
+            this.btnMatchDone.Name = "btnMatchDone";
+            this.btnMatchDone.Size = new System.Drawing.Size(75, 23);
+            this.btnMatchDone.TabIndex = 10;
+            this.btnMatchDone.Text = "Done";
+            this.btnMatchDone.UseVisualStyleBackColor = true;
+            this.btnMatchDone.Click += new System.EventHandler(this.btnMatchDone_Click);
+            // 
+            // ucMatchTags
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnMatchDone);
             this.Controls.Add(this.lvMatchTags);
-            this.Name = "ucLvMatchTags";
-            this.Size = new System.Drawing.Size(948, 336);
+            this.Name = "ucMatchTags";
+            this.Size = new System.Drawing.Size(368, 408);
             this.Load += new System.EventHandler(this.ucMatchTags_Load);
             this.ResumeLayout(false);
 
@@ -153,5 +166,6 @@ namespace TagBot.App
         private Aga.Controls.Tree.NodeControls.NodeTextBox ntbArtist;
         private Aga.Controls.Tree.NodeControls.NodeTextBox ntbAlbum;
         public System.Windows.Forms.ListView lvMatchTags;
+        private System.Windows.Forms.Button btnMatchDone;
     }
 }

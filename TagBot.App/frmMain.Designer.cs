@@ -68,7 +68,6 @@ namespace TagBot.App
             this.label2 = new System.Windows.Forms.Label();
             this.btnMatch = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
-            this.btnGetShowData = new System.Windows.Forms.Button();
             this.txtDate = new System.Windows.Forms.TextBox();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.scFileTagFlac = new System.Windows.Forms.SplitContainer();
@@ -474,7 +473,7 @@ namespace TagBot.App
             // btnMatch
             // 
             this.btnMatch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMatch.Location = new System.Drawing.Point(223, 27);
+            this.btnMatch.Location = new System.Drawing.Point(226, 4);
             this.btnMatch.Name = "btnMatch";
             this.btnMatch.Size = new System.Drawing.Size(75, 20);
             this.btnMatch.TabIndex = 50;
@@ -490,17 +489,6 @@ namespace TagBot.App
             this.label12.Size = new System.Drawing.Size(60, 13);
             this.label12.TabIndex = 48;
             this.label12.Text = "Show Date";
-            // 
-            // btnGetShowData
-            // 
-            this.btnGetShowData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGetShowData.Location = new System.Drawing.Point(223, 4);
-            this.btnGetShowData.Name = "btnGetShowData";
-            this.btnGetShowData.Size = new System.Drawing.Size(75, 20);
-            this.btnGetShowData.TabIndex = 47;
-            this.btnGetShowData.Text = "Search";
-            this.btnGetShowData.UseVisualStyleBackColor = true;
-            this.btnGetShowData.Click += new System.EventHandler(this.btnGetShowData_Click);
             // 
             // txtDate
             // 
@@ -619,7 +607,6 @@ namespace TagBot.App
             // 
             this.pnlShowSearch.BackColor = System.Drawing.SystemColors.Control;
             this.pnlShowSearch.Controls.Add(this.label12);
-            this.pnlShowSearch.Controls.Add(this.btnGetShowData);
             this.pnlShowSearch.Controls.Add(this.txtDate);
             this.pnlShowSearch.Controls.Add(this.btnMatch);
             this.pnlShowSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -915,7 +902,6 @@ namespace TagBot.App
         private System.Windows.Forms.ProgressBar pbTagProgress;
         private System.Windows.Forms.Button btnAutomate;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button btnGetShowData;
         private System.Windows.Forms.TextBox txtDate;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.TextBox txtMetadataDate;
