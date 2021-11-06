@@ -72,18 +72,16 @@ namespace TagBot.App
             this.txtDate = new System.Windows.Forms.TextBox();
             this.scMain = new System.Windows.Forms.SplitContainer();
             this.scFileTagFlac = new System.Windows.Forms.SplitContainer();
-            this.pnlTagView = new System.Windows.Forms.Panel();
             this.pnlFileView = new System.Windows.Forms.Panel();
+            this.pnlDirectoryBrowserToolbar = new System.Windows.Forms.Panel();
+            this.tsDirectoryBrowser = new System.Windows.Forms.ToolStrip();
+            this.tsbSelectDirectory = new System.Windows.Forms.ToolStripButton();
+            this.tstbLocation = new System.Windows.Forms.ToolStripTextBox();
+            this.tvDirectories = new System.Windows.Forms.TreeView();
             this.pnlShowSearch = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pnlTagView = new System.Windows.Forms.Panel();
             this.scFlacText = new System.Windows.Forms.SplitContainer();
             this.pnlTvMatchFiles = new System.Windows.Forms.Panel();
-            this.lvAudioFiles = new System.Windows.Forms.ListView();
-            this.lvAudioFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvAudioTrackNumber = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvAudioTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvAudioArtist = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvAudioAlbum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tsAudioBrowser = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tcFilename = new Aga.Controls.Tree.TreeColumn();
@@ -109,11 +107,6 @@ namespace TagBot.App
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
-            this.tvDirectories = new System.Windows.Forms.TreeView();
-            this.tsDirectoryBrowser = new System.Windows.Forms.ToolStrip();
-            this.tsbSelectDirectory = new System.Windows.Forms.ToolStripButton();
-            this.tstbLocation = new System.Windows.Forms.ToolStripTextBox();
-            this.pnlDirectoryBrowserToolbar = new System.Windows.Forms.Panel();
             this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -130,6 +123,8 @@ namespace TagBot.App
             this.scFileTagFlac.Panel2.SuspendLayout();
             this.scFileTagFlac.SuspendLayout();
             this.pnlFileView.SuspendLayout();
+            this.pnlDirectoryBrowserToolbar.SuspendLayout();
+            this.tsDirectoryBrowser.SuspendLayout();
             this.pnlShowSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.scFlacText)).BeginInit();
             this.scFlacText.Panel1.SuspendLayout();
@@ -140,8 +135,6 @@ namespace TagBot.App
             this.scTopBottom.Panel1.SuspendLayout();
             this.scTopBottom.Panel2.SuspendLayout();
             this.scTopBottom.SuspendLayout();
-            this.tsDirectoryBrowser.SuspendLayout();
-            this.pnlDirectoryBrowserToolbar.SuspendLayout();
             this.SuspendLayout();
             // 
             // imgListFileIcons
@@ -554,16 +547,9 @@ namespace TagBot.App
             this.scFileTagFlac.SplitterDistance = 301;
             this.scFileTagFlac.TabIndex = 10;
             // 
-            // pnlTagView
-            // 
-            this.pnlTagView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlTagView.Location = new System.Drawing.Point(0, 0);
-            this.pnlTagView.Name = "pnlTagView";
-            this.pnlTagView.Size = new System.Drawing.Size(301, 438);
-            this.pnlTagView.TabIndex = 1;
-            // 
             // pnlFileView
             // 
+            this.pnlFileView.BackColor = System.Drawing.SystemColors.Control;
             this.pnlFileView.Controls.Add(this.pnlDirectoryBrowserToolbar);
             this.pnlFileView.Controls.Add(this.pnlShowSearch);
             this.pnlFileView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -572,9 +558,66 @@ namespace TagBot.App
             this.pnlFileView.Size = new System.Drawing.Size(301, 438);
             this.pnlFileView.TabIndex = 0;
             // 
+            // pnlDirectoryBrowserToolbar
+            // 
+            this.pnlDirectoryBrowserToolbar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlDirectoryBrowserToolbar.BackColor = System.Drawing.SystemColors.Control;
+            this.pnlDirectoryBrowserToolbar.Controls.Add(this.tsDirectoryBrowser);
+            this.pnlDirectoryBrowserToolbar.Controls.Add(this.tvDirectories);
+            this.pnlDirectoryBrowserToolbar.Location = new System.Drawing.Point(0, 0);
+            this.pnlDirectoryBrowserToolbar.Name = "pnlDirectoryBrowserToolbar";
+            this.pnlDirectoryBrowserToolbar.Size = new System.Drawing.Size(301, 336);
+            this.pnlDirectoryBrowserToolbar.TabIndex = 52;
+            // 
+            // tsDirectoryBrowser
+            // 
+            this.tsDirectoryBrowser.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbSelectDirectory,
+            this.tstbLocation});
+            this.tsDirectoryBrowser.Location = new System.Drawing.Point(0, 0);
+            this.tsDirectoryBrowser.Name = "tsDirectoryBrowser";
+            this.tsDirectoryBrowser.Size = new System.Drawing.Size(301, 25);
+            this.tsDirectoryBrowser.TabIndex = 10;
+            this.tsDirectoryBrowser.Text = "toolStrip2";
+            this.tsDirectoryBrowser.Resize += new System.EventHandler(this.tsDirectoryBrowser_Resize);
+            // 
+            // tsbSelectDirectory
+            // 
+            this.tsbSelectDirectory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSelectDirectory.Image = ((System.Drawing.Image)(resources.GetObject("tsbSelectDirectory.Image")));
+            this.tsbSelectDirectory.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSelectDirectory.Name = "tsbSelectDirectory";
+            this.tsbSelectDirectory.Size = new System.Drawing.Size(23, 22);
+            this.tsbSelectDirectory.Text = "toolStripButton1";
+            this.tsbSelectDirectory.Click += new System.EventHandler(this.tsbSelectDirectory_Click);
+            // 
+            // tstbLocation
+            // 
+            this.tstbLocation.AutoSize = false;
+            this.tstbLocation.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tstbLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.tstbLocation.Name = "tstbLocation";
+            this.tstbLocation.ReadOnly = true;
+            this.tstbLocation.Size = new System.Drawing.Size(100, 25);
+            // 
+            // tvDirectories
+            // 
+            this.tvDirectories.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tvDirectories.ImageIndex = 0;
+            this.tvDirectories.ImageList = this.imgListFileIcons;
+            this.tvDirectories.Location = new System.Drawing.Point(0, 24);
+            this.tvDirectories.Name = "tvDirectories";
+            this.tvDirectories.SelectedImageIndex = 0;
+            this.tvDirectories.Size = new System.Drawing.Size(301, 312);
+            this.tvDirectories.TabIndex = 4;
+            // 
             // pnlShowSearch
             // 
-            this.pnlShowSearch.Controls.Add(this.button1);
+            this.pnlShowSearch.BackColor = System.Drawing.SystemColors.Control;
             this.pnlShowSearch.Controls.Add(this.label12);
             this.pnlShowSearch.Controls.Add(this.btnGetShowData);
             this.pnlShowSearch.Controls.Add(this.txtDate);
@@ -585,15 +628,13 @@ namespace TagBot.App
             this.pnlShowSearch.Size = new System.Drawing.Size(301, 64);
             this.pnlShowSearch.TabIndex = 51;
             // 
-            // button1
+            // pnlTagView
             // 
-            this.button1.Location = new System.Drawing.Point(96, 32);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 51;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.pnlTagView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTagView.Location = new System.Drawing.Point(0, 0);
+            this.pnlTagView.Name = "pnlTagView";
+            this.pnlTagView.Size = new System.Drawing.Size(301, 438);
+            this.pnlTagView.TabIndex = 1;
             // 
             // scFlacText
             // 
@@ -605,58 +646,17 @@ namespace TagBot.App
             // scFlacText.Panel1
             // 
             this.scFlacText.Panel1.Controls.Add(this.pnlTvMatchFiles);
-            this.scFlacText.Panel1.Controls.Add(this.lvAudioFiles);
             this.scFlacText.Size = new System.Drawing.Size(599, 413);
             this.scFlacText.SplitterDistance = 288;
             this.scFlacText.TabIndex = 10;
             // 
             // pnlTvMatchFiles
             // 
-            this.pnlTvMatchFiles.Location = new System.Drawing.Point(192, 168);
+            this.pnlTvMatchFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlTvMatchFiles.Location = new System.Drawing.Point(0, 0);
             this.pnlTvMatchFiles.Name = "pnlTvMatchFiles";
-            this.pnlTvMatchFiles.Size = new System.Drawing.Size(568, 288);
+            this.pnlTvMatchFiles.Size = new System.Drawing.Size(599, 288);
             this.pnlTvMatchFiles.TabIndex = 11;
-            // 
-            // lvAudioFiles
-            // 
-            this.lvAudioFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.lvAudioFilename,
-            this.lvAudioTrackNumber,
-            this.lvAudioTitle,
-            this.lvAudioArtist,
-            this.lvAudioAlbum});
-            this.lvAudioFiles.FullRowSelect = true;
-            this.lvAudioFiles.HideSelection = false;
-            this.lvAudioFiles.Location = new System.Drawing.Point(168, 16);
-            this.lvAudioFiles.Name = "lvAudioFiles";
-            this.lvAudioFiles.Size = new System.Drawing.Size(599, 288);
-            this.lvAudioFiles.SmallImageList = this.imgListFileIcons;
-            this.lvAudioFiles.TabIndex = 10;
-            this.lvAudioFiles.UseCompatibleStateImageBehavior = false;
-            this.lvAudioFiles.View = System.Windows.Forms.View.Details;
-            this.lvAudioFiles.SelectedIndexChanged += new System.EventHandler(this.lvAudioFiles_SelectedIndexChanged);
-            this.lvAudioFiles.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lvAudioFiles_KeyDown);
-            // 
-            // lvAudioFilename
-            // 
-            this.lvAudioFilename.Text = "Filename";
-            this.lvAudioFilename.Width = 59;
-            // 
-            // lvAudioTrackNumber
-            // 
-            this.lvAudioTrackNumber.Text = "#";
-            // 
-            // lvAudioTitle
-            // 
-            this.lvAudioTitle.Text = "Title";
-            // 
-            // lvAudioArtist
-            // 
-            this.lvAudioArtist.Text = "Artist";
-            // 
-            // lvAudioAlbum
-            // 
-            this.lvAudioAlbum.Text = "Album";
             // 
             // tsAudioBrowser
             // 
@@ -844,58 +844,6 @@ namespace TagBot.App
             this.miniToolStrip.Size = new System.Drawing.Size(301, 25);
             this.miniToolStrip.TabIndex = 10;
             // 
-            // tvDirectories
-            // 
-            this.tvDirectories.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tvDirectories.ImageIndex = 0;
-            this.tvDirectories.ImageList = this.imgListFileIcons;
-            this.tvDirectories.Location = new System.Drawing.Point(0, 24);
-            this.tvDirectories.Name = "tvDirectories";
-            this.tvDirectories.SelectedImageIndex = 0;
-            this.tvDirectories.Size = new System.Drawing.Size(301, 352);
-            this.tvDirectories.TabIndex = 4;
-            // 
-            // tsDirectoryBrowser
-            // 
-            this.tsDirectoryBrowser.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbSelectDirectory,
-            this.tstbLocation});
-            this.tsDirectoryBrowser.Location = new System.Drawing.Point(0, 0);
-            this.tsDirectoryBrowser.Name = "tsDirectoryBrowser";
-            this.tsDirectoryBrowser.Size = new System.Drawing.Size(301, 25);
-            this.tsDirectoryBrowser.TabIndex = 10;
-            this.tsDirectoryBrowser.Text = "toolStrip2";
-            this.tsDirectoryBrowser.Resize += new System.EventHandler(this.tsDirectoryBrowser_Resize);
-            // 
-            // tsbSelectDirectory
-            // 
-            this.tsbSelectDirectory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbSelectDirectory.Image = ((System.Drawing.Image)(resources.GetObject("tsbSelectDirectory.Image")));
-            this.tsbSelectDirectory.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSelectDirectory.Name = "tsbSelectDirectory";
-            this.tsbSelectDirectory.Size = new System.Drawing.Size(23, 22);
-            this.tsbSelectDirectory.Text = "toolStripButton1";
-            this.tsbSelectDirectory.Click += new System.EventHandler(this.tsbSelectDirectory_Click);
-            // 
-            // tstbLocation
-            // 
-            this.tstbLocation.AutoSize = false;
-            this.tstbLocation.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tstbLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.tstbLocation.Name = "tstbLocation";
-            this.tstbLocation.ReadOnly = true;
-            this.tstbLocation.Size = new System.Drawing.Size(100, 25);
-            // 
-            // pnlDirectoryBrowserToolbar
-            // 
-            this.pnlDirectoryBrowserToolbar.Controls.Add(this.tsDirectoryBrowser);
-            this.pnlDirectoryBrowserToolbar.Controls.Add(this.tvDirectories);
-            this.pnlDirectoryBrowserToolbar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlDirectoryBrowserToolbar.Location = new System.Drawing.Point(0, 0);
-            this.pnlDirectoryBrowserToolbar.Name = "pnlDirectoryBrowserToolbar";
-            this.pnlDirectoryBrowserToolbar.Size = new System.Drawing.Size(301, 376);
-            this.pnlDirectoryBrowserToolbar.TabIndex = 52;
-            // 
             // srtfLog
             // 
             this.srtfLog.BackColor = System.Drawing.Color.Black;
@@ -939,6 +887,10 @@ namespace TagBot.App
             ((System.ComponentModel.ISupportInitialize)(this.scFileTagFlac)).EndInit();
             this.scFileTagFlac.ResumeLayout(false);
             this.pnlFileView.ResumeLayout(false);
+            this.pnlDirectoryBrowserToolbar.ResumeLayout(false);
+            this.pnlDirectoryBrowserToolbar.PerformLayout();
+            this.tsDirectoryBrowser.ResumeLayout(false);
+            this.tsDirectoryBrowser.PerformLayout();
             this.pnlShowSearch.ResumeLayout(false);
             this.pnlShowSearch.PerformLayout();
             this.scFlacText.Panel1.ResumeLayout(false);
@@ -952,10 +904,6 @@ namespace TagBot.App
             this.scTopBottom.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scTopBottom)).EndInit();
             this.scTopBottom.ResumeLayout(false);
-            this.tsDirectoryBrowser.ResumeLayout(false);
-            this.tsDirectoryBrowser.PerformLayout();
-            this.pnlDirectoryBrowserToolbar.ResumeLayout(false);
-            this.pnlDirectoryBrowserToolbar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1019,7 +967,6 @@ namespace TagBot.App
         private System.Windows.Forms.SplitContainer scTopBottom;
         private System.Windows.Forms.Panel pnlShowSearch;
         private System.Windows.Forms.Button btnDbInfo;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private Aga.Controls.Tree.TreeColumn tcFilename;
         private System.Windows.Forms.ColumnHeader columnHeader2;
@@ -1034,12 +981,6 @@ namespace TagBot.App
         private Aga.Controls.Tree.NodeControls.NodeTextBox ntbArtist;
         private Aga.Controls.Tree.NodeControls.NodeTextBox ntbAlbum;
         private System.Windows.Forms.Panel pnlTvMatchFiles;
-        private System.Windows.Forms.ListView lvAudioFiles;
-        private System.Windows.Forms.ColumnHeader lvAudioFilename;
-        private System.Windows.Forms.ColumnHeader lvAudioTrackNumber;
-        private System.Windows.Forms.ColumnHeader lvAudioTitle;
-        private System.Windows.Forms.ColumnHeader lvAudioArtist;
-        private System.Windows.Forms.ColumnHeader lvAudioAlbum;
         private System.Windows.Forms.Panel pnlDirectoryBrowserToolbar;
         private System.Windows.Forms.ToolStrip tsDirectoryBrowser;
         private System.Windows.Forms.ToolStripButton tsbSelectDirectory;
