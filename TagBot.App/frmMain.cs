@@ -63,6 +63,8 @@ namespace TagBot.App
             tsbSelectDirectory.Image = imgListFileIcons.Images["folder"];
             tsbSave.Image = imgListFileIcons.Images["save"];
 
+            fileMode();
+
             if (!string.IsNullOrEmpty(Settings.Default.startingDirectory))
             {
                 UpdateCurrentPath(Settings.Default.startingDirectory);
@@ -441,12 +443,29 @@ namespace TagBot.App
         {
             pnlFileView.Visible = true;
             pnlTagView.Visible = false;
+            toggleTagFields(false);
         }
 
         public void matchMode()
         {
             pnlFileView.Visible = false;
             pnlTagView.Visible = true;
+            toggleTagFields(true);
+        }
+
+        public void toggleTagFields(bool enabled)
+        {
+            foreach (Control ctrl in grpCommonTags.Controls)
+            {
+                if (ctrl is TextBox)
+                {
+                    ctrl.Enabled = enabled;
+                    if (!string.IsNullOrEmpty(ctrl.Tag.ToString()))
+                    {
+                        grpFileTags.Controls[ctrl.Tag.ToString()].Enabled = !enabled;
+                    }
+                }
+            }
         }
 
         private void tsbSelectDirectory_Click(object sender, EventArgs e)
