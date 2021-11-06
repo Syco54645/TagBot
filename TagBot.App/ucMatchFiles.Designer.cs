@@ -143,12 +143,12 @@ namespace TagBot.App
             this.ntbAlbum.LeftMargin = 3;
             this.ntbAlbum.ParentColumn = this.tcAlbum;
             // 
-            // ucTvMatchFiles
+            // ucMatchFiles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tvMatchFiles);
-            this.Name = "ucTvMatchFiles";
+            this.Name = "ucMatchFiles";
             this.Size = new System.Drawing.Size(948, 450);
             this.Load += new System.EventHandler(this.ucMatchFiles_Load);
             this.ResumeLayout(false);

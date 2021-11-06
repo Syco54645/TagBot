@@ -13,6 +13,7 @@ namespace TagBot.App
     public partial class frmDebug : Form
     {
         private string  _showData;
+        public frmMain frmMain;
         public string ShowData 
         { 
             get 
@@ -73,6 +74,11 @@ namespace TagBot.App
             Properties.Settings.Default.startingDirectory = null;
             Properties.Settings.Default.databaseLocation = null;
             Properties.Settings.Default.Save();
+        }
+
+        private void btnUpdateContention_Click(object sender, EventArgs e)
+        {
+            frmMain.ucMatchFiles.updateContention();
         }
     }
 }
