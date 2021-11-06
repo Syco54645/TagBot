@@ -279,7 +279,7 @@ namespace TagBot.App
             public string Filename { get; set; }
             public string Artist { get; set; }
             public string Title { get; set; }
-            public override string Text { get { return (Index + 1).ToString() + " - " + Title; } }
+            public override string Text { get { return (Index + 1).ToString() + " - " + Filename; } }
             public string Tracknumber { get; set; }
         }
     }
