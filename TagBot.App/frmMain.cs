@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
+﻿using Aga.Controls.Tree;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +27,7 @@ namespace TagBot.App
         public Dictionary<string, FlacFileInfo> originalMetadata;
         public Dictionary<string, FlacFileInfo> proposedMetadata;
         public DatabaseMeta databaseMeta;
+        public TreeModel tvMatchFilesModel;
 
         private Logger _log = new Logger(100u);
         private List<Color> _randomColors = new List<Color> { Color.Red, Color.SkyBlue, Color.Green };
@@ -35,6 +37,8 @@ namespace TagBot.App
         public ucTextFiles ucTextFiles = new ucTextFiles();
         frmDebug frmDebug = new frmDebug();
         ucManualMatch ucManualMatch = new ucManualMatch();
+        public ucMatchFiles ucMatchFiles = new ucMatchFiles();
+        public ucMatchTags ucMatchTags = new ucMatchTags();
         frmDbInfo frmDbInfo = new frmDbInfo();
 
         public frmMain()
@@ -47,7 +51,12 @@ namespace TagBot.App
         private void frmMain_Load(object sender, EventArgs e)
         {
             ucManualMatch.frmMain = this;
-            pnlTagView.Controls.Add(ucManualMatch);
+            ucMatchTags.frmMain = this;
+            pnlTagView.Controls.Add(ucMatchTags);
+
+            ucMatchFiles.frmMain = this;
+            pnlTvMatchFiles.Controls.Add(ucMatchFiles);
+
             ucTextFiles.Dock = DockStyle.Fill;
             scFlacText.Panel2.Controls.Add(ucTextFiles);
             ucTextFiles.frmMain = this;
@@ -70,6 +79,7 @@ namespace TagBot.App
             {
                 btnDbInfo.Enabled = false;
             }
+            tvDirectories.ExpandAll();
         }
 
         private void btnGetShowData_Click(object sender, EventArgs e)
@@ -85,7 +95,7 @@ namespace TagBot.App
 
             showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
             frmDebug.ShowData = showDataJson;
-            ucManualMatch.populateMatchTags(showData);
+            ucMatchTags.populateMatchTags(showData);
         }
 
         #region File List
@@ -153,8 +163,6 @@ namespace TagBot.App
         private void tvDirectories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode newSelected = e.Node;
-            lvAudioFiles.SelectedIndices.Clear();
-            lvAudioFiles.Items.Clear();
             ucTextFiles.clearListView();
             DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
             ListViewItem.ListViewSubItem[] subItems;
@@ -208,7 +216,6 @@ namespace TagBot.App
                     };
 
                     item.SubItems.AddRange(subItems);
-                    lvAudioFiles.Items.Add(item);
                 }
                 else if (Utility.isInfoFile(extension))
                 {
@@ -218,7 +225,7 @@ namespace TagBot.App
                 }
             }
 
-            lvAudioFiles.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            ucMatchFiles.populateTvMatchFiles();
         }
 
         private void createContentionVariables(List<string> files)
@@ -255,13 +262,13 @@ namespace TagBot.App
 
         private void lvAudioFiles_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedFiles = lvAudioFiles.SelectedItems;
+            var selectedFiles = new List<string>(); // todo fix this
             if (selectedFiles.Count > 0)
             {
-                string fileName = selectedFiles[0].Text;
+                //string fileName = selectedFiles[0].Text;
 
-                FlacFileInfo flacInfo = originalMetadata[fileName];
-                loadFlacTagsInEditor(flacInfo);
+                //FlacFileInfo flacInfo = originalMetadata[fileName];
+                //loadFlacTagsInEditor(flacInfo);
             }
             else
             {
@@ -285,7 +292,7 @@ namespace TagBot.App
             getShowData();
             pbTagProgress.Value = 0;
             List<Track> tracks = showData.Setlist;
-            var files = lvAudioFiles.Items;
+            var files = new List<ListViewItem>(); // lvAudioFiles.Items; // todo fix this
             List<string> audioFiles = new List<string>();
             foreach (ListViewItem f in files)
             {
@@ -343,11 +350,11 @@ namespace TagBot.App
 
             return audioFiles;
         }
-        private void btnAutomate_Click(object sender, EventArgs e)
+        private void btnAutomate_Click(object sender, EventArgs e) // todo fix
         {
-            getShowData();
+            /*getShowData();
             pbTagProgress.Value = 0;
-            lvAudioFiles.SelectedIndices.Clear();
+            //lvAudioFiles.SelectedIndices.Clear();
             List<Track> tracks = showData.Setlist;
             List<string> audioFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
 
@@ -373,7 +380,7 @@ namespace TagBot.App
             else
             {
                 // scary needs to match stuff here
-            }
+            }*/
         }
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -387,6 +394,7 @@ namespace TagBot.App
             {
                 frmDebug = new frmDebug();
             }
+            frmDebug.frmMain = this;
             frmDebug.Show();
         }
 
@@ -395,9 +403,9 @@ namespace TagBot.App
             MessageBox.Show("Made with love for the DMB community by Syco54645");
         }
 
-        private void tsbSave_Click(object sender, EventArgs e)
+        private void tsbSave_Click(object sender, EventArgs e) // todo fix
         {
-            var files = lvAudioFiles.SelectedItems;
+            /*var files = lvAudioFiles.SelectedItems;
             int incrementAmount = 100 / files.Count;
             pbTagProgress.Value = 0;
 
@@ -417,32 +425,13 @@ namespace TagBot.App
                     pbTagProgress.Increment(incrementAmount * (i));
                 }
             }
-            MessageBox.Show("Flac tags saved.", "Saving Complete");
-        }
-
-        private void lvAudioFiles_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.A && e.Control)
-            {
-                lvAudioFiles.MultiSelect = true;
-                foreach (ListViewItem item in lvAudioFiles.Items)
-                {
-                    item.Selected = true;
-                }
-            }
+            MessageBox.Show("Flac tags saved.", "Saving Complete");*/
         }
 
         private void btnMatch_Click(object sender, EventArgs e)
         {
-            /*frmMatch frmMatch = new frmMatch();
-            frmMatch.workingFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
-            frmMatch.showData = showData;
-            frmMatch.Show();*/
-
-            ucManualMatch.workingFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
-            ucManualMatch.initControl();
-
             matchMode();
+            getShowData();
             _log.AddToLog("Some event to log.", _randomColors[_r.Next(3)]);
             srtfLog.Rtf = _log.GetLogAsRichText(true);
             srtfLog.ScrollToBottom();
@@ -452,7 +441,6 @@ namespace TagBot.App
         {
             pnlFileView.Visible = true;
             pnlTagView.Visible = false;
-            scFlacText.Panel2.Controls.Add(ucTextFiles);
         }
 
         public void matchMode()

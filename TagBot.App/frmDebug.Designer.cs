@@ -33,6 +33,7 @@ namespace TagBot.App
             this.rtfOriginal = new System.Windows.Forms.RichTextBox();
             this.rtfProposed = new System.Windows.Forms.RichTextBox();
             this.btnResetConfig = new System.Windows.Forms.Button();
+            this.btnUpdateContention = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // rtfResult
@@ -69,11 +70,22 @@ namespace TagBot.App
             this.btnResetConfig.UseVisualStyleBackColor = true;
             this.btnResetConfig.Click += new System.EventHandler(this.btnResetConfig_Click);
             // 
+            // btnUpdateContention
+            // 
+            this.btnUpdateContention.Location = new System.Drawing.Point(568, 304);
+            this.btnUpdateContention.Name = "btnUpdateContention";
+            this.btnUpdateContention.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateContention.TabIndex = 7;
+            this.btnUpdateContention.Text = "btnUpdateContention";
+            this.btnUpdateContention.UseVisualStyleBackColor = true;
+            this.btnUpdateContention.Click += new System.EventHandler(this.btnUpdateContention_Click);
+            // 
             // frmDebug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 450);
+            this.Controls.Add(this.btnUpdateContention);
             this.Controls.Add(this.btnResetConfig);
             this.Controls.Add(this.rtfProposed);
             this.Controls.Add(this.rtfOriginal);
@@ -90,5 +102,6 @@ namespace TagBot.App
         private System.Windows.Forms.RichTextBox rtfOriginal;
         private System.Windows.Forms.RichTextBox rtfProposed;
         private System.Windows.Forms.Button btnResetConfig;
+        private System.Windows.Forms.Button btnUpdateContention;
     }
 }
