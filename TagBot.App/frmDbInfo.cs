@@ -13,6 +13,7 @@ namespace TagBot.App
 {
     public partial class frmDbInfo : Form
     {
+        public frmMain frmMain;
         public frmDbInfo()
         {
             InitializeComponent();

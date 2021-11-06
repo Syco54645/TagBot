@@ -14,6 +14,7 @@ namespace TagBot.Service
             {
                 using (FlacFile file = new FlacFile(path))
                 {
+                    response.Filename = System.IO.Path.GetFileName(path);
                     response.Encoder = file.StreamInfo.BitsPerSample.ToString() + " bit flac";
                     response.Bitrate = file.StreamInfo.BitsPerSample.ToString();
                     response.SampleRate = file.StreamInfo.SampleRateHz.ToString() + " Hz";

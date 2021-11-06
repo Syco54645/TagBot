@@ -63,7 +63,7 @@ namespace TagBot.App
             tsbSelectDirectory.Image = imgListFileIcons.Images["folder"];
             tsbSave.Image = imgListFileIcons.Images["save"];
 
-            fileMode();
+            _clearFileInfoLabels();
 
             if (!string.IsNullOrEmpty(Settings.Default.startingDirectory))
             {
@@ -82,6 +82,20 @@ namespace TagBot.App
                 btnDbInfo.Enabled = false;
             }
             tvDirectories.ExpandAll();
+        }
+
+        private void _clearFileInfoLabels()
+        {
+            foreach (Control ctrl in grpFIleInfo.Controls)
+            {
+                if (ctrl is Label)
+                {
+                    if (ctrl.Tag != null && !string.IsNullOrEmpty(ctrl.Tag.ToString()) && ctrl.Tag.ToString() == "info")
+                    {
+                        ctrl.Text = string.Empty;
+                    }
+                }
+            }
         }
 
         private void btnGetShowData_Click(object sender, EventArgs e)
@@ -248,6 +262,7 @@ namespace TagBot.App
         public void loadFlacTagsInEditor(FlacFileInfo flacInfo)
         {
             //FlacFileInfo flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + fileName);
+            lblCurrentFile.Text = flacInfo.Filename;
             lblEncoder.Text = flacInfo.Encoder;
             lblBitrate.Text = flacInfo.Bitrate;
             lblSampleRate.Text = flacInfo.SampleRate;
@@ -517,8 +532,10 @@ namespace TagBot.App
             {
                 frmDbInfo = new frmDbInfo();
             }
+            frmDbInfo.frmMain = this;
             frmDbInfo.displayDbMeta(databaseMeta);
-            frmDbInfo.Show();
+            frmDbInfo.StartPosition = FormStartPosition.CenterParent;
+            frmDbInfo.ShowDialog();
         }
     }
 }

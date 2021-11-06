@@ -112,10 +112,10 @@ namespace TagBot.App
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scTopBottom = new System.Windows.Forms.SplitContainer();
-            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
+            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.groupBox1.SuspendLayout();
             this.grpCommonTags.SuspendLayout();
             this.grpFileTags.SuspendLayout();
@@ -398,12 +398,14 @@ namespace TagBot.App
             // 
             // lblCurrentFile
             // 
-            this.lblCurrentFile.AutoSize = true;
-            this.lblCurrentFile.Location = new System.Drawing.Point(88, 16);
+            this.lblCurrentFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentFile.Location = new System.Drawing.Point(8, 14);
             this.lblCurrentFile.Name = "lblCurrentFile";
-            this.lblCurrentFile.Size = new System.Drawing.Size(67, 13);
+            this.lblCurrentFile.Size = new System.Drawing.Size(336, 16);
             this.lblCurrentFile.TabIndex = 42;
+            this.lblCurrentFile.Tag = "info";
             this.lblCurrentFile.Text = "lblCurrentFile";
+            this.lblCurrentFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
             // 
@@ -466,6 +468,7 @@ namespace TagBot.App
             this.lblEncoder.Name = "lblEncoder";
             this.lblEncoder.Size = new System.Drawing.Size(57, 13);
             this.lblEncoder.TabIndex = 36;
+            this.lblEncoder.Tag = "info";
             this.lblEncoder.Text = "lblEncoder";
             // 
             // lblDuration
@@ -475,6 +478,7 @@ namespace TagBot.App
             this.lblDuration.Name = "lblDuration";
             this.lblDuration.Size = new System.Drawing.Size(57, 13);
             this.lblDuration.TabIndex = 37;
+            this.lblDuration.Tag = "info";
             this.lblDuration.Text = "lblDuration";
             // 
             // lblSize
@@ -484,6 +488,7 @@ namespace TagBot.App
             this.lblSize.Name = "lblSize";
             this.lblSize.Size = new System.Drawing.Size(37, 13);
             this.lblSize.TabIndex = 38;
+            this.lblSize.Tag = "info";
             this.lblSize.Text = "lblSize";
             // 
             // lblChannels
@@ -493,6 +498,7 @@ namespace TagBot.App
             this.lblChannels.Name = "lblChannels";
             this.lblChannels.Size = new System.Drawing.Size(61, 13);
             this.lblChannels.TabIndex = 39;
+            this.lblChannels.Tag = "info";
             this.lblChannels.Text = "lblChannels";
             // 
             // lblSampleRate
@@ -502,6 +508,7 @@ namespace TagBot.App
             this.lblSampleRate.Name = "lblSampleRate";
             this.lblSampleRate.Size = new System.Drawing.Size(75, 13);
             this.lblSampleRate.TabIndex = 40;
+            this.lblSampleRate.Tag = "info";
             this.lblSampleRate.Text = "lblSampleRate";
             // 
             // lblBitrate
@@ -511,6 +518,7 @@ namespace TagBot.App
             this.lblBitrate.Name = "lblBitrate";
             this.lblBitrate.Size = new System.Drawing.Size(47, 13);
             this.lblBitrate.TabIndex = 41;
+            this.lblBitrate.Tag = "info";
             this.lblBitrate.Text = "lblBitrate";
             // 
             // btnDbInfo
@@ -919,16 +927,6 @@ namespace TagBot.App
             this.scTopBottom.SplitterDistance = 469;
             this.scTopBottom.TabIndex = 8;
             // 
-            // srtfLog
-            // 
-            this.srtfLog.BackColor = System.Drawing.Color.Black;
-            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.srtfLog.Location = new System.Drawing.Point(0, 0);
-            this.srtfLog.Name = "srtfLog";
-            this.srtfLog.Size = new System.Drawing.Size(1278, 59);
-            this.srtfLog.TabIndex = 53;
-            this.srtfLog.Text = "";
-            // 
             // miniToolStrip
             // 
             this.miniToolStrip.AccessibleName = "New item selection";
@@ -941,6 +939,16 @@ namespace TagBot.App
             this.miniToolStrip.Name = "miniToolStrip";
             this.miniToolStrip.Size = new System.Drawing.Size(301, 25);
             this.miniToolStrip.TabIndex = 10;
+            // 
+            // srtfLog
+            // 
+            this.srtfLog.BackColor = System.Drawing.Color.Black;
+            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.srtfLog.Location = new System.Drawing.Point(0, 0);
+            this.srtfLog.Name = "srtfLog";
+            this.srtfLog.Size = new System.Drawing.Size(1278, 59);
+            this.srtfLog.TabIndex = 53;
+            this.srtfLog.Text = "";
             // 
             // frmMain
             // 

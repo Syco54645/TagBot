@@ -8,6 +8,7 @@ namespace TagBot.Service.models
 {
     public class FlacFileInfo
     {
+        public string Filename { get; set; }
         public string Encoder { get; set; }
         public string Bitrate { get; set; }
         public string SampleRate { get; set; }
