@@ -18,27 +18,29 @@ using TagBot.Service.models;
 
 namespace TagBot.App
 {
-    public partial class frmTreeViewAdv : Form
+    public partial class ucMatchFiles : UserControl
     {
         public frmMain frmMain;
-        private TreeModel _model;
-        public frmTreeViewAdv()
+        private TreeModel tvMatchFilesModel;
+        public ucMatchFiles()
         {
             InitializeComponent();
         }
 
-        private void frmTreeViewAdv_Load(object sender, EventArgs e)
+        private void ucMatchFiles_Load(object sender, EventArgs e)
         {
             Sqlite sqlite = new Sqlite();
             sqlite.databasePath = Settings.Default.databaseLocation;
             string showDataJson = sqlite.getShow("2021-09-03");
 
             ShowSearchResponseContract showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
-            populateMatchTags(showData);
 
-            tvMatchFiles.BeginUpdate();
-            PopulateTreeView();
-            tvMatchFiles.EndUpdate();
+            if (frmMain.originalMetadata != null && frmMain.originalMetadata.Count > 0)
+            {
+                tvMatchFiles.BeginUpdate();
+                PopulateTvMatchFiles();
+                tvMatchFiles.EndUpdate();
+            }
 
             // setup handlers for drag drop
             tvMatchFiles.DragDrop += tvDirectoriesAdv_DragDrop;
@@ -46,7 +48,7 @@ namespace TagBot.App
             tvMatchFiles.ItemDrag += tvDirectoriesAdv_ItemDrag;
             tvMatchFiles.NodeMouseDoubleClick += tvDirectoriesAdv_NodeMouseDoubleClick;
             tvMatchFiles.AllowDrop = true;
-            lvMatchTags.ItemDrag += lvMatchTags_ItemDrag;
+            this.Dock = DockStyle.Fill;
         }
 
         private void tvDirectoriesAdv_NodeMouseDoubleClick(object sender, TreeNodeAdvMouseEventArgs e)
@@ -112,11 +114,6 @@ namespace TagBot.App
                 }
             }
             e.Effect = e.AllowedEffect;
-        }
-
-        private void lvMatchTags_ItemDrag(object sender, ItemDragEventArgs e)
-        {
-            DoDragDrop(lvMatchTags.SelectedItems, DragDropEffects.Move);
         }
 
         private void tvDirectoriesAdv_DragDrop(object sender, DragEventArgs e)
@@ -200,8 +197,8 @@ namespace TagBot.App
                     targetNode.Expand();
 
                     // lvItem.Remove();
-                    _model.Nodes[targetNode.Index].Nodes.Add(new Node(trackName));
-                    lvItem.Font = new Font(lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Regular);
+                    tvMatchFilesModel.Nodes[targetNode.Index].Nodes.Add(new Node(trackName));
+                    lvItem.Font = new Font(frmMain.ucLvMatchTags.lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Regular);
                     lvItem.ForeColor = Color.LightGray;
                 }
             }
@@ -211,7 +208,7 @@ namespace TagBot.App
 
         private void UpdateContention()
         {
-            foreach (SongNode node in _model.Nodes)
+            foreach (SongNode node in tvMatchFilesModel.Nodes)
             {
                 //frmMain.proposedMetadata[node.Filename].Metadata.Title = node.
                 string combinedTitle = string.Join(" > ", node.Nodes.Select(x => x.Text).ToArray());
@@ -225,10 +222,10 @@ namespace TagBot.App
 
 
 
-        private void PopulateTreeView()
+        public void PopulateTvMatchFiles()
         {
-            _model = new TreeModel();
-            tvMatchFiles.Model = _model;
+            tvMatchFilesModel = new TreeModel();
+            tvMatchFiles.Model = tvMatchFilesModel;
             
             foreach (KeyValuePair<string, FlacFileInfo> entry in frmMain.originalMetadata)
             {
@@ -278,7 +275,7 @@ namespace TagBot.App
             node.Artist = flacFileInfo.Metadata.Artist;
             node.Title = flacFileInfo.Metadata.Title;
             node.Tracknumber = flacFileInfo.Metadata.Tracknumber;
-            _model.Nodes.Add(node);
+            tvMatchFilesModel.Nodes.Add(node);
             return node;
         }
 
@@ -306,44 +303,5 @@ namespace TagBot.App
 
 
 
-
-
-
-
-        #region forklift
-        public void populateMatchTags(ShowSearchResponseContract showData)
-        {
-            if (showData != null)
-            {
-                foreach (Track track in showData.Setlist)
-                {
-                    string format = "%n %t [%m]";
-                    string formattedName = "";
-                    if (String.IsNullOrEmpty(track.Modifier))
-                    {
-                        formattedName = string.Format("{0} - {1}", track.TrackNumber, track.TrackName);
-                    }
-                    else
-                    {
-                        formattedName = string.Format("{0} - {1} [{2}]", track.TrackNumber, track.TrackName, track.Modifier);
-                    }
-                    ListViewItem tempLVI = new ListViewItem(formattedName);
-                    tempLVI.Tag = track;
-                    tempLVI.Font = new Font(lvMatchTags.Font, FontStyle.Bold);
-                    lvMatchTags.Items.Add(tempLVI);
-                }
-            }
-            lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-            lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
-        }
-       
-
-
-        #endregion
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            UpdateContention();
-        }
     }
 }

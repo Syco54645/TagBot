@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAPICodePack.Dialogs;
+﻿using Aga.Controls.Tree;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,6 +27,7 @@ namespace TagBot.App
         public Dictionary<string, FlacFileInfo> originalMetadata;
         public Dictionary<string, FlacFileInfo> proposedMetadata;
         public DatabaseMeta databaseMeta;
+        public TreeModel tvMatchFilesModel;
 
         private Logger _log = new Logger(100u);
         private List<Color> _randomColors = new List<Color> { Color.Red, Color.SkyBlue, Color.Green };
@@ -35,6 +37,8 @@ namespace TagBot.App
         public ucTextFiles ucTextFiles = new ucTextFiles();
         frmDebug frmDebug = new frmDebug();
         ucManualMatch ucManualMatch = new ucManualMatch();
+        public ucMatchFiles ucTvMatchFiles = new ucMatchFiles();
+        public ucLvMatchTags ucLvMatchTags = new ucLvMatchTags();
         frmDbInfo frmDbInfo = new frmDbInfo();
 
         public frmMain()
@@ -47,7 +51,12 @@ namespace TagBot.App
         private void frmMain_Load(object sender, EventArgs e)
         {
             ucManualMatch.frmMain = this;
-            pnlTagView.Controls.Add(ucManualMatch);
+            ucLvMatchTags.frmMain = this;
+            pnlTagView.Controls.Add(ucLvMatchTags);
+
+            ucTvMatchFiles.frmMain = this;
+            pnlTvMatchFiles.Controls.Add(ucTvMatchFiles);
+
             ucTextFiles.Dock = DockStyle.Fill;
             scFlacText.Panel2.Controls.Add(ucTextFiles);
             ucTextFiles.frmMain = this;
@@ -220,6 +229,8 @@ namespace TagBot.App
             }
 
             lvAudioFiles.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+            ucTvMatchFiles.PopulateTvMatchFiles();
         }
 
         private void createContentionVariables(List<string> files)
@@ -440,8 +451,8 @@ namespace TagBot.App
             frmMatch.showData = showData;
             frmMatch.Show();*/
 
-            ucManualMatch.workingFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
-            ucManualMatch.initControl();
+            /*ucManualMatch.workingFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
+            ucManualMatch.initControl();*/
 
             matchMode();
             _log.AddToLog("Some event to log.", _randomColors[_r.Next(3)]);
@@ -517,9 +528,41 @@ namespace TagBot.App
 
         private void button1_Click(object sender, EventArgs e)
         {
-            frmTreeViewAdv frmTreeViewAdv = new frmTreeViewAdv();
-            frmTreeViewAdv.frmMain = this;
-            frmTreeViewAdv.Show();
+            
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
