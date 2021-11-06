@@ -568,7 +568,7 @@ namespace TagBot.App
             this.pnlDirectoryBrowserToolbar.Controls.Add(this.tvDirectories);
             this.pnlDirectoryBrowserToolbar.Location = new System.Drawing.Point(0, 0);
             this.pnlDirectoryBrowserToolbar.Name = "pnlDirectoryBrowserToolbar";
-            this.pnlDirectoryBrowserToolbar.Size = new System.Drawing.Size(301, 336);
+            this.pnlDirectoryBrowserToolbar.Size = new System.Drawing.Size(301, 376);
             this.pnlDirectoryBrowserToolbar.TabIndex = 52;
             // 
             // tsDirectoryBrowser
@@ -612,7 +612,7 @@ namespace TagBot.App
             this.tvDirectories.Location = new System.Drawing.Point(0, 24);
             this.tvDirectories.Name = "tvDirectories";
             this.tvDirectories.SelectedImageIndex = 0;
-            this.tvDirectories.Size = new System.Drawing.Size(301, 312);
+            this.tvDirectories.Size = new System.Drawing.Size(301, 352);
             this.tvDirectories.TabIndex = 4;
             // 
             // pnlShowSearch
