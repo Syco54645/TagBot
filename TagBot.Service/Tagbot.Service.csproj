@@ -95,6 +95,7 @@
     <Compile Include="contracts\ShowSearchRequestContract.cs" />
     <Compile Include="contracts\ShowSearchResponseContract.cs" />
     <Compile Include="Flac.cs" />
+    <Compile Include="Formatter.cs" />
     <Compile Include="models\DatabaseMeta.cs" />
     <Compile Include="models\FlacFileInfo.cs" />
     <Compile Include="models\Metadata.cs" />

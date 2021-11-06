@@ -40,6 +40,7 @@ namespace TagBot.App
         public ucMatchFiles ucMatchFiles = new ucMatchFiles();
         public ucMatchTags ucMatchTags = new ucMatchTags();
         frmDbInfo frmDbInfo = new frmDbInfo();
+        frmPreferences frmPreferences = new frmPreferences();
 
         public frmMain()
         {
@@ -537,6 +538,17 @@ namespace TagBot.App
             frmDbInfo.displayDbMeta(databaseMeta);
             frmDbInfo.StartPosition = FormStartPosition.CenterParent;
             frmDbInfo.ShowDialog();
+        }
+
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmPreferences.IsDisposed)
+            {
+                frmPreferences = new frmPreferences();
+            }
+            frmPreferences.frmMain = this;
+            frmPreferences.StartPosition = FormStartPosition.CenterParent;
+            frmPreferences.ShowDialog();
         }
     }
 }

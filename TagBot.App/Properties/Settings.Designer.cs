@@ -46,5 +46,29 @@ namespace TagBot.App.Properties {
                 this["databaseLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%dcus - %v - %c, %s")]
+        public string albumFormatterString {
+            get {
+                return ((string)(this["albumFormatterString"]));
+            }
+            set {
+                this["albumFormatterString"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("yyyy-MM-dd")]
+        public string customDateFormatter {
+            get {
+                return ((string)(this["customDateFormatter"]));
+            }
+            set {
+                this["customDateFormatter"] = value;
+            }
+        }
     }
 }

@@ -21,7 +21,6 @@ namespace TagBot.App
     public partial class ucMatchTags : UserControl
     {
         public frmMain frmMain;
-        private TreeModel tvMatchFilesModel;
         public ucMatchTags()
         {
             InitializeComponent();
@@ -89,6 +88,14 @@ namespace TagBot.App
         private void btnMatchDone_Click(object sender, EventArgs e)
         {
             frmMain.fileMode();
+        }
+
+        private void btnAutoFill_Click(object sender, EventArgs e)
+        {
+            string albumFormatter = string.IsNullOrEmpty(Settings.Default.albumFormatterString) ? "%d0 - %v - %c, %s" : Settings.Default.albumFormatterString;
+            Service.Formatter formatter = new Service.Formatter(frmMain.showData, Settings.Default.customDateFormatter);
+            string albumTitle = formatter.formatString(albumFormatter, formatter.albumFormatterDict); // frmMain.showData.Date.Trim() + " - " + frmMain.showData.Venue.Trim() + frmMain.showData.City.Trim() + ", " + frmMain.showData.State.Trim();
+            if (false) { }
         }
     }
 }
