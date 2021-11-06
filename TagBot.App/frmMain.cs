@@ -225,7 +225,7 @@ namespace TagBot.App
                 }
             }
 
-            ucMatchFiles.PopulateTvMatchFiles();
+            ucMatchFiles.populateTvMatchFiles();
         }
 
         private void createContentionVariables(List<string> files)
@@ -394,6 +394,7 @@ namespace TagBot.App
             {
                 frmDebug = new frmDebug();
             }
+            frmDebug.frmMain = this;
             frmDebug.Show();
         }
 

@@ -29,16 +29,10 @@ namespace TagBot.App
 
         private void ucMatchFiles_Load(object sender, EventArgs e)
         {
-            Sqlite sqlite = new Sqlite();
-            sqlite.databasePath = Settings.Default.databaseLocation;
-            string showDataJson = sqlite.getShow("2021-09-03");
-
-            ShowSearchResponseContract showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
-
             if (frmMain.originalMetadata != null && frmMain.originalMetadata.Count > 0)
             {
                 tvMatchFiles.BeginUpdate();
-                PopulateTvMatchFiles();
+                populateTvMatchFiles();
                 tvMatchFiles.EndUpdate();
             }
 
@@ -206,7 +200,7 @@ namespace TagBot.App
             //UpdateContention();
         }
 
-        private void UpdateContention()
+        public void updateContention()
         {
             foreach (SongNode node in tvMatchFilesModel.Nodes)
             {
@@ -222,20 +216,20 @@ namespace TagBot.App
 
 
 
-        public void PopulateTvMatchFiles()
+        public void populateTvMatchFiles()
         {
             tvMatchFilesModel = new TreeModel();
             tvMatchFiles.Model = tvMatchFilesModel;
             
             foreach (KeyValuePair<string, FlacFileInfo> entry in frmMain.originalMetadata)
             {
-                Node rootNode = AddRoot(entry.Key, entry.Value);
+                Node rootNode = addRoot(entry.Key, entry.Value);
                 if (false) { }
             }
-            ResizeCols();
+            resizeCols();
         }
 
-        private void ResizeCols()
+        private void resizeCols()
         {
             // taken from https://sourceforge.net/p/treeviewadv/discussion/568369/thread/b9e687fa/
             DrawContext _measureContext = new DrawContext();
@@ -266,7 +260,7 @@ namespace TagBot.App
         }
 
 
-        private Node AddRoot(string text, FlacFileInfo flacFileInfo)
+        private Node addRoot(string text, FlacFileInfo flacFileInfo)
         {
             SongNode node = new SongNode();
             node.Text = text;
@@ -285,23 +279,8 @@ namespace TagBot.App
             public string Filename { get; set; }
             public string Artist { get; set; }
             public string Title { get; set; }
+            public override string Text { get { return (Index + 1).ToString() + " - " + Title; } }
             public string Tracknumber { get; set; }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
