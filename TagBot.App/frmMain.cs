@@ -64,6 +64,7 @@ namespace TagBot.App
             tsbSave.Image = imgListFileIcons.Images["save"];
 
             _clearFileInfoLabels();
+            fileMode();
 
             if (!string.IsNullOrEmpty(Settings.Default.startingDirectory))
             {
