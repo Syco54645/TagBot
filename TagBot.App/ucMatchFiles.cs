@@ -41,14 +41,28 @@ namespace TagBot.App
             tvMatchFiles.DragOver += tvDirectoriesAdv_DragOver;
             tvMatchFiles.ItemDrag += tvDirectoriesAdv_ItemDrag;
             tvMatchFiles.NodeMouseDoubleClick += tvDirectoriesAdv_NodeMouseDoubleClick;
+            tvMatchFiles.NodeMouseClick += tvDirectoriesAdv_NodeMouseClick;
             tvMatchFiles.AllowDrop = true;
             this.Dock = DockStyle.Fill;
+        }
+
+        /// <summary>
+        /// The Purpose of this function is to get the clicked node and load the tags in to the editor
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tvDirectoriesAdv_NodeMouseClick(object sender, TreeNodeAdvMouseEventArgs e)
+        {
+            SongNode node = (SongNode)tvMatchFilesModel.Nodes[e.Node.Index];
+            frmMain.loadFlacTagsInEditor(frmMain.proposedMetadata[node.Filename]);
         }
 
         private void tvDirectoriesAdv_NodeMouseDoubleClick(object sender, TreeNodeAdvMouseEventArgs e)
         {
             if (e.Control is NodeTextBox)
+            {
                 MessageBox.Show(e.Node.Tag.ToString());
+            }
         }
 
         private void tvDirectoriesAdv_ItemDrag(object sender, ItemDragEventArgs e)
@@ -204,17 +218,12 @@ namespace TagBot.App
         {
             foreach (SongNode node in tvMatchFilesModel.Nodes)
             {
-                //frmMain.proposedMetadata[node.Filename].Metadata.Title = node.
                 string combinedTitle = string.Join(" > ", node.Nodes.Select(x => x.Text).ToArray());
                 int trackNumber = node.Index + 1;
-                frmMain.proposedMetadata[node.Filename].Metadata.Title = combinedTitle;
+                frmMain.proposedMetadata[node.Filename].Metadata.Title = string.IsNullOrEmpty(combinedTitle) ? frmMain.proposedMetadata[node.Filename].Metadata.Title : combinedTitle;
                 frmMain.proposedMetadata[node.Filename].Metadata.Tracknumber = trackNumber.ToString();
-                if (false) { }
             }
         }
-
-
-
 
         public void populateTvMatchFiles()
         {
