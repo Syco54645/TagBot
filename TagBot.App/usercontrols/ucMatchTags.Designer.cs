@@ -1,7 +1,7 @@
 ﻿
 namespace TagBot.App
 {
-    partial class frmTreeViewAdv
+    partial class ucLvMatchTags
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,6 @@ namespace TagBot.App
         /// </summary>
         private void InitializeComponent()
         {
-            this.tvMatchFiles = new Aga.Controls.Tree.TreeViewAdv();
             this.tcFilename = new Aga.Controls.Tree.TreeColumn();
             this.tcNumber = new Aga.Controls.Tree.TreeColumn();
             this.tcTitle = new Aga.Controls.Tree.TreeColumn();
@@ -42,36 +41,7 @@ namespace TagBot.App
             this.ntbArtist = new Aga.Controls.Tree.NodeControls.NodeTextBox();
             this.ntbAlbum = new Aga.Controls.Tree.NodeControls.NodeTextBox();
             this.lvMatchTags = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // tvMatchFiles
-            // 
-            this.tvMatchFiles.BackColor = System.Drawing.SystemColors.Window;
-            this.tvMatchFiles.Columns.Add(this.tcFilename);
-            this.tvMatchFiles.Columns.Add(this.tcNumber);
-            this.tvMatchFiles.Columns.Add(this.tcTitle);
-            this.tvMatchFiles.Columns.Add(this.tcArtist);
-            this.tvMatchFiles.Columns.Add(this.tcAlbum);
-            this.tvMatchFiles.DefaultToolTipProvider = null;
-            this.tvMatchFiles.DragDropMarkColor = System.Drawing.Color.Black;
-            this.tvMatchFiles.LineColor = System.Drawing.SystemColors.ControlDark;
-            this.tvMatchFiles.Location = new System.Drawing.Point(432, 8);
-            this.tvMatchFiles.Model = null;
-            this.tvMatchFiles.Name = "tvMatchFiles";
-            this.tvMatchFiles.NodeControls.Add(this.nodeIcon1);
-            this.tvMatchFiles.NodeControls.Add(this.ntbFile);
-            this.tvMatchFiles.NodeControls.Add(this.ntbNumber);
-            this.tvMatchFiles.NodeControls.Add(this.ntbTitle);
-            this.tvMatchFiles.NodeControls.Add(this.ntbArtist);
-            this.tvMatchFiles.NodeControls.Add(this.ntbAlbum);
-            this.tvMatchFiles.SelectedNode = null;
-            this.tvMatchFiles.Size = new System.Drawing.Size(512, 320);
-            this.tvMatchFiles.TabIndex = 8;
-            this.tvMatchFiles.Text = "treeViewAdv1";
-            this.tvMatchFiles.UseColumns = true;
             // 
             // tcFilename
             // 
@@ -148,59 +118,30 @@ namespace TagBot.App
             // 
             // lvMatchTags
             // 
-            this.lvMatchTags.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.lvMatchTags.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lvMatchTags.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lvMatchTags.HideSelection = false;
-            this.lvMatchTags.Location = new System.Drawing.Point(8, 8);
+            this.lvMatchTags.Location = new System.Drawing.Point(0, 0);
             this.lvMatchTags.Name = "lvMatchTags";
-            this.lvMatchTags.Size = new System.Drawing.Size(422, 317);
+            this.lvMatchTags.Size = new System.Drawing.Size(952, 334);
             this.lvMatchTags.TabIndex = 9;
             this.lvMatchTags.UseCompatibleStateImageBehavior = false;
-            this.lvMatchTags.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "";
-            this.columnHeader1.Width = 25;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = global::TagBot.App.Properties.Settings.Default.databaseLocation;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(376, 392);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // frmTreeViewAdv
+            // ucLvMatchTags
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 450);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.lvMatchTags);
-            this.Controls.Add(this.tvMatchFiles);
-            this.Name = "frmTreeViewAdv";
-            this.Text = "frmTreeViewAdv";
-            this.Load += new System.EventHandler(this.frmTreeViewAdv_Load);
+            this.Name = "ucLvMatchTags";
+            this.Size = new System.Drawing.Size(948, 336);
+            this.Load += new System.EventHandler(this.ucMatchTags_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private Aga.Controls.Tree.TreeViewAdv tvMatchFiles;
-        private System.Windows.Forms.ListView lvMatchTags;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
         private Aga.Controls.Tree.TreeColumn tcFilename;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
         private Aga.Controls.Tree.TreeColumn tcNumber;
         private Aga.Controls.Tree.NodeControls.NodeTextBox ntbFile;
         private Aga.Controls.Tree.NodeControls.NodeIcon nodeIcon1;
@@ -211,6 +152,6 @@ namespace TagBot.App
         private Aga.Controls.Tree.NodeControls.NodeTextBox ntbTitle;
         private Aga.Controls.Tree.NodeControls.NodeTextBox ntbArtist;
         private Aga.Controls.Tree.NodeControls.NodeTextBox ntbAlbum;
-        private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.ListView lvMatchTags;
     }
 }

@@ -85,11 +85,11 @@
     <Compile Include="frmText.Designer.cs">
       <DependentUpon>frmText.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTreeViewAdv.cs">
-      <SubType>Form</SubType>
+    <Compile Include="ucMatchFiles.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="frmTreeViewAdv.Designer.cs">
-      <DependentUpon>frmTreeViewAdv.cs</DependentUpon>
+    <Compile Include="ucMatchFiles.Designer.cs">
+      <DependentUpon>ucMatchFiles.cs</DependentUpon>
     </Compile>
     <Compile Include="logger\Logger.cs" />
     <Compile Include="Program.cs" />
@@ -109,6 +109,12 @@
     <Compile Include="usercontrols\ucTextFiles.Designer.cs">
       <DependentUpon>ucTextFiles.cs</DependentUpon>
     </Compile>
+    <Compile Include="usercontrols\ucMatchTags.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="usercontrols\ucMatchTags.Designer.cs">
+      <DependentUpon>ucMatchTags.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmDbInfo.resx">
       <DependentUpon>frmDbInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -124,8 +130,8 @@
     <EmbeddedResource Include="frmText.resx">
       <DependentUpon>frmText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTreeViewAdv.resx">
-      <DependentUpon>frmTreeViewAdv.cs</DependentUpon>
+    <EmbeddedResource Include="ucMatchFiles.resx">
+      <DependentUpon>ucMatchFiles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -141,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="usercontrols\ucTextFiles.resx">
       <DependentUpon>ucTextFiles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="usercontrols\ucMatchTags.resx">
+      <DependentUpon>ucMatchTags.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
