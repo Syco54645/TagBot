@@ -37,8 +37,8 @@ namespace TagBot.App
         public ucTextFiles ucTextFiles = new ucTextFiles();
         frmDebug frmDebug = new frmDebug();
         ucManualMatch ucManualMatch = new ucManualMatch();
-        public ucMatchFiles ucTvMatchFiles = new ucMatchFiles();
-        public ucLvMatchTags ucLvMatchTags = new ucLvMatchTags();
+        public ucMatchFiles ucMatchFiles = new ucMatchFiles();
+        public ucMatchTags ucMatchTags = new ucMatchTags();
         frmDbInfo frmDbInfo = new frmDbInfo();
 
         public frmMain()
@@ -51,11 +51,11 @@ namespace TagBot.App
         private void frmMain_Load(object sender, EventArgs e)
         {
             ucManualMatch.frmMain = this;
-            ucLvMatchTags.frmMain = this;
-            pnlTagView.Controls.Add(ucLvMatchTags);
+            ucMatchTags.frmMain = this;
+            pnlTagView.Controls.Add(ucMatchTags);
 
-            ucTvMatchFiles.frmMain = this;
-            pnlTvMatchFiles.Controls.Add(ucTvMatchFiles);
+            ucMatchFiles.frmMain = this;
+            pnlTvMatchFiles.Controls.Add(ucMatchFiles);
 
             ucTextFiles.Dock = DockStyle.Fill;
             scFlacText.Panel2.Controls.Add(ucTextFiles);
@@ -95,7 +95,7 @@ namespace TagBot.App
 
             showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
             frmDebug.ShowData = showDataJson;
-            ucManualMatch.populateMatchTags(showData);
+            ucMatchTags.populateMatchTags(showData);
         }
 
         #region File List
@@ -225,7 +225,7 @@ namespace TagBot.App
                 }
             }
 
-            ucTvMatchFiles.PopulateTvMatchFiles();
+            ucMatchFiles.PopulateTvMatchFiles();
         }
 
         private void createContentionVariables(List<string> files)
@@ -429,15 +429,8 @@ namespace TagBot.App
 
         private void btnMatch_Click(object sender, EventArgs e)
         {
-            /*frmMatch frmMatch = new frmMatch();
-            frmMatch.workingFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
-            frmMatch.showData = showData;
-            frmMatch.Show();*/
-
-            /*ucManualMatch.workingFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
-            ucManualMatch.initControl();*/
-
             matchMode();
+            getShowData();
             _log.AddToLog("Some event to log.", _randomColors[_r.Next(3)]);
             srtfLog.Rtf = _log.GetLogAsRichText(true);
             srtfLog.ScrollToBottom();
@@ -447,7 +440,6 @@ namespace TagBot.App
         {
             pnlFileView.Visible = true;
             pnlTagView.Visible = false;
-            scFlacText.Panel2.Controls.Add(ucTextFiles);
         }
 
         public void matchMode()
