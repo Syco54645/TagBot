@@ -34,15 +34,7 @@ namespace TagBot.App.usercontrols
             this.lvMatchTags = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.scMain = new System.Windows.Forms.SplitContainer();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtOverallDate = new System.Windows.Forms.TextBox();
             this.btnDone = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtOverallArtist = new System.Windows.Forms.TextBox();
-            this.txtOverallAlbum = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblOriginalComment = new System.Windows.Forms.Label();
             this.lblOriginalDate = new System.Windows.Forms.Label();
@@ -131,15 +123,7 @@ namespace TagBot.App.usercontrols
             // 
             // scMain.Panel1
             // 
-            this.scMain.Panel1.Controls.Add(this.label7);
-            this.scMain.Panel1.Controls.Add(this.textBox1);
-            this.scMain.Panel1.Controls.Add(this.label6);
-            this.scMain.Panel1.Controls.Add(this.txtOverallDate);
             this.scMain.Panel1.Controls.Add(this.btnDone);
-            this.scMain.Panel1.Controls.Add(this.label2);
-            this.scMain.Panel1.Controls.Add(this.label1);
-            this.scMain.Panel1.Controls.Add(this.txtOverallArtist);
-            this.scMain.Panel1.Controls.Add(this.txtOverallAlbum);
             this.scMain.Panel1.Controls.Add(this.groupBox1);
             // 
             // scMain.Panel2
@@ -148,42 +132,6 @@ namespace TagBot.App.usercontrols
             this.scMain.Size = new System.Drawing.Size(1181, 426);
             this.scMain.SplitterDistance = 392;
             this.scMain.TabIndex = 3;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(32, 76);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(51, 13);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Comment";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(88, 72);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(296, 20);
-            this.textBox1.TabIndex = 16;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(53, 52);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(30, 13);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "Date";
-            // 
-            // txtOverallDate
-            // 
-            this.txtOverallDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOverallDate.Location = new System.Drawing.Point(88, 48);
-            this.txtOverallDate.Name = "txtOverallDate";
-            this.txtOverallDate.Size = new System.Drawing.Size(296, 20);
-            this.txtOverallDate.TabIndex = 14;
             // 
             // btnDone
             // 
@@ -195,42 +143,6 @@ namespace TagBot.App.usercontrols
             this.btnDone.Text = "Done";
             this.btnDone.UseVisualStyleBackColor = true;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(47, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 13);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Album";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(53, 4);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Artist";
-            // 
-            // txtOverallArtist
-            // 
-            this.txtOverallArtist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOverallArtist.Location = new System.Drawing.Point(88, 0);
-            this.txtOverallArtist.Name = "txtOverallArtist";
-            this.txtOverallArtist.Size = new System.Drawing.Size(296, 20);
-            this.txtOverallArtist.TabIndex = 10;
-            // 
-            // txtOverallAlbum
-            // 
-            this.txtOverallAlbum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtOverallAlbum.Location = new System.Drawing.Point(88, 24);
-            this.txtOverallAlbum.Name = "txtOverallAlbum";
-            this.txtOverallAlbum.Size = new System.Drawing.Size(296, 20);
-            this.txtOverallAlbum.TabIndex = 9;
             // 
             // groupBox1
             // 
@@ -401,7 +313,6 @@ namespace TagBot.App.usercontrols
             ((System.ComponentModel.ISupportInitialize)(this.scFileMatch)).EndInit();
             this.scFileMatch.ResumeLayout(false);
             this.scMain.Panel1.ResumeLayout(false);
-            this.scMain.Panel1.PerformLayout();
             this.scMain.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).EndInit();
             this.scMain.ResumeLayout(false);
@@ -423,16 +334,8 @@ namespace TagBot.App.usercontrols
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.SplitContainer scMain;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtOverallArtist;
-        private System.Windows.Forms.TextBox txtOverallAlbum;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtOverallDate;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label9;
