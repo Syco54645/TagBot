@@ -39,7 +39,7 @@ namespace TagBot.App
             this.label16 = new System.Windows.Forms.Label();
             this.txtOverallDate = new System.Windows.Forms.TextBox();
             this.txtOverallArtist = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtOverallComment = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.txtOverallAlbum = new System.Windows.Forms.TextBox();
             this.grpFileTags = new System.Windows.Forms.GroupBox();
@@ -112,10 +112,11 @@ namespace TagBot.App
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scTopBottom = new System.Windows.Forms.SplitContainer();
+            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
-            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
+            this.btnAutoFillCommonTags = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.grpCommonTags.SuspendLayout();
             this.grpFileTags.SuspendLayout();
@@ -174,17 +175,18 @@ namespace TagBot.App
             // 
             // grpCommonTags
             // 
+            this.grpCommonTags.Controls.Add(this.btnAutoFillCommonTags);
             this.grpCommonTags.Controls.Add(this.label14);
             this.grpCommonTags.Controls.Add(this.label17);
             this.grpCommonTags.Controls.Add(this.label16);
             this.grpCommonTags.Controls.Add(this.txtOverallDate);
             this.grpCommonTags.Controls.Add(this.txtOverallArtist);
-            this.grpCommonTags.Controls.Add(this.textBox1);
+            this.grpCommonTags.Controls.Add(this.txtOverallComment);
             this.grpCommonTags.Controls.Add(this.label15);
             this.grpCommonTags.Controls.Add(this.txtOverallAlbum);
             this.grpCommonTags.Location = new System.Drawing.Point(8, 304);
             this.grpCommonTags.Name = "grpCommonTags";
-            this.grpCommonTags.Size = new System.Drawing.Size(352, 127);
+            this.grpCommonTags.Size = new System.Drawing.Size(352, 144);
             this.grpCommonTags.TabIndex = 61;
             this.grpCommonTags.TabStop = false;
             this.grpCommonTags.Text = "Common Tags";
@@ -232,13 +234,13 @@ namespace TagBot.App
             this.txtOverallArtist.TabIndex = 54;
             this.txtOverallArtist.Tag = "txtMetadataArtist";
             // 
-            // textBox1
+            // txtOverallComment
             // 
-            this.textBox1.Location = new System.Drawing.Point(75, 89);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(261, 20);
-            this.textBox1.TabIndex = 59;
-            this.textBox1.Tag = "txtMetadataComment";
+            this.txtOverallComment.Location = new System.Drawing.Point(75, 89);
+            this.txtOverallComment.Name = "txtOverallComment";
+            this.txtOverallComment.Size = new System.Drawing.Size(261, 20);
+            this.txtOverallComment.TabIndex = 59;
+            this.txtOverallComment.Tag = "txtMetadataComment";
             // 
             // label15
             // 
@@ -563,9 +565,9 @@ namespace TagBot.App
             // pbTagProgress
             // 
             this.pbTagProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pbTagProgress.Location = new System.Drawing.Point(5, 446);
+            this.pbTagProgress.Location = new System.Drawing.Point(5, 456);
             this.pbTagProgress.Name = "pbTagProgress";
-            this.pbTagProgress.Size = new System.Drawing.Size(360, 23);
+            this.pbTagProgress.Size = new System.Drawing.Size(360, 13);
             this.pbTagProgress.TabIndex = 28;
             // 
             // btnAutomate
@@ -869,6 +871,7 @@ namespace TagBot.App
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
             this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
@@ -928,6 +931,16 @@ namespace TagBot.App
             this.scTopBottom.SplitterDistance = 469;
             this.scTopBottom.TabIndex = 8;
             // 
+            // srtfLog
+            // 
+            this.srtfLog.BackColor = System.Drawing.Color.Black;
+            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.srtfLog.Location = new System.Drawing.Point(0, 0);
+            this.srtfLog.Name = "srtfLog";
+            this.srtfLog.Size = new System.Drawing.Size(1278, 59);
+            this.srtfLog.TabIndex = 53;
+            this.srtfLog.Text = "";
+            // 
             // miniToolStrip
             // 
             this.miniToolStrip.AccessibleName = "New item selection";
@@ -941,15 +954,15 @@ namespace TagBot.App
             this.miniToolStrip.Size = new System.Drawing.Size(301, 25);
             this.miniToolStrip.TabIndex = 10;
             // 
-            // srtfLog
+            // btnAutoFillCommonTags
             // 
-            this.srtfLog.BackColor = System.Drawing.Color.Black;
-            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.srtfLog.Location = new System.Drawing.Point(0, 0);
-            this.srtfLog.Name = "srtfLog";
-            this.srtfLog.Size = new System.Drawing.Size(1278, 59);
-            this.srtfLog.TabIndex = 53;
-            this.srtfLog.Text = "";
+            this.btnAutoFillCommonTags.Location = new System.Drawing.Point(262, 112);
+            this.btnAutoFillCommonTags.Name = "btnAutoFillCommonTags";
+            this.btnAutoFillCommonTags.Size = new System.Drawing.Size(75, 23);
+            this.btnAutoFillCommonTags.TabIndex = 61;
+            this.btnAutoFillCommonTags.Text = "Auto Fill";
+            this.btnAutoFillCommonTags.UseVisualStyleBackColor = true;
+            this.btnAutoFillCommonTags.Click += new System.EventHandler(this.btnAutoFillCommonTags_Click);
             // 
             // frmMain
             // 
@@ -1077,7 +1090,7 @@ namespace TagBot.App
         private System.Windows.Forms.Label lblBitrate;
         private System.Windows.Forms.GroupBox grpCommonTags;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtOverallComment;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtOverallDate;
         private System.Windows.Forms.Label label16;
@@ -1088,6 +1101,7 @@ namespace TagBot.App
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox txtMetadataComment;
         private System.Windows.Forms.Label lblCurrentFile;
+        private System.Windows.Forms.Button btnAutoFillCommonTags;
     }
 }
 

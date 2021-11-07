@@ -50,10 +50,6 @@ namespace TagBot.App
             DoDragDrop(lvMatchTags.SelectedItems, DragDropEffects.Move);
         }
 
-        
-
-
-        #region forklift
         public void populateMatchTags(ShowSearchResponseContract showData)
         {
             lvMatchTags.Items.Clear();
@@ -81,21 +77,9 @@ namespace TagBot.App
             lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
-
-
-        #endregion
-
         private void btnMatchDone_Click(object sender, EventArgs e)
         {
             frmMain.fileMode();
-        }
-
-        private void btnAutoFill_Click(object sender, EventArgs e)
-        {
-            string albumFormatter = string.IsNullOrEmpty(Settings.Default.albumFormatterString) ? "%d - %v - %c, %s" : Settings.Default.albumFormatterString;
-            Service.Formatter formatter = new Service.Formatter(frmMain.showData, Settings.Default.customDateFormatter);
-            string albumTitle = formatter.formatString(albumFormatter, Service.FormatterType.Album); // frmMain.showData.Date.Trim() + " - " + frmMain.showData.Venue.Trim() + frmMain.showData.City.Trim() + ", " + frmMain.showData.State.Trim();
-            if (false) { }
         }
     }
 }

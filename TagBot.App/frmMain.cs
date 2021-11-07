@@ -482,6 +482,10 @@ namespace TagBot.App
                         grpFileTags.Controls[ctrl.Tag.ToString()].Enabled = !enabled;
                     }
                 }
+                else if (ctrl is Button)
+                {
+                    ctrl.Enabled = enabled;
+                }
             }
         }
 
@@ -549,6 +553,18 @@ namespace TagBot.App
             frmPreferences.frmMain = this;
             frmPreferences.StartPosition = FormStartPosition.CenterParent;
             frmPreferences.ShowDialog();
+        }
+
+        private void btnAutoFillCommonTags_Click(object sender, EventArgs e)
+        {
+            string albumFormatter = string.IsNullOrEmpty(Settings.Default.albumFormatterString) ? "%d - %v - %c, %s" : Settings.Default.albumFormatterString;
+            Service.Formatter formatter = new Service.Formatter(showData, Settings.Default.customDateFormatter);
+            string albumTitle = formatter.formatString(albumFormatter, Service.FormatterType.Album);
+            txtOverallAlbum.Text = albumTitle;
+            txtOverallDate.Text = showData.Date;
+            txtOverallArtist.Text = showData.Artist;
+            txtOverallComment.Text = "Source: " + new DirectoryInfo(currentPath).Name;
+            if (false) { }
         }
     }
 }

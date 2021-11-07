@@ -74,7 +74,7 @@ namespace Tagbot.Service
                 var command = connection.CreateCommand();
                 command.CommandText =
                 @"
-                    SELECT show_id, date, venue, city, state
+                    SELECT show_id, date, venue, city, state, artist
                     FROM show
                     WHERE date = $date
                 ";
@@ -90,6 +90,7 @@ namespace Tagbot.Service
                         response.Venue = (string)reader["venue"];
                         response.City = (string)reader["city"];
                         response.State = (string)reader["state"];
+                        response.Artist = (string)reader["artist"];
                     }
                 }
             }

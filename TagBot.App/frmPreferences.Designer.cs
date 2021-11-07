@@ -49,7 +49,7 @@ namespace TagBot.App
             // btnApply
             // 
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApply.Location = new System.Drawing.Point(456, 368);
+            this.btnApply.Location = new System.Drawing.Point(168, 368);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 0;
@@ -60,7 +60,7 @@ namespace TagBot.App
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(552, 368);
+            this.btnCancel.Location = new System.Drawing.Point(253, 368);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -172,12 +172,17 @@ namespace TagBot.App
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(642, 406);
+            this.ClientSize = new System.Drawing.Size(354, 406);
             this.Controls.Add(this.grpCustomDate);
             this.Controls.Add(this.grpAlbumFormatter);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmPreferences";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "Preferences";
             this.Load += new System.EventHandler(this.frmPreferences_Load);
             this.grpAlbumFormatter.ResumeLayout(false);

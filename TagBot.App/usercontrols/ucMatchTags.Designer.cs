@@ -42,7 +42,6 @@ namespace TagBot.App
             this.ntbAlbum = new Aga.Controls.Tree.NodeControls.NodeTextBox();
             this.lvMatchTags = new System.Windows.Forms.ListView();
             this.btnMatchDone = new System.Windows.Forms.Button();
-            this.btnAutoFill = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tcFilename
@@ -141,22 +140,10 @@ namespace TagBot.App
             this.btnMatchDone.UseVisualStyleBackColor = true;
             this.btnMatchDone.Click += new System.EventHandler(this.btnMatchDone_Click);
             // 
-            // btnAutoFill
-            // 
-            this.btnAutoFill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAutoFill.Location = new System.Drawing.Point(8, 376);
-            this.btnAutoFill.Name = "btnAutoFill";
-            this.btnAutoFill.Size = new System.Drawing.Size(75, 23);
-            this.btnAutoFill.TabIndex = 11;
-            this.btnAutoFill.Text = "Auto Fill";
-            this.btnAutoFill.UseVisualStyleBackColor = true;
-            this.btnAutoFill.Click += new System.EventHandler(this.btnAutoFill_Click);
-            // 
             // ucMatchTags
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnAutoFill);
             this.Controls.Add(this.btnMatchDone);
             this.Controls.Add(this.lvMatchTags);
             this.Name = "ucMatchTags";
@@ -180,6 +167,5 @@ namespace TagBot.App
         private Aga.Controls.Tree.NodeControls.NodeTextBox ntbAlbum;
         public System.Windows.Forms.ListView lvMatchTags;
         private System.Windows.Forms.Button btnMatchDone;
-        private System.Windows.Forms.Button btnAutoFill;
     }
 }
