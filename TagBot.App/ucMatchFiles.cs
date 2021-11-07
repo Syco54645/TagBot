@@ -211,7 +211,7 @@ namespace TagBot.App
                 }
             }
             tvMatchFiles.EndUpdate();
-            //UpdateContention();
+            updateContention();
         }
 
         public void updateContention()

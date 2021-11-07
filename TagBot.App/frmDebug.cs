@@ -7,62 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tagbot.Service;
+using Tagbot.Service.contracts;
+using TagBot.Service.models;
 
 namespace TagBot.App
 {
     public partial class frmDebug : Form
     {
-        private string  _showData;
         public frmMain frmMain;
-        public string ShowData 
-        { 
-            get 
-            {
-                return _showData;
-            } 
-            set 
-            { 
-                if (value != null)
-                {
-                    _showData = value;
-                    rtfResult.Text = value;
-                }
-            } 
-        }
-        
-        private string _originalMetadata;
-        public string originalMetadata
-        {
-            get
-            {
-                return _originalMetadata;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    _originalMetadata = value;
-                    rtfOriginal.Text = value;
-                }
-            }
-        }
-
-        private string _proposedMetadata;
-        public string proposedMetadata
-        {
-            get
-            {
-                return _proposedMetadata;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    _proposedMetadata = value;
-                    rtfProposed.Text = value;
-                }
-            }
-        }
 
         public frmDebug()
         {
@@ -79,6 +32,25 @@ namespace TagBot.App
         private void btnUpdateContention_Click(object sender, EventArgs e)
         {
             frmMain.ucMatchFiles.updateContention();
+            rtfOriginalMetadata.Text = Utility.SerializeObject<Dictionary<string, FlacFileInfo>>(frmMain.originalMetadata, true);
+            rtfProposedMetadata.Text = Utility.SerializeObject<Dictionary<string, FlacFileInfo>>(frmMain.proposedMetadata, true);
+        }
+
+        private void btnRefreshTextBoxes_Click(object sender, EventArgs e)
+        {
+            refreshTextBoxes();
+        }
+
+        public void refreshTextBoxes()
+        {
+            rtfSearchResult.Text = Utility.SerializeObject<ShowSearchResponseContract>(frmMain.showData, true);
+            rtfOriginalMetadata.Text = Utility.SerializeObject<Dictionary<string, FlacFileInfo>>(frmMain.originalMetadata, true);
+            rtfProposedMetadata.Text = Utility.SerializeObject<Dictionary<string, FlacFileInfo>>(frmMain.proposedMetadata, true);
+        }
+
+        private void frmDebug_Load(object sender, EventArgs e)
+        {
+            refreshTextBoxes();
         }
     }
 }

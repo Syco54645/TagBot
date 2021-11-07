@@ -14,6 +14,7 @@ namespace TagBot.Service.models
         public string Date { get; set; }
         public string Title { get; set; }
         public string Tracknumber { get; set; }
+        public string Comment { get; set; }
 
         public object this[string name]
         {

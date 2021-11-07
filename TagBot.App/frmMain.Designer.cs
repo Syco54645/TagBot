@@ -34,6 +34,7 @@ namespace TagBot.App
             this.imgListFileIcons = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.grpCommonTags = new System.Windows.Forms.GroupBox();
+            this.btnAutoFillCommonTags = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -112,11 +113,10 @@ namespace TagBot.App
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scTopBottom = new System.Windows.Forms.SplitContainer();
-            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
-            this.btnAutoFillCommonTags = new System.Windows.Forms.Button();
+            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.groupBox1.SuspendLayout();
             this.grpCommonTags.SuspendLayout();
             this.grpFileTags.SuspendLayout();
@@ -192,6 +192,17 @@ namespace TagBot.App
             this.grpCommonTags.TabIndex = 61;
             this.grpCommonTags.TabStop = false;
             this.grpCommonTags.Text = "Common Tags";
+            // 
+            // btnAutoFillCommonTags
+            // 
+            this.btnAutoFillCommonTags.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAutoFillCommonTags.Location = new System.Drawing.Point(262, 112);
+            this.btnAutoFillCommonTags.Name = "btnAutoFillCommonTags";
+            this.btnAutoFillCommonTags.Size = new System.Drawing.Size(75, 23);
+            this.btnAutoFillCommonTags.TabIndex = 61;
+            this.btnAutoFillCommonTags.Text = "Auto Fill";
+            this.btnAutoFillCommonTags.UseVisualStyleBackColor = true;
+            this.btnAutoFillCommonTags.Click += new System.EventHandler(this.btnAutoFillCommonTags_Click);
             // 
             // label14
             // 
@@ -812,6 +823,7 @@ namespace TagBot.App
             this.tsbSave.Name = "tsbSave";
             this.tsbSave.Size = new System.Drawing.Size(23, 22);
             this.tsbSave.Text = "Save";
+            this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
             // tcFilename
             // 
@@ -910,14 +922,14 @@ namespace TagBot.App
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
             this.preferencesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -969,16 +981,6 @@ namespace TagBot.App
             this.scTopBottom.SplitterDistance = 469;
             this.scTopBottom.TabIndex = 8;
             // 
-            // srtfLog
-            // 
-            this.srtfLog.BackColor = System.Drawing.Color.Black;
-            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.srtfLog.Location = new System.Drawing.Point(0, 0);
-            this.srtfLog.Name = "srtfLog";
-            this.srtfLog.Size = new System.Drawing.Size(1278, 59);
-            this.srtfLog.TabIndex = 53;
-            this.srtfLog.Text = "";
-            // 
             // miniToolStrip
             // 
             this.miniToolStrip.AccessibleName = "New item selection";
@@ -992,16 +994,15 @@ namespace TagBot.App
             this.miniToolStrip.Size = new System.Drawing.Size(301, 25);
             this.miniToolStrip.TabIndex = 10;
             // 
-            // btnAutoFillCommonTags
+            // srtfLog
             // 
-            this.btnAutoFillCommonTags.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAutoFillCommonTags.Location = new System.Drawing.Point(262, 112);
-            this.btnAutoFillCommonTags.Name = "btnAutoFillCommonTags";
-            this.btnAutoFillCommonTags.Size = new System.Drawing.Size(75, 23);
-            this.btnAutoFillCommonTags.TabIndex = 61;
-            this.btnAutoFillCommonTags.Text = "Auto Fill";
-            this.btnAutoFillCommonTags.UseVisualStyleBackColor = true;
-            this.btnAutoFillCommonTags.Click += new System.EventHandler(this.btnAutoFillCommonTags_Click);
+            this.srtfLog.BackColor = System.Drawing.Color.Black;
+            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.srtfLog.Location = new System.Drawing.Point(0, 0);
+            this.srtfLog.Name = "srtfLog";
+            this.srtfLog.Size = new System.Drawing.Size(1278, 59);
+            this.srtfLog.TabIndex = 53;
+            this.srtfLog.Text = "";
             // 
             // frmMain
             // 

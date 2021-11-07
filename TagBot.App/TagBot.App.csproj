@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmConfirmation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfirmation.Designer.cs">
+      <DependentUpon>frmConfirmation.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDbInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     <Compile Include="usercontrols\ucMatchTags.Designer.cs">
       <DependentUpon>ucMatchTags.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmConfirmation.resx">
+      <DependentUpon>frmConfirmation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDbInfo.resx">
       <DependentUpon>frmDbInfo.cs</DependentUpon>
     </EmbeddedResource>

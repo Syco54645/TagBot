@@ -42,6 +42,7 @@ namespace TagBot.App
         public ucMatchTags ucMatchTags = new ucMatchTags();
         frmDbInfo frmDbInfo = new frmDbInfo();
         frmPreferences frmPreferences = new frmPreferences();
+        frmConfirmation frmConfirmation = new frmConfirmation();
 
         public frmMain()
         {
@@ -114,7 +115,6 @@ namespace TagBot.App
             string showDataJson = sqlite.getShow(txtDate.Text);
 
             showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
-            frmDebug.ShowData = showDataJson;
             ucMatchTags.populateMatchTags(showData);
         }
 
@@ -257,10 +257,10 @@ namespace TagBot.App
             {
                 FlacFileInfo flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + filename);
                 originalMetadata.Add(filename, flacInfo);
-                proposedMetadata.Add(filename, flacInfo);
             }
-            frmDebug.originalMetadata = Utility.SerializeObject(originalMetadata, true);
-            frmDebug.proposedMetadata = Utility.SerializeObject(proposedMetadata, true);
+
+            // cheap way to do a deep clone
+            proposedMetadata = Utility.DeserializeObject< Dictionary<string, FlacFileInfo>>(Utility.SerializeObject<Dictionary<string, FlacFileInfo>>(originalMetadata));
         }
 
         public void loadFlacTagsInEditor(FlacFileInfo flacInfo)
@@ -426,6 +426,12 @@ namespace TagBot.App
 
         private void tsbSave_Click(object sender, EventArgs e) // todo fix
         {
+            if (frmConfirmation.IsDisposed == true)
+            {
+                frmConfirmation = new frmConfirmation();
+            }
+            frmConfirmation.frmMain = this;
+            frmConfirmation.ShowDialog();
             /*var files = lvAudioFiles.SelectedItems;
             int incrementAmount = 100 / files.Count;
             pbTagProgress.Value = 0;
@@ -467,6 +473,7 @@ namespace TagBot.App
 
         public void matchMode()
         {
+            ucMatchFiles.updateContention();
             pnlFileView.Visible = false;
             pnlTagView.Visible = true;
             toggleTagFields(true);

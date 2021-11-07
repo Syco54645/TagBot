@@ -171,6 +171,8 @@ namespace TagBot.App
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmDbInfo";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Text = "frmDbInfo";
             this.Load += new System.EventHandler(this.frmDbInfo_Load);
             this.ResumeLayout(false);
