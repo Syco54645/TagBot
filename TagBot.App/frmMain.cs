@@ -562,8 +562,11 @@ namespace TagBot.App
             string albumTitle = formatter.formatString(albumFormatter, Service.FormatterType.Album);
             txtOverallAlbum.Text = albumTitle;
             txtOverallDate.Text = showData.Date;
-            txtOverallArtist.Text = showData.Artist;
             txtOverallComment.Text = "Source: " + new DirectoryInfo(currentPath).Name;
+
+            var artistTransformationDict = Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation);
+            txtOverallArtist.Text = (artistTransformationDict.ContainsKey(showData.Artist) && !string.IsNullOrEmpty(artistTransformationDict[showData.Artist])) ? artistTransformationDict[showData.Artist] : showData.Artist;
+            
             if (false) { }
         }
     }

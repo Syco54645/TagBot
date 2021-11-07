@@ -14,5 +14,8 @@
     <Setting Name="customDateFormatter" Type="System.String" Scope="User">
       <Value Profile="(Default)">yyyy-MM-dd</Value>
     </Setting>
+    <Setting Name="artistTransformation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{"dmb":"Dave Matthews Band","dm":"Dave Matthews","d&amp;t":"Dave Matthews"}</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

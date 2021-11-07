@@ -70,5 +70,17 @@ namespace TagBot.App.Properties {
                 this["customDateFormatter"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("{\"dmb\":\"Dave Matthews Band\",\"dm\":\"Dave Matthews\",\"d&t\":\"Dave Matthews\"}")]
+        public string artistTransformation {
+            get {
+                return ((string)(this["artistTransformation"]));
+            }
+            set {
+                this["artistTransformation"] = value;
+            }
+        }
     }
 }
