@@ -19,6 +19,7 @@ namespace TagBot.App
     {
         public frmMain frmMain;
         private ShowSearchResponseContract _dummyShow;
+        private Track _dummyTrack;
         Service.Formatter formatter = new Service.Formatter(Settings.Default.customDateFormatter);
 
         public frmPreferences()
@@ -35,6 +36,14 @@ namespace TagBot.App
                 Venue = "Susquehanna Bank Center",
                 Date = "2009-09-19",
             };
+            
+            _dummyTrack = new Track()
+            {
+                TrackNumber = 1,
+                TrackName = "Cornbread",
+                Modifier = "",
+            };
+
             formatter.customDateFormatter = Settings.Default.customDateFormatter;
             formatter.albumFormatterString = Settings.Default.albumFormatterString;
             formatter.titleFormatterString = Settings.Default.titleFormatterString;
@@ -87,15 +96,10 @@ namespace TagBot.App
         private void txtTitleFormatter_TextChanged(object sender, EventArgs e)
         {
             formatter.titleFormatterString = txtTitleFormatter.Text;
-            Track dummyTrack = new Track()
-            {
-                TrackNumber = 1,
-                TrackName = "Cornbread",
-                Modifier = "",
-            };
-            lblTitleFormatterDemo.Text = formatter.formatString(dummyTrack, FormatterType.Track);
-            dummyTrack.Modifier = "aborted";
-            lblTitleModifierFormatterDemo.Text = formatter.formatString(dummyTrack, FormatterType.Track);
+            _dummyTrack.Modifier = "";
+            lblTitleFormatterDemo.Text = formatter.formatString(_dummyTrack, FormatterType.Track);
+            _dummyTrack.Modifier = "aborted";
+            lblTitleModifierFormatterDemo.Text = formatter.formatString(_dummyTrack, FormatterType.Track);
         }
     }
 }

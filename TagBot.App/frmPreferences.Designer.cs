@@ -43,12 +43,12 @@ namespace TagBot.App
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.lblDateFormatterDemo = new System.Windows.Forms.Label();
             this.grpTitleFormatter = new System.Windows.Forms.GroupBox();
+            this.lblTitleModifierFormatterDemo = new System.Windows.Forms.Label();
             this.lblTitleFormatterDemo = new System.Windows.Forms.Label();
-            this.txtTitleFormatter = new System.Windows.Forms.TextBox();
+            this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.lblTitleModifierFormatterDemo = new System.Windows.Forms.Label();
+            this.txtTitleFormatter = new System.Windows.Forms.TextBox();
             this.grpAlbumFormatter.SuspendLayout();
             this.grpCustomDate.SuspendLayout();
             this.grpTitleFormatter.SuspendLayout();
@@ -99,7 +99,7 @@ namespace TagBot.App
             // lblAlbumFormatterDemo
             // 
             this.lblAlbumFormatterDemo.AutoSize = true;
-            this.lblAlbumFormatterDemo.Location = new System.Drawing.Point(8, 56);
+            this.lblAlbumFormatterDemo.Location = new System.Drawing.Point(8, 48);
             this.lblAlbumFormatterDemo.Name = "lblAlbumFormatterDemo";
             this.lblAlbumFormatterDemo.Size = new System.Drawing.Size(35, 13);
             this.lblAlbumFormatterDemo.TabIndex = 6;
@@ -111,7 +111,7 @@ namespace TagBot.App
             this.columnHeader1,
             this.columnHeader2});
             this.lvAlbumFormatters.HideSelection = false;
-            this.lvAlbumFormatters.Location = new System.Drawing.Point(8, 80);
+            this.lvAlbumFormatters.Location = new System.Drawing.Point(8, 72);
             this.lvAlbumFormatters.Name = "lvAlbumFormatters";
             this.lvAlbumFormatters.Size = new System.Drawing.Size(296, 104);
             this.lvAlbumFormatters.TabIndex = 5;
@@ -189,22 +189,36 @@ namespace TagBot.App
             this.grpTitleFormatter.TabStop = false;
             this.grpTitleFormatter.Text = "Title Formatter";
             // 
+            // lblTitleModifierFormatterDemo
+            // 
+            this.lblTitleModifierFormatterDemo.AutoSize = true;
+            this.lblTitleModifierFormatterDemo.Location = new System.Drawing.Point(8, 72);
+            this.lblTitleModifierFormatterDemo.Name = "lblTitleModifierFormatterDemo";
+            this.lblTitleModifierFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblTitleModifierFormatterDemo.TabIndex = 7;
+            this.lblTitleModifierFormatterDemo.Text = "label1";
+            // 
             // lblTitleFormatterDemo
             // 
             this.lblTitleFormatterDemo.AutoSize = true;
-            this.lblTitleFormatterDemo.Location = new System.Drawing.Point(8, 56);
+            this.lblTitleFormatterDemo.Location = new System.Drawing.Point(8, 48);
             this.lblTitleFormatterDemo.Name = "lblTitleFormatterDemo";
             this.lblTitleFormatterDemo.Size = new System.Drawing.Size(35, 13);
             this.lblTitleFormatterDemo.TabIndex = 6;
             this.lblTitleFormatterDemo.Text = "label1";
             // 
-            // txtTitleFormatter
+            // listView1
             // 
-            this.txtTitleFormatter.Location = new System.Drawing.Point(8, 24);
-            this.txtTitleFormatter.Name = "txtTitleFormatter";
-            this.txtTitleFormatter.Size = new System.Drawing.Size(296, 20);
-            this.txtTitleFormatter.TabIndex = 3;
-            this.txtTitleFormatter.TextChanged += new System.EventHandler(this.txtTitleFormatter_TextChanged);
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4});
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(8, 96);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(296, 96);
+            this.listView1.TabIndex = 5;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader3
             // 
@@ -214,27 +228,13 @@ namespace TagBot.App
             // 
             this.columnHeader4.Text = "Description";
             // 
-            // listView1
+            // txtTitleFormatter
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4});
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(8, 120);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(296, 88);
-            this.listView1.TabIndex = 5;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // lblTitleModifierFormatterDemo
-            // 
-            this.lblTitleModifierFormatterDemo.AutoSize = true;
-            this.lblTitleModifierFormatterDemo.Location = new System.Drawing.Point(8, 80);
-            this.lblTitleModifierFormatterDemo.Name = "lblTitleModifierFormatterDemo";
-            this.lblTitleModifierFormatterDemo.Size = new System.Drawing.Size(35, 13);
-            this.lblTitleModifierFormatterDemo.TabIndex = 7;
-            this.lblTitleModifierFormatterDemo.Text = "label1";
+            this.txtTitleFormatter.Location = new System.Drawing.Point(8, 24);
+            this.txtTitleFormatter.Name = "txtTitleFormatter";
+            this.txtTitleFormatter.Size = new System.Drawing.Size(296, 20);
+            this.txtTitleFormatter.TabIndex = 3;
+            this.txtTitleFormatter.TextChanged += new System.EventHandler(this.txtTitleFormatter_TextChanged);
             // 
             // frmPreferences
             // 
