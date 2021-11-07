@@ -25,7 +25,7 @@ namespace TagBot.Service
                 _showData = value;
                 albumFormatterDict = new Dictionary<string, FormatterInfo>
                 {
-                    {"%d", new FormatterInfo("Format date in custom date format", formatAlbumDCus(showData.Date.Trim()))},
+                    {"%d", new FormatterInfo("Format date in custom date format", formatDate(showData.Date.Trim()))},
                     {"%v", new FormatterInfo("Venue", showData.Venue.Trim())},
                     {"%c", new FormatterInfo("City", showData.City.Trim())},
                     {"%s", new FormatterInfo("State", showData.State.Trim())},
@@ -95,7 +95,7 @@ namespace TagBot.Service
         }
 
         #region Album Formatters
-        public string formatAlbumDCus(string str)
+        public string formatDate(string str)
         {
             return DateTime.Parse(str).ToString(customDateFormatter);
         }

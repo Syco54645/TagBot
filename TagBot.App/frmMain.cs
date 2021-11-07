@@ -568,13 +568,18 @@ namespace TagBot.App
         {
             string albumTitle = formatter.formatString(showData, Service.FormatterType.Album);
             txtOverallAlbum.Text = albumTitle;
-            txtOverallDate.Text = showData.Date;
+            txtOverallDate.Text = formatter.formatDate(showData.Date);
             txtOverallComment.Text = "Source: " + new DirectoryInfo(currentPath).Name;
 
             var artistTransformationDict = Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation);
             txtOverallArtist.Text = (artistTransformationDict.ContainsKey(showData.Artist) && !string.IsNullOrEmpty(artistTransformationDict[showData.Artist])) ? artistTransformationDict[showData.Artist] : showData.Artist;
-            
-            if (false) { }
+            foreach(KeyValuePair<string, FlacFileInfo> entry in proposedMetadata)
+            {
+                entry.Value.Metadata.Artist = txtOverallArtist.Text;
+                entry.Value.Metadata.Album = txtOverallAlbum.Text;
+                entry.Value.Metadata.Date = txtOverallDate.Text;
+                entry.Value.Metadata.Comment = txtOverallComment.Text;
+            }
         }
 
         public void updateFormatterStrings()
