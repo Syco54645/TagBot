@@ -200,7 +200,7 @@ namespace TagBot.App
                 foreach (ListViewItem lvItem in lstViewColl)
                 {
                     Track track = (Track)lvItem.Tag;
-                    string trackName = track.TrackName;
+                    string trackName = frmMain.formatter.formatString(track, Service.FormatterType.Track);
                     
                     targetNode.Expand();
 
