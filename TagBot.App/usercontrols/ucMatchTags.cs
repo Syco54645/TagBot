@@ -75,6 +75,7 @@ namespace TagBot.App
             }
             lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            lvMatchTags.Columns[0].Width = lvMatchTags.Width - 4 - SystemInformation.VerticalScrollBarWidth;
         }
 
         private void btnMatchDone_Click(object sender, EventArgs e)

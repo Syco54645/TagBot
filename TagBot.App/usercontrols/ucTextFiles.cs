@@ -27,6 +27,7 @@ namespace TagBot.App.usercontrols
         public void addItem(ListViewItem item)
         {
             lvTextFiles.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+            lvTextFiles.Columns[0].Width = lvTextFiles.Width - 4 - SystemInformation.VerticalScrollBarWidth;
             lvTextFiles.Items.Add(item);
         }
 
