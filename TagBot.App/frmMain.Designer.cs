@@ -306,7 +306,7 @@ namespace TagBot.App
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(16, 136);
+            this.label18.Location = new System.Drawing.Point(16, 140);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(51, 13);
             this.label18.TabIndex = 62;

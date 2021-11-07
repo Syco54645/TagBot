@@ -59,11 +59,11 @@ namespace TagBot.App
                         {
                             row.Add(filename);
                             addedFilename = true;
+                            dgvChanges.Rows.Add(row.ToArray());
+                            row = new List<string>();
                         }
-                        else
-                        {
-                            row.Add(string.Empty);
-                        }
+                        
+                        row.Add(string.Empty);    
                         row.Add(mdk);
                         row.Add(originalValue);
                         row.Add(proposedValue);
