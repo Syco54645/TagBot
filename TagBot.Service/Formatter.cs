@@ -19,15 +19,25 @@ namespace TagBot.Service
             this.customDateFormatter = customDateFormatter;
             albumFormatterDict = new Dictionary<string, FormatterInfo>
             {
-                {"%dcus", new FormatterInfo("Format date in custom date format", formatAlbumDCus(showData.Date.Trim()))},
+                {"%d", new FormatterInfo("Format date in custom date format", formatAlbumDCus(showData.Date.Trim()))},
                 {"%v",  new FormatterInfo("Venue", showData.Venue.Trim())},
                 {"%c",  new FormatterInfo("City", showData.City.Trim())},
                 {"%s",  new FormatterInfo("State", showData.State.Trim())},
             };
         }
 
-        public string formatString(string formatter, Dictionary<string, FormatterInfo> formatterValues)
+        public string formatString(string formatter, FormatterType formatterType)
         {
+            Dictionary<string, FormatterInfo> formatterValues;
+            switch (formatterType)
+            {
+                case FormatterType.Album:
+                    formatterValues = albumFormatterDict;
+                    break;
+                default:
+                    formatterValues = new Dictionary<string, FormatterInfo>();
+                    break;
+            }
             string response = formatterValues.Aggregate(formatter, (current, value) => current.Replace(value.Key, value.Value.Value));
             return response;
         }
@@ -50,5 +60,11 @@ namespace TagBot.Service
             Description = desc;
             Value = val;
         }
+    }
+
+    public enum FormatterType
+    {
+        Album,
+        Title
     }
 }

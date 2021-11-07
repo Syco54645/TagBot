@@ -49,7 +49,7 @@ namespace TagBot.App.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("%dcus - %v - %c, %s")]
+        [global::System.Configuration.DefaultSettingValueAttribute("%d - %v - %c, %s")]
         public string albumFormatterString {
             get {
                 return ((string)(this["albumFormatterString"]));

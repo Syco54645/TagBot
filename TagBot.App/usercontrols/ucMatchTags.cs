@@ -92,9 +92,9 @@ namespace TagBot.App
 
         private void btnAutoFill_Click(object sender, EventArgs e)
         {
-            string albumFormatter = string.IsNullOrEmpty(Settings.Default.albumFormatterString) ? "%d0 - %v - %c, %s" : Settings.Default.albumFormatterString;
+            string albumFormatter = string.IsNullOrEmpty(Settings.Default.albumFormatterString) ? "%d - %v - %c, %s" : Settings.Default.albumFormatterString;
             Service.Formatter formatter = new Service.Formatter(frmMain.showData, Settings.Default.customDateFormatter);
-            string albumTitle = formatter.formatString(albumFormatter, formatter.albumFormatterDict); // frmMain.showData.Date.Trim() + " - " + frmMain.showData.Venue.Trim() + frmMain.showData.City.Trim() + ", " + frmMain.showData.State.Trim();
+            string albumTitle = formatter.formatString(albumFormatter, Service.FormatterType.Album); // frmMain.showData.Date.Trim() + " - " + frmMain.showData.Venue.Trim() + frmMain.showData.City.Trim() + ", " + frmMain.showData.State.Trim();
             if (false) { }
         }
     }

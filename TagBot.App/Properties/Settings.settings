@@ -9,7 +9,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="albumFormatterString" Type="System.String" Scope="User">
-      <Value Profile="(Default)">%dcus - %v - %c, %s</Value>
+      <Value Profile="(Default)">%d - %v - %c, %s</Value>
     </Setting>
     <Setting Name="customDateFormatter" Type="System.String" Scope="User">
       <Value Profile="(Default)">yyyy-MM-dd</Value>

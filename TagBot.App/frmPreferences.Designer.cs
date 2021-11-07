@@ -33,15 +33,15 @@ namespace TagBot.App
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtAlbumFormatter = new System.Windows.Forms.TextBox();
             this.grpAlbumFormatter = new System.Windows.Forms.GroupBox();
+            this.lblAlbumFormatterDemo = new System.Windows.Forms.Label();
             this.lvAlbumFormatters = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lblAlbumFormatterDemo = new System.Windows.Forms.Label();
             this.txtCustomDateFormatter = new System.Windows.Forms.TextBox();
             this.grpCustomDate = new System.Windows.Forms.GroupBox();
-            this.lblDateFormatterDemo = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lblDateFormatterDemo = new System.Windows.Forms.Label();
             this.grpAlbumFormatter.SuspendLayout();
             this.grpCustomDate.SuspendLayout();
             this.SuspendLayout();
@@ -81,12 +81,21 @@ namespace TagBot.App
             this.grpAlbumFormatter.Controls.Add(this.lblAlbumFormatterDemo);
             this.grpAlbumFormatter.Controls.Add(this.lvAlbumFormatters);
             this.grpAlbumFormatter.Controls.Add(this.txtAlbumFormatter);
-            this.grpAlbumFormatter.Location = new System.Drawing.Point(32, 24);
+            this.grpAlbumFormatter.Location = new System.Drawing.Point(16, 128);
             this.grpAlbumFormatter.Name = "grpAlbumFormatter";
             this.grpAlbumFormatter.Size = new System.Drawing.Size(312, 192);
             this.grpAlbumFormatter.TabIndex = 4;
             this.grpAlbumFormatter.TabStop = false;
             this.grpAlbumFormatter.Text = "Album Formatter";
+            // 
+            // lblAlbumFormatterDemo
+            // 
+            this.lblAlbumFormatterDemo.AutoSize = true;
+            this.lblAlbumFormatterDemo.Location = new System.Drawing.Point(8, 56);
+            this.lblAlbumFormatterDemo.Name = "lblAlbumFormatterDemo";
+            this.lblAlbumFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblAlbumFormatterDemo.TabIndex = 6;
+            this.lblAlbumFormatterDemo.Text = "label1";
             // 
             // lvAlbumFormatters
             // 
@@ -109,15 +118,6 @@ namespace TagBot.App
             // 
             this.columnHeader2.Text = "Description";
             // 
-            // lblAlbumFormatterDemo
-            // 
-            this.lblAlbumFormatterDemo.AutoSize = true;
-            this.lblAlbumFormatterDemo.Location = new System.Drawing.Point(8, 56);
-            this.lblAlbumFormatterDemo.Name = "lblAlbumFormatterDemo";
-            this.lblAlbumFormatterDemo.Size = new System.Drawing.Size(35, 13);
-            this.lblAlbumFormatterDemo.TabIndex = 6;
-            this.lblAlbumFormatterDemo.Text = "label1";
-            // 
             // txtCustomDateFormatter
             // 
             this.txtCustomDateFormatter.Location = new System.Drawing.Point(8, 24);
@@ -132,21 +132,21 @@ namespace TagBot.App
             this.grpCustomDate.Controls.Add(this.linkLabel1);
             this.grpCustomDate.Controls.Add(this.lblDateFormatterDemo);
             this.grpCustomDate.Controls.Add(this.txtCustomDateFormatter);
-            this.grpCustomDate.Location = new System.Drawing.Point(32, 224);
+            this.grpCustomDate.Location = new System.Drawing.Point(16, 16);
             this.grpCustomDate.Name = "grpCustomDate";
             this.grpCustomDate.Size = new System.Drawing.Size(312, 100);
             this.grpCustomDate.TabIndex = 6;
             this.grpCustomDate.TabStop = false;
             this.grpCustomDate.Text = "Custom Date Format";
             // 
-            // lblDateFormatterDemo
+            // label1
             // 
-            this.lblDateFormatterDemo.AutoSize = true;
-            this.lblDateFormatterDemo.Location = new System.Drawing.Point(8, 48);
-            this.lblDateFormatterDemo.Name = "lblDateFormatterDemo";
-            this.lblDateFormatterDemo.Size = new System.Drawing.Size(35, 13);
-            this.lblDateFormatterDemo.TabIndex = 7;
-            this.lblDateFormatterDemo.Text = "label1";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(8, 72);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(147, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Formatted using the standard ";
             // 
             // linkLabel1
             // 
@@ -159,14 +159,14 @@ namespace TagBot.App
             this.linkLabel1.Text = "C# date and time format strings.";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // label1
+            // lblDateFormatterDemo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 72);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(147, 13);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Formatted using the standard ";
+            this.lblDateFormatterDemo.AutoSize = true;
+            this.lblDateFormatterDemo.Location = new System.Drawing.Point(8, 48);
+            this.lblDateFormatterDemo.Name = "lblDateFormatterDemo";
+            this.lblDateFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblDateFormatterDemo.TabIndex = 7;
+            this.lblDateFormatterDemo.Text = "label1";
             // 
             // frmPreferences
             // 

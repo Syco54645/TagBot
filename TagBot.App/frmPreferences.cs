@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Tagbot.Service;
 using Tagbot.Service.contracts;
 using TagBot.App.Properties;
+using TagBot.Service;
 
 namespace TagBot.App
 {
@@ -38,7 +39,7 @@ namespace TagBot.App
             txtAlbumFormatter.Text = Settings.Default.albumFormatterString;
             txtCustomDateFormatter.Text = Settings.Default.customDateFormatter;
 
-            lblAlbumFormatterDemo.Text = formatter.formatString(txtAlbumFormatter.Text, formatter.albumFormatterDict);
+            lblAlbumFormatterDemo.Text = formatter.formatString(txtAlbumFormatter.Text, FormatterType.Album);
 
             foreach (KeyValuePair<string, Service.FormatterInfo> entry in formatter.albumFormatterDict)
             {
@@ -65,7 +66,7 @@ namespace TagBot.App
 
         private void txtAlbumFormatter_TextChanged(object sender, EventArgs e)
         {
-            lblAlbumFormatterDemo.Text = formatter.formatString(txtAlbumFormatter.Text, formatter.albumFormatterDict);
+            lblAlbumFormatterDemo.Text = formatter.formatString(txtAlbumFormatter.Text, FormatterType.Album);
         }
 
         private void txtCustomDateFormatter_TextChanged(object sender, EventArgs e)
