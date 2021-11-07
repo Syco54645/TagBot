@@ -73,6 +73,7 @@ namespace TagBot.App
             // tcFilename
             // 
             this.tcFilename.Header = "Filename";
+            this.tcFilename.MinColumnWidth = 100;
             this.tcFilename.SortOrder = System.Windows.Forms.SortOrder.None;
             this.tcFilename.TooltipText = null;
             this.tcFilename.Width = 100;
@@ -80,24 +81,29 @@ namespace TagBot.App
             // tcNumber
             // 
             this.tcNumber.Header = "#";
+            this.tcNumber.MinColumnWidth = 25;
             this.tcNumber.SortOrder = System.Windows.Forms.SortOrder.None;
             this.tcNumber.TooltipText = null;
+            this.tcNumber.Width = 25;
             // 
             // tcTitle
             // 
             this.tcTitle.Header = "Title";
+            this.tcTitle.MinColumnWidth = 50;
             this.tcTitle.SortOrder = System.Windows.Forms.SortOrder.None;
             this.tcTitle.TooltipText = null;
             // 
             // tcArtist
             // 
             this.tcArtist.Header = "Artist";
+            this.tcArtist.MinColumnWidth = 50;
             this.tcArtist.SortOrder = System.Windows.Forms.SortOrder.None;
             this.tcArtist.TooltipText = null;
             // 
             // tcAlbum
             // 
             this.tcAlbum.Header = "Album";
+            this.tcAlbum.MinColumnWidth = 50;
             this.tcAlbum.SortOrder = System.Windows.Forms.SortOrder.None;
             this.tcAlbum.TooltipText = null;
             // 
