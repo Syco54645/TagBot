@@ -53,13 +53,20 @@ namespace TagBot.App
             txtTitleFormatter.Text = Settings.Default.titleFormatterString;
 
             lblAlbumFormatterDemo.Text = formatter.formatString(_dummyShow, FormatterType.Album);
-
+            
+            string formatterGuide = "";
             foreach (KeyValuePair<string, Service.FormatterInfo> entry in formatter.albumFormatterDict)
             {
-                ListViewItem temp = new ListViewItem(entry.Key);
-                temp.SubItems.Add(entry.Value.Description);
-                lvAlbumFormatters.Items.Add(temp);
+                formatterGuide += entry.Key + " - " + entry.Value.Description + Environment.NewLine;
             }
+            rtfAlbumFormatterGuide.Text = formatterGuide.TrimEnd(Environment.NewLine.ToCharArray());
+
+            formatterGuide = "";
+            foreach (KeyValuePair<string, Service.FormatterInfo> entry in formatter.titleFormatterDict)
+            {
+                formatterGuide += entry.Key + " - " + entry.Value.Description + Environment.NewLine;
+            }
+            rtfTitleFormatterGuide.Text = formatterGuide.TrimEnd(Environment.NewLine.ToCharArray());
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -100,6 +107,11 @@ namespace TagBot.App
             lblTitleFormatterDemo.Text = formatter.formatString(_dummyTrack, FormatterType.Track);
             _dummyTrack.Modifier = "aborted";
             lblTitleModifierFormatterDemo.Text = formatter.formatString(_dummyTrack, FormatterType.Track);
+        }
+
+        private void lvAlbumFormatters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
