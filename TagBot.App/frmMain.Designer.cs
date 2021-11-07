@@ -175,6 +175,8 @@ namespace TagBot.App
             // 
             // grpCommonTags
             // 
+            this.grpCommonTags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grpCommonTags.Controls.Add(this.btnAutoFillCommonTags);
             this.grpCommonTags.Controls.Add(this.label14);
             this.grpCommonTags.Controls.Add(this.label17);
@@ -220,6 +222,8 @@ namespace TagBot.App
             // 
             // txtOverallDate
             // 
+            this.txtOverallDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOverallDate.Location = new System.Drawing.Point(75, 66);
             this.txtOverallDate.Name = "txtOverallDate";
             this.txtOverallDate.Size = new System.Drawing.Size(261, 20);
@@ -228,6 +232,8 @@ namespace TagBot.App
             // 
             // txtOverallArtist
             // 
+            this.txtOverallArtist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOverallArtist.Location = new System.Drawing.Point(75, 20);
             this.txtOverallArtist.Name = "txtOverallArtist";
             this.txtOverallArtist.Size = new System.Drawing.Size(261, 20);
@@ -236,6 +242,8 @@ namespace TagBot.App
             // 
             // txtOverallComment
             // 
+            this.txtOverallComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOverallComment.Location = new System.Drawing.Point(75, 89);
             this.txtOverallComment.Name = "txtOverallComment";
             this.txtOverallComment.Size = new System.Drawing.Size(261, 20);
@@ -253,6 +261,8 @@ namespace TagBot.App
             // 
             // txtOverallAlbum
             // 
+            this.txtOverallAlbum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOverallAlbum.Location = new System.Drawing.Point(75, 43);
             this.txtOverallAlbum.Name = "txtOverallAlbum";
             this.txtOverallAlbum.Size = new System.Drawing.Size(261, 20);
@@ -261,6 +271,8 @@ namespace TagBot.App
             // 
             // grpFileTags
             // 
+            this.grpFileTags.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grpFileTags.Controls.Add(this.label18);
             this.grpFileTags.Controls.Add(this.txtMetadataComment);
             this.grpFileTags.Controls.Add(this.txtMetadataDate);
@@ -291,6 +303,8 @@ namespace TagBot.App
             // 
             // txtMetadataComment
             // 
+            this.txtMetadataComment.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMetadataComment.Location = new System.Drawing.Point(75, 136);
             this.txtMetadataComment.Name = "txtMetadataComment";
             this.txtMetadataComment.Size = new System.Drawing.Size(261, 20);
@@ -298,6 +312,8 @@ namespace TagBot.App
             // 
             // txtMetadataDate
             // 
+            this.txtMetadataDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMetadataDate.Location = new System.Drawing.Point(75, 112);
             this.txtMetadataDate.Name = "txtMetadataDate";
             this.txtMetadataDate.Size = new System.Drawing.Size(261, 20);
@@ -323,6 +339,8 @@ namespace TagBot.App
             // 
             // txtMetadataTitle
             // 
+            this.txtMetadataTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMetadataTitle.Location = new System.Drawing.Point(75, 20);
             this.txtMetadataTitle.Name = "txtMetadataTitle";
             this.txtMetadataTitle.Size = new System.Drawing.Size(261, 20);
@@ -330,6 +348,8 @@ namespace TagBot.App
             // 
             // txtMetadataAlbum
             // 
+            this.txtMetadataAlbum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMetadataAlbum.Location = new System.Drawing.Point(75, 89);
             this.txtMetadataAlbum.Name = "txtMetadataAlbum";
             this.txtMetadataAlbum.Size = new System.Drawing.Size(261, 20);
@@ -355,6 +375,8 @@ namespace TagBot.App
             // 
             // txtMetadataTrackNumber
             // 
+            this.txtMetadataTrackNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMetadataTrackNumber.Location = new System.Drawing.Point(75, 43);
             this.txtMetadataTrackNumber.Name = "txtMetadataTrackNumber";
             this.txtMetadataTrackNumber.Size = new System.Drawing.Size(261, 20);
@@ -362,6 +384,8 @@ namespace TagBot.App
             // 
             // txtMetadataArtist
             // 
+            this.txtMetadataArtist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMetadataArtist.Location = new System.Drawing.Point(75, 66);
             this.txtMetadataArtist.Name = "txtMetadataArtist";
             this.txtMetadataArtist.Size = new System.Drawing.Size(261, 20);
@@ -378,6 +402,8 @@ namespace TagBot.App
             // 
             // grpFIleInfo
             // 
+            this.grpFIleInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.grpFIleInfo.Controls.Add(this.lblCurrentFile);
             this.grpFIleInfo.Controls.Add(this.label2);
             this.grpFIleInfo.Controls.Add(this.label3);
@@ -400,6 +426,8 @@ namespace TagBot.App
             // 
             // lblCurrentFile
             // 
+            this.lblCurrentFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCurrentFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCurrentFile.Location = new System.Drawing.Point(8, 14);
             this.lblCurrentFile.Name = "lblCurrentFile";
@@ -429,6 +457,7 @@ namespace TagBot.App
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(220, 48);
             this.label4.Name = "label4";
@@ -447,6 +476,7 @@ namespace TagBot.App
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(196, 32);
             this.label6.Name = "label6";
@@ -456,6 +486,7 @@ namespace TagBot.App
             // 
             // label7
             // 
+            this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(200, 64);
             this.label7.Name = "label7";
@@ -475,6 +506,7 @@ namespace TagBot.App
             // 
             // lblDuration
             // 
+            this.lblDuration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDuration.AutoSize = true;
             this.lblDuration.Location = new System.Drawing.Point(256, 64);
             this.lblDuration.Name = "lblDuration";
@@ -485,6 +517,7 @@ namespace TagBot.App
             // 
             // lblSize
             // 
+            this.lblSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblSize.AutoSize = true;
             this.lblSize.Location = new System.Drawing.Point(256, 48);
             this.lblSize.Name = "lblSize";
@@ -495,6 +528,7 @@ namespace TagBot.App
             // 
             // lblChannels
             // 
+            this.lblChannels.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblChannels.AutoSize = true;
             this.lblChannels.Location = new System.Drawing.Point(256, 32);
             this.lblChannels.Name = "lblChannels";
@@ -525,7 +559,8 @@ namespace TagBot.App
             // 
             // btnDbInfo
             // 
-            this.btnDbInfo.Location = new System.Drawing.Point(328, 16);
+            this.btnDbInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDbInfo.Location = new System.Drawing.Point(336, 16);
             this.btnDbInfo.Name = "btnDbInfo";
             this.btnDbInfo.Size = new System.Drawing.Size(24, 20);
             this.btnDbInfo.TabIndex = 8;
@@ -535,16 +570,19 @@ namespace TagBot.App
             // 
             // txtLoadedDatabase
             // 
+            this.txtLoadedDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLoadedDatabase.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLoadedDatabase.Location = new System.Drawing.Point(72, 16);
             this.txtLoadedDatabase.Name = "txtLoadedDatabase";
             this.txtLoadedDatabase.ReadOnly = true;
-            this.txtLoadedDatabase.Size = new System.Drawing.Size(224, 20);
+            this.txtLoadedDatabase.Size = new System.Drawing.Size(232, 20);
             this.txtLoadedDatabase.TabIndex = 7;
             // 
             // btnLoadDatabase
             // 
-            this.btnLoadDatabase.Location = new System.Drawing.Point(304, 16);
+            this.btnLoadDatabase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoadDatabase.Location = new System.Drawing.Point(310, 16);
             this.btnLoadDatabase.Name = "btnLoadDatabase";
             this.btnLoadDatabase.Size = new System.Drawing.Size(24, 20);
             this.btnLoadDatabase.TabIndex = 1;
@@ -956,6 +994,7 @@ namespace TagBot.App
             // 
             // btnAutoFillCommonTags
             // 
+            this.btnAutoFillCommonTags.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAutoFillCommonTags.Location = new System.Drawing.Point(262, 112);
             this.btnAutoFillCommonTags.Name = "btnAutoFillCommonTags";
             this.btnAutoFillCommonTags.Size = new System.Drawing.Size(75, 23);
