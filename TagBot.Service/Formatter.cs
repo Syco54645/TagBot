@@ -2,54 +2,105 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Tagbot.Service.contracts;
+using Tagbot.Service.models;
 
 namespace TagBot.Service
 {
     public class Formatter
     {
         public Dictionary<string, FormatterInfo> albumFormatterDict;
-        public ShowSearchResponseContract showData;
-        public string customDateFormatter;
-
-        public Formatter(ShowSearchResponseContract sd, string customDateFormatter)
+        public Dictionary<string, FormatterInfo> titleFormatterDict;
+        private ShowSearchResponseContract _showData;
+        public ShowSearchResponseContract showData
         {
-            showData = sd;
-            this.customDateFormatter = customDateFormatter;
-            albumFormatterDict = new Dictionary<string, FormatterInfo>
+            get
             {
-                {"%d", new FormatterInfo("Format date in custom date format", formatAlbumDCus(showData.Date.Trim()))},
-                {"%v",  new FormatterInfo("Venue", showData.Venue.Trim())},
-                {"%c",  new FormatterInfo("City", showData.City.Trim())},
-                {"%s",  new FormatterInfo("State", showData.State.Trim())},
-            };
+                return _showData;
+            }
+            set
+            {
+                _showData = value;
+                albumFormatterDict = new Dictionary<string, FormatterInfo>
+                {
+                    {"%d", new FormatterInfo("Format date in custom date format", formatAlbumDCus(showData.Date.Trim()))},
+                    {"%v", new FormatterInfo("Venue", showData.Venue.Trim())},
+                    {"%c", new FormatterInfo("City", showData.City.Trim())},
+                    {"%s", new FormatterInfo("State", showData.State.Trim())},
+                };
+            }
         }
 
-        public string formatString(string formatter, FormatterType formatterType)
-        {
-            Dictionary<string, FormatterInfo> formatterValues;
-            switch (formatterType)
+        private Track _track;
+        public Track track 
+        { 
+            get 
+            { 
+                return _track; 
+            } 
+            set 
             {
-                case FormatterType.Album:
-                    formatterValues = albumFormatterDict;
-                    break;
-                default:
-                    formatterValues = new Dictionary<string, FormatterInfo>();
-                    break;
+                _track = value;
+                titleFormatterDict = new Dictionary<string, FormatterInfo>
+                {
+                    {"%t", new FormatterInfo("Title", track.TrackName.Trim())},
+                    {"%r", new FormatterInfo("Title with article at the end", moveArticleToEnd(track.TrackName.Trim()))},
+                    {"%m", new FormatterInfo("Modifier", track.Modifier.Trim())},
+                };
+            } 
+        }
+        public string customDateFormatter;
+        public string albumFormatterString;
+        public string titleFormatterString;
+
+        public Formatter(string customDateFormatter)
+        {
+            this.customDateFormatter = customDateFormatter;
+        }
+        
+        public string moveArticleToEnd(string str)
+        {
+            if (str.StartsWith("The "))
+            {
+                //var temp = str.Split(' ').Join()
             }
-            string response = formatterValues.Aggregate(formatter, (current, value) => current.Replace(value.Key, value.Value.Value));
+            return str;
+        }
+
+        public string formatString(Track track, FormatterType formatterType)
+        {
+            this.track = track;
+            string formatter = titleFormatterString;
+            if (string.IsNullOrEmpty(track.Modifier))
+            {
+                // remove the %0 bit
+                Regex rx = new Regex(@"\%0.*\%0");
+                formatter = rx.Replace(formatter, string.Empty).Trim();
+            }
+            else
+            {
+                formatter = formatter.Replace("%0", string.Empty).Trim();
+            }
+            string response = titleFormatterDict.Aggregate(formatter, (current, value) => current.Replace(value.Key, value.Value.Value));
+            return response;
+        }
+        public string formatString(ShowSearchResponseContract showData, FormatterType formatterType)
+        {
+            this.showData = showData;
+            string formatter = albumFormatterString;
+            string response = albumFormatterDict.Aggregate(formatter, (current, value) => current.Replace(value.Key, value.Value.Value));
             return response;
         }
 
         #region Album Formatters
         public string formatAlbumDCus(string str)
         {
-            
             return DateTime.Parse(str).ToString(customDateFormatter);
         }
-        #endregion
 
+        #endregion
     }
     public class FormatterInfo
     {
@@ -65,6 +116,6 @@ namespace TagBot.Service
     public enum FormatterType
     {
         Album,
-        Title
+        Track
     }
 }

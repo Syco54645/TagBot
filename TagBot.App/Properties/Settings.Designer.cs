@@ -82,5 +82,17 @@ namespace TagBot.App.Properties {
                 this["artistTransformation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%t %0[%m]%0")]
+        public string titleFormatterString {
+            get {
+                return ((string)(this["titleFormatterString"]));
+            }
+            set {
+                this["titleFormatterString"] = value;
+            }
+        }
     }
 }

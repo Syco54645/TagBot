@@ -57,16 +57,8 @@ namespace TagBot.App
             {
                 foreach (Track track in showData.Setlist)
                 {
-                    string format = "%n %t [%m]";
-                    string formattedName = "";
-                    if (String.IsNullOrEmpty(track.Modifier))
-                    {
-                        formattedName = string.Format("{0} - {1}", track.TrackNumber, track.TrackName);
-                    }
-                    else
-                    {
-                        formattedName = string.Format("{0} - {1} [{2}]", track.TrackNumber, track.TrackName, track.Modifier);
-                    }
+                    string formattedName = frmMain.formatter.formatString(track, Service.FormatterType.Track);
+                    formattedName = string.Format("{0} - {1}", track.TrackNumber, formattedName);
                     ListViewItem tempLVI = new ListViewItem(formattedName);
                     tempLVI.Tag = track;
                     tempLVI.Font = new Font(lvMatchTags.Font, FontStyle.Bold);

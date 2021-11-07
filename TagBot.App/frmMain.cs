@@ -28,6 +28,7 @@ namespace TagBot.App
         public Dictionary<string, FlacFileInfo> proposedMetadata;
         public DatabaseMeta databaseMeta;
         public TreeModel tvMatchFilesModel;
+        public Formatter formatter = new Formatter(Settings.Default.customDateFormatter);
 
         private Logger _log = new Logger(100u);
         private List<Color> _randomColors = new List<Color> { Color.Red, Color.SkyBlue, Color.Green };
@@ -84,6 +85,7 @@ namespace TagBot.App
                 btnDbInfo.Enabled = false;
             }
             tvDirectories.ExpandAll();
+            updateFormatterStrings();
         }
 
         private void _clearFileInfoLabels()
@@ -557,9 +559,7 @@ namespace TagBot.App
 
         private void btnAutoFillCommonTags_Click(object sender, EventArgs e)
         {
-            string albumFormatter = string.IsNullOrEmpty(Settings.Default.albumFormatterString) ? "%d - %v - %c, %s" : Settings.Default.albumFormatterString;
-            Service.Formatter formatter = new Service.Formatter(showData, Settings.Default.customDateFormatter);
-            string albumTitle = formatter.formatString(albumFormatter, Service.FormatterType.Album);
+            string albumTitle = formatter.formatString(showData, Service.FormatterType.Album);
             txtOverallAlbum.Text = albumTitle;
             txtOverallDate.Text = showData.Date;
             txtOverallComment.Text = "Source: " + new DirectoryInfo(currentPath).Name;
@@ -568,6 +568,13 @@ namespace TagBot.App
             txtOverallArtist.Text = (artistTransformationDict.ContainsKey(showData.Artist) && !string.IsNullOrEmpty(artistTransformationDict[showData.Artist])) ? artistTransformationDict[showData.Artist] : showData.Artist;
             
             if (false) { }
+        }
+
+        public void updateFormatterStrings()
+        {
+            formatter.customDateFormatter = Settings.Default.customDateFormatter;
+            formatter.albumFormatterString = Settings.Default.albumFormatterString;
+            formatter.titleFormatterString = Settings.Default.titleFormatterString;
         }
     }
 }

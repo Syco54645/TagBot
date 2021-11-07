@@ -42,14 +42,22 @@ namespace TagBot.App
             this.label1 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.lblDateFormatterDemo = new System.Windows.Forms.Label();
+            this.grpTitleFormatter = new System.Windows.Forms.GroupBox();
+            this.lblTitleFormatterDemo = new System.Windows.Forms.Label();
+            this.txtTitleFormatter = new System.Windows.Forms.TextBox();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.lblTitleModifierFormatterDemo = new System.Windows.Forms.Label();
             this.grpAlbumFormatter.SuspendLayout();
             this.grpCustomDate.SuspendLayout();
+            this.grpTitleFormatter.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnApply
             // 
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApply.Location = new System.Drawing.Point(168, 368);
+            this.btnApply.Location = new System.Drawing.Point(655, 406);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 0;
@@ -60,7 +68,7 @@ namespace TagBot.App
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(253, 368);
+            this.btnCancel.Location = new System.Drawing.Point(740, 406);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -168,11 +176,72 @@ namespace TagBot.App
             this.lblDateFormatterDemo.TabIndex = 7;
             this.lblDateFormatterDemo.Text = "label1";
             // 
+            // grpTitleFormatter
+            // 
+            this.grpTitleFormatter.Controls.Add(this.lblTitleModifierFormatterDemo);
+            this.grpTitleFormatter.Controls.Add(this.lblTitleFormatterDemo);
+            this.grpTitleFormatter.Controls.Add(this.listView1);
+            this.grpTitleFormatter.Controls.Add(this.txtTitleFormatter);
+            this.grpTitleFormatter.Location = new System.Drawing.Point(344, 16);
+            this.grpTitleFormatter.Name = "grpTitleFormatter";
+            this.grpTitleFormatter.Size = new System.Drawing.Size(312, 216);
+            this.grpTitleFormatter.TabIndex = 7;
+            this.grpTitleFormatter.TabStop = false;
+            this.grpTitleFormatter.Text = "Title Formatter";
+            // 
+            // lblTitleFormatterDemo
+            // 
+            this.lblTitleFormatterDemo.AutoSize = true;
+            this.lblTitleFormatterDemo.Location = new System.Drawing.Point(8, 56);
+            this.lblTitleFormatterDemo.Name = "lblTitleFormatterDemo";
+            this.lblTitleFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblTitleFormatterDemo.TabIndex = 6;
+            this.lblTitleFormatterDemo.Text = "label1";
+            // 
+            // txtTitleFormatter
+            // 
+            this.txtTitleFormatter.Location = new System.Drawing.Point(8, 24);
+            this.txtTitleFormatter.Name = "txtTitleFormatter";
+            this.txtTitleFormatter.Size = new System.Drawing.Size(296, 20);
+            this.txtTitleFormatter.TabIndex = 3;
+            this.txtTitleFormatter.TextChanged += new System.EventHandler(this.txtTitleFormatter_TextChanged);
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Format";
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Description";
+            // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4});
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(8, 120);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(296, 88);
+            this.listView1.TabIndex = 5;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // lblTitleModifierFormatterDemo
+            // 
+            this.lblTitleModifierFormatterDemo.AutoSize = true;
+            this.lblTitleModifierFormatterDemo.Location = new System.Drawing.Point(8, 80);
+            this.lblTitleModifierFormatterDemo.Name = "lblTitleModifierFormatterDemo";
+            this.lblTitleModifierFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblTitleModifierFormatterDemo.TabIndex = 7;
+            this.lblTitleModifierFormatterDemo.Text = "label1";
+            // 
             // frmPreferences
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(354, 406);
+            this.ClientSize = new System.Drawing.Size(841, 444);
+            this.Controls.Add(this.grpTitleFormatter);
             this.Controls.Add(this.grpCustomDate);
             this.Controls.Add(this.grpAlbumFormatter);
             this.Controls.Add(this.btnCancel);
@@ -189,6 +258,8 @@ namespace TagBot.App
             this.grpAlbumFormatter.PerformLayout();
             this.grpCustomDate.ResumeLayout(false);
             this.grpCustomDate.PerformLayout();
+            this.grpTitleFormatter.ResumeLayout(false);
+            this.grpTitleFormatter.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -208,5 +279,12 @@ namespace TagBot.App
         private System.Windows.Forms.Label lblDateFormatterDemo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.GroupBox grpTitleFormatter;
+        private System.Windows.Forms.Label lblTitleFormatterDemo;
+        private System.Windows.Forms.TextBox txtTitleFormatter;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Label lblTitleModifierFormatterDemo;
     }
 }

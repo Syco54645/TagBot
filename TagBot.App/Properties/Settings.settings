@@ -17,5 +17,8 @@
     <Setting Name="artistTransformation" Type="System.String" Scope="User">
       <Value Profile="(Default)">{"dmb":"Dave Matthews Band","dm":"Dave Matthews","d&amp;t":"Dave Matthews"}</Value>
     </Setting>
+    <Setting Name="titleFormatterString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%t %0[%m]%0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
