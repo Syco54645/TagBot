@@ -125,14 +125,14 @@ namespace TagBot.App
             this.lvMatchTags.HideSelection = false;
             this.lvMatchTags.Location = new System.Drawing.Point(0, 0);
             this.lvMatchTags.Name = "lvMatchTags";
-            this.lvMatchTags.Size = new System.Drawing.Size(372, 320);
+            this.lvMatchTags.Size = new System.Drawing.Size(372, 383);
             this.lvMatchTags.TabIndex = 9;
             this.lvMatchTags.UseCompatibleStateImageBehavior = false;
             // 
             // btnMatchDone
             // 
             this.btnMatchDone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMatchDone.Location = new System.Drawing.Point(288, 376);
+            this.btnMatchDone.Location = new System.Drawing.Point(288, 408);
             this.btnMatchDone.Name = "btnMatchDone";
             this.btnMatchDone.Size = new System.Drawing.Size(75, 23);
             this.btnMatchDone.TabIndex = 10;
@@ -147,7 +147,7 @@ namespace TagBot.App
             this.Controls.Add(this.btnMatchDone);
             this.Controls.Add(this.lvMatchTags);
             this.Name = "ucMatchTags";
-            this.Size = new System.Drawing.Size(368, 408);
+            this.Size = new System.Drawing.Size(368, 440);
             this.Load += new System.EventHandler(this.ucMatchTags_Load);
             this.ResumeLayout(false);
 
