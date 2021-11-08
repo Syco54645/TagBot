@@ -210,6 +210,7 @@ namespace TagBot.App
                     lvItem.ForeColor = Color.LightGray;
                 }
             }
+            frmMain.clearFlacEditor(false);
             tvMatchFiles.EndUpdate();
             updateContention();
         }

@@ -280,7 +280,7 @@ namespace TagBot.App
             txtOverallDate.Text = string.Empty;
         }
 
-        public void clearFlacEditor()
+        public void clearFlacEditor(bool clearOverall = true)
         {
             lblCurrentFile.Text = string.Empty;
             lblEncoder.Text = string.Empty;
@@ -295,11 +295,14 @@ namespace TagBot.App
             txtMetadataAlbum.Text = string.Empty;
             txtMetadataDate.Text = string.Empty;
             txtMetadataTrackNumber.Text = string.Empty;
-
-            txtOverallAlbum.Text = string.Empty;
-            txtOverallArtist.Text = string.Empty;
-            txtOverallComment.Text = string.Empty;
-            txtOverallDate.Text = string.Empty;
+            
+            if (clearOverall)
+            {
+                txtOverallAlbum.Text = string.Empty;
+                txtOverallArtist.Text = string.Empty;
+                txtOverallComment.Text = string.Empty;
+                txtOverallDate.Text = string.Empty;
+            }
         }
 
         private void lvAudioFiles_SelectedIndexChanged(object sender, EventArgs e)
