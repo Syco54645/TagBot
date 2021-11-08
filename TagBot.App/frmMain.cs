@@ -182,71 +182,65 @@ namespace TagBot.App
 
         private void tvDirectories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            TreeNode newSelected = e.Node;
-            ucTextFiles.clearListView();
-            clearFlacTagsInEditor();
-            DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
-            ListViewItem.ListViewSubItem[] subItems;
-            ListViewItem item = null;
+            string oldCurrentPath = currentPath;
             UpdateCurrentPath(e);
+            string newCurrentPath = currentPath;
 
-            DateCheckResponseContract dateCheck = Utility.dateDir(nodeDirInfo.Name);
-            if (dateCheck.IsDate == true)
+            if (oldCurrentPath != newCurrentPath)
             {
-                txtDate.Text = dateCheck.Date;
-            }
-            else
-            {
-                txtDate.Text = string.Empty;
-            }
+                clearFlacEditor();
+                TreeNode newSelected = e.Node;
+                ucTextFiles.clearListView();
+                DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
+                ListViewItem.ListViewSubItem[] subItems;
+                ListViewItem item = null;
 
-            /*foreach (DirectoryInfo dir in nodeDirInfo.GetDirectories())
-            {
-                item = new ListViewItem(dir.Name, "folder");
-                
-                subItems = new ListViewItem.ListViewSubItem[]
+                DateCheckResponseContract dateCheck = Utility.dateDir(nodeDirInfo.Name);
+                if (dateCheck.IsDate == true)
                 {
-                    new ListViewItem.ListViewSubItem(item, "Directory"), 
-                    new ListViewItem.ListViewSubItem(item, dir.LastAccessTime.ToShortDateString())
-                };
-                item.SubItems.AddRange(subItems);
-                lvAudioFiles.Items.Add(item);
-            }*/
-            List<string> files = new List<string>();
-            foreach (FileInfo file in nodeDirInfo.GetFiles())
-            {
-                if (Utility.isSupportedAudio(file.Extension))
-                {
-                    files.Add(file.Name);
+                    txtDate.Text = dateCheck.Date;
                 }
-            }
-            createContentionVariables(files);
-
-            foreach (FileInfo file in nodeDirInfo.GetFiles())
-            {
-                string extension = file.Extension;
-                if (Utility.isSupportedAudio(extension))
+                else
                 {
-                    item = new ListViewItem(file.Name, Utility.getIconType(extension));
-                    subItems = new ListViewItem.ListViewSubItem[]
+                    txtDate.Text = string.Empty;
+                }
+
+                List<string> files = new List<string>();
+                foreach (FileInfo file in nodeDirInfo.GetFiles())
+                {
+                    if (Utility.isSupportedAudio(file.Extension))
                     {
-                        new ListViewItem.ListViewSubItem(item, proposedMetadata[file.Name].Metadata.Tracknumber),
-                        new ListViewItem.ListViewSubItem(item, proposedMetadata[file.Name].Metadata.Title),
-                        new ListViewItem.ListViewSubItem(item, proposedMetadata[file.Name].Metadata.Artist),
-                        new ListViewItem.ListViewSubItem(item, proposedMetadata[file.Name].Metadata.Album),
-                    };
-
-                    item.SubItems.AddRange(subItems);
+                        files.Add(file.Name);
+                    }
                 }
-                else if (Utility.isInfoFile(extension))
+                createContentionVariables(files);
+
+                foreach (FileInfo file in nodeDirInfo.GetFiles())
                 {
-                    item = new ListViewItem(file.Name, Utility.getIconType(extension));
+                    string extension = file.Extension;
+                    if (Utility.isSupportedAudio(extension))
+                    {
+                        item = new ListViewItem(file.Name, Utility.getIconType(extension));
+                        subItems = new ListViewItem.ListViewSubItem[]
+                        {
+                            new ListViewItem.ListViewSubItem(item, proposedMetadata[file.Name].Metadata.Tracknumber),
+                            new ListViewItem.ListViewSubItem(item, proposedMetadata[file.Name].Metadata.Title),
+                            new ListViewItem.ListViewSubItem(item, proposedMetadata[file.Name].Metadata.Artist),
+                            new ListViewItem.ListViewSubItem(item, proposedMetadata[file.Name].Metadata.Album),
+                        };
 
-                    ucTextFiles.addItem(item);
+                        item.SubItems.AddRange(subItems);
+                    }
+                    else if (Utility.isInfoFile(extension))
+                    {
+                        item = new ListViewItem(file.Name, Utility.getIconType(extension));
+
+                        ucTextFiles.addItem(item);
+                    }
                 }
-            }
 
-            ucMatchFiles.populateTvMatchFiles();
+                ucMatchFiles.populateTvMatchFiles();
+            }
         }
 
         private void createContentionVariables(List<string> files)
@@ -286,7 +280,7 @@ namespace TagBot.App
             txtOverallDate.Text = string.Empty;
         }
 
-        public void clearFlacTagsInEditor()
+        public void clearFlacEditor()
         {
             lblCurrentFile.Text = string.Empty;
             lblEncoder.Text = string.Empty;
