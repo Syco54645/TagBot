@@ -36,6 +36,7 @@ namespace TagBot.App
                 State = "NJ",
                 Venue = "Susquehanna Bank Center",
                 Date = "2009-09-19",
+                Artist = "dmb",
             };
             
             _dummyTrack = new Track()
@@ -48,6 +49,7 @@ namespace TagBot.App
             formatter.customDateFormatter = Settings.Default.customDateFormatter;
             formatter.albumFormatterString = Settings.Default.albumFormatterString;
             formatter.titleFormatterString = Settings.Default.titleFormatterString;
+            formatter.artistTransformationDict = Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation);
 
             txtAlbumFormatter.Text = Settings.Default.albumFormatterString;
             txtCustomDateFormatter.Text = Settings.Default.customDateFormatter;

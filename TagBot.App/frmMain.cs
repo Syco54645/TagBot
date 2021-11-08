@@ -274,10 +274,10 @@ namespace TagBot.App
             txtMetadataDate.Text = flacInfo.Metadata.Date;
             txtMetadataTrackNumber.Text = flacInfo.Metadata.Tracknumber;
 
-            txtOverallAlbum.Text = string.Empty;
+            /*txtOverallAlbum.Text = string.Empty;
             txtOverallArtist.Text = string.Empty;
             txtOverallComment.Text = string.Empty;
-            txtOverallDate.Text = string.Empty;
+            txtOverallDate.Text = string.Empty;*/
         }
 
         public void clearFlacEditor(bool clearOverall = true)
@@ -491,7 +491,7 @@ namespace TagBot.App
             }
             else
             {
-                MessageBox.Show("You need to enter a value to search on");
+                MessageBox.Show("You need to enter a value to search on.");
             }
         }
 
@@ -618,6 +618,7 @@ namespace TagBot.App
             formatter.customDateFormatter = Settings.Default.customDateFormatter;
             formatter.albumFormatterString = Settings.Default.albumFormatterString;
             formatter.titleFormatterString = Settings.Default.titleFormatterString;
+            formatter.artistTransformationDict = Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation);
         }
     }
 }

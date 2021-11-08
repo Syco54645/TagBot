@@ -13,6 +13,8 @@ namespace TagBot.Service
     {
         public Dictionary<string, FormatterInfo> albumFormatterDict;
         public Dictionary<string, FormatterInfo> titleFormatterDict;
+        public Dictionary<string, string> artistTransformationDict;
+
         private ShowSearchResponseContract _showData;
         public ShowSearchResponseContract showData
         {
@@ -23,12 +25,16 @@ namespace TagBot.Service
             set
             {
                 _showData = value;
+                
+                string artistName = (artistTransformationDict.ContainsKey(showData.Artist) && !string.IsNullOrEmpty(artistTransformationDict[showData.Artist])) ? artistTransformationDict[showData.Artist] : showData.Artist;
                 albumFormatterDict = new Dictionary<string, FormatterInfo>
                 {
                     {"%d", new FormatterInfo("Format date in custom date format", formatDate(showData.Date.Trim()))},
                     {"%v", new FormatterInfo("Venue", showData.Venue.Trim())},
                     {"%c", new FormatterInfo("City", showData.City.Trim())},
                     {"%s", new FormatterInfo("State", showData.State.Trim())},
+                    {"%a", new FormatterInfo("Short Artist Name", showData.Artist.Trim())},
+                    {"%A", new FormatterInfo("Full Artist Name", artistName.Trim())},
                 };
             }
         }

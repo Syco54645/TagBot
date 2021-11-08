@@ -29,7 +29,7 @@ namespace TagBot.App
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "dmb",
             "dm",
@@ -124,10 +124,11 @@ namespace TagBot.App
             this.rtfAlbumFormatterGuide.Location = new System.Drawing.Point(8, 16);
             this.rtfAlbumFormatterGuide.Name = "rtfAlbumFormatterGuide";
             this.rtfAlbumFormatterGuide.ReadOnly = true;
-            this.rtfAlbumFormatterGuide.Size = new System.Drawing.Size(272, 56);
+            this.rtfAlbumFormatterGuide.Size = new System.Drawing.Size(288, 56);
             this.rtfAlbumFormatterGuide.TabIndex = 8;
             this.rtfAlbumFormatterGuide.TabStop = false;
-            this.rtfAlbumFormatterGuide.Text = "%d - Format date in custom date format\n%v - Venue\n%c - City\n%s - State";
+            this.rtfAlbumFormatterGuide.Text = "%d - Format date in custom date format\n%v - Venue\n%c - City\n%s - State\n%a - Short" +
+    " Artist Name\n%A - Full Artist Name";
             // 
             // lblAlbumFormatterDemo
             // 
@@ -211,7 +212,7 @@ namespace TagBot.App
             this.rtfTitleFormatterGuide.Location = new System.Drawing.Point(8, 16);
             this.rtfTitleFormatterGuide.Name = "rtfTitleFormatterGuide";
             this.rtfTitleFormatterGuide.ReadOnly = true;
-            this.rtfTitleFormatterGuide.Size = new System.Drawing.Size(272, 48);
+            this.rtfTitleFormatterGuide.Size = new System.Drawing.Size(288, 48);
             this.rtfTitleFormatterGuide.TabIndex = 8;
             this.rtfTitleFormatterGuide.TabStop = false;
             this.rtfTitleFormatterGuide.Text = "%t - Title\n%r - Title with article at the end\n%m - Modifier";
@@ -270,7 +271,7 @@ namespace TagBot.App
             // 
             this.lvArtists.HideSelection = false;
             this.lvArtists.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem3});
             this.lvArtists.Location = new System.Drawing.Point(8, 24);
             this.lvArtists.Name = "lvArtists";
             this.lvArtists.Size = new System.Drawing.Size(304, 56);

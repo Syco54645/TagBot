@@ -217,12 +217,19 @@ namespace TagBot.App
 
         public void updateContention()
         {
-            foreach (SongNode node in tvMatchFilesModel.Nodes)
+            if (tvMatchFilesModel != null)
             {
-                string combinedTitle = string.Join(" > ", node.Nodes.Select(x => x.Text).ToArray());
-                int trackNumber = node.Index + 1;
-                frmMain.proposedMetadata[node.Filename].Metadata.Title = string.IsNullOrEmpty(combinedTitle) ? frmMain.proposedMetadata[node.Filename].Metadata.Title : combinedTitle;
-                frmMain.proposedMetadata[node.Filename].Metadata.Tracknumber = trackNumber.ToString();
+                foreach (SongNode node in tvMatchFilesModel.Nodes)
+                {
+                    string combinedTitle = string.Join(" > ", node.Nodes.Select(x => x.Text).ToArray());
+                    int trackNumber = node.Index + 1;
+                    frmMain.proposedMetadata[node.Filename].Metadata.Title = string.IsNullOrEmpty(combinedTitle) ? frmMain.proposedMetadata[node.Filename].Metadata.Title : combinedTitle;
+                    frmMain.proposedMetadata[node.Filename].Metadata.Tracknumber = trackNumber.ToString();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Contention generation error. Probably occured because no files were found in the working directory.");
             }
         }
 
