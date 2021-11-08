@@ -117,6 +117,7 @@ namespace TagBot.App
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
+            this.tslMatchFilesCount = new System.Windows.Forms.ToolStripLabel();
             this.groupBox1.SuspendLayout();
             this.grpCommonTags.SuspendLayout();
             this.grpFileTags.SuspendLayout();
@@ -809,7 +810,8 @@ namespace TagBot.App
             // tsAudioBrowser
             // 
             this.tsAudioBrowser.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbSave});
+            this.tsbSave,
+            this.tslMatchFilesCount});
             this.tsAudioBrowser.Location = new System.Drawing.Point(0, 0);
             this.tsAudioBrowser.Name = "tsAudioBrowser";
             this.tsAudioBrowser.Size = new System.Drawing.Size(599, 25);
@@ -1005,6 +1007,12 @@ namespace TagBot.App
             this.miniToolStrip.Size = new System.Drawing.Size(301, 25);
             this.miniToolStrip.TabIndex = 10;
             // 
+            // tslMatchFilesCount
+            // 
+            this.tslMatchFilesCount.Name = "tslMatchFilesCount";
+            this.tslMatchFilesCount.Size = new System.Drawing.Size(42, 22);
+            this.tslMatchFilesCount.Text = "Files: 0";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1143,6 +1151,7 @@ namespace TagBot.App
         private System.Windows.Forms.TextBox txtMetadataComment;
         private System.Windows.Forms.Label lblCurrentFile;
         private System.Windows.Forms.Button btnAutoFillCommonTags;
+        private System.Windows.Forms.ToolStripLabel tslMatchFilesCount;
     }
 }
 

@@ -214,6 +214,7 @@ namespace TagBot.App
                     }
                 }
                 createContentionVariables(files);
+                tslMatchFilesCount.Text = "Files: " + originalMetadata.Count.ToString();
 
                 foreach (FileInfo file in nodeDirInfo.GetFiles())
                 {

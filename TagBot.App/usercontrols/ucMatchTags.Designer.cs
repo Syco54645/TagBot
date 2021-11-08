@@ -42,6 +42,9 @@ namespace TagBot.App
             this.ntbAlbum = new Aga.Controls.Tree.NodeControls.NodeTextBox();
             this.lvMatchTags = new System.Windows.Forms.ListView();
             this.btnMatchDone = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tslTagCount = new System.Windows.Forms.ToolStripLabel();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcFilename
@@ -123,9 +126,9 @@ namespace TagBot.App
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvMatchTags.HideSelection = false;
-            this.lvMatchTags.Location = new System.Drawing.Point(0, 0);
+            this.lvMatchTags.Location = new System.Drawing.Point(0, 24);
             this.lvMatchTags.Name = "lvMatchTags";
-            this.lvMatchTags.Size = new System.Drawing.Size(372, 383);
+            this.lvMatchTags.Size = new System.Drawing.Size(368, 359);
             this.lvMatchTags.TabIndex = 9;
             this.lvMatchTags.UseCompatibleStateImageBehavior = false;
             // 
@@ -140,16 +143,36 @@ namespace TagBot.App
             this.btnMatchDone.UseVisualStyleBackColor = true;
             this.btnMatchDone.Click += new System.EventHandler(this.btnMatchDone_Click);
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tslTagCount});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(368, 25);
+            this.toolStrip1.TabIndex = 11;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tslTagCount
+            // 
+            this.tslTagCount.Name = "tslTagCount";
+            this.tslTagCount.Size = new System.Drawing.Size(42, 22);
+            this.tslTagCount.Text = "Tags: 0";
+            // 
             // ucMatchTags
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.btnMatchDone);
             this.Controls.Add(this.lvMatchTags);
             this.Name = "ucMatchTags";
             this.Size = new System.Drawing.Size(368, 440);
             this.Load += new System.EventHandler(this.ucMatchTags_Load);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -167,5 +190,7 @@ namespace TagBot.App
         private Aga.Controls.Tree.NodeControls.NodeTextBox ntbAlbum;
         public System.Windows.Forms.ListView lvMatchTags;
         private System.Windows.Forms.Button btnMatchDone;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripLabel tslTagCount;
     }
 }
