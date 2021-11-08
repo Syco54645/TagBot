@@ -113,10 +113,10 @@ namespace TagBot.App
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scTopBottom = new System.Windows.Forms.SplitContainer();
+            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
-            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.groupBox1.SuspendLayout();
             this.grpCommonTags.SuspendLayout();
             this.grpFileTags.SuspendLayout();
@@ -754,6 +754,7 @@ namespace TagBot.App
             this.tvDirectories.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tvDirectories.HideSelection = false;
             this.tvDirectories.ImageIndex = 0;
             this.tvDirectories.ImageList = this.imgListFileIcons;
             this.tvDirectories.Location = new System.Drawing.Point(0, 24);
@@ -981,6 +982,16 @@ namespace TagBot.App
             this.scTopBottom.SplitterDistance = 469;
             this.scTopBottom.TabIndex = 8;
             // 
+            // srtfLog
+            // 
+            this.srtfLog.BackColor = System.Drawing.Color.Black;
+            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.srtfLog.Location = new System.Drawing.Point(0, 0);
+            this.srtfLog.Name = "srtfLog";
+            this.srtfLog.Size = new System.Drawing.Size(1278, 59);
+            this.srtfLog.TabIndex = 53;
+            this.srtfLog.Text = "";
+            // 
             // miniToolStrip
             // 
             this.miniToolStrip.AccessibleName = "New item selection";
@@ -993,16 +1004,6 @@ namespace TagBot.App
             this.miniToolStrip.Name = "miniToolStrip";
             this.miniToolStrip.Size = new System.Drawing.Size(301, 25);
             this.miniToolStrip.TabIndex = 10;
-            // 
-            // srtfLog
-            // 
-            this.srtfLog.BackColor = System.Drawing.Color.Black;
-            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.srtfLog.Location = new System.Drawing.Point(0, 0);
-            this.srtfLog.Name = "srtfLog";
-            this.srtfLog.Size = new System.Drawing.Size(1278, 59);
-            this.srtfLog.TabIndex = 53;
-            this.srtfLog.Text = "";
             // 
             // frmMain
             // 

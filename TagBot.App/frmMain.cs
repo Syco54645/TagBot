@@ -184,6 +184,7 @@ namespace TagBot.App
         {
             TreeNode newSelected = e.Node;
             ucTextFiles.clearListView();
+            clearFlacTagsInEditor();
             DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
             ListViewItem.ListViewSubItem[] subItems;
             ListViewItem item = null;
@@ -265,7 +266,6 @@ namespace TagBot.App
 
         public void loadFlacTagsInEditor(FlacFileInfo flacInfo)
         {
-            //FlacFileInfo flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + fileName);
             lblCurrentFile.Text = flacInfo.Filename;
             lblEncoder.Text = flacInfo.Encoder;
             lblBitrate.Text = flacInfo.Bitrate;
@@ -279,6 +279,33 @@ namespace TagBot.App
             txtMetadataAlbum.Text = flacInfo.Metadata.Album;
             txtMetadataDate.Text = flacInfo.Metadata.Date;
             txtMetadataTrackNumber.Text = flacInfo.Metadata.Tracknumber;
+
+            txtOverallAlbum.Text = string.Empty;
+            txtOverallArtist.Text = string.Empty;
+            txtOverallComment.Text = string.Empty;
+            txtOverallDate.Text = string.Empty;
+        }
+
+        public void clearFlacTagsInEditor()
+        {
+            lblCurrentFile.Text = string.Empty;
+            lblEncoder.Text = string.Empty;
+            lblBitrate.Text = string.Empty;
+            lblSampleRate.Text = string.Empty;
+            lblChannels.Text = string.Empty;
+            lblSize.Text = string.Empty;
+            lblDuration.Text = string.Empty;
+
+            txtMetadataTitle.Text = string.Empty;
+            txtMetadataArtist.Text = string.Empty;
+            txtMetadataAlbum.Text = string.Empty;
+            txtMetadataDate.Text = string.Empty;
+            txtMetadataTrackNumber.Text = string.Empty;
+
+            txtOverallAlbum.Text = string.Empty;
+            txtOverallArtist.Text = string.Empty;
+            txtOverallComment.Text = string.Empty;
+            txtOverallDate.Text = string.Empty;
         }
 
         private void lvAudioFiles_SelectedIndexChanged(object sender, EventArgs e)
