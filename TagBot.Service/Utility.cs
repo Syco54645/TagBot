@@ -19,15 +19,22 @@ namespace Tagbot.Service
 
         public static DateCheckResponseContract dateDir(string name)
         {
+            bool gotDate = false;
             var regEx = new Regex(@"\d{4}\-\d{1,2}\-\d{1,2}");
             var text = regEx.Replace(name, "");
             var date = regEx.Match(name);
             DateTime parsedDateTime;
-            DateTime.TryParseExact(date.ToString(), "yyyy-MM-dd", new CultureInfo("en-US"), DateTimeStyles.None, out parsedDateTime);
+            gotDate = DateTime.TryParseExact(date.ToString(), "yyyy-MM-dd", new CultureInfo("en-US"), DateTimeStyles.None, out parsedDateTime);
+            if (!gotDate)
+            {
+                regEx = new Regex(@"\d{4}\d{1,2}\d{1,2}");
+                date = regEx.Match(name);
+                gotDate = DateTime.TryParseExact(date.ToString(), "yyyyMMdd", new CultureInfo("en-US"), DateTimeStyles.None, out parsedDateTime);
+            }
             DateCheckResponseContract response = new DateCheckResponseContract()
             {
                 DirectoryName = name,
-                Date = date.ToString(),
+                Date = parsedDateTime.ToString("yyyy-MM-dd"),
                 IsDate = parsedDateTime != DateTime.MinValue,
             };
             return response;

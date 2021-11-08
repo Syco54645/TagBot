@@ -85,15 +85,9 @@ namespace TagBot.App
             foreach (string artist in frmMain.databaseMeta.Artists)
             {
                 ListViewItem temp = new ListViewItem(artist);
-                temp.Tag = artistTransformationDict[artist];
                 lvArtists.Items.Add(temp);
             }
             txtArtistTransformation.Text = string.Empty;
-
-            //lvArtists.Columns[0].Width = 20;//lvArtists.Width - 150 - SystemInformation.VerticalScrollBarWidth;
-            //lvArtists.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
-
-            //lvArtists.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         
@@ -159,11 +153,6 @@ namespace TagBot.App
                 }
                 artistTransformationDict[artistAbbreviation] = txtArtistTransformation.Text;
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (false) { }
         }
     }
 }
