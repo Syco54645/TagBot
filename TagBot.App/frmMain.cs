@@ -457,11 +457,18 @@ namespace TagBot.App
 
         private void btnMatch_Click(object sender, EventArgs e)
         {
-            matchMode();
-            getShowData();
-            _log.AddToLog("Some event to log.", _randomColors[_r.Next(3)]);
-            srtfLog.Rtf = _log.GetLogAsRichText(true);
-            srtfLog.ScrollToBottom();
+            if (!string.IsNullOrEmpty(txtDate.Text))
+            {
+                matchMode();
+                getShowData();
+                _log.AddToLog("Some event to log.", _randomColors[_r.Next(3)]);
+                srtfLog.Rtf = _log.GetLogAsRichText(true);
+                srtfLog.ScrollToBottom();
+            }
+            else
+            {
+                MessageBox.Show("You need to enter a value to search on");
+            }
         }
 
         public void fileMode()

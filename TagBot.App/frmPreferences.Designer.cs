@@ -29,28 +29,40 @@ namespace TagBot.App
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            "",
+            "dmb",
+            "dm",
+            "d&ttt"}, -1);
             this.btnApply = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.txtAlbumFormatter = new System.Windows.Forms.TextBox();
             this.grpAlbumFormatter = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rtfAlbumFormatterGuide = new System.Windows.Forms.RichTextBox();
             this.lblAlbumFormatterDemo = new System.Windows.Forms.Label();
             this.txtCustomDateFormatter = new System.Windows.Forms.TextBox();
             this.grpCustomDate = new System.Windows.Forms.GroupBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.lblDateFormatterDemo = new System.Windows.Forms.Label();
             this.grpTitleFormatter = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rtfTitleFormatterGuide = new System.Windows.Forms.RichTextBox();
             this.lblTitleModifierFormatterDemo = new System.Windows.Forms.Label();
             this.lblTitleFormatterDemo = new System.Windows.Forms.Label();
             this.txtTitleFormatter = new System.Windows.Forms.TextBox();
-            this.rtfTitleFormatterGuide = new System.Windows.Forms.RichTextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.rtfAlbumFormatterGuide = new System.Windows.Forms.RichTextBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.grpArtistTransformation = new System.Windows.Forms.GroupBox();
+            this.lvArtists = new System.Windows.Forms.ListView();
+            this.txtArtistTransformation = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.grpAlbumFormatter.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.grpCustomDate.SuspendLayout();
             this.grpTitleFormatter.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
+            this.grpArtistTransformation.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnApply
@@ -79,7 +91,7 @@ namespace TagBot.App
             // 
             this.txtAlbumFormatter.Location = new System.Drawing.Point(8, 24);
             this.txtAlbumFormatter.Name = "txtAlbumFormatter";
-            this.txtAlbumFormatter.Size = new System.Drawing.Size(296, 20);
+            this.txtAlbumFormatter.Size = new System.Drawing.Size(304, 20);
             this.txtAlbumFormatter.TabIndex = 3;
             this.txtAlbumFormatter.TextChanged += new System.EventHandler(this.txtAlbumFormatter_TextChanged);
             // 
@@ -88,12 +100,34 @@ namespace TagBot.App
             this.grpAlbumFormatter.Controls.Add(this.groupBox2);
             this.grpAlbumFormatter.Controls.Add(this.lblAlbumFormatterDemo);
             this.grpAlbumFormatter.Controls.Add(this.txtAlbumFormatter);
-            this.grpAlbumFormatter.Location = new System.Drawing.Point(16, 112);
+            this.grpAlbumFormatter.Location = new System.Drawing.Point(3, 109);
             this.grpAlbumFormatter.Name = "grpAlbumFormatter";
-            this.grpAlbumFormatter.Size = new System.Drawing.Size(312, 152);
+            this.grpAlbumFormatter.Size = new System.Drawing.Size(317, 152);
             this.grpAlbumFormatter.TabIndex = 4;
             this.grpAlbumFormatter.TabStop = false;
             this.grpAlbumFormatter.Text = "Album Formatter";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rtfAlbumFormatterGuide);
+            this.groupBox2.Location = new System.Drawing.Point(8, 64);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(304, 80);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Template Vars";
+            // 
+            // rtfAlbumFormatterGuide
+            // 
+            this.rtfAlbumFormatterGuide.BackColor = System.Drawing.SystemColors.Control;
+            this.rtfAlbumFormatterGuide.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtfAlbumFormatterGuide.Location = new System.Drawing.Point(8, 16);
+            this.rtfAlbumFormatterGuide.Name = "rtfAlbumFormatterGuide";
+            this.rtfAlbumFormatterGuide.ReadOnly = true;
+            this.rtfAlbumFormatterGuide.Size = new System.Drawing.Size(272, 56);
+            this.rtfAlbumFormatterGuide.TabIndex = 8;
+            this.rtfAlbumFormatterGuide.TabStop = false;
+            this.rtfAlbumFormatterGuide.Text = "%d - Format date in custom date format\n%v - Venue\n%c - City\n%s - State";
             // 
             // lblAlbumFormatterDemo
             // 
@@ -108,7 +142,7 @@ namespace TagBot.App
             // 
             this.txtCustomDateFormatter.Location = new System.Drawing.Point(8, 24);
             this.txtCustomDateFormatter.Name = "txtCustomDateFormatter";
-            this.txtCustomDateFormatter.Size = new System.Drawing.Size(296, 20);
+            this.txtCustomDateFormatter.Size = new System.Drawing.Size(304, 20);
             this.txtCustomDateFormatter.TabIndex = 5;
             this.txtCustomDateFormatter.TextChanged += new System.EventHandler(this.txtCustomDateFormatter_TextChanged);
             // 
@@ -117,9 +151,9 @@ namespace TagBot.App
             this.grpCustomDate.Controls.Add(this.linkLabel1);
             this.grpCustomDate.Controls.Add(this.lblDateFormatterDemo);
             this.grpCustomDate.Controls.Add(this.txtCustomDateFormatter);
-            this.grpCustomDate.Location = new System.Drawing.Point(16, 8);
+            this.grpCustomDate.Location = new System.Drawing.Point(3, 3);
             this.grpCustomDate.Name = "grpCustomDate";
-            this.grpCustomDate.Size = new System.Drawing.Size(312, 100);
+            this.grpCustomDate.Size = new System.Drawing.Size(317, 100);
             this.grpCustomDate.TabIndex = 6;
             this.grpCustomDate.TabStop = false;
             this.grpCustomDate.Text = "Custom Date Format";
@@ -153,12 +187,34 @@ namespace TagBot.App
             this.grpTitleFormatter.Controls.Add(this.lblTitleModifierFormatterDemo);
             this.grpTitleFormatter.Controls.Add(this.lblTitleFormatterDemo);
             this.grpTitleFormatter.Controls.Add(this.txtTitleFormatter);
-            this.grpTitleFormatter.Location = new System.Drawing.Point(16, 272);
+            this.grpTitleFormatter.Location = new System.Drawing.Point(3, 267);
             this.grpTitleFormatter.Name = "grpTitleFormatter";
-            this.grpTitleFormatter.Size = new System.Drawing.Size(312, 160);
+            this.grpTitleFormatter.Size = new System.Drawing.Size(317, 160);
             this.grpTitleFormatter.TabIndex = 7;
             this.grpTitleFormatter.TabStop = false;
             this.grpTitleFormatter.Text = "Title Formatter";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rtfTitleFormatterGuide);
+            this.groupBox1.Location = new System.Drawing.Point(8, 80);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(304, 72);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Template Vars";
+            // 
+            // rtfTitleFormatterGuide
+            // 
+            this.rtfTitleFormatterGuide.BackColor = System.Drawing.SystemColors.Control;
+            this.rtfTitleFormatterGuide.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.rtfTitleFormatterGuide.Location = new System.Drawing.Point(8, 16);
+            this.rtfTitleFormatterGuide.Name = "rtfTitleFormatterGuide";
+            this.rtfTitleFormatterGuide.ReadOnly = true;
+            this.rtfTitleFormatterGuide.Size = new System.Drawing.Size(272, 48);
+            this.rtfTitleFormatterGuide.TabIndex = 8;
+            this.rtfTitleFormatterGuide.TabStop = false;
+            this.rtfTitleFormatterGuide.Text = "%t - Title\n%r - Title with article at the end\n%m - Modifier";
             // 
             // lblTitleModifierFormatterDemo
             // 
@@ -182,60 +238,70 @@ namespace TagBot.App
             // 
             this.txtTitleFormatter.Location = new System.Drawing.Point(8, 24);
             this.txtTitleFormatter.Name = "txtTitleFormatter";
-            this.txtTitleFormatter.Size = new System.Drawing.Size(296, 20);
+            this.txtTitleFormatter.Size = new System.Drawing.Size(304, 20);
             this.txtTitleFormatter.TabIndex = 3;
             this.txtTitleFormatter.TextChanged += new System.EventHandler(this.txtTitleFormatter_TextChanged);
             // 
-            // rtfTitleFormatterGuide
+            // flowLayoutPanel1
             // 
-            this.rtfTitleFormatterGuide.BackColor = System.Drawing.SystemColors.Control;
-            this.rtfTitleFormatterGuide.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtfTitleFormatterGuide.Location = new System.Drawing.Point(8, 16);
-            this.rtfTitleFormatterGuide.Name = "rtfTitleFormatterGuide";
-            this.rtfTitleFormatterGuide.ReadOnly = true;
-            this.rtfTitleFormatterGuide.Size = new System.Drawing.Size(272, 48);
-            this.rtfTitleFormatterGuide.TabIndex = 8;
-            this.rtfTitleFormatterGuide.Text = "%t - Title\n%r - Title with article at the end\n%m - Modifier";
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Controls.Add(this.grpCustomDate);
+            this.flowLayoutPanel1.Controls.Add(this.grpAlbumFormatter);
+            this.flowLayoutPanel1.Controls.Add(this.grpTitleFormatter);
+            this.flowLayoutPanel1.Controls.Add(this.grpArtistTransformation);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(344, 456);
+            this.flowLayoutPanel1.TabIndex = 8;
             // 
-            // groupBox1
+            // grpArtistTransformation
             // 
-            this.groupBox1.Controls.Add(this.rtfTitleFormatterGuide);
-            this.groupBox1.Location = new System.Drawing.Point(8, 80);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(296, 72);
-            this.groupBox1.TabIndex = 8;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Template Vars";
+            this.grpArtistTransformation.Controls.Add(this.label1);
+            this.grpArtistTransformation.Controls.Add(this.lvArtists);
+            this.grpArtistTransformation.Controls.Add(this.txtArtistTransformation);
+            this.grpArtistTransformation.Location = new System.Drawing.Point(3, 433);
+            this.grpArtistTransformation.Name = "grpArtistTransformation";
+            this.grpArtistTransformation.Size = new System.Drawing.Size(317, 158);
+            this.grpArtistTransformation.TabIndex = 9;
+            this.grpArtistTransformation.TabStop = false;
+            this.grpArtistTransformation.Text = "Artist Transformation";
             // 
-            // groupBox2
+            // lvArtists
             // 
-            this.groupBox2.Controls.Add(this.rtfAlbumFormatterGuide);
-            this.groupBox2.Location = new System.Drawing.Point(8, 64);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(296, 80);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Template Vars";
+            this.lvArtists.HideSelection = false;
+            this.lvArtists.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem2});
+            this.lvArtists.Location = new System.Drawing.Point(8, 24);
+            this.lvArtists.Name = "lvArtists";
+            this.lvArtists.Size = new System.Drawing.Size(304, 56);
+            this.lvArtists.TabIndex = 2;
+            this.lvArtists.UseCompatibleStateImageBehavior = false;
+            this.lvArtists.View = System.Windows.Forms.View.Details;
+            this.lvArtists.SelectedIndexChanged += new System.EventHandler(this.lvArtists_SelectedIndexChanged);
             // 
-            // rtfAlbumFormatterGuide
+            // txtArtistTransformation
             // 
-            this.rtfAlbumFormatterGuide.BackColor = System.Drawing.SystemColors.Control;
-            this.rtfAlbumFormatterGuide.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.rtfAlbumFormatterGuide.Location = new System.Drawing.Point(8, 16);
-            this.rtfAlbumFormatterGuide.Name = "rtfAlbumFormatterGuide";
-            this.rtfAlbumFormatterGuide.ReadOnly = true;
-            this.rtfAlbumFormatterGuide.Size = new System.Drawing.Size(272, 56);
-            this.rtfAlbumFormatterGuide.TabIndex = 8;
-            this.rtfAlbumFormatterGuide.Text = "%d - Format date in custom date format\n%v - Venue\n%c - City\n%s - State";
+            this.txtArtistTransformation.Location = new System.Drawing.Point(8, 88);
+            this.txtArtistTransformation.Name = "txtArtistTransformation";
+            this.txtArtistTransformation.Size = new System.Drawing.Size(304, 20);
+            this.txtArtistTransformation.TabIndex = 1;
+            this.txtArtistTransformation.TextChanged += new System.EventHandler(this.txtArtistTransformation_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(8, 112);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(304, 40);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Click on an artist abbreviation in the above list and enter what the full name sh" +
+    "ould be in the text box.";
             // 
             // frmPreferences
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(347, 502);
-            this.Controls.Add(this.grpTitleFormatter);
-            this.Controls.Add(this.grpCustomDate);
-            this.Controls.Add(this.grpAlbumFormatter);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -248,12 +314,15 @@ namespace TagBot.App
             this.Load += new System.EventHandler(this.frmPreferences_Load);
             this.grpAlbumFormatter.ResumeLayout(false);
             this.grpAlbumFormatter.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
             this.grpCustomDate.ResumeLayout(false);
             this.grpCustomDate.PerformLayout();
             this.grpTitleFormatter.ResumeLayout(false);
             this.grpTitleFormatter.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.grpArtistTransformation.ResumeLayout(false);
+            this.grpArtistTransformation.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -277,5 +346,10 @@ namespace TagBot.App
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RichTextBox rtfAlbumFormatterGuide;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.GroupBox grpArtistTransformation;
+        private System.Windows.Forms.TextBox txtArtistTransformation;
+        private System.Windows.Forms.ListView lvArtists;
+        private System.Windows.Forms.Label label1;
     }
 }

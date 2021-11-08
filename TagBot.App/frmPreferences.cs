@@ -21,6 +21,7 @@ namespace TagBot.App
         private ShowSearchResponseContract _dummyShow;
         private Track _dummyTrack;
         Service.Formatter formatter = new Service.Formatter(Settings.Default.customDateFormatter);
+        Dictionary<string, string> artistTransformationDict;
 
         public frmPreferences()
         {
@@ -67,7 +68,33 @@ namespace TagBot.App
                 formatterGuide += entry.Key + " - " + entry.Value.Description + Environment.NewLine;
             }
             rtfTitleFormatterGuide.Text = formatterGuide.TrimEnd(Environment.NewLine.ToCharArray());
+
+            artistTransformationDict = Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation);
+            lvArtists.Items.Clear();
+
+
+            lvArtists.View = View.Details;
+            lvArtists.HeaderStyle = ColumnHeaderStyle.None;
+            lvArtists.FullRowSelect = true;
+            if (lvArtists.Columns.Count == 0)
+            {
+                lvArtists.Columns.Add("", lvArtists.Width - SystemInformation.VerticalScrollBarWidth - 4);
+            }
+            foreach (string artist in frmMain.databaseMeta.Artists)
+            {
+                ListViewItem temp = new ListViewItem(artist);
+                temp.Tag = artistTransformationDict[artist];
+                lvArtists.Items.Add(temp);
+            }
+            txtArtistTransformation.Text = string.Empty;
+
+            //lvArtists.Columns[0].Width = 20;//lvArtists.Width - 150 - SystemInformation.VerticalScrollBarWidth;
+            //lvArtists.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+
+            //lvArtists.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
+
+        
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
@@ -78,6 +105,7 @@ namespace TagBot.App
         {
             Settings.Default.albumFormatterString = txtAlbumFormatter.Text;
             Settings.Default.customDateFormatter = txtCustomDateFormatter.Text;
+            Settings.Default.artistTransformation = Utility.SerializeObject<Dictionary<string, string>>(artistTransformationDict);
             Settings.Default.Save();
             frmMain.updateFormatterStrings();
             MessageBox.Show("Saved");
@@ -109,9 +137,31 @@ namespace TagBot.App
             lblTitleModifierFormatterDemo.Text = formatter.formatString(_dummyTrack, FormatterType.Track);
         }
 
-        private void lvAlbumFormatters_SelectedIndexChanged(object sender, EventArgs e)
+        private void lvArtists_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (lvArtists.SelectedItems.Count > 0)
+            {
+                string artistAbbreviation = lvArtists.SelectedItems[0].Text;
+                txtArtistTransformation.Text = artistTransformationDict.ContainsKey(artistAbbreviation) ? artistTransformationDict[artistAbbreviation] : string.Empty;
+            }
+        }
 
+        private void txtArtistTransformation_TextChanged(object sender, EventArgs e)
+        {
+            if (lvArtists.SelectedItems.Count > 0)
+            {
+                string artistAbbreviation = lvArtists.SelectedItems[0].Text;
+                if (!artistTransformationDict.ContainsKey(artistAbbreviation))
+                {
+                    artistTransformationDict.Add(artistAbbreviation, string.Empty);
+                }
+                artistTransformationDict[artistAbbreviation] = txtArtistTransformation.Text;
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (false) { }
         }
     }
 }
