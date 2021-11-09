@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Tagbot.Service;
 using Tagbot.Service.contracts;
 using Tagbot.Service.models;
+using TagBot.App.models;
 using TagBot.App.Properties;
 using TagBot.App.usercontrols;
 using TagBot.Log;
@@ -65,6 +66,8 @@ namespace TagBot.App
             ucTextFiles.frmMain = this;
             tsbSelectDirectory.Image = imgListFileIcons.Images["folder"];
             tsbSave.Image = imgListFileIcons.Images["save"];
+
+            setupMetadataTextbox();
 
             _clearFileInfoLabels();
             fileMode();
@@ -511,6 +514,11 @@ namespace TagBot.App
             toggleTagFields(true);
         }
 
+        /// <summary>
+        /// The purpose of this function is to enable and disable fields based on the mode that
+        /// The app is currently in. It is currently hard coded to iterate over the grpCommonTags controls
+        /// </summary>
+        /// <param name="enabled"></param>
         public void toggleTagFields(bool enabled)
         {
             foreach (Control ctrl in grpCommonTags.Controls)
@@ -518,15 +526,26 @@ namespace TagBot.App
                 if (ctrl is TextBox)
                 {
                     ctrl.Enabled = enabled;
-                    if (!string.IsNullOrEmpty(ctrl.Tag.ToString()))
+                    MetadataTextBox tag = (MetadataTextBox)ctrl.Tag;
+                    if (!string.IsNullOrEmpty(tag.MutuallyExclusiveField))
                     {
-                        grpFileTags.Controls[ctrl.Tag.ToString()].Enabled = !enabled;
+                        grpFileTags.Controls[tag.MutuallyExclusiveField].Enabled = !enabled;
                     }
                 }
                 else if (ctrl is Button)
                 {
                     ctrl.Enabled = enabled;
                 }
+            }
+            if (enabled)
+            {
+                txtMetadataTitle.Enabled = false;
+                txtMetadataTrackNumber.Enabled = false;
+            }
+            else
+            {
+                txtMetadataTitle.Enabled = true;
+                txtMetadataTrackNumber.Enabled = true;
             }
         }
 
@@ -558,6 +577,11 @@ namespace TagBot.App
                 getDatabaseMeta();
             }
         }
+
+        /// <summary>
+        /// The purpose of this function is to get the "metadata" from the database
+        /// This includes things such as artists, song count, show count, schema version
+        /// </summary>
 
         private void getDatabaseMeta()
         {
@@ -605,21 +629,126 @@ namespace TagBot.App
 
             var artistTransformationDict = Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation);
             txtOverallArtist.Text = (artistTransformationDict.ContainsKey(showData.Artist) && !string.IsNullOrEmpty(artistTransformationDict[showData.Artist])) ? artistTransformationDict[showData.Artist] : showData.Artist;
-            foreach(KeyValuePair<string, FlacFileInfo> entry in proposedMetadata)
-            {
-                entry.Value.Metadata.Artist = txtOverallArtist.Text;
-                entry.Value.Metadata.Album = txtOverallAlbum.Text;
-                entry.Value.Metadata.Date = txtOverallDate.Text;
-                entry.Value.Metadata.Comment = txtOverallComment.Text;
-            }
         }
 
+        /// <summary>
+        /// The purpose of this function is to set the persistent formatter's settings if they are changed via preferences.
+        /// This function should be called at form load as well as when we save the settings in preferences
+        /// </summary>
         public void updateFormatterStrings()
         {
             formatter.customDateFormatter = Settings.Default.customDateFormatter;
             formatter.albumFormatterString = Settings.Default.albumFormatterString;
             formatter.titleFormatterString = Settings.Default.titleFormatterString;
             formatter.artistTransformationDict = Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation);
+        }
+
+        /// <summary>
+        /// The purpose of this function is to set up the metadata text box tags and event handlers
+        /// </summary>
+        public void setupMetadataTextbox()
+        {
+            txtOverallAlbum.Tag = new MetadataTextBox
+            {
+                MutuallyExclusiveField = "txtMetadataAlbum",
+                MetadataTextboxType = MetadataTextboxType.Overall,
+                FieldInMetadata = "Album"
+            };
+
+            txtOverallComment.Tag = new MetadataTextBox
+            {
+                MutuallyExclusiveField = "txtMetadataComment",
+                MetadataTextboxType = MetadataTextboxType.Overall,
+                FieldInMetadata = "Comment"
+            };
+
+            txtOverallDate.Tag = new MetadataTextBox
+            {
+                MutuallyExclusiveField = "txtMetadataDate",
+                MetadataTextboxType = MetadataTextboxType.Overall,
+                FieldInMetadata = "Date"
+            };
+
+            txtOverallArtist.Tag = new MetadataTextBox
+            {
+                MutuallyExclusiveField = "txtMetadataArtist",
+                MetadataTextboxType = MetadataTextboxType.Overall,
+                FieldInMetadata = "Artist"
+            };
+
+            txtMetadataTitle.Tag = new MetadataTextBox
+            {
+                MetadataTextboxType = MetadataTextboxType.Single,
+                FieldInMetadata = "Title"
+            };
+
+            txtMetadataTrackNumber.Tag = new MetadataTextBox
+            {
+                MetadataTextboxType = MetadataTextboxType.Single,
+                FieldInMetadata = "Tracknumber"
+            };
+
+            txtMetadataArtist.Tag = new MetadataTextBox
+            {
+                MetadataTextboxType = MetadataTextboxType.Single,
+                FieldInMetadata = "Artist"
+            };
+
+            txtMetadataAlbum.Tag = new MetadataTextBox
+            {
+                MetadataTextboxType = MetadataTextboxType.Single,
+                FieldInMetadata = "Album"
+            };
+
+            txtMetadataDate.Tag = new MetadataTextBox
+            {
+                MetadataTextboxType = MetadataTextboxType.Single,
+                FieldInMetadata = "Date"
+            };
+
+            txtMetadataComment.Tag = new MetadataTextBox
+            {
+                MetadataTextboxType = MetadataTextboxType.Single,
+                FieldInMetadata = "Comment"
+            };
+
+            txtOverallAlbum.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
+            txtOverallComment.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
+            txtOverallDate.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
+            txtOverallArtist.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
+            txtMetadataTitle.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
+            txtMetadataTrackNumber.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
+            txtMetadataArtist.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
+            txtMetadataAlbum.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
+            txtMetadataDate.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
+            txtMetadataComment.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
+
+        }
+
+        /// <summary>
+        /// The purpose of this function is to propagate metadata changes from text boxes through to the proposedMetadata object
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtMetadataFieldEditor_TextChanged(object sender, EventArgs e)
+        {
+            TextBox ctrl = (sender as TextBox);
+            MetadataTextBox tag = (MetadataTextBox)ctrl.Tag;
+
+            if (tag.MetadataTextboxType == MetadataTextboxType.Overall)
+            {
+                foreach (KeyValuePair<string, FlacFileInfo> entry in proposedMetadata)
+                {
+                    entry.Value.Metadata[tag.FieldInMetadata] = ctrl.Text;
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(lblCurrentFile.Text))
+                {
+                    proposedMetadata[lblCurrentFile.Text].Metadata[tag.FieldInMetadata] = ctrl.Text;
+                }
+            }
         }
     }
 }

@@ -97,6 +97,7 @@
     <Compile Include="frmText.Designer.cs">
       <DependentUpon>frmText.cs</DependentUpon>
     </Compile>
+    <Compile Include="models\MetadataTextBox.cs" />
     <Compile Include="ucMatchFiles.cs">
       <SubType>UserControl</SubType>
     </Compile>

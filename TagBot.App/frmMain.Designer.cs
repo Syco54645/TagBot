@@ -93,6 +93,7 @@ namespace TagBot.App
             this.pnlTvMatchFiles = new System.Windows.Forms.Panel();
             this.tsAudioBrowser = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
+            this.tslMatchFilesCount = new System.Windows.Forms.ToolStripLabel();
             this.tcFilename = new Aga.Controls.Tree.TreeColumn();
             this.tcNumber = new Aga.Controls.Tree.TreeColumn();
             this.tcTitle = new Aga.Controls.Tree.TreeColumn();
@@ -117,7 +118,6 @@ namespace TagBot.App
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
-            this.tslMatchFilesCount = new System.Windows.Forms.ToolStripLabel();
             this.groupBox1.SuspendLayout();
             this.grpCommonTags.SuspendLayout();
             this.grpFileTags.SuspendLayout();
@@ -240,7 +240,6 @@ namespace TagBot.App
             this.txtOverallDate.Name = "txtOverallDate";
             this.txtOverallDate.Size = new System.Drawing.Size(261, 20);
             this.txtOverallDate.TabIndex = 57;
-            this.txtOverallDate.Tag = "txtMetadataDate";
             // 
             // txtOverallArtist
             // 
@@ -250,7 +249,6 @@ namespace TagBot.App
             this.txtOverallArtist.Name = "txtOverallArtist";
             this.txtOverallArtist.Size = new System.Drawing.Size(261, 20);
             this.txtOverallArtist.TabIndex = 54;
-            this.txtOverallArtist.Tag = "txtMetadataArtist";
             // 
             // txtOverallComment
             // 
@@ -260,7 +258,6 @@ namespace TagBot.App
             this.txtOverallComment.Name = "txtOverallComment";
             this.txtOverallComment.Size = new System.Drawing.Size(261, 20);
             this.txtOverallComment.TabIndex = 59;
-            this.txtOverallComment.Tag = "txtMetadataComment";
             // 
             // label15
             // 
@@ -279,7 +276,6 @@ namespace TagBot.App
             this.txtOverallAlbum.Name = "txtOverallAlbum";
             this.txtOverallAlbum.Size = new System.Drawing.Size(261, 20);
             this.txtOverallAlbum.TabIndex = 53;
-            this.txtOverallAlbum.Tag = "txtMetadataAlbum";
             // 
             // grpFileTags
             // 
@@ -828,6 +824,12 @@ namespace TagBot.App
             this.tsbSave.Text = "Save";
             this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
+            // tslMatchFilesCount
+            // 
+            this.tslMatchFilesCount.Name = "tslMatchFilesCount";
+            this.tslMatchFilesCount.Size = new System.Drawing.Size(42, 22);
+            this.tslMatchFilesCount.Text = "Files: 0";
+            // 
             // tcFilename
             // 
             this.tcFilename.Header = "Filename";
@@ -1006,12 +1008,6 @@ namespace TagBot.App
             this.miniToolStrip.Name = "miniToolStrip";
             this.miniToolStrip.Size = new System.Drawing.Size(301, 25);
             this.miniToolStrip.TabIndex = 10;
-            // 
-            // tslMatchFilesCount
-            // 
-            this.tslMatchFilesCount.Name = "tslMatchFilesCount";
-            this.tslMatchFilesCount.Size = new System.Drawing.Size(42, 22);
-            this.tslMatchFilesCount.Text = "Files: 0";
             // 
             // frmMain
             // 
