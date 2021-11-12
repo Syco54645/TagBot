@@ -17,7 +17,7 @@ namespace TagBot.Service.models
         public string DisplayDataVersion()
         {
             var dataVersion = DateTime.Parse(DataVersion);
-            return dataVersion.ToString("yyyyMMdd.HH:mm.ss");
+            return dataVersion.ToString("yyyy.MM.dd.HH.mm.ss");
         }
     }
 }
