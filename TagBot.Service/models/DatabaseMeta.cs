@@ -12,5 +12,12 @@ namespace TagBot.Service.models
         public List<string> Artists { get; set; }
         public int ShowCount { get; set; }
         public int SongCount { get; set; }
+        public string DatabaseRepo { get; set; }
+        public string DataVersion { get; set; }
+        public string DisplayDataVersion()
+        {
+            var dataVersion = DateTime.Parse(DataVersion);
+            return dataVersion.ToString("yyyyMMdd.HH:mm.ss");
+        }
     }
 }

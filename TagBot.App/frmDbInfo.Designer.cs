@@ -41,12 +41,14 @@ namespace TagBot.App
             this.lblSongCount = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lbArtists = new System.Windows.Forms.ListBox();
+            this.lblDataVersion = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblLoadedDatabaseVersion
             // 
             this.lblLoadedDatabaseVersion.AutoSize = true;
-            this.lblLoadedDatabaseVersion.Location = new System.Drawing.Point(104, 39);
+            this.lblLoadedDatabaseVersion.Location = new System.Drawing.Point(105, 39);
             this.lblLoadedDatabaseVersion.Name = "lblLoadedDatabaseVersion";
             this.lblLoadedDatabaseVersion.Size = new System.Drawing.Size(98, 13);
             this.lblLoadedDatabaseVersion.TabIndex = 9;
@@ -55,7 +57,7 @@ namespace TagBot.App
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(15, 99);
+            this.label15.Location = new System.Drawing.Point(15, 116);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(87, 13);
             this.label15.TabIndex = 8;
@@ -109,7 +111,7 @@ namespace TagBot.App
             // lblArtistCount
             // 
             this.lblArtistCount.AutoSize = true;
-            this.lblArtistCount.Location = new System.Drawing.Point(104, 84);
+            this.lblArtistCount.Location = new System.Drawing.Point(105, 84);
             this.lblArtistCount.Name = "lblArtistCount";
             this.lblArtistCount.Size = new System.Drawing.Size(68, 13);
             this.lblArtistCount.TabIndex = 16;
@@ -127,7 +129,7 @@ namespace TagBot.App
             // lblSongCount
             // 
             this.lblSongCount.AutoSize = true;
-            this.lblSongCount.Location = new System.Drawing.Point(103, 69);
+            this.lblSongCount.Location = new System.Drawing.Point(105, 69);
             this.lblSongCount.Name = "lblSongCount";
             this.lblSongCount.Size = new System.Drawing.Size(70, 13);
             this.lblSongCount.TabIndex = 18;
@@ -136,7 +138,7 @@ namespace TagBot.App
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(64, 69);
+            this.label3.Location = new System.Drawing.Point(65, 69);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 17;
@@ -145,16 +147,36 @@ namespace TagBot.App
             // lbArtists
             // 
             this.lbArtists.FormattingEnabled = true;
-            this.lbArtists.Location = new System.Drawing.Point(104, 99);
+            this.lbArtists.Location = new System.Drawing.Point(104, 116);
             this.lbArtists.Name = "lbArtists";
             this.lbArtists.Size = new System.Drawing.Size(224, 95);
             this.lbArtists.TabIndex = 19;
+            // 
+            // lblDataVersion
+            // 
+            this.lblDataVersion.AutoSize = true;
+            this.lblDataVersion.Location = new System.Drawing.Point(105, 99);
+            this.lblDataVersion.Name = "lblDataVersion";
+            this.lblDataVersion.Size = new System.Drawing.Size(75, 13);
+            this.lblDataVersion.TabIndex = 21;
+            this.lblDataVersion.Text = "lblDataVersion";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(34, 99);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(68, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Data Version";
             // 
             // frmDbInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(380, 233);
+            this.Controls.Add(this.lblDataVersion);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.lbArtists);
             this.Controls.Add(this.lblSongCount);
             this.Controls.Add(this.label3);
@@ -193,5 +215,7 @@ namespace TagBot.App
         private System.Windows.Forms.Label lblSongCount;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox lbArtists;
+        private System.Windows.Forms.Label lblDataVersion;
+        private System.Windows.Forms.Label label4;
     }
 }

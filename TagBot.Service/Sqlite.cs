@@ -185,6 +185,10 @@ namespace Tagbot.Service
                         {
                             meta.SchemaVersion = (string)reader["meta_value"];
                         }
+                        if ((string)reader["meta_key"] == "database_repo")
+                        {
+                            meta.DatabaseRepo = (string)reader["meta_value"];
+                        }
                     }
                 }
 
@@ -213,6 +217,20 @@ namespace Tagbot.Service
                     while (reader.Read())
                     {
                         meta.ShowCount = Convert.ToInt32(reader["ct"]);
+                    }
+                }
+
+                command = connection.CreateCommand();
+                command.CommandText =
+                @"
+                    SELECT database_last_modified FROM database_last_modified
+                ";
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        meta.DataVersion = (string)reader["database_last_modified"];
                     }
                 }
 

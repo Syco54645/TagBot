@@ -32,6 +32,7 @@ namespace TagBot.App
             lblSongCount.Text = databaseMeta.SongCount.ToString();
             lblShowCount.Text = databaseMeta.ShowCount.ToString();
             lblArtistCount.Text = databaseMeta.Artists.Count.ToString();
+            lblDataVersion.Text = databaseMeta.DisplayDataVersion();
 
             foreach (string artist in databaseMeta.Artists)
             {
