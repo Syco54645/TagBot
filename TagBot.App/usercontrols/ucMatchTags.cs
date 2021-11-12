@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using Tagbot.Service;
 using Tagbot.Service.contracts;
 using Tagbot.Service.models;
+using TagBot.App.models;
 using TagBot.App.Properties;
 using TagBot.Service.models;
 
@@ -68,12 +69,49 @@ namespace TagBot.App
             lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
             lvMatchTags.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             lvMatchTags.Columns[0].Width = lvMatchTags.Width - 4 - SystemInformation.VerticalScrollBarWidth;
-            tslTagCount.Text = "Tags: " + lvMatchTags.Items.Count.ToString(); ;
+            tslTagCount.Text = "Tags: " + lvMatchTags.Items.Count.ToString();
         }
 
         private void btnMatchDone_Click(object sender, EventArgs e)
         {
             frmMain.fileMode();
+        }
+
+        private void btnAutomate_Click(object sender, EventArgs e) // todo fix
+        {
+            
+            frmMain.pbTagProgress.Value = 0;
+            //lvAudioFiles.SelectedIndices.Clear();
+            List<Track> tracks = frmMain.showData.Setlist;
+
+            if (tracks.Count == frmMain.tvMatchFilesModel.Nodes.Count)
+            {
+                // we can do this automatically more than likely
+                int i = 0;
+                foreach (SongNode file in frmMain.tvMatchFilesModel.Nodes) 
+                {
+                    string filename = file.Filename;
+                    string title = tracks[i].TrackName;
+
+                    frmMain.proposedMetadata[filename].Metadata.Title = title;
+                    file.Nodes.Add(new Node(title));
+
+                    int incrementAmount = 100 / frmMain.tvMatchFilesModel.Nodes.Count;
+                    frmMain.pbTagProgress.Increment(incrementAmount * (i));
+                    frmMain.ucMatchFiles.expandMyMind();
+                    i++;
+                }
+                MessageBox.Show("Please verify and save your files.", "Tagging Complete");
+            }
+            else
+            {
+                // scary needs to match stuff here
+            }
+        }
+
+        public void enableAutomateButton()
+        {
+            btnAutomate.Enabled = frmMain.showData.Setlist.Count == frmMain.tvMatchFilesModel.Nodes.Count;
         }
     }
 }

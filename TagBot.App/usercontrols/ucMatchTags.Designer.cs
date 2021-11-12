@@ -44,6 +44,7 @@ namespace TagBot.App
             this.btnMatchDone = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tslTagCount = new System.Windows.Forms.ToolStripLabel();
+            this.btnAutomate = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,7 +136,7 @@ namespace TagBot.App
             // btnMatchDone
             // 
             this.btnMatchDone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMatchDone.Location = new System.Drawing.Point(288, 408);
+            this.btnMatchDone.Location = new System.Drawing.Point(293, 408);
             this.btnMatchDone.Name = "btnMatchDone";
             this.btnMatchDone.Size = new System.Drawing.Size(75, 23);
             this.btnMatchDone.TabIndex = 10;
@@ -159,10 +160,22 @@ namespace TagBot.App
             this.tslTagCount.Size = new System.Drawing.Size(42, 22);
             this.tslTagCount.Text = "Tags: 0";
             // 
+            // btnAutomate
+            // 
+            this.btnAutomate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAutomate.Location = new System.Drawing.Point(208, 408);
+            this.btnAutomate.Name = "btnAutomate";
+            this.btnAutomate.Size = new System.Drawing.Size(75, 23);
+            this.btnAutomate.TabIndex = 50;
+            this.btnAutomate.Text = "Automate";
+            this.btnAutomate.UseVisualStyleBackColor = true;
+            this.btnAutomate.Click += new System.EventHandler(this.btnAutomate_Click);
+            // 
             // ucMatchTags
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnAutomate);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.btnMatchDone);
             this.Controls.Add(this.lvMatchTags);
@@ -192,5 +205,6 @@ namespace TagBot.App
         private System.Windows.Forms.Button btnMatchDone;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel tslTagCount;
+        private System.Windows.Forms.Button btnAutomate;
     }
 }

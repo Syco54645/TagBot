@@ -119,6 +119,7 @@ namespace TagBot.App
 
             showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
             ucMatchTags.populateMatchTags(showData);
+            ucMatchTags.enableAutomateButton();
         }
 
         #region File List
@@ -399,38 +400,7 @@ namespace TagBot.App
 
             return audioFiles;
         }
-        private void btnAutomate_Click(object sender, EventArgs e) // todo fix
-        {
-            /*getShowData();
-            pbTagProgress.Value = 0;
-            //lvAudioFiles.SelectedIndices.Clear();
-            List<Track> tracks = showData.Setlist;
-            List<string> audioFiles = _getAudioFilesInCurrentDirector(lvAudioFiles.Items);
-
-            if (tracks.Count == audioFiles.Count)
-            {
-                // we can do this automatically more than likely
-                for (int i = 0; i < audioFiles.Count; i++)
-                {
-                    string filename = audioFiles[i];
-                    Metadata metadata = new Metadata
-                    {
-                        Title = tracks[i].TrackName,
-                        Tracknumber = Convert.ToString(tracks[i].TrackNumber),
-                        Album = showData.Date + " " + showData.Venue + ", " + showData.City + ", " + showData.State
-                    };
-                    proposedMetadata[filename].Metadata = metadata;
-                    
-                    int incrementAmount = 100 / audioFiles.Count;
-                    pbTagProgress.Increment(incrementAmount * (i));
-                }
-                MessageBox.Show("Please verify and save your files.", "Tagging Complete");
-            }
-            else
-            {
-                // scary needs to match stuff here
-            }*/
-        }
+        
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {

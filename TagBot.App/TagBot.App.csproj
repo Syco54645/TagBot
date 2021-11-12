@@ -98,6 +98,7 @@
       <DependentUpon>frmText.cs</DependentUpon>
     </Compile>
     <Compile Include="models\MetadataTextBox.cs" />
+    <Compile Include="models\SongNode.cs" />
     <Compile Include="ucMatchFiles.cs">
       <SubType>UserControl</SubType>
     </Compile>

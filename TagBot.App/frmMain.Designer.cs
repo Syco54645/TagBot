@@ -75,7 +75,6 @@ namespace TagBot.App
             this.btnLoadDatabase = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.pbTagProgress = new System.Windows.Forms.ProgressBar();
-            this.btnAutomate = new System.Windows.Forms.Button();
             this.btnMatch = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.txtDate = new System.Windows.Forms.TextBox();
@@ -114,10 +113,10 @@ namespace TagBot.App
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scTopBottom = new System.Windows.Forms.SplitContainer();
-            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
+            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.groupBox1.SuspendLayout();
             this.grpCommonTags.SuspendLayout();
             this.grpFileTags.SuspendLayout();
@@ -616,16 +615,6 @@ namespace TagBot.App
             this.pbTagProgress.Size = new System.Drawing.Size(360, 13);
             this.pbTagProgress.TabIndex = 28;
             // 
-            // btnAutomate
-            // 
-            this.btnAutomate.Location = new System.Drawing.Point(129, 31);
-            this.btnAutomate.Name = "btnAutomate";
-            this.btnAutomate.Size = new System.Drawing.Size(75, 23);
-            this.btnAutomate.TabIndex = 49;
-            this.btnAutomate.Text = "Automate";
-            this.btnAutomate.UseVisualStyleBackColor = true;
-            this.btnAutomate.Click += new System.EventHandler(this.btnAutomate_Click);
-            // 
             // btnMatch
             // 
             this.btnMatch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -766,7 +755,6 @@ namespace TagBot.App
             this.pnlShowSearch.Controls.Add(this.label12);
             this.pnlShowSearch.Controls.Add(this.txtDate);
             this.pnlShowSearch.Controls.Add(this.btnMatch);
-            this.pnlShowSearch.Controls.Add(this.btnAutomate);
             this.pnlShowSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlShowSearch.Location = new System.Drawing.Point(0, 405);
             this.pnlShowSearch.Name = "pnlShowSearch";
@@ -986,16 +974,6 @@ namespace TagBot.App
             this.scTopBottom.SplitterDistance = 469;
             this.scTopBottom.TabIndex = 8;
             // 
-            // srtfLog
-            // 
-            this.srtfLog.BackColor = System.Drawing.Color.Black;
-            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.srtfLog.Location = new System.Drawing.Point(0, 0);
-            this.srtfLog.Name = "srtfLog";
-            this.srtfLog.Size = new System.Drawing.Size(1278, 59);
-            this.srtfLog.TabIndex = 53;
-            this.srtfLog.Text = "";
-            // 
             // miniToolStrip
             // 
             this.miniToolStrip.AccessibleName = "New item selection";
@@ -1008,6 +986,16 @@ namespace TagBot.App
             this.miniToolStrip.Name = "miniToolStrip";
             this.miniToolStrip.Size = new System.Drawing.Size(301, 25);
             this.miniToolStrip.TabIndex = 10;
+            // 
+            // srtfLog
+            // 
+            this.srtfLog.BackColor = System.Drawing.Color.Black;
+            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.srtfLog.Location = new System.Drawing.Point(0, 0);
+            this.srtfLog.Name = "srtfLog";
+            this.srtfLog.Size = new System.Drawing.Size(1278, 59);
+            this.srtfLog.TabIndex = 53;
+            this.srtfLog.Text = "";
             // 
             // frmMain
             // 
@@ -1063,8 +1051,7 @@ namespace TagBot.App
         #endregion
         public System.Windows.Forms.ImageList imgListFileIcons;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ProgressBar pbTagProgress;
-        private System.Windows.Forms.Button btnAutomate;
+        public System.Windows.Forms.ProgressBar pbTagProgress;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtDate;
         private System.Windows.Forms.TextBox txtMetadataDate;

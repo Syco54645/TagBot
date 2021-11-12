@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using Tagbot.Service;
 using Tagbot.Service.contracts;
 using Tagbot.Service.models;
+using TagBot.App.models;
 using TagBot.App.Properties;
 using TagBot.Service.models;
 
@@ -21,7 +22,7 @@ namespace TagBot.App
     public partial class ucMatchFiles : UserControl
     {
         public frmMain frmMain;
-        private TreeModel tvMatchFilesModel;
+        //private TreeModel tvMatchFilesModel;
         public ucMatchFiles()
         {
             InitializeComponent();
@@ -53,7 +54,7 @@ namespace TagBot.App
         /// <param name="e"></param>
         private void tvDirectoriesAdv_NodeMouseClick(object sender, TreeNodeAdvMouseEventArgs e)
         {
-            SongNode node = (SongNode)tvMatchFilesModel.Nodes[e.Node.Index];
+            SongNode node = (SongNode)frmMain.tvMatchFilesModel.Nodes[e.Node.Index];
             frmMain.loadFlacTagsInEditor(frmMain.proposedMetadata[node.Filename]);
         }
 
@@ -185,7 +186,6 @@ namespace TagBot.App
             }
             else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
             {
-
                 Point targetPoint = tvMatchFiles.PointToClient(new Point(e.X, e.Y));
                 TreeNodeAdv targetNode = tvMatchFiles.GetNodeAt(targetPoint);
                 TreeNodeAdv tnNew;
@@ -205,7 +205,7 @@ namespace TagBot.App
                     targetNode.Expand();
 
                     // lvItem.Remove();
-                    tvMatchFilesModel.Nodes[targetNode.Index].Nodes.Add(new Node(trackName));
+                    frmMain.tvMatchFilesModel.Nodes[targetNode.Index].Nodes.Add(new Node(trackName));
                     lvItem.Font = new Font(frmMain.ucMatchTags.lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Regular);
                     lvItem.ForeColor = Color.LightGray;
                 }
@@ -215,11 +215,16 @@ namespace TagBot.App
             updateContention();
         }
 
+        public void expandMyMind()
+        {
+            tvMatchFiles.ExpandAll();
+        }
+
         public void updateContention()
         {
-            if (tvMatchFilesModel != null)
+            if (frmMain.tvMatchFilesModel != null)
             {
-                foreach (SongNode node in tvMatchFilesModel.Nodes)
+                foreach (SongNode node in frmMain.tvMatchFilesModel.Nodes)
                 {
                     string combinedTitle = string.Join(" > ", node.Nodes.Select(x => x.Text).ToArray());
                     int trackNumber = node.Index + 1;
@@ -235,8 +240,8 @@ namespace TagBot.App
 
         public void populateTvMatchFiles()
         {
-            tvMatchFilesModel = new TreeModel();
-            tvMatchFiles.Model = tvMatchFilesModel;
+            frmMain.tvMatchFilesModel = new TreeModel();
+            tvMatchFiles.Model = frmMain.tvMatchFilesModel;
             
             foreach (KeyValuePair<string, FlacFileInfo> entry in frmMain.originalMetadata)
             {
@@ -286,18 +291,8 @@ namespace TagBot.App
             node.Artist = flacFileInfo.Metadata.Artist;
             node.Title = flacFileInfo.Metadata.Title;
             node.Tracknumber = flacFileInfo.Metadata.Tracknumber;
-            tvMatchFilesModel.Nodes.Add(node);
+            frmMain.tvMatchFilesModel.Nodes.Add(node);
             return node;
-        }
-
-
-        public class SongNode : Node
-        {
-            public string Filename { get; set; }
-            public string Artist { get; set; }
-            public string Title { get; set; }
-            public override string Text { get { return (Index + 1).ToString() + " - " + Filename; } }
-            public string Tracknumber { get; set; }
         }
     }
 }
