@@ -99,6 +99,8 @@ namespace TagBot.App
                     int incrementAmount = 100 / frmMain.tvMatchFilesModel.Nodes.Count;
                     frmMain.pbTagProgress.Increment(incrementAmount * (i));
                     frmMain.ucMatchFiles.expandMyMind();
+                    lvMatchTags.Items[i].Font = new Font(lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Regular);
+                    lvMatchTags.Items[i].ForeColor = Color.LightGray;
                     i++;
                 }
                 SongNode selectedTvMatchFilesNode = frmMain.ucMatchFiles.currentSelectNoded();
