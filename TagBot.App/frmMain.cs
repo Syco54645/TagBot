@@ -594,11 +594,20 @@ namespace TagBot.App
         {
             string albumTitle = formatter.formatString(showData, Service.FormatterType.Album);
             txtOverallAlbum.Text = albumTitle;
+            txtMetadataFieldEditor_TextChanged(txtOverallAlbum, e);
             txtOverallDate.Text = formatter.formatDate(showData.Date);
+            txtMetadataFieldEditor_TextChanged(txtOverallDate, e);
             txtOverallComment.Text = "Source: " + new DirectoryInfo(currentPath).Name;
-
+            txtMetadataFieldEditor_TextChanged(txtOverallComment, e);
             var artistTransformationDict = Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation);
             txtOverallArtist.Text = (artistTransformationDict.ContainsKey(showData.Artist) && !string.IsNullOrEmpty(artistTransformationDict[showData.Artist])) ? artistTransformationDict[showData.Artist] : showData.Artist;
+            txtMetadataFieldEditor_TextChanged(txtOverallArtist, e);
+
+            SongNode selectedTvMatchFilesNode = ucMatchFiles.currentSelectNoded();
+            if (selectedTvMatchFilesNode != null)
+            {
+                loadFlacTagsInEditor(proposedMetadata[selectedTvMatchFilesNode.Filename]);
+            }
         }
 
         /// <summary>
@@ -692,7 +701,6 @@ namespace TagBot.App
             txtMetadataAlbum.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
             txtMetadataDate.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
             txtMetadataComment.TextChanged += new System.EventHandler(this.txtMetadataFieldEditor_TextChanged);
-
         }
 
         /// <summary>

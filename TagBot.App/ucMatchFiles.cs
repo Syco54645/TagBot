@@ -58,6 +58,15 @@ namespace TagBot.App
             frmMain.loadFlacTagsInEditor(frmMain.proposedMetadata[node.Filename]);
         }
 
+        public SongNode currentSelectNoded()
+        {
+            if (tvMatchFiles.CurrentNode != null)
+            {
+                return (SongNode)frmMain.tvMatchFilesModel.Nodes[tvMatchFiles.CurrentNode.Index];
+            }
+            return null;
+        }
+
         private void tvDirectoriesAdv_NodeMouseDoubleClick(object sender, TreeNodeAdvMouseEventArgs e)
         {
             if (e.Control is NodeTextBox)

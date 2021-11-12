@@ -101,7 +101,11 @@ namespace TagBot.App
                     frmMain.ucMatchFiles.expandMyMind();
                     i++;
                 }
-                MessageBox.Show("Please verify and save your files.", "Tagging Complete");
+                SongNode selectedTvMatchFilesNode = frmMain.ucMatchFiles.currentSelectNoded();
+                if (selectedTvMatchFilesNode != null)
+                {
+                    frmMain.loadFlacTagsInEditor(frmMain.proposedMetadata[selectedTvMatchFilesNode.Filename]);
+                }
             }
             else
             {
