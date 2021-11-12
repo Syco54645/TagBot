@@ -43,12 +43,14 @@ namespace TagBot.App
             this.lbArtists = new System.Windows.Forms.ListBox();
             this.lblDataVersion = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblDatabaseUrl = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // lblLoadedDatabaseVersion
             // 
             this.lblLoadedDatabaseVersion.AutoSize = true;
-            this.lblLoadedDatabaseVersion.Location = new System.Drawing.Point(105, 39);
+            this.lblLoadedDatabaseVersion.Location = new System.Drawing.Point(104, 55);
             this.lblLoadedDatabaseVersion.Name = "lblLoadedDatabaseVersion";
             this.lblLoadedDatabaseVersion.Size = new System.Drawing.Size(98, 13);
             this.lblLoadedDatabaseVersion.TabIndex = 9;
@@ -57,7 +59,7 @@ namespace TagBot.App
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(15, 116);
+            this.label15.Location = new System.Drawing.Point(13, 117);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(87, 13);
             this.label15.TabIndex = 8;
@@ -66,7 +68,7 @@ namespace TagBot.App
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(18, 39);
+            this.label14.Location = new System.Drawing.Point(16, 55);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(84, 13);
             this.label14.TabIndex = 7;
@@ -75,7 +77,7 @@ namespace TagBot.App
             // txtLoadedDatabase
             // 
             this.txtLoadedDatabase.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtLoadedDatabase.Location = new System.Drawing.Point(104, 24);
+            this.txtLoadedDatabase.Location = new System.Drawing.Point(104, 9);
             this.txtLoadedDatabase.Name = "txtLoadedDatabase";
             this.txtLoadedDatabase.ReadOnly = true;
             this.txtLoadedDatabase.Size = new System.Drawing.Size(224, 13);
@@ -84,7 +86,7 @@ namespace TagBot.App
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(48, 24);
+            this.label13.Location = new System.Drawing.Point(48, 9);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(53, 13);
             this.label13.TabIndex = 11;
@@ -93,7 +95,7 @@ namespace TagBot.App
             // lblShowCount
             // 
             this.lblShowCount.AutoSize = true;
-            this.lblShowCount.Location = new System.Drawing.Point(105, 54);
+            this.lblShowCount.Location = new System.Drawing.Point(104, 70);
             this.lblShowCount.Name = "lblShowCount";
             this.lblShowCount.Size = new System.Drawing.Size(72, 13);
             this.lblShowCount.TabIndex = 14;
@@ -102,7 +104,7 @@ namespace TagBot.App
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(63, 54);
+            this.label2.Location = new System.Drawing.Point(61, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 13);
             this.label2.TabIndex = 13;
@@ -111,7 +113,7 @@ namespace TagBot.App
             // lblArtistCount
             // 
             this.lblArtistCount.AutoSize = true;
-            this.lblArtistCount.Location = new System.Drawing.Point(105, 84);
+            this.lblArtistCount.Location = new System.Drawing.Point(104, 100);
             this.lblArtistCount.Name = "lblArtistCount";
             this.lblArtistCount.Size = new System.Drawing.Size(68, 13);
             this.lblArtistCount.TabIndex = 16;
@@ -120,7 +122,7 @@ namespace TagBot.App
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(67, 84);
+            this.label6.Location = new System.Drawing.Point(65, 100);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 15;
@@ -129,7 +131,7 @@ namespace TagBot.App
             // lblSongCount
             // 
             this.lblSongCount.AutoSize = true;
-            this.lblSongCount.Location = new System.Drawing.Point(105, 69);
+            this.lblSongCount.Location = new System.Drawing.Point(104, 85);
             this.lblSongCount.Name = "lblSongCount";
             this.lblSongCount.Size = new System.Drawing.Size(70, 13);
             this.lblSongCount.TabIndex = 18;
@@ -138,7 +140,7 @@ namespace TagBot.App
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(65, 69);
+            this.label3.Location = new System.Drawing.Point(63, 85);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 17;
@@ -147,7 +149,7 @@ namespace TagBot.App
             // lbArtists
             // 
             this.lbArtists.FormattingEnabled = true;
-            this.lbArtists.Location = new System.Drawing.Point(104, 116);
+            this.lbArtists.Location = new System.Drawing.Point(104, 117);
             this.lbArtists.Name = "lbArtists";
             this.lbArtists.Size = new System.Drawing.Size(224, 95);
             this.lbArtists.TabIndex = 19;
@@ -155,7 +157,7 @@ namespace TagBot.App
             // lblDataVersion
             // 
             this.lblDataVersion.AutoSize = true;
-            this.lblDataVersion.Location = new System.Drawing.Point(105, 99);
+            this.lblDataVersion.Location = new System.Drawing.Point(104, 25);
             this.lblDataVersion.Name = "lblDataVersion";
             this.lblDataVersion.Size = new System.Drawing.Size(75, 13);
             this.lblDataVersion.TabIndex = 21;
@@ -164,17 +166,39 @@ namespace TagBot.App
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(34, 99);
+            this.label4.Location = new System.Drawing.Point(32, 25);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 13);
             this.label4.TabIndex = 20;
             this.label4.Text = "Data Version";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(32, 40);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(68, 13);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Data Version";
+            // 
+            // lblDatabaseUrl
+            // 
+            this.lblDatabaseUrl.AutoSize = true;
+            this.lblDatabaseUrl.Location = new System.Drawing.Point(104, 40);
+            this.lblDatabaseUrl.Name = "lblDatabaseUrl";
+            this.lblDatabaseUrl.Size = new System.Drawing.Size(76, 13);
+            this.lblDatabaseUrl.TabIndex = 23;
+            this.lblDatabaseUrl.TabStop = true;
+            this.lblDatabaseUrl.Text = "lblDatabaseUrl";
+            this.lblDatabaseUrl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblDatabaseUrl_LinkClicked);
+            // 
             // frmDbInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(380, 233);
+            this.ClientSize = new System.Drawing.Size(380, 226);
+            this.Controls.Add(this.lblDatabaseUrl);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.lblDataVersion);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lbArtists);
@@ -195,7 +219,7 @@ namespace TagBot.App
             this.Name = "frmDbInfo";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "frmDbInfo";
+            this.Text = "Database Info";
             this.Load += new System.EventHandler(this.frmDbInfo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -217,5 +241,7 @@ namespace TagBot.App
         private System.Windows.Forms.ListBox lbArtists;
         private System.Windows.Forms.Label lblDataVersion;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.LinkLabel lblDatabaseUrl;
     }
 }

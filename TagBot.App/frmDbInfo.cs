@@ -33,11 +33,17 @@ namespace TagBot.App
             lblShowCount.Text = databaseMeta.ShowCount.ToString();
             lblArtistCount.Text = databaseMeta.Artists.Count.ToString();
             lblDataVersion.Text = databaseMeta.DisplayDataVersion();
+            lblDatabaseUrl.Text = databaseMeta.DatabaseRepo + "/releases";
 
             foreach (string artist in databaseMeta.Artists)
             {
                 lbArtists.Items.Add(artist);
             }
+        }
+
+        private void lblDatabaseUrl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start((sender as LinkLabel).Text);
         }
     }
 }
