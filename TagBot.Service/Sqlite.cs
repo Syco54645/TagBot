@@ -181,9 +181,9 @@ namespace Tagbot.Service
                 {
                     while (reader.Read())
                     {
-                        if ((string)reader["meta_key"] == "version")
+                        if ((string)reader["meta_key"] == "schema_version")
                         {
-                            meta.Version = (string)reader["meta_value"];
+                            meta.SchemaVersion = (string)reader["meta_value"];
                         }
                     }
                 }

@@ -8,7 +8,7 @@ namespace TagBot.Service.models
 {
     public class DatabaseMeta
     {
-        public string Version { get; set; }
+        public string SchemaVersion { get; set; }
         public List<string> Artists { get; set; }
         public int ShowCount { get; set; }
         public int SongCount { get; set; }

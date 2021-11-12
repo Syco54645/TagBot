@@ -28,7 +28,7 @@ namespace TagBot.App
         {
             txtLoadedDatabase.Text = Properties.Settings.Default.databaseLocation;
             txtLoadedDatabase.AppendText("");
-            lblLoadedDatabaseVersion.Text = databaseMeta.Version;
+            lblLoadedDatabaseVersion.Text = databaseMeta.SchemaVersion;
             lblSongCount.Text = databaseMeta.SongCount.ToString();
             lblShowCount.Text = databaseMeta.ShowCount.ToString();
             lblArtistCount.Text = databaseMeta.Artists.Count.ToString();
