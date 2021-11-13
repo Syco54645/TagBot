@@ -44,6 +44,7 @@ namespace TagBot.App
         frmDbInfo frmDbInfo = new frmDbInfo();
         frmPreferences frmPreferences = new frmPreferences();
         frmConfirmation frmConfirmation = new frmConfirmation();
+        frmMultipleShowsFound frmMultipleShowsFound = new frmMultipleShowsFound();
 
         public frmMain()
         {
@@ -116,8 +117,30 @@ namespace TagBot.App
             Sqlite sqlite = new Sqlite();
             sqlite.databasePath = Settings.Default.databaseLocation;
             string showDataJson = sqlite.getShow(txtDate.Text);
+            List<ShowSearchResponseContract> temp = Utility.DeserializeObject<List<ShowSearchResponseContract>>(showDataJson);
+            if (temp.Count == 0)
+            {
+                MessageBox.Show("No show results found.", "No Data");
+                fileMode();
+                return;
+            }
+            if (temp.Count == 1)
+            {
+                showData = temp[0];
+            }
+            else
+            {
+                if (frmMultipleShowsFound.IsDisposed)
+                {
+                    frmMultipleShowsFound = new frmMultipleShowsFound();
+                }
+                frmMultipleShowsFound.frmMain = this;
+                frmMultipleShowsFound.showList = temp;
+                frmMultipleShowsFound.StartPosition = FormStartPosition.CenterParent;
+                frmMultipleShowsFound.ShowDialog();
+            }
 
-            showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
+            //showData = Utility.DeserializeObject<ShowSearchResponseContract>(showDataJson);
             ucMatchTags.populateMatchTags(showData);
             ucMatchTags.enableAutomateButton();
         }
@@ -457,8 +480,8 @@ namespace TagBot.App
         {
             if (!string.IsNullOrEmpty(txtDate.Text))
             {
-                matchMode();
                 getShowData();
+                matchMode();
                 _log.AddToLog("Some event to log.", _randomColors[_r.Next(3)]);
                 srtfLog.Rtf = _log.GetLogAsRichText(true);
                 srtfLog.ScrollToBottom();

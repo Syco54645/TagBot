@@ -50,14 +50,17 @@ namespace Tagbot.Service
 
         public string getShow(string date)
         {
-            ShowSearchResponseContract response;
+            List<ShowSearchResponseContract> response;
             string strippedDate = Utility.cleanDate(date);
 
             string showInfoJson = getShowInfo(strippedDate);
-            response = Newtonsoft.Json.JsonConvert.DeserializeObject<ShowSearchResponseContract>(showInfoJson);
+            response = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ShowSearchResponseContract>>(showInfoJson);
 
-            string setlistJson = getShowSongs(response.ShowId);
-            response.Setlist = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Track>>(setlistJson);
+            foreach (var show in response)
+            {
+                string setlistJson = getShowSongs(show.ShowId);
+                show.Setlist = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Track>>(setlistJson);
+            }
 
             string stringResponse = Newtonsoft.Json.JsonConvert.SerializeObject(response);
             return stringResponse;
@@ -65,7 +68,7 @@ namespace Tagbot.Service
 
         public string getShowInfo(string date)
         {
-            ShowSearchResponseContract response = new ShowSearchResponseContract();
+            List<ShowSearchResponseContract> response = new List<ShowSearchResponseContract>();
             //https://localhost:44341/api/values/dmb2009-09-19
             using (var connection = new SQLiteConnection("Data Source=" + databasePath))
             {
@@ -85,12 +88,16 @@ namespace Tagbot.Service
                 {
                     while (reader.Read())
                     {
-                        response.ShowId = (int)(long)reader["show_id"];
-                        response.Date = (string)reader["date"];
-                        response.Venue = (string)reader["venue"];
-                        response.City = (string)reader["city"];
-                        response.State = (string)reader["state"];
-                        response.Artist = (string)reader["artist"];
+                        ShowSearchResponseContract temp = new ShowSearchResponseContract
+                        {
+                            ShowId = (int)(long)reader["show_id"],
+                            Date = (string)reader["date"],
+                            Venue = (string)reader["venue"],
+                            City = (string)reader["city"],
+                            State = (string)reader["state"],
+                            Artist = (string)reader["artist"],
+                        };
+                        response.Add(temp);
                     }
                 }
             }
