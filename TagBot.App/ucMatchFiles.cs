@@ -300,6 +300,7 @@ namespace TagBot.App
             node.Artist = flacFileInfo.Metadata.Artist;
             node.Title = flacFileInfo.Metadata.Title;
             node.Tracknumber = flacFileInfo.Metadata.Tracknumber;
+            node.Album = flacFileInfo.Metadata.Album;
             frmMain.tvMatchFilesModel.Nodes.Add(node);
             return node;
         }

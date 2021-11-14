@@ -11,6 +11,7 @@ namespace TagBot.App.models
     {
         public string Filename { get; set; }
         public string Artist { get; set; }
+        public string Album { get; set; }
         public string Title { get; set; }
         public override string Text { get { return (Index + 1).ToString() + " - " + Filename; } }
         public string Tracknumber { get; set; }
