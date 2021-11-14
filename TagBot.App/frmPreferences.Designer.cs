@@ -29,7 +29,7 @@ namespace TagBot.App
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "dmb",
             "dm",
@@ -53,9 +53,10 @@ namespace TagBot.App
             this.txtTitleFormatter = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.grpArtistTransformation = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.lvArtists = new System.Windows.Forms.ListView();
             this.txtArtistTransformation = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.btnResetSettings = new System.Windows.Forms.Button();
             this.grpAlbumFormatter.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.grpCustomDate.SuspendLayout();
@@ -267,11 +268,20 @@ namespace TagBot.App
             this.grpArtistTransformation.TabStop = false;
             this.grpArtistTransformation.Text = "Artist Transformation";
             // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(8, 112);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(304, 40);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Click on an artist abbreviation in the above list and enter what the full name sh" +
+    "ould be in the text box.";
+            // 
             // lvArtists
             // 
             this.lvArtists.HideSelection = false;
             this.lvArtists.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3});
+            listViewItem1});
             this.lvArtists.Location = new System.Drawing.Point(8, 24);
             this.lvArtists.Name = "lvArtists";
             this.lvArtists.Size = new System.Drawing.Size(304, 56);
@@ -288,20 +298,22 @@ namespace TagBot.App
             this.txtArtistTransformation.TabIndex = 1;
             this.txtArtistTransformation.TextChanged += new System.EventHandler(this.txtArtistTransformation_TextChanged);
             // 
-            // label1
+            // btnResetSettings
             // 
-            this.label1.Location = new System.Drawing.Point(8, 112);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(304, 40);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Click on an artist abbreviation in the above list and enter what the full name sh" +
-    "ould be in the text box.";
+            this.btnResetSettings.Location = new System.Drawing.Point(8, 464);
+            this.btnResetSettings.Name = "btnResetSettings";
+            this.btnResetSettings.Size = new System.Drawing.Size(75, 23);
+            this.btnResetSettings.TabIndex = 9;
+            this.btnResetSettings.Text = "Reset Settings";
+            this.btnResetSettings.UseVisualStyleBackColor = true;
+            this.btnResetSettings.Click += new System.EventHandler(this.btnResetSettings_Click);
             // 
             // frmPreferences
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(347, 502);
+            this.Controls.Add(this.btnResetSettings);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
@@ -352,5 +364,6 @@ namespace TagBot.App
         private System.Windows.Forms.TextBox txtArtistTransformation;
         private System.Windows.Forms.ListView lvArtists;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnResetSettings;
     }
 }

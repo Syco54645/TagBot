@@ -154,5 +154,25 @@ namespace TagBot.App
                 artistTransformationDict[artistAbbreviation] = txtArtistTransformation.Text;
             }
         }
+
+        private void btnResetSettings_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Resetting settings cannot be undone. Are you sure you wish to do this?", "Thar be dragons!!!!", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Settings.Default.albumFormatterString = null;
+                Settings.Default.customDateFormatter = null ;
+                Settings.Default.artistTransformation = null;
+                Settings.Default.startingDirectory = null;
+                Settings.Default.databaseLocation = null;
+                Settings.Default.Save();
+                frmMain.updateFormatterStrings();
+                this.Close();
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+        }
     }
 }
