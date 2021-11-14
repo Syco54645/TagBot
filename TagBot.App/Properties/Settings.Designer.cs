@@ -94,5 +94,14 @@ namespace TagBot.App.Properties {
                 this["titleFormatterString"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/Syco54645/TagBot")]
+        public string applicationRepo {
+            get {
+                return ((string)(this["applicationRepo"]));
+            }
+        }
     }
 }

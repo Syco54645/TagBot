@@ -117,6 +117,7 @@ namespace TagBot.App
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.saveTagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkForUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.grpCommonTags.SuspendLayout();
             this.grpFileTags.SuspendLayout();
@@ -922,6 +923,7 @@ namespace TagBot.App
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkForUpdateToolStripMenuItem,
             this.debugToolStripMenuItem,
             this.toolStripMenuItem1,
             this.aboutToolStripMenuItem});
@@ -998,6 +1000,14 @@ namespace TagBot.App
             this.saveTagsToolStripMenuItem.Text = "Save Tags";
             this.saveTagsToolStripMenuItem.Visible = false;
             this.saveTagsToolStripMenuItem.Click += new System.EventHandler(this.saveTagsToolStripMenuItem_Click);
+            // 
+            // checkForUpdateToolStripMenuItem
+            // 
+            this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
+            this.checkForUpdateToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
+            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.checkForUpdateToolStripMenuItem.Text = "Check For Update";
+            this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdateToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -1137,6 +1147,7 @@ namespace TagBot.App
         private System.Windows.Forms.Button btnAutoFillCommonTags;
         private System.Windows.Forms.ToolStripLabel tslMatchFilesCount;
         private System.Windows.Forms.ToolStripMenuItem saveTagsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem checkForUpdateToolStripMenuItem;
     }
 }
 

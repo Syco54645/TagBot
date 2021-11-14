@@ -18,6 +18,7 @@ namespace TagBot.Log
         private readonly uint _maxEntries;
         private readonly object _logLock = new object();
         private readonly Color _defaultColor = Color.White;
+        public App.ScrollingRichTextBox rtf;
 
         private class LogEntry
         {
@@ -72,15 +73,24 @@ namespace TagBot.Log
         /// <summary>
         /// Adds <paramref name="text"/> as a log entry.
         /// </summary>
-        public void AddToLog(string text)
+        public void AddToLog(string text, LogType type = LogType.Info)
         {
-            AddToLog(text, _defaultColor);
+            Color entryColor = Color.White;
+            if (type == LogType.Error)
+            {
+                entryColor = Color.Red;
+            }
+            else if (type == LogType.Notice)
+            {
+                entryColor = Color.Blue;
+            }
+            AddToLog(type + ": " + text, entryColor, type);
         }
 
         /// <summary>
         /// Adds <paramref name="text"/> as a log entry, and specifies a color to display it in.
         /// </summary>
-        public void AddToLog(string text, Color entryColor)
+        public void AddToLog(string text, Color entryColor, LogType type = LogType.Info)
         {
             lock (_logLock)
             {
@@ -122,6 +132,35 @@ namespace TagBot.Log
         private string ColorToRichColorString(Color c)
         {
             return $"\\red{c.R}\\green{c.G}\\blue{c.B};";
+        }
+        public void AddToRtf(App.ScrollingRichTextBox rtf, string text, Color entryColor)
+        {
+            AddToLog(text, entryColor);
+            rtf.Rtf = GetLogAsRichText(false);
+            rtf.ScrollToBottom();
+        }
+        public void AddToRtf(string text, LogType type = LogType.Info)
+        {
+            AddToLog(text, type);
+            rtf.Rtf = GetLogAsRichText(false);
+            rtf.ScrollToBottom();
+        }
+
+        public void AddErrorToRtf(string text)
+        {
+            AddToRtf(text, LogType.Error);
+        }
+
+        public void AddNoticeToRtf(string text)
+        {
+            AddToRtf(text, LogType.Notice);
+        }
+
+        public enum LogType
+        {
+            Error,
+            Notice,
+            Info
         }
     }
 }

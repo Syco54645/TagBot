@@ -188,6 +188,20 @@ namespace Tagbot.Service
                 {
                     while (reader.Read())
                     {
+                        /*string metaKey = "";
+                        switch ((string)reader["meta_key"])
+                        {
+                            case "schema_version":
+                                metaKey = "SchemaVersion";
+                                break;
+                            case "database_repo":
+                                metaKey = "DatabaseRepo";
+                                break;
+                            case "database_name":
+                                metaKey = "Name";
+                                break;
+                        }
+                        meta[metaKey] = (string)reader["meta_value"];*/
                         if ((string)reader["meta_key"] == "schema_version")
                         {
                             meta.SchemaVersion = (string)reader["meta_value"];
@@ -195,6 +209,10 @@ namespace Tagbot.Service
                         if ((string)reader["meta_key"] == "database_repo")
                         {
                             meta.DatabaseRepo = (string)reader["meta_value"];
+                        }
+                        if ((string)reader["meta_key"] == "database_name")
+                        {
+                            meta.Name = (string)reader["meta_value"];
                         }
                     }
                 }

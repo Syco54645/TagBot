@@ -31,10 +31,10 @@ namespace TagBot.App
         public TreeModel tvMatchFilesModel;
         public Formatter formatter = new Formatter(Settings.Default.customDateFormatter);
 
-        private Logger _log = new Logger(100u);
+        public Logger log = new Logger(100u);
         private List<Color> _randomColors = new List<Color> { Color.Red, Color.SkyBlue, Color.Green };
         private Random _r = new Random((int)DateTime.Now.Ticks);
-
+        public ScrollingRichTextBox rtfLogger;
 
         public ucTextFiles ucTextFiles = new ucTextFiles();
         frmDebug frmDebug = new frmDebug();
@@ -45,6 +45,7 @@ namespace TagBot.App
         frmPreferences frmPreferences = new frmPreferences();
         frmConfirmation frmConfirmation = new frmConfirmation();
         frmMultipleShowsFound frmMultipleShowsFound = new frmMultipleShowsFound();
+        frmUpdate frmUpdate = new frmUpdate();
 
         public frmMain()
         {
@@ -55,6 +56,7 @@ namespace TagBot.App
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            log.rtf = srtfLog;
             ucManualMatch.frmMain = this;
             ucMatchTags.frmMain = this;
             pnlTagView.Controls.Add(ucMatchTags);
@@ -426,8 +428,8 @@ namespace TagBot.App
             {
                 getShowData();
                 matchMode();
-                _log.AddToLog("Some event to log.", _randomColors[_r.Next(3)]);
-                srtfLog.Rtf = _log.GetLogAsRichText(true);
+                log.AddToLog("Some event to log.", _randomColors[_r.Next(3)]);
+                srtfLog.Rtf = log.GetLogAsRichText(true);
                 srtfLog.ScrollToBottom();
             }
             else
@@ -699,6 +701,18 @@ namespace TagBot.App
         private void saveTagsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveTags();
+        }
+
+        private void checkForUpdateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmUpdate.IsDisposed)
+            {
+                frmUpdate = new frmUpdate();
+            }
+            frmUpdate.StartPosition = FormStartPosition.Manual;
+            frmUpdate.Location = new Point(this.Location.X + (this.Width - frmUpdate.Width) / 2, this.Location.Y + (this.Height - frmUpdate.Height) / 2);
+            frmUpdate.frmMain = this;
+            frmUpdate.Show();
         }
     }
 }

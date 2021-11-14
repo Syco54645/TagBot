@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace TagBot.App
 {
-    class ScrollingRichTextBox : RichTextBox
+    public class ScrollingRichTextBox : RichTextBox
     {
         [Browsable(true)]
         [Category("Custom Behavior")]
