@@ -361,54 +361,6 @@ namespace TagBot.App
         }
         #endregion
 
-        private void btnAutomate_Click_Original(object sender, EventArgs e)
-        {
-            getShowData();
-            pbTagProgress.Value = 0;
-            List<Track> tracks = showData.Setlist;
-            var files = new List<ListViewItem>(); // lvAudioFiles.Items; // todo fix this
-            List<string> audioFiles = new List<string>();
-            foreach (ListViewItem f in files)
-            {
-                string fileName = f.Text;
-                string ext = fileName.Substring(Math.Max(0, fileName.Length - 5));
-                if (ext == ".flac")
-                {
-                    audioFiles.Add(fileName);
-                }
-            }
-
-            if (tracks.Count == audioFiles.Count)
-            {
-                // we can do this automatically more than likely
-                for (int i = 0; i < audioFiles.Count; i++)
-                {
-                    string fileName = audioFiles[i];
-                    string path = this.currentPath + "\\" + fileName;
-                    Metadata metadata = new Metadata
-                    {
-                        Title = tracks[i].TrackName,
-                        Tracknumber = Convert.ToString(tracks[i].TrackNumber),
-                        Album = showData.Date + " " + showData.Venue + ", " + showData.City + ", " + showData.State
-                    };
-                    Flac.writeFlacTags(path, metadata);
-                    int incrementAmount = 100 / audioFiles.Count;
-                    pbTagProgress.Increment(incrementAmount * (i));
-                }
-                MessageBox.Show("Tagging Complete");
-            }
-            else
-            {
-                // scary needs to match stuff here
-            }
-            /*foreach (Track t in tracks)
-            {
-
-            }*/
-            
-        }
-
-        
         private List<string> _getAudioFilesInCurrentDirector(ListView.ListViewItemCollection files)
         {
             List<string> audioFiles = new List<string>();

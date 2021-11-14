@@ -36,6 +36,7 @@ namespace TagBot.App
             this.dgcNewVal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.pbTagProgress = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChanges)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,17 +82,18 @@ namespace TagBot.App
             // btnAccept
             // 
             this.btnAccept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAccept.Location = new System.Drawing.Point(720, 404);
+            this.btnAccept.Location = new System.Drawing.Point(720, 400);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(75, 23);
             this.btnAccept.TabIndex = 1;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = true;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(632, 404);
+            this.btnCancel.Location = new System.Drawing.Point(632, 400);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 2;
@@ -99,11 +101,20 @@ namespace TagBot.App
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // pbTagProgress
+            // 
+            this.pbTagProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pbTagProgress.Location = new System.Drawing.Point(0, 424);
+            this.pbTagProgress.Name = "pbTagProgress";
+            this.pbTagProgress.Size = new System.Drawing.Size(800, 15);
+            this.pbTagProgress.TabIndex = 29;
+            // 
             // frmConfirmation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 439);
+            this.Controls.Add(this.pbTagProgress);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.dgvChanges);
@@ -130,5 +141,6 @@ namespace TagBot.App
         private System.Windows.Forms.DataGridViewTextBoxColumn dgcNewVal;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnCancel;
+        public System.Windows.Forms.ProgressBar pbTagProgress;
     }
 }

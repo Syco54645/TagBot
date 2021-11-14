@@ -74,7 +74,6 @@ namespace TagBot.App
             this.txtLoadedDatabase = new System.Windows.Forms.TextBox();
             this.btnLoadDatabase = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
-            this.pbTagProgress = new System.Windows.Forms.ProgressBar();
             this.btnMatch = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.txtDate = new System.Windows.Forms.TextBox();
@@ -163,7 +162,6 @@ namespace TagBot.App
             this.groupBox1.Controls.Add(this.txtLoadedDatabase);
             this.groupBox1.Controls.Add(this.btnLoadDatabase);
             this.groupBox1.Controls.Add(this.label13);
-            this.groupBox1.Controls.Add(this.pbTagProgress);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
@@ -607,14 +605,6 @@ namespace TagBot.App
             this.label13.TabIndex = 0;
             this.label13.Text = "Database";
             // 
-            // pbTagProgress
-            // 
-            this.pbTagProgress.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pbTagProgress.Location = new System.Drawing.Point(5, 456);
-            this.pbTagProgress.Name = "pbTagProgress";
-            this.pbTagProgress.Size = new System.Drawing.Size(360, 13);
-            this.pbTagProgress.TabIndex = 28;
-            // 
             // btnMatch
             // 
             this.btnMatch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1051,7 +1041,6 @@ namespace TagBot.App
         #endregion
         public System.Windows.Forms.ImageList imgListFileIcons;
         private System.Windows.Forms.GroupBox groupBox1;
-        public System.Windows.Forms.ProgressBar pbTagProgress;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtDate;
         private System.Windows.Forms.TextBox txtMetadataDate;

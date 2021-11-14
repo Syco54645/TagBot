@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TagBot.Service;
 using TagBot.Service.models;
 
 namespace TagBot.App
@@ -37,7 +38,7 @@ namespace TagBot.App
                     "Artist",
                     "Date",
                     "Tracknumber",
-                    //"Comment"
+                    "Comment"
                 };
                 foreach (string mdk in metadataKeys)
                 {
@@ -81,6 +82,24 @@ namespace TagBot.App
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+            pbTagProgress.Value = i;
+            foreach (var item in frmMain.proposedMetadata)
+            {
+                string filename = item.Key;
+                Metadata proposedMetadata = item.Value.Metadata;
+                string path = frmMain.currentPath + "\\" + filename;
+                Flac.writeFlacTags(path, proposedMetadata);
+                int incrementAmount = 100 / frmMain.tvMatchFilesModel.Nodes.Count;
+                pbTagProgress.Increment(incrementAmount * (i));
+                i++;
+            }
+            MessageBox.Show("Tagging Complete");
             this.Close();
         }
     }
