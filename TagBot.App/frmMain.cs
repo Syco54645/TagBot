@@ -301,6 +301,7 @@ namespace TagBot.App
             txtMetadataAlbum.Text = flacInfo.Metadata.Album;
             txtMetadataDate.Text = flacInfo.Metadata.Date;
             txtMetadataTrackNumber.Text = flacInfo.Metadata.Tracknumber;
+            txtMetadataComment.Text = flacInfo.Metadata.Comment;
 
             /*txtOverallAlbum.Text = string.Empty;
             txtOverallArtist.Text = string.Empty;
