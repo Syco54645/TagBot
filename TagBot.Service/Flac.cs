@@ -30,6 +30,10 @@ namespace TagBot.Service
                         {
                             response.Metadata[Utility.UpperFirst(tag.Key)] = tag.Value;
                         }
+                        if (vorbisComment["Comment"] != null && !string.IsNullOrEmpty(vorbisComment["Comment"].Value.ToString()))
+                        {
+                            response.Metadata["Comment"] = vorbisComment["Comment"].Value;
+                        }
                     }
                 }
             }
@@ -62,6 +66,7 @@ namespace TagBot.Service
                     comment.Date.Value = metadata.Date;
                     comment.Title.Value = metadata.Title;
                     comment.TrackNumber.Value = metadata.Tracknumber;
+                    comment["Comment"] = new VorbisCommentValues(metadata.Comment);
 
                     // Write the changes back to the FLAC file
                     flac.Save();

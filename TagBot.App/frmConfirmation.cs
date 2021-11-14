@@ -22,6 +22,7 @@ namespace TagBot.App
 
         private void frmConfirmation_Load(object sender, EventArgs e)
         {
+            pbTagProgress.Value = 0;
             dgvChanges.Rows.Clear();
             dgvChanges.Font = new Font(this.Font.FontFamily.Name, 8);
             

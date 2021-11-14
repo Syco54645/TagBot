@@ -398,35 +398,26 @@ namespace TagBot.App
             MessageBox.Show("Made with love for the DMB community by Syco54645");
         }
 
+        private void saveTags()
+        {
+            if (proposedMetadata != null)
+            {
+                if (frmConfirmation.IsDisposed == true)
+                {
+                    frmConfirmation = new frmConfirmation();
+                }
+                frmConfirmation.frmMain = this;
+                frmConfirmation.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No Tags Loaded.");
+            }
+        }
+
         private void tsbSave_Click(object sender, EventArgs e) // todo fix
         {
-            if (frmConfirmation.IsDisposed == true)
-            {
-                frmConfirmation = new frmConfirmation();
-            }
-            frmConfirmation.frmMain = this;
-            frmConfirmation.ShowDialog();
-            /*var files = lvAudioFiles.SelectedItems;
-            int incrementAmount = 100 / files.Count;
-            pbTagProgress.Value = 0;
-
-            List<string> audioFiles = new List<string>();
-            for (int i = 0; i < files.Count; i++)
-            {
-                ListViewItem f = files[i];
-                string filename = f.Text;
-                string ext = filename.Substring(Math.Max(0, filename.Length - 5));
-                if (ext == ".flac")
-                {
-                    audioFiles.Add(filename);
-
-                    string path = this.currentPath + "\\" + filename;
-                    Metadata metadata = proposedMetadata[filename].Metadata;
-                    Flac.writeFlacTags(path, metadata);
-                    pbTagProgress.Increment(incrementAmount * (i));
-                }
-            }
-            MessageBox.Show("Flac tags saved.", "Saving Complete");*/
+            saveTags();
         }
 
         private void btnMatch_Click(object sender, EventArgs e)
@@ -703,6 +694,11 @@ namespace TagBot.App
                     proposedMetadata[lblCurrentFile.Text].Metadata[tag.FieldInMetadata] = ctrl.Text;
                 }
             }
+        }
+
+        private void saveTagsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveTags();
         }
     }
 }
