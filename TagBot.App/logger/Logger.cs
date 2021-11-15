@@ -78,11 +78,11 @@ namespace TagBot.Log
             Color entryColor = Color.White;
             if (type == LogType.Error)
             {
-                entryColor = Color.Red;
+                entryColor = Color.Tomato;
             }
             else if (type == LogType.Notice)
             {
-                entryColor = Color.Blue;
+                entryColor = Color.DeepSkyBlue;
             }
             AddToLog(type + ": " + text, entryColor, type);
         }
