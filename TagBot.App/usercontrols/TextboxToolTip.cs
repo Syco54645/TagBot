@@ -12,15 +12,16 @@ namespace TagBot.App.usercontrols
     public partial class TextboxToolTip : TextBox
     {
         private TextBox _tb = new TextBox();
+        private ToolTip _tt = new ToolTip();
 
         public TextboxToolTip() : base()
         {
-            /*_tb.AutoPopDelay = 1500;
-            _tb.InitialDelay = 400;
+            _tt.AutoPopDelay = 1500;
+            _tt.InitialDelay = 400;
             //_tt.IsBalloon = true;
-            _tb.UseAnimation = true;
-            _tb.UseFading = true;
-            _tb.Active = true;*/
+            _tt.UseAnimation = true;
+            _tt.UseFading = true;
+            _tt.Active = true;
             this.MouseEnter += new EventHandler(this.ucTextBox_MouseEnter);
         }
 
@@ -28,9 +29,8 @@ namespace TagBot.App.usercontrols
         {
             if (!string.IsNullOrEmpty(this.Text))
             {
-                ToolTip tt = new ToolTip();
-                tt.SetToolTip(this, this.Text);
-                tt.Show(this.Text, this.Parent);
+                _tt.SetToolTip(this, this.Text);
+                _tt.Show(this.Text, this.Parent);
             }
         }
 
