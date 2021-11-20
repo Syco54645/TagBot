@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{52C19F10-8067-4E3F-A663-DB19550306C8}"
-	ProjectSection(SolutionItems) = preProject
-		database.db = database.db
-		database.sql = database.sql
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{EE4FDA15-55B8-4C35-B6A0-D229B708C68F}"
 	ProjectSection(SolutionItems) = preProject
 		LICENSE = LICENSE
