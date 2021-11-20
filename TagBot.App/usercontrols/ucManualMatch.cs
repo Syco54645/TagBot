@@ -67,7 +67,6 @@ namespace TagBot.App.usercontrols
             {
                 foreach (Track track in frmMain.showData.Setlist)
                 {
-                    string format = "%n %t [%m]";
                     string formattedName = "";
                     if (String.IsNullOrEmpty(track.Modifier))
                     {

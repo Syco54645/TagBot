@@ -197,7 +197,6 @@ namespace TagBot.App
             {
                 Point targetPoint = tvMatchFiles.PointToClient(new Point(e.X, e.Y));
                 TreeNodeAdv targetNode = tvMatchFiles.GetNodeAt(targetPoint);
-                TreeNodeAdv tnNew;
                 if (targetNode == null) return;
 
                 while (targetNode.Level > 1)
