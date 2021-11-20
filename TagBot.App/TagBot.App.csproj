@@ -134,6 +134,12 @@
     <Compile Include="frmUpdate.Designer.cs">
       <DependentUpon>frmUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="LabelToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="LabelToolTip.Designer.cs">
+      <DependentUpon>LabelToolTip.cs</DependentUpon>
+    </Compile>
     <Compile Include="models\MetadataTextBox.cs" />
     <Compile Include="models\SongNode.cs" />
     <Compile Include="ucMatchFiles.cs">

@@ -177,9 +177,9 @@ namespace TagBot.App
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(32, 40);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 13);
+            this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 22;
-            this.label5.Text = "Data Version";
+            this.label5.Text = "Database Url";
             // 
             // lblDatabaseUrl
             // 
