@@ -169,6 +169,7 @@ namespace TagBot.App
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(268, 17);
             this.linkLabel1.TabIndex = 8;
+            this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Formatted using the C# date and time format strings.";
             this.linkLabel1.UseCompatibleTextRendering = true;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);

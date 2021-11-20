@@ -71,6 +71,7 @@ namespace TagBot.App
             {
                 formatterGuide += entry.Key + " - " + entry.Value.Description + Environment.NewLine;
             }
+            formatterGuide += "%0 - Surrounding text with this will cause the contents inside to be hidden if there is no title modifier";
             rtfTitleFormatterGuide.Text = formatterGuide.TrimEnd(Environment.NewLine.ToCharArray());
 
             lvArtists.Items.Clear();
@@ -188,5 +189,7 @@ namespace TagBot.App
                 return;
             }
         }
+
+
     }
 }
