@@ -471,11 +471,11 @@ namespace TagBot.App
             {
                 if (ctrl is TextBox)
                 {
-                    ctrl.Enabled = enabled;
+                    (ctrl as TextBox).ReadOnly = enabled;
                     MetadataTextBox tag = (MetadataTextBox)ctrl.Tag;
                     if (!string.IsNullOrEmpty(tag.MutuallyExclusiveField))
                     {
-                        grpFileTags.Controls[tag.MutuallyExclusiveField].Enabled = !enabled;
+                        (grpFileTags.Controls[tag.MutuallyExclusiveField] as TextBox).ReadOnly = !enabled;
                     }
                 }
                 else if (ctrl is Button)
@@ -485,13 +485,13 @@ namespace TagBot.App
             }
             if (enabled)
             {
-                txtMetadataTitle.Enabled = false;
-                txtMetadataTrackNumber.Enabled = false;
+                txtMetadataTitle.ReadOnly = false;
+                txtMetadataTrackNumber.ReadOnly = false;
             }
             else
             {
-                txtMetadataTitle.Enabled = true;
-                txtMetadataTrackNumber.Enabled = true;
+                txtMetadataTitle.ReadOnly = true;
+                txtMetadataTrackNumber.ReadOnly = true;
             }
         }
 

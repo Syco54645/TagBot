@@ -142,6 +142,12 @@
     </Compile>
     <Compile Include="models\MetadataTextBox.cs" />
     <Compile Include="models\SongNode.cs" />
+    <Compile Include="usercontrols\TextboxToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="usercontrols\TextboxToolTip.Designer.cs">
+      <DependentUpon>TextboxToolTip.cs</DependentUpon>
+    </Compile>
     <Compile Include="usercontrols\ucMatchFiles.cs">
       <SubType>UserControl</SubType>
     </Compile>
