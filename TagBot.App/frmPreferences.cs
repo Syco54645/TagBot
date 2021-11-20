@@ -22,6 +22,7 @@ namespace TagBot.App
         private Track _dummyTrack;
         Service.Formatter formatter = new Service.Formatter(!string.IsNullOrEmpty(Settings.Default.customDateFormatter) ? Settings.Default.customDateFormatter : Settings.Default.defaultCustomDateFormatter);
         Dictionary<string, string> artistTransformationDict;
+        bool skipArtistTransformUpdate = true;
 
         public frmPreferences()
         {
@@ -85,9 +86,18 @@ namespace TagBot.App
             foreach (string artist in frmMain.databaseMeta.Artists)
             {
                 ListViewItem temp = new ListViewItem(artist);
+                temp.Selected = false;
+                temp.Focused = false;
                 lvArtists.Items.Add(temp);
+                if (!artistTransformationDict.ContainsKey(artist))
+                {
+                    artistTransformationDict.Add(artist, string.Empty);
+                }
             }
+            
+            skipArtistTransformUpdate = true;
             txtArtistTransformation.Text = string.Empty;
+            skipArtistTransformUpdate = false;
         }
 
         
@@ -147,7 +157,7 @@ namespace TagBot.App
 
         private void txtArtistTransformation_TextChanged(object sender, EventArgs e)
         {
-            if (lvArtists.SelectedItems.Count > 0)
+            if (lvArtists.SelectedItems.Count > 0 && !skipArtistTransformUpdate)
             {
                 string artistAbbreviation = lvArtists.SelectedItems[0].Text;
                 if (!artistTransformationDict.ContainsKey(artistAbbreviation))

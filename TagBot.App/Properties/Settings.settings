@@ -15,7 +15,7 @@
       <Value Profile="(Default)">yyyy-MM-dd</Value>
     </Setting>
     <Setting Name="artistTransformation" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{"dmb":"Dave Matthews Band","dm":"Dave Matthews","d&amp;t":"Dave Matthews"}</Value>
+      <Value Profile="(Default)">{"dmb":"Dave Matthews Band","dm":"Dave Matthews","d&amp;t":"Dave Matthews","d&amp;f":"Dave Matthews"}</Value>
     </Setting>
     <Setting Name="titleFormatterString" Type="System.String" Scope="User">
       <Value Profile="(Default)">%t %0[%m]%0</Value>
@@ -29,14 +29,11 @@
     <Setting Name="defaultCustomDateFormatter" Type="System.String" Scope="Application">
       <Value Profile="(Default)">yyyy-MM-dd</Value>
     </Setting>
-    <Setting Name="defaultSrtistTransformation" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">{"dmb":"Dave Matthews Band","dm":"Dave Matthews","d&amp;t":"Dave Matthews"}</Value>
-    </Setting>
     <Setting Name="defaultTitleFormatterString" Type="System.String" Scope="Application">
       <Value Profile="(Default)">%t %0[%m]%0</Value>
     </Setting>
     <Setting Name="defaultArtistTransformation" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">{"dmb":"Dave Matthews Band","dm":"Dave Matthews","d&amp;t":"Dave Matthews"}</Value>
+      <Value Profile="(Default)">{"dmb":"Dave Matthews Band","dm":"Dave Matthews","d&amp;t":"Dave Matthews","d&amp;f":"Dave Matthews"}</Value>
     </Setting>
     <Setting Name="requiredDatabaseMeta" Type="System.String" Scope="Application">
       <Value Profile="(Default)">1.0.0</Value>

@@ -73,7 +73,8 @@ namespace TagBot.App.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("{\"dmb\":\"Dave Matthews Band\",\"dm\":\"Dave Matthews\",\"d&t\":\"Dave Matthews\"}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("{\"dmb\":\"Dave Matthews Band\",\"dm\":\"Dave Matthews\",\"d&t\":\"Dave Matthews\",\"d&f\":\"Dav" +
+            "e Matthews\"}")]
         public string artistTransformation {
             get {
                 return ((string)(this["artistTransformation"]));
@@ -124,15 +125,6 @@ namespace TagBot.App.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("{\"dmb\":\"Dave Matthews Band\",\"dm\":\"Dave Matthews\",\"d&t\":\"Dave Matthews\"}")]
-        public string defaultSrtistTransformation {
-            get {
-                return ((string)(this["defaultSrtistTransformation"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("%t %0[%m]%0")]
         public string defaultTitleFormatterString {
             get {
@@ -142,7 +134,8 @@ namespace TagBot.App.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("{\"dmb\":\"Dave Matthews Band\",\"dm\":\"Dave Matthews\",\"d&t\":\"Dave Matthews\"}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("{\"dmb\":\"Dave Matthews Band\",\"dm\":\"Dave Matthews\",\"d&t\":\"Dave Matthews\",\"d&f\":\"Dav" +
+            "e Matthews\"}")]
         public string defaultArtistTransformation {
             get {
                 return ((string)(this["defaultArtistTransformation"]));
