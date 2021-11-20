@@ -57,19 +57,12 @@ namespace TagBot.App
             this.txtMetadataArtist = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.grpFIleInfo = new System.Windows.Forms.GroupBox();
-            this.lblCurrentFile = new LabelToolTip();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.lblEncoder = new LabelToolTip();
-            this.lblDuration = new LabelToolTip();
-            this.lblSize = new LabelToolTip();
-            this.lblChannels = new LabelToolTip();
-            this.lblSampleRate = new LabelToolTip();
-            this.lblBitrate = new LabelToolTip();
             this.btnDbInfo = new System.Windows.Forms.Button();
             this.txtLoadedDatabase = new System.Windows.Forms.TextBox();
             this.btnLoadDatabase = new System.Windows.Forms.Button();
@@ -106,18 +99,25 @@ namespace TagBot.App
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveTagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkForUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scTopBottom = new System.Windows.Forms.SplitContainer();
-            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
-            this.saveTagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkForUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblCurrentFile = new TagBot.App.LabelToolTip();
+            this.lblEncoder = new TagBot.App.LabelToolTip();
+            this.lblDuration = new TagBot.App.LabelToolTip();
+            this.lblSize = new TagBot.App.LabelToolTip();
+            this.lblChannels = new TagBot.App.LabelToolTip();
+            this.lblSampleRate = new TagBot.App.LabelToolTip();
+            this.lblBitrate = new TagBot.App.LabelToolTip();
+            this.srtfLog = new TagBot.App.ScrollingRichTextBox();
             this.groupBox1.SuspendLayout();
             this.grpCommonTags.SuspendLayout();
             this.grpFileTags.SuspendLayout();
@@ -199,7 +199,7 @@ namespace TagBot.App
             this.btnAutoFillCommonTags.Location = new System.Drawing.Point(262, 112);
             this.btnAutoFillCommonTags.Name = "btnAutoFillCommonTags";
             this.btnAutoFillCommonTags.Size = new System.Drawing.Size(75, 23);
-            this.btnAutoFillCommonTags.TabIndex = 61;
+            this.btnAutoFillCommonTags.TabIndex = 300;
             this.btnAutoFillCommonTags.Text = "Auto Fill";
             this.btnAutoFillCommonTags.UseVisualStyleBackColor = true;
             this.btnAutoFillCommonTags.Click += new System.EventHandler(this.btnAutoFillCommonTags_Click);
@@ -211,6 +211,7 @@ namespace TagBot.App
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(51, 13);
             this.label14.TabIndex = 60;
+            this.label14.TabStop = false;
             this.label14.Text = "Comment";
             // 
             // label17
@@ -220,6 +221,7 @@ namespace TagBot.App
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(30, 13);
             this.label17.TabIndex = 55;
+            this.label17.TabStop = false;
             this.label17.Text = "Artist";
             // 
             // label16
@@ -229,6 +231,7 @@ namespace TagBot.App
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(36, 13);
             this.label16.TabIndex = 56;
+            this.label16.TabStop = false;
             this.label16.Text = "Album";
             // 
             // txtOverallDate
@@ -238,7 +241,7 @@ namespace TagBot.App
             this.txtOverallDate.Location = new System.Drawing.Point(75, 66);
             this.txtOverallDate.Name = "txtOverallDate";
             this.txtOverallDate.Size = new System.Drawing.Size(261, 20);
-            this.txtOverallDate.TabIndex = 57;
+            this.txtOverallDate.TabIndex = 260;
             // 
             // txtOverallArtist
             // 
@@ -247,7 +250,7 @@ namespace TagBot.App
             this.txtOverallArtist.Location = new System.Drawing.Point(75, 20);
             this.txtOverallArtist.Name = "txtOverallArtist";
             this.txtOverallArtist.Size = new System.Drawing.Size(261, 20);
-            this.txtOverallArtist.TabIndex = 54;
+            this.txtOverallArtist.TabIndex = 220;
             // 
             // txtOverallComment
             // 
@@ -256,7 +259,7 @@ namespace TagBot.App
             this.txtOverallComment.Location = new System.Drawing.Point(75, 89);
             this.txtOverallComment.Name = "txtOverallComment";
             this.txtOverallComment.Size = new System.Drawing.Size(261, 20);
-            this.txtOverallComment.TabIndex = 59;
+            this.txtOverallComment.TabIndex = 280;
             // 
             // label15
             // 
@@ -265,6 +268,7 @@ namespace TagBot.App
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(30, 13);
             this.label15.TabIndex = 58;
+            this.label15.TabStop = false;
             this.label15.Text = "Date";
             // 
             // txtOverallAlbum
@@ -274,7 +278,7 @@ namespace TagBot.App
             this.txtOverallAlbum.Location = new System.Drawing.Point(75, 43);
             this.txtOverallAlbum.Name = "txtOverallAlbum";
             this.txtOverallAlbum.Size = new System.Drawing.Size(261, 20);
-            this.txtOverallAlbum.TabIndex = 53;
+            this.txtOverallAlbum.TabIndex = 240;
             // 
             // grpFileTags
             // 
@@ -306,6 +310,7 @@ namespace TagBot.App
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(51, 13);
             this.label18.TabIndex = 62;
+            this.label18.TabStop = false;
             this.label18.Text = "Comment";
             // 
             // txtMetadataComment
@@ -315,7 +320,7 @@ namespace TagBot.App
             this.txtMetadataComment.Location = new System.Drawing.Point(75, 136);
             this.txtMetadataComment.Name = "txtMetadataComment";
             this.txtMetadataComment.Size = new System.Drawing.Size(261, 20);
-            this.txtMetadataComment.TabIndex = 61;
+            this.txtMetadataComment.TabIndex = 200;
             // 
             // txtMetadataDate
             // 
@@ -324,7 +329,7 @@ namespace TagBot.App
             this.txtMetadataDate.Location = new System.Drawing.Point(75, 112);
             this.txtMetadataDate.Name = "txtMetadataDate";
             this.txtMetadataDate.Size = new System.Drawing.Size(261, 20);
-            this.txtMetadataDate.TabIndex = 3;
+            this.txtMetadataDate.TabIndex = 180;
             // 
             // label1
             // 
@@ -333,6 +338,7 @@ namespace TagBot.App
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 2;
+            this.label1.TabStop = false;
             this.label1.Text = "Title";
             // 
             // label11
@@ -342,6 +348,7 @@ namespace TagBot.App
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(30, 13);
             this.label11.TabIndex = 2;
+            this.label11.TabStop = false;
             this.label11.Text = "Date";
             // 
             // txtMetadataTitle
@@ -351,7 +358,7 @@ namespace TagBot.App
             this.txtMetadataTitle.Location = new System.Drawing.Point(75, 20);
             this.txtMetadataTitle.Name = "txtMetadataTitle";
             this.txtMetadataTitle.Size = new System.Drawing.Size(261, 20);
-            this.txtMetadataTitle.TabIndex = 3;
+            this.txtMetadataTitle.TabIndex = 100;
             // 
             // txtMetadataAlbum
             // 
@@ -360,7 +367,7 @@ namespace TagBot.App
             this.txtMetadataAlbum.Location = new System.Drawing.Point(75, 89);
             this.txtMetadataAlbum.Name = "txtMetadataAlbum";
             this.txtMetadataAlbum.Size = new System.Drawing.Size(261, 20);
-            this.txtMetadataAlbum.TabIndex = 3;
+            this.txtMetadataAlbum.TabIndex = 160;
             // 
             // label10
             // 
@@ -369,6 +376,7 @@ namespace TagBot.App
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(14, 13);
             this.label10.TabIndex = 2;
+            this.label10.TabStop = false;
             this.label10.Text = "#";
             // 
             // label9
@@ -378,6 +386,7 @@ namespace TagBot.App
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(36, 13);
             this.label9.TabIndex = 2;
+            this.label9.TabStop = false;
             this.label9.Text = "Album";
             // 
             // txtMetadataTrackNumber
@@ -387,7 +396,7 @@ namespace TagBot.App
             this.txtMetadataTrackNumber.Location = new System.Drawing.Point(75, 43);
             this.txtMetadataTrackNumber.Name = "txtMetadataTrackNumber";
             this.txtMetadataTrackNumber.Size = new System.Drawing.Size(261, 20);
-            this.txtMetadataTrackNumber.TabIndex = 3;
+            this.txtMetadataTrackNumber.TabIndex = 120;
             // 
             // txtMetadataArtist
             // 
@@ -396,7 +405,7 @@ namespace TagBot.App
             this.txtMetadataArtist.Location = new System.Drawing.Point(75, 66);
             this.txtMetadataArtist.Name = "txtMetadataArtist";
             this.txtMetadataArtist.Size = new System.Drawing.Size(261, 20);
-            this.txtMetadataArtist.TabIndex = 3;
+            this.txtMetadataArtist.TabIndex = 140;
             // 
             // label8
             // 
@@ -405,6 +414,7 @@ namespace TagBot.App
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(30, 13);
             this.label8.TabIndex = 2;
+            this.label8.TabStop = false;
             this.label8.Text = "Artist";
             // 
             // grpFIleInfo
@@ -431,19 +441,6 @@ namespace TagBot.App
             this.grpFIleInfo.TabStop = false;
             this.grpFIleInfo.Text = "File Info";
             // 
-            // lblCurrentFile
-            // 
-            this.lblCurrentFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCurrentFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurrentFile.Location = new System.Drawing.Point(8, 14);
-            this.lblCurrentFile.Name = "lblCurrentFile";
-            this.lblCurrentFile.Size = new System.Drawing.Size(336, 16);
-            this.lblCurrentFile.TabIndex = 42;
-            this.lblCurrentFile.Tag = "info";
-            this.lblCurrentFile.Text = "lblCurrentFile";
-            this.lblCurrentFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -451,6 +448,7 @@ namespace TagBot.App
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(47, 13);
             this.label2.TabIndex = 30;
+            this.label2.TabStop = false;
             this.label2.Text = "Encoder";
             // 
             // label3
@@ -460,6 +458,7 @@ namespace TagBot.App
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 13);
             this.label3.TabIndex = 31;
+            this.label3.TabStop = false;
             this.label3.Text = "Bitrate";
             // 
             // label4
@@ -470,6 +469,7 @@ namespace TagBot.App
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(27, 13);
             this.label4.TabIndex = 32;
+            this.label4.TabStop = false;
             this.label4.Text = "Size";
             // 
             // label5
@@ -479,6 +479,7 @@ namespace TagBot.App
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 13);
             this.label5.TabIndex = 33;
+            this.label5.TabStop = false;
             this.label5.Text = "Sample rate";
             // 
             // label6
@@ -489,6 +490,7 @@ namespace TagBot.App
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(51, 13);
             this.label6.TabIndex = 34;
+            this.label6.TabStop = false;
             this.label6.Text = "Channels";
             // 
             // label7
@@ -499,70 +501,8 @@ namespace TagBot.App
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 13);
             this.label7.TabIndex = 35;
+            this.label7.TabStop = false;
             this.label7.Text = "Duration";
-            // 
-            // lblEncoder
-            // 
-            this.lblEncoder.AutoSize = true;
-            this.lblEncoder.Location = new System.Drawing.Point(96, 32);
-            this.lblEncoder.Name = "lblEncoder";
-            this.lblEncoder.Size = new System.Drawing.Size(57, 13);
-            this.lblEncoder.TabIndex = 36;
-            this.lblEncoder.Tag = "info";
-            this.lblEncoder.Text = "lblEncoder";
-            // 
-            // lblDuration
-            // 
-            this.lblDuration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblDuration.AutoSize = true;
-            this.lblDuration.Location = new System.Drawing.Point(256, 64);
-            this.lblDuration.Name = "lblDuration";
-            this.lblDuration.Size = new System.Drawing.Size(57, 13);
-            this.lblDuration.TabIndex = 37;
-            this.lblDuration.Tag = "info";
-            this.lblDuration.Text = "lblDuration";
-            // 
-            // lblSize
-            // 
-            this.lblSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSize.AutoSize = true;
-            this.lblSize.Location = new System.Drawing.Point(256, 48);
-            this.lblSize.Name = "lblSize";
-            this.lblSize.Size = new System.Drawing.Size(37, 13);
-            this.lblSize.TabIndex = 38;
-            this.lblSize.Tag = "info";
-            this.lblSize.Text = "lblSize";
-            // 
-            // lblChannels
-            // 
-            this.lblChannels.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblChannels.AutoSize = true;
-            this.lblChannels.Location = new System.Drawing.Point(256, 32);
-            this.lblChannels.Name = "lblChannels";
-            this.lblChannels.Size = new System.Drawing.Size(61, 13);
-            this.lblChannels.TabIndex = 39;
-            this.lblChannels.Tag = "info";
-            this.lblChannels.Text = "lblChannels";
-            // 
-            // lblSampleRate
-            // 
-            this.lblSampleRate.AutoSize = true;
-            this.lblSampleRate.Location = new System.Drawing.Point(96, 64);
-            this.lblSampleRate.Name = "lblSampleRate";
-            this.lblSampleRate.Size = new System.Drawing.Size(75, 13);
-            this.lblSampleRate.TabIndex = 40;
-            this.lblSampleRate.Tag = "info";
-            this.lblSampleRate.Text = "lblSampleRate";
-            // 
-            // lblBitrate
-            // 
-            this.lblBitrate.AutoSize = true;
-            this.lblBitrate.Location = new System.Drawing.Point(96, 48);
-            this.lblBitrate.Name = "lblBitrate";
-            this.lblBitrate.Size = new System.Drawing.Size(47, 13);
-            this.lblBitrate.TabIndex = 41;
-            this.lblBitrate.Tag = "info";
-            this.lblBitrate.Text = "lblBitrate";
             // 
             // btnDbInfo
             // 
@@ -570,7 +510,7 @@ namespace TagBot.App
             this.btnDbInfo.Location = new System.Drawing.Point(336, 16);
             this.btnDbInfo.Name = "btnDbInfo";
             this.btnDbInfo.Size = new System.Drawing.Size(24, 20);
-            this.btnDbInfo.TabIndex = 8;
+            this.btnDbInfo.TabIndex = 80;
             this.btnDbInfo.Text = "?";
             this.btnDbInfo.UseVisualStyleBackColor = true;
             this.btnDbInfo.Click += new System.EventHandler(this.btnDbInfo_Click);
@@ -585,6 +525,7 @@ namespace TagBot.App
             this.txtLoadedDatabase.ReadOnly = true;
             this.txtLoadedDatabase.Size = new System.Drawing.Size(232, 20);
             this.txtLoadedDatabase.TabIndex = 7;
+            this.txtLoadedDatabase.TabStop = false;
             // 
             // btnLoadDatabase
             // 
@@ -592,7 +533,7 @@ namespace TagBot.App
             this.btnLoadDatabase.Location = new System.Drawing.Point(310, 16);
             this.btnLoadDatabase.Name = "btnLoadDatabase";
             this.btnLoadDatabase.Size = new System.Drawing.Size(24, 20);
-            this.btnLoadDatabase.TabIndex = 1;
+            this.btnLoadDatabase.TabIndex = 60;
             this.btnLoadDatabase.Text = "...";
             this.btnLoadDatabase.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btnLoadDatabase.UseVisualStyleBackColor = true;
@@ -605,6 +546,7 @@ namespace TagBot.App
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(53, 13);
             this.label13.TabIndex = 0;
+            this.label13.TabStop = false;
             this.label13.Text = "Database";
             // 
             // btnMatch
@@ -613,7 +555,7 @@ namespace TagBot.App
             this.btnMatch.Location = new System.Drawing.Point(226, 4);
             this.btnMatch.Name = "btnMatch";
             this.btnMatch.Size = new System.Drawing.Size(75, 20);
-            this.btnMatch.TabIndex = 50;
+            this.btnMatch.TabIndex = 40;
             this.btnMatch.Text = "Match";
             this.btnMatch.UseVisualStyleBackColor = true;
             this.btnMatch.Click += new System.EventHandler(this.btnMatch_Click);
@@ -625,6 +567,7 @@ namespace TagBot.App
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(60, 13);
             this.label12.TabIndex = 48;
+            this.label12.TabStop = false;
             this.label12.Text = "Show Date";
             // 
             // txtDate
@@ -634,7 +577,7 @@ namespace TagBot.App
             this.txtDate.Location = new System.Drawing.Point(64, 4);
             this.txtDate.Name = "txtDate";
             this.txtDate.Size = new System.Drawing.Size(157, 20);
-            this.txtDate.TabIndex = 46;
+            this.txtDate.TabIndex = 20;
             // 
             // scMain
             // 
@@ -652,6 +595,7 @@ namespace TagBot.App
             this.scMain.Size = new System.Drawing.Size(1278, 457);
             this.scMain.SplitterDistance = 904;
             this.scMain.TabIndex = 6;
+            this.scMain.TabStop = false;
             // 
             // scFileTagFlac
             // 
@@ -671,6 +615,7 @@ namespace TagBot.App
             this.scFileTagFlac.Size = new System.Drawing.Size(904, 457);
             this.scFileTagFlac.SplitterDistance = 301;
             this.scFileTagFlac.TabIndex = 10;
+            this.scFileTagFlac.TabStop = false;
             // 
             // pnlFileView
             // 
@@ -682,6 +627,7 @@ namespace TagBot.App
             this.pnlFileView.Name = "pnlFileView";
             this.pnlFileView.Size = new System.Drawing.Size(301, 457);
             this.pnlFileView.TabIndex = 0;
+            this.pnlFileView.TabStop = false;
             // 
             // pnlDirectoryBrowserToolbar
             // 
@@ -695,6 +641,7 @@ namespace TagBot.App
             this.pnlDirectoryBrowserToolbar.Name = "pnlDirectoryBrowserToolbar";
             this.pnlDirectoryBrowserToolbar.Size = new System.Drawing.Size(301, 395);
             this.pnlDirectoryBrowserToolbar.TabIndex = 52;
+            this.pnlDirectoryBrowserToolbar.TabStop = false;
             // 
             // tsDirectoryBrowser
             // 
@@ -705,6 +652,7 @@ namespace TagBot.App
             this.tsDirectoryBrowser.Name = "tsDirectoryBrowser";
             this.tsDirectoryBrowser.Size = new System.Drawing.Size(301, 25);
             this.tsDirectoryBrowser.TabIndex = 10;
+            this.tsDirectoryBrowser.TabStop = false;
             this.tsDirectoryBrowser.Text = "toolStrip2";
             this.tsDirectoryBrowser.Resize += new System.EventHandler(this.tsDirectoryBrowser_Resize);
             // 
@@ -740,6 +688,7 @@ namespace TagBot.App
             this.tvDirectories.SelectedImageIndex = 0;
             this.tvDirectories.Size = new System.Drawing.Size(301, 371);
             this.tvDirectories.TabIndex = 4;
+            this.tvDirectories.TabStop = false;
             // 
             // pnlShowSearch
             // 
@@ -752,6 +701,7 @@ namespace TagBot.App
             this.pnlShowSearch.Name = "pnlShowSearch";
             this.pnlShowSearch.Size = new System.Drawing.Size(301, 64);
             this.pnlShowSearch.TabIndex = 51;
+            this.pnlShowSearch.TabStop = false;
             // 
             // pnlTagView
             // 
@@ -760,6 +710,7 @@ namespace TagBot.App
             this.pnlTagView.Name = "pnlTagView";
             this.pnlTagView.Size = new System.Drawing.Size(301, 457);
             this.pnlTagView.TabIndex = 1;
+            this.pnlTagView.TabStop = false;
             // 
             // scFlacText
             // 
@@ -774,6 +725,7 @@ namespace TagBot.App
             this.scFlacText.Size = new System.Drawing.Size(599, 432);
             this.scFlacText.SplitterDistance = 300;
             this.scFlacText.TabIndex = 10;
+            this.scFlacText.TabStop = false;
             // 
             // pnlTvMatchFiles
             // 
@@ -782,6 +734,7 @@ namespace TagBot.App
             this.pnlTvMatchFiles.Name = "pnlTvMatchFiles";
             this.pnlTvMatchFiles.Size = new System.Drawing.Size(599, 300);
             this.pnlTvMatchFiles.TabIndex = 11;
+            this.pnlTvMatchFiles.TabStop = false;
             // 
             // tsAudioBrowser
             // 
@@ -792,6 +745,7 @@ namespace TagBot.App
             this.tsAudioBrowser.Name = "tsAudioBrowser";
             this.tsAudioBrowser.Size = new System.Drawing.Size(599, 25);
             this.tsAudioBrowser.TabIndex = 12;
+            this.tsAudioBrowser.TabStop = false;
             this.tsAudioBrowser.Text = "toolStrip1";
             // 
             // tsbSave
@@ -892,6 +846,7 @@ namespace TagBot.App
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1278, 24);
             this.menuStrip1.TabIndex = 7;
+            this.menuStrip1.TabStop = false;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
@@ -908,15 +863,24 @@ namespace TagBot.App
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
             this.preferencesToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
+            // 
+            // saveTagsToolStripMenuItem
+            // 
+            this.saveTagsToolStripMenuItem.Name = "saveTagsToolStripMenuItem";
+            this.saveTagsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveTagsToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.saveTagsToolStripMenuItem.Text = "Save Tags";
+            this.saveTagsToolStripMenuItem.Visible = false;
+            this.saveTagsToolStripMenuItem.Click += new System.EventHandler(this.saveTagsToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
             this.quitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -931,23 +895,31 @@ namespace TagBot.App
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
             // 
+            // checkForUpdateToolStripMenuItem
+            // 
+            this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
+            this.checkForUpdateToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
+            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.checkForUpdateToolStripMenuItem.Text = "Check For Update";
+            this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdateToolStripMenuItem_Click);
+            // 
             // debugToolStripMenuItem
             // 
             this.debugToolStripMenuItem.Name = "debugToolStripMenuItem";
             this.debugToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.debugToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.debugToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.debugToolStripMenuItem.Text = "Debug";
             this.debugToolStripMenuItem.Click += new System.EventHandler(this.debugToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(148, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(207, 6);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -968,16 +940,7 @@ namespace TagBot.App
             this.scTopBottom.Size = new System.Drawing.Size(1278, 519);
             this.scTopBottom.SplitterDistance = 457;
             this.scTopBottom.TabIndex = 8;
-            // 
-            // srtfLog
-            // 
-            this.srtfLog.BackColor = System.Drawing.Color.Black;
-            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.srtfLog.Location = new System.Drawing.Point(0, 0);
-            this.srtfLog.Name = "srtfLog";
-            this.srtfLog.Size = new System.Drawing.Size(1278, 58);
-            this.srtfLog.TabIndex = 53;
-            this.srtfLog.Text = "";
+            this.scTopBottom.TabStop = false;
             // 
             // miniToolStrip
             // 
@@ -991,23 +954,101 @@ namespace TagBot.App
             this.miniToolStrip.Name = "miniToolStrip";
             this.miniToolStrip.Size = new System.Drawing.Size(301, 25);
             this.miniToolStrip.TabIndex = 10;
+            this.miniToolStrip.TabStop = false;
             // 
-            // saveTagsToolStripMenuItem
+            // lblCurrentFile
             // 
-            this.saveTagsToolStripMenuItem.Name = "saveTagsToolStripMenuItem";
-            this.saveTagsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveTagsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveTagsToolStripMenuItem.Text = "Save Tags";
-            this.saveTagsToolStripMenuItem.Visible = false;
-            this.saveTagsToolStripMenuItem.Click += new System.EventHandler(this.saveTagsToolStripMenuItem_Click);
+            this.lblCurrentFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCurrentFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentFile.Location = new System.Drawing.Point(8, 14);
+            this.lblCurrentFile.Name = "lblCurrentFile";
+            this.lblCurrentFile.Size = new System.Drawing.Size(336, 16);
+            this.lblCurrentFile.TabIndex = 42;
+            this.lblCurrentFile.TabStop = false;
+            this.lblCurrentFile.Tag = "info";
+            this.lblCurrentFile.Text = "lblCurrentFile";
+            this.lblCurrentFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // checkForUpdateToolStripMenuItem
+            // lblEncoder
             // 
-            this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
-            this.checkForUpdateToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
-            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.checkForUpdateToolStripMenuItem.Text = "Check For Update";
-            this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdateToolStripMenuItem_Click);
+            this.lblEncoder.AutoSize = true;
+            this.lblEncoder.Location = new System.Drawing.Point(96, 32);
+            this.lblEncoder.Name = "lblEncoder";
+            this.lblEncoder.Size = new System.Drawing.Size(57, 13);
+            this.lblEncoder.TabIndex = 36;
+            this.lblEncoder.TabStop = false;
+            this.lblEncoder.Tag = "info";
+            this.lblEncoder.Text = "lblEncoder";
+            // 
+            // lblDuration
+            // 
+            this.lblDuration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblDuration.AutoSize = true;
+            this.lblDuration.Location = new System.Drawing.Point(256, 64);
+            this.lblDuration.Name = "lblDuration";
+            this.lblDuration.Size = new System.Drawing.Size(57, 13);
+            this.lblDuration.TabIndex = 37;
+            this.lblDuration.TabStop = false;
+            this.lblDuration.Tag = "info";
+            this.lblDuration.Text = "lblDuration";
+            // 
+            // lblSize
+            // 
+            this.lblSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblSize.AutoSize = true;
+            this.lblSize.Location = new System.Drawing.Point(256, 48);
+            this.lblSize.Name = "lblSize";
+            this.lblSize.Size = new System.Drawing.Size(37, 13);
+            this.lblSize.TabIndex = 38;
+            this.lblSize.TabStop = false;
+            this.lblSize.Tag = "info";
+            this.lblSize.Text = "lblSize";
+            // 
+            // lblChannels
+            // 
+            this.lblChannels.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblChannels.AutoSize = true;
+            this.lblChannels.Location = new System.Drawing.Point(256, 32);
+            this.lblChannels.Name = "lblChannels";
+            this.lblChannels.Size = new System.Drawing.Size(61, 13);
+            this.lblChannels.TabIndex = 39;
+            this.lblChannels.TabStop = false;
+            this.lblChannels.Tag = "info";
+            this.lblChannels.Text = "lblChannels";
+            // 
+            // lblSampleRate
+            // 
+            this.lblSampleRate.AutoSize = true;
+            this.lblSampleRate.Location = new System.Drawing.Point(96, 64);
+            this.lblSampleRate.Name = "lblSampleRate";
+            this.lblSampleRate.Size = new System.Drawing.Size(75, 13);
+            this.lblSampleRate.TabIndex = 40;
+            this.lblSampleRate.TabStop = false;
+            this.lblSampleRate.Tag = "info";
+            this.lblSampleRate.Text = "lblSampleRate";
+            // 
+            // lblBitrate
+            // 
+            this.lblBitrate.AutoSize = true;
+            this.lblBitrate.Location = new System.Drawing.Point(96, 48);
+            this.lblBitrate.Name = "lblBitrate";
+            this.lblBitrate.Size = new System.Drawing.Size(47, 13);
+            this.lblBitrate.TabIndex = 41;
+            this.lblBitrate.TabStop = false;
+            this.lblBitrate.Tag = "info";
+            this.lblBitrate.Text = "lblBitrate";
+            // 
+            // srtfLog
+            // 
+            this.srtfLog.BackColor = System.Drawing.Color.Black;
+            this.srtfLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.srtfLog.Location = new System.Drawing.Point(0, 0);
+            this.srtfLog.Name = "srtfLog";
+            this.srtfLog.Size = new System.Drawing.Size(1278, 58);
+            this.srtfLog.TabIndex = 53;
+            this.srtfLog.TabStop = false;
+            this.srtfLog.Text = "";
             // 
             // frmMain
             // 

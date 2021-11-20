@@ -131,6 +131,7 @@ namespace TagBot.App
             this.lvMatchTags.Name = "lvMatchTags";
             this.lvMatchTags.Size = new System.Drawing.Size(368, 359);
             this.lvMatchTags.TabIndex = 9;
+            this.lvMatchTags.TabStop = false;
             this.lvMatchTags.UseCompatibleStateImageBehavior = false;
             // 
             // btnMatchDone
@@ -166,7 +167,7 @@ namespace TagBot.App
             this.btnAutomate.Location = new System.Drawing.Point(208, 408);
             this.btnAutomate.Name = "btnAutomate";
             this.btnAutomate.Size = new System.Drawing.Size(75, 23);
-            this.btnAutomate.TabIndex = 50;
+            this.btnAutomate.TabIndex = 10;
             this.btnAutomate.Text = "Automate";
             this.btnAutomate.UseVisualStyleBackColor = true;
             this.btnAutomate.Click += new System.EventHandler(this.btnAutomate_Click);

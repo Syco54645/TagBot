@@ -40,16 +40,16 @@ namespace TagBot.App
             this.grpAlbumFormatter = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rtfAlbumFormatterGuide = new System.Windows.Forms.RichTextBox();
-            this.lblAlbumFormatterDemo = new LabelToolTip();
+            this.lblAlbumFormatterDemo = new TagBot.App.LabelToolTip();
             this.txtCustomDateFormatter = new System.Windows.Forms.TextBox();
             this.grpCustomDate = new System.Windows.Forms.GroupBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.lblDateFormatterDemo = new LabelToolTip();
+            this.lblDateFormatterDemo = new TagBot.App.LabelToolTip();
             this.grpTitleFormatter = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rtfTitleFormatterGuide = new System.Windows.Forms.RichTextBox();
-            this.lblTitleModifierFormatterDemo = new LabelToolTip();
-            this.lblTitleFormatterDemo = new LabelToolTip();
+            this.lblTitleModifierFormatterDemo = new TagBot.App.LabelToolTip();
+            this.lblTitleFormatterDemo = new TagBot.App.LabelToolTip();
             this.txtTitleFormatter = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.grpArtistTransformation = new System.Windows.Forms.GroupBox();
@@ -72,7 +72,7 @@ namespace TagBot.App
             this.btnApply.Location = new System.Drawing.Point(161, 464);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
-            this.btnApply.TabIndex = 0;
+            this.btnApply.TabIndex = 120;
             this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
@@ -83,7 +83,7 @@ namespace TagBot.App
             this.btnCancel.Location = new System.Drawing.Point(246, 464);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 1;
+            this.btnCancel.TabIndex = 140;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -93,7 +93,7 @@ namespace TagBot.App
             this.txtAlbumFormatter.Location = new System.Drawing.Point(8, 24);
             this.txtAlbumFormatter.Name = "txtAlbumFormatter";
             this.txtAlbumFormatter.Size = new System.Drawing.Size(304, 20);
-            this.txtAlbumFormatter.TabIndex = 3;
+            this.txtAlbumFormatter.TabIndex = 40;
             this.txtAlbumFormatter.TextChanged += new System.EventHandler(this.txtAlbumFormatter_TextChanged);
             // 
             // grpAlbumFormatter
@@ -145,7 +145,7 @@ namespace TagBot.App
             this.txtCustomDateFormatter.Location = new System.Drawing.Point(8, 24);
             this.txtCustomDateFormatter.Name = "txtCustomDateFormatter";
             this.txtCustomDateFormatter.Size = new System.Drawing.Size(304, 20);
-            this.txtCustomDateFormatter.TabIndex = 5;
+            this.txtCustomDateFormatter.TabIndex = 20;
             this.txtCustomDateFormatter.TextChanged += new System.EventHandler(this.txtCustomDateFormatter_TextChanged);
             // 
             // grpCustomDate
@@ -169,7 +169,6 @@ namespace TagBot.App
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(268, 17);
             this.linkLabel1.TabIndex = 8;
-            this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Formatted using the C# date and time format strings.";
             this.linkLabel1.UseCompatibleTextRendering = true;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
@@ -241,7 +240,7 @@ namespace TagBot.App
             this.txtTitleFormatter.Location = new System.Drawing.Point(8, 24);
             this.txtTitleFormatter.Name = "txtTitleFormatter";
             this.txtTitleFormatter.Size = new System.Drawing.Size(304, 20);
-            this.txtTitleFormatter.TabIndex = 3;
+            this.txtTitleFormatter.TabIndex = 60;
             this.txtTitleFormatter.TextChanged += new System.EventHandler(this.txtTitleFormatter_TextChanged);
             // 
             // flowLayoutPanel1
@@ -285,7 +284,7 @@ namespace TagBot.App
             this.lvArtists.Location = new System.Drawing.Point(8, 24);
             this.lvArtists.Name = "lvArtists";
             this.lvArtists.Size = new System.Drawing.Size(304, 56);
-            this.lvArtists.TabIndex = 2;
+            this.lvArtists.TabIndex = 80;
             this.lvArtists.UseCompatibleStateImageBehavior = false;
             this.lvArtists.View = System.Windows.Forms.View.Details;
             this.lvArtists.SelectedIndexChanged += new System.EventHandler(this.lvArtists_SelectedIndexChanged);
@@ -295,7 +294,7 @@ namespace TagBot.App
             this.txtArtistTransformation.Location = new System.Drawing.Point(8, 88);
             this.txtArtistTransformation.Name = "txtArtistTransformation";
             this.txtArtistTransformation.Size = new System.Drawing.Size(304, 20);
-            this.txtArtistTransformation.TabIndex = 1;
+            this.txtArtistTransformation.TabIndex = 100;
             this.txtArtistTransformation.TextChanged += new System.EventHandler(this.txtArtistTransformation_TextChanged);
             // 
             // btnResetSettings
@@ -304,6 +303,7 @@ namespace TagBot.App
             this.btnResetSettings.Name = "btnResetSettings";
             this.btnResetSettings.Size = new System.Drawing.Size(75, 23);
             this.btnResetSettings.TabIndex = 9;
+            this.btnResetSettings.TabStop = false;
             this.btnResetSettings.Text = "Reset Settings";
             this.btnResetSettings.UseVisualStyleBackColor = true;
             this.btnResetSettings.Click += new System.EventHandler(this.btnResetSettings_Click);

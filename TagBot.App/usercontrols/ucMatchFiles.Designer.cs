@@ -67,6 +67,7 @@ namespace TagBot.App
             this.tvMatchFiles.SelectedNode = null;
             this.tvMatchFiles.Size = new System.Drawing.Size(948, 450);
             this.tvMatchFiles.TabIndex = 8;
+            this.tvMatchFiles.TabStop = false;
             this.tvMatchFiles.Text = "treeViewAdv1";
             this.tvMatchFiles.UseColumns = true;
             // 
