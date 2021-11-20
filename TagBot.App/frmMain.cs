@@ -46,6 +46,7 @@ namespace TagBot.App
         frmConfirmation frmConfirmation = new frmConfirmation();
         frmMultipleShowsFound frmMultipleShowsFound = new frmMultipleShowsFound();
         frmUpdate frmUpdate = new frmUpdate();
+        frmAbout frmAbout = new frmAbout();
 
         public frmMain()
         {
@@ -56,6 +57,7 @@ namespace TagBot.App
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            this.Text += " " + frmAbout.AssemblyVersion;
             log.rtf = srtfLog;
             ucManualMatch.frmMain = this;
             ucMatchTags.frmMain = this;
@@ -397,7 +399,13 @@ namespace TagBot.App
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Made with love for the DMB community by Syco54645");
+            //MessageBox.Show("Made with love for the DMB community by Syco54645");
+            if (frmAbout.IsDisposed)
+            {
+                frmAbout = new frmAbout();
+            }
+            centerToMainForm(frmAbout);
+            frmAbout.ShowDialog();
         }
 
         private void saveTags()
@@ -428,9 +436,8 @@ namespace TagBot.App
             {
                 getShowData();
                 matchMode();
-                log.AddToLog("Some event to log.", _randomColors[_r.Next(3)]);
-                srtfLog.Rtf = log.GetLogAsRichText(true);
-                srtfLog.ScrollToBottom();
+                //log.AddToLog("Some event to log.", _randomColors[_r.Next(3)]);
+                log.AddNoticeToRtf("Searching " + txtDate.Text);
             }
             else
             {
@@ -709,10 +716,15 @@ namespace TagBot.App
             {
                 frmUpdate = new frmUpdate();
             }
-            frmUpdate.StartPosition = FormStartPosition.Manual;
-            frmUpdate.Location = new Point(this.Location.X + (this.Width - frmUpdate.Width) / 2, this.Location.Y + (this.Height - frmUpdate.Height) / 2);
             frmUpdate.frmMain = this;
+            centerToMainForm(frmUpdate);
             frmUpdate.Show();
+        }
+
+        private void centerToMainForm(Form form)
+        {
+            form.StartPosition = FormStartPosition.Manual;
+            form.Location = new Point(this.Location.X + (this.Width - form.Width) / 2, this.Location.Y + (this.Height - form.Height) / 2);
         }
     }
 }
