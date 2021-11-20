@@ -537,9 +537,20 @@ namespace TagBot.App
         {
             Sqlite sqlite = new Sqlite();
             sqlite.databasePath = Settings.Default.databaseLocation;
-            databaseMeta = Utility.DeserializeObject<DatabaseMeta>(sqlite.getDatabaseMeta());
+            string requiredDatabaseMeta = Settings.Default.requiredDatabaseMeta;
+            databaseMeta = Utility.DeserializeObject<DatabaseMeta>(sqlite.getDatabaseMeta(requiredDatabaseMeta));
             txtLoadedDatabase.Text = Settings.Default.databaseLocation;
             btnDbInfo.Enabled = true;
+            if (databaseMeta.Unload == true)
+            {
+                string errorMessage = "Selected Database is incorrect. Please Load a new one.";
+                if (!string.IsNullOrEmpty(databaseMeta.Error))
+                {
+                    errorMessage += Environment.NewLine + databaseMeta.Error;
+                }
+                MessageBox.Show(errorMessage, "Database Error");
+                loadDatabase();
+            }
         }
 
         private void tsDirectoryBrowser_Resize(object sender, EventArgs e)

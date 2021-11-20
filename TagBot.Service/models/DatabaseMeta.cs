@@ -8,6 +8,8 @@ namespace TagBot.Service.models
 {
     public class DatabaseMeta
     {
+        public bool Unload { get; set; } = false;
+        public string Error { get; set; } = string.Empty;
         public string SchemaVersion { get; set; }
         public string Name { get; set; }
         public List<string> Artists { get; set; }

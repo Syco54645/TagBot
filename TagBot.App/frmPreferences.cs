@@ -163,10 +163,10 @@ namespace TagBot.App
             DialogResult dialogResult = MessageBox.Show("Resetting settings cannot be undone. Are you sure you wish to do this?", "Thar be dragons!!!!", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                Settings.Default.customDateFormatter = Settings.Default.customDateFormatter;
-                Settings.Default.albumFormatterString = Settings.Default.albumFormatterString;
-                Settings.Default.customDateFormatter = Settings.Default.customDateFormatter;
-                Settings.Default.artistTransformation = Settings.Default.artistTransformation;
+                Settings.Default.customDateFormatter = Settings.Default.defaultCustomDateFormatter;
+                Settings.Default.albumFormatterString = Settings.Default.defaultAlbumFormatterString;
+                Settings.Default.customDateFormatter = Settings.Default.defaultCustomDateFormatter;
+                Settings.Default.artistTransformation = Settings.Default.defaultArtistTransformation;
                 Settings.Default.startingDirectory = null;
                 Settings.Default.databaseLocation = null;
                 Settings.Default.Save();

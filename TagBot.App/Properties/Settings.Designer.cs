@@ -148,5 +148,14 @@ namespace TagBot.App.Properties {
                 return ((string)(this["defaultArtistTransformation"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1.0.0")]
+        public string requiredDatabaseMeta {
+            get {
+                return ((string)(this["requiredDatabaseMeta"]));
+            }
+        }
     }
 }

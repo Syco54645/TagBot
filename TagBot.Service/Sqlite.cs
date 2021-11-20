@@ -168,98 +168,112 @@ namespace Tagbot.Service
             return stringResponse;
         }
 
-        public string getDatabaseMeta()
+        public string getDatabaseMeta(string requiredSchemaVersion)
         {
             DatabaseMeta meta = new DatabaseMeta();
-            meta.Artists = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(getArtists());
-
-            using (var connection = new SQLiteConnection("Data Source=" + databasePath))
+            try
             {
-                connection.Open();
+                meta.Artists = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(getArtists());
 
-                var command = connection.CreateCommand();
-                command.CommandText =
-                @"
-                    SELECT meta_key, meta_value
-                    FROM meta
-                ";
-
-                using (var reader = command.ExecuteReader())
+                using (var connection = new SQLiteConnection("Data Source=" + databasePath))
                 {
-                    while (reader.Read())
+                    connection.Open();
+
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                    @"
+                        SELECT meta_key, meta_value
+                        FROM meta
+                    ";
+
+                    using (var reader = command.ExecuteReader())
                     {
-                        /*string metaKey = "";
-                        switch ((string)reader["meta_key"])
+                        while (reader.Read())
                         {
-                            case "schema_version":
-                                metaKey = "SchemaVersion";
-                                break;
-                            case "database_repo":
-                                metaKey = "DatabaseRepo";
-                                break;
-                            case "database_name":
-                                metaKey = "Name";
-                                break;
+                            /*string metaKey = "";
+                            switch ((string)reader["meta_key"])
+                            {
+                                case "schema_version":
+                                    metaKey = "SchemaVersion";
+                                    break;
+                                case "database_repo":
+                                    metaKey = "DatabaseRepo";
+                                    break;
+                                case "database_name":
+                                    metaKey = "Name";
+                                    break;
+                            }
+                            meta[metaKey] = (string)reader["meta_value"];*/
+                            if ((string)reader["meta_key"] == "schema_version")
+                            {
+                                meta.SchemaVersion = (string)reader["meta_value"];
+                            }
+                            if ((string)reader["meta_key"] == "database_repo")
+                            {
+                                meta.DatabaseRepo = (string)reader["meta_value"];
+                            }
+                            if ((string)reader["meta_key"] == "database_name")
+                            {
+                                meta.Name = (string)reader["meta_value"];
+                            }
                         }
-                        meta[metaKey] = (string)reader["meta_value"];*/
-                        if ((string)reader["meta_key"] == "schema_version")
+                    }
+
+                    command = connection.CreateCommand();
+                    command.CommandText =
+                    @"
+                        SELECT COUNT(*) AS ct FROM song 
+                    ";
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
                         {
-                            meta.SchemaVersion = (string)reader["meta_value"];
+                            meta.SongCount = Convert.ToInt32(reader["ct"]);
                         }
-                        if ((string)reader["meta_key"] == "database_repo")
+                    }
+
+                    command = connection.CreateCommand();
+                    command.CommandText =
+                    @"
+                        SELECT COUNT(*) AS ct FROM show
+                    ";
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
                         {
-                            meta.DatabaseRepo = (string)reader["meta_value"];
+                            meta.ShowCount = Convert.ToInt32(reader["ct"]);
                         }
-                        if ((string)reader["meta_key"] == "database_name")
+                    }
+
+                    command = connection.CreateCommand();
+                    command.CommandText =
+                    @"
+                        SELECT database_last_modified FROM database_last_modified
+                    ";
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
                         {
-                            meta.Name = (string)reader["meta_value"];
+                            meta.DataVersion = (string)reader["database_last_modified"];
                         }
                     }
                 }
 
-                command = connection.CreateCommand();
-                command.CommandText =
-                @"
-                    SELECT COUNT(*) AS ct FROM song 
-                ";
-
-                using (var reader = command.ExecuteReader())
+                if (meta.SchemaVersion != requiredSchemaVersion)
                 {
-                    while (reader.Read())
-                    {
-                        meta.SongCount = Convert.ToInt32(reader["ct"]);
-                    }
+                    meta.Unload = true;
+                    meta.Error = "Reqired Schema Version: " + requiredSchemaVersion + Environment.NewLine + "Schema Version: " + meta.SchemaVersion;
+                    meta.Error += Environment.NewLine + Environment.NewLine + "This typically happens when you need to update the application or the database. Please download both and try again.";
+                    meta.Error += Environment.NewLine + Environment.NewLine + "If the issue persists open a bug against both TagBot and the selected database.";
                 }
-
-                command = connection.CreateCommand();
-                command.CommandText =
-                @"
-                    SELECT COUNT(*) AS ct FROM show
-                ";
-
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        meta.ShowCount = Convert.ToInt32(reader["ct"]);
-                    }
-                }
-
-                command = connection.CreateCommand();
-                command.CommandText =
-                @"
-                    SELECT database_last_modified FROM database_last_modified
-                ";
-
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        meta.DataVersion = (string)reader["database_last_modified"];
-                    }
-                }
-
-
+            }
+            catch (Exception e)
+            {
+                meta.Unload = true;
+                meta.Error = e.Message;
             }
             string stringResponse = Newtonsoft.Json.JsonConvert.SerializeObject(meta);
             return stringResponse;
