@@ -29,7 +29,7 @@ namespace TagBot.App
         public Dictionary<string, FlacFileInfo> proposedMetadata;
         public DatabaseMeta databaseMeta;
         public TreeModel tvMatchFilesModel;
-        public Formatter formatter = new Formatter(Settings.Default.customDateFormatter);
+        public Formatter formatter = new Formatter(!string.IsNullOrEmpty(Settings.Default.customDateFormatter) ? Settings.Default.customDateFormatter : Settings.Default.defaultCustomDateFormatter);
 
         public Logger log = new Logger(100u);
         private List<Color> _randomColors = new List<Color> { Color.Red, Color.SkyBlue, Color.Green };
@@ -510,7 +510,11 @@ namespace TagBot.App
 
         private void btnLoadDatabase_Click(object sender, EventArgs e)
         {
-            // C:\Users\Frank\source\repos\TagBot\database.db
+            loadDatabase();
+        }
+
+        private void loadDatabase()
+        {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Title = "Open Database File";
             dialog.Filter = "sqlite files|*.db";
@@ -557,6 +561,10 @@ namespace TagBot.App
 
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (databaseMeta == null)
+            {
+                loadDatabase();
+            }
             if (frmPreferences.IsDisposed)
             {
                 frmPreferences = new frmPreferences();
@@ -575,7 +583,7 @@ namespace TagBot.App
             txtMetadataFieldEditor_TextChanged(txtOverallDate, e);
             txtOverallComment.Text = "Source: " + new DirectoryInfo(currentPath).Name;
             txtMetadataFieldEditor_TextChanged(txtOverallComment, e);
-            var artistTransformationDict = Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation);
+            var artistTransformationDict = formatter.artistTransformationDict;
             txtOverallArtist.Text = (artistTransformationDict.ContainsKey(showData.Artist) && !string.IsNullOrEmpty(artistTransformationDict[showData.Artist])) ? artistTransformationDict[showData.Artist] : showData.Artist;
             txtMetadataFieldEditor_TextChanged(txtOverallArtist, e);
 
@@ -592,10 +600,10 @@ namespace TagBot.App
         /// </summary>
         public void updateFormatterStrings()
         {
-            formatter.customDateFormatter = Settings.Default.customDateFormatter;
-            formatter.albumFormatterString = Settings.Default.albumFormatterString;
-            formatter.titleFormatterString = Settings.Default.titleFormatterString;
-            formatter.artistTransformationDict = Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation);
+            formatter.customDateFormatter = !string.IsNullOrEmpty(Settings.Default.customDateFormatter) ? Settings.Default.customDateFormatter : Settings.Default.defaultCustomDateFormatter;
+            formatter.albumFormatterString = !string.IsNullOrEmpty(Settings.Default.albumFormatterString) ? Settings.Default.albumFormatterString : Settings.Default.defaultAlbumFormatterString;
+            formatter.titleFormatterString = !string.IsNullOrEmpty(Settings.Default.titleFormatterString) ? Settings.Default.titleFormatterString : Settings.Default.defaultTitleFormatterString;
+            formatter.artistTransformationDict = !string.IsNullOrEmpty(Settings.Default.artistTransformation) ? Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation) : Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.defaultArtistTransformation);
         }
 
         /// <summary>

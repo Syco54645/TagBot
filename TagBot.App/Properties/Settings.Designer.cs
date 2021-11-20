@@ -103,5 +103,50 @@ namespace TagBot.App.Properties {
                 return ((string)(this["applicationRepo"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%d - %v - %c, %s")]
+        public string defaultAlbumFormatterString {
+            get {
+                return ((string)(this["defaultAlbumFormatterString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("yyyy-MM-dd")]
+        public string defaultCustomDateFormatter {
+            get {
+                return ((string)(this["defaultCustomDateFormatter"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("{\"dmb\":\"Dave Matthews Band\",\"dm\":\"Dave Matthews\",\"d&t\":\"Dave Matthews\"}")]
+        public string defaultSrtistTransformation {
+            get {
+                return ((string)(this["defaultSrtistTransformation"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("%t %0[%m]%0")]
+        public string defaultTitleFormatterString {
+            get {
+                return ((string)(this["defaultTitleFormatterString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("{\"dmb\":\"Dave Matthews Band\",\"dm\":\"Dave Matthews\",\"d&t\":\"Dave Matthews\"}")]
+        public string defaultArtistTransformation {
+            get {
+                return ((string)(this["defaultArtistTransformation"]));
+            }
+        }
     }
 }

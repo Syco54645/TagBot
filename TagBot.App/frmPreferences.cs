@@ -20,7 +20,7 @@ namespace TagBot.App
         public frmMain frmMain;
         private ShowSearchResponseContract _dummyShow;
         private Track _dummyTrack;
-        Service.Formatter formatter = new Service.Formatter(Settings.Default.customDateFormatter);
+        Service.Formatter formatter = new Service.Formatter(!string.IsNullOrEmpty(Settings.Default.customDateFormatter) ? Settings.Default.customDateFormatter : Settings.Default.defaultCustomDateFormatter);
         Dictionary<string, string> artistTransformationDict;
 
         public frmPreferences()
@@ -46,14 +46,15 @@ namespace TagBot.App
                 Modifier = "",
             };
 
-            formatter.customDateFormatter = Settings.Default.customDateFormatter;
-            formatter.albumFormatterString = Settings.Default.albumFormatterString;
-            formatter.titleFormatterString = Settings.Default.titleFormatterString;
-            formatter.artistTransformationDict = Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation);
+            formatter.customDateFormatter = !string.IsNullOrEmpty(Settings.Default.customDateFormatter) ? Settings.Default.customDateFormatter : Settings.Default.defaultCustomDateFormatter;
+            formatter.albumFormatterString = !string.IsNullOrEmpty(Settings.Default.albumFormatterString) ? Settings.Default.albumFormatterString : Settings.Default.defaultAlbumFormatterString;
+            formatter.titleFormatterString = !string.IsNullOrEmpty(Settings.Default.titleFormatterString) ? Settings.Default.titleFormatterString : Settings.Default.defaultTitleFormatterString;
+            formatter.artistTransformationDict = !string.IsNullOrEmpty(Settings.Default.artistTransformation) ? Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation) : Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.defaultArtistTransformation);
 
-            txtAlbumFormatter.Text = Settings.Default.albumFormatterString;
-            txtCustomDateFormatter.Text = Settings.Default.customDateFormatter;
-            txtTitleFormatter.Text = Settings.Default.titleFormatterString;
+            txtCustomDateFormatter.Text = formatter.customDateFormatter;
+            txtAlbumFormatter.Text = formatter.albumFormatterString;
+            txtTitleFormatter.Text = formatter.titleFormatterString;
+            artistTransformationDict = formatter.artistTransformationDict;
 
             lblAlbumFormatterDemo.Text = formatter.formatString(_dummyShow, FormatterType.Album);
             
@@ -71,7 +72,6 @@ namespace TagBot.App
             }
             rtfTitleFormatterGuide.Text = formatterGuide.TrimEnd(Environment.NewLine.ToCharArray());
 
-            artistTransformationDict = Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation);
             lvArtists.Items.Clear();
 
 
@@ -160,14 +160,15 @@ namespace TagBot.App
             DialogResult dialogResult = MessageBox.Show("Resetting settings cannot be undone. Are you sure you wish to do this?", "Thar be dragons!!!!", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                Settings.Default.albumFormatterString = null;
-                Settings.Default.customDateFormatter = null ;
-                Settings.Default.artistTransformation = null;
+                Settings.Default.customDateFormatter = Settings.Default.customDateFormatter;
+                Settings.Default.albumFormatterString = Settings.Default.albumFormatterString;
+                Settings.Default.customDateFormatter = Settings.Default.customDateFormatter;
+                Settings.Default.artistTransformation = Settings.Default.artistTransformation;
                 Settings.Default.startingDirectory = null;
                 Settings.Default.databaseLocation = null;
                 Settings.Default.Save();
                 frmMain.updateFormatterStrings();
-                this.Close();
+                Application.Restart();
             }
             else if (dialogResult == DialogResult.No)
             {
