@@ -134,24 +134,24 @@
     <Compile Include="frmUpdate.Designer.cs">
       <DependentUpon>frmUpdate.cs</DependentUpon>
     </Compile>
-    <Compile Include="LabelToolTip.cs">
+    <Compile Include="usercontrols\LabelToolTip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="LabelToolTip.Designer.cs">
+    <Compile Include="usercontrols\LabelToolTip.Designer.cs">
       <DependentUpon>LabelToolTip.cs</DependentUpon>
     </Compile>
     <Compile Include="models\MetadataTextBox.cs" />
     <Compile Include="models\SongNode.cs" />
-    <Compile Include="ucMatchFiles.cs">
+    <Compile Include="usercontrols\ucMatchFiles.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucMatchFiles.Designer.cs">
+    <Compile Include="usercontrols\ucMatchFiles.Designer.cs">
       <DependentUpon>ucMatchFiles.cs</DependentUpon>
     </Compile>
     <Compile Include="logger\Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScrollingRichTextBox.cs">
+    <Compile Include="usercontrols\ScrollingRichTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="usercontrols\ucManualMatch.cs">
@@ -202,7 +202,7 @@
     <EmbeddedResource Include="frmUpdate.resx">
       <DependentUpon>frmUpdate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucMatchFiles.resx">
+    <EmbeddedResource Include="usercontrols\ucMatchFiles.resx">
       <DependentUpon>ucMatchFiles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
