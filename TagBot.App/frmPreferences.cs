@@ -117,6 +117,9 @@ namespace TagBot.App
         private void txtCustomDateFormatter_TextChanged(object sender, EventArgs e)
         {
             lblDateFormatterDemo.Text = DateTime.Parse(_dummyShow.Date).ToString(txtCustomDateFormatter.Text);
+            formatter.customDateFormatter = txtCustomDateFormatter.Text;
+
+            lblAlbumFormatterDemo.Text = formatter.formatString(_dummyShow, FormatterType.Album);
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
