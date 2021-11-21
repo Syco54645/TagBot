@@ -209,6 +209,20 @@ namespace TagBot.App
             return nodes_;
         }
 
+        List<string> getAudioFilesInDirectory(FileInfo[] files)
+        {
+            List<string> response = new List<string>();
+            foreach (FileInfo file in files)
+            {
+                if (Utility.isSupportedAudio(file.Extension))
+                {
+                    response.Add(file.Name);
+                }
+            }
+
+            return response;
+        }
+
         private void tvDirectories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             string oldCurrentPath = currentPath;
@@ -234,14 +248,8 @@ namespace TagBot.App
                     txtDate.Text = string.Empty;
                 }
 
-                List<string> files = new List<string>();
-                foreach (FileInfo file in nodeDirInfo.GetFiles())
-                {
-                    if (Utility.isSupportedAudio(file.Extension))
-                    {
-                        files.Add(file.Name);
-                    }
-                }
+                List<string> files = getAudioFilesInDirectory(nodeDirInfo.GetFiles());
+                
                 createContentionVariables(files);
                 tslMatchFilesCount.Text = "Files: " + originalMetadata.Count.ToString();
 
@@ -426,6 +434,13 @@ namespace TagBot.App
         private void tsbSave_Click(object sender, EventArgs e) // todo fix
         {
             saveTags();
+            //DirectoryInfo nodeDirInfo = (DirectoryInfo)currentPath;
+            DirectoryInfo nodeDirInfo = new DirectoryInfo(currentPath);
+
+            List<string> files = getAudioFilesInDirectory(nodeDirInfo.GetFiles());
+
+            createContentionVariables(files);
+            ucMatchFiles.populateTvMatchFiles();
         }
 
         private void btnMatch_Click(object sender, EventArgs e)

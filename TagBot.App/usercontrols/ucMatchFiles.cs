@@ -254,7 +254,6 @@ namespace TagBot.App
             foreach (KeyValuePair<string, FlacFileInfo> entry in frmMain.originalMetadata)
             {
                 Node rootNode = addRoot(entry.Key, entry.Value);
-                if (false) { }
             }
             resizeCols();
         }
