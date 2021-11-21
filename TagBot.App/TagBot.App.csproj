@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>TagBot.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Aga.Controls, Version=1.7.0.0, Culture=neutral, PublicKeyToken=fcc90fbf924463a3, processorArchitecture=MSIL">
       <HintPath>..\packages\TreeViewAdv.1.7.0.0\lib\net\Aga.Controls.dll</HintPath>
@@ -178,6 +181,7 @@
     <Compile Include="usercontrols\ucMatchTags.Designer.cs">
       <DependentUpon>ucMatchTags.cs</DependentUpon>
     </Compile>
+    <Content Include="TagBot.ico" />
     <EmbeddedResource Include="frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -262,6 +266,7 @@
     <Content Include="icons\audio-file-3-24.png" />
     <Content Include="icons\file-24.png" />
     <Content Include="icons\folder-24.png" />
+    <Content Include="icons\TagBot.ico" />
     <Content Include="icons\text-file-4-24.png" />
   </ItemGroup>
   <ItemGroup />

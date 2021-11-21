@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("TagBot.App")]
 [assembly: AssemblyDescription("Your friendly neighborhood TagBot is licensed under GPL-3.0. Please report any bugs and make feature suggestions using the issue tracker.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("TagBot")]
 [assembly: AssemblyProduct("TagBot.App")]
 [assembly: AssemblyCopyright("Copyright © 2021 Syco54645")]
 [assembly: AssemblyTrademark("")]
