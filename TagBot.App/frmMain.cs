@@ -54,6 +54,11 @@ namespace TagBot.App
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
+        public string getAssemblyVersion()
+        {
+            return frmAbout.AssemblyVersion;
+        }
+
         private void frmMain_Load(object sender, EventArgs e)
         {
             this.Text += " " + frmAbout.AssemblyVersion;

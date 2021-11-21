@@ -49,7 +49,7 @@ namespace TagBot.App
 
         private async void getReleases(UpdateObjectType objectType)
         {
-            string localVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            string localVersion = "TagBot-" + frmMain.getAssemblyVersion();
             try
             {
                 bool updateAvailable = false;
@@ -67,7 +67,7 @@ namespace TagBot.App
                     localVersion = convertDataVersionToGithubDatabaseVersion();
                     releaseTitle = ": " + frmMain.databaseMeta.Name;
                 }
-                ListViewItem item = new ListViewItem(new string[] { objectType + releaseTitle, convertDataVersionToGithubDatabaseVersion(), githubVersion });
+                ListViewItem item = new ListViewItem(new string[] { objectType + releaseTitle, localVersion, githubVersion });
 
                 if (githubVersion != localVersion)
                 {
