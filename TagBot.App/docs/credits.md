@@ -10,4 +10,4 @@ Please report any bugs and make feature suggestions using the [issue tracker](ht
 
 Syco54645
 
-[Font Awesome](https://fontawesome.com/) was used to create the icon. The headphone icon's strap' was made longer. [License](https://fontawesome.com/license)
+[Font Awesome](https://fontawesome.com/) was used to create the icon. The headphone icon's strap was made longer. [License](https://fontawesome.com/license)
