@@ -38,7 +38,6 @@ namespace TagBot.App
 
         public ucTextFiles ucTextFiles = new ucTextFiles();
         frmDebug frmDebug = new frmDebug();
-        ucManualMatch ucManualMatch = new ucManualMatch();
         public ucMatchFiles ucMatchFiles = new ucMatchFiles();
         public ucMatchTags ucMatchTags = new ucMatchTags();
         frmDbInfo frmDbInfo = new frmDbInfo();
@@ -59,7 +58,6 @@ namespace TagBot.App
         {
             this.Text += " " + frmAbout.AssemblyVersion;
             log.rtf = srtfLog;
-            ucManualMatch.frmMain = this;
             ucMatchTags.frmMain = this;
             pnlTagView.Controls.Add(ucMatchTags);
 
