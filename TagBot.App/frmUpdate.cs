@@ -58,14 +58,17 @@ namespace TagBot.App
                 string[] urlParts = repoUri.LocalPath.TrimStart('/').Split('/');
                 IReadOnlyList<Release> releases = await client.Repository.Release.GetAll(urlParts[0], urlParts[1]);
 
-                string githubVersion = releases.FirstOrDefault().TagName;
-
                 string releaseTitle = string.Empty;
-
+                string githubVersion = string.Empty;
                 if (objectType == UpdateObjectType.Database)
                 {
+                    githubVersion = releases.Select(x => x).Where(x => x.Name.StartsWith(frmMain.databaseMeta.Name)).FirstOrDefault().TagName;
                     localVersion = convertDataVersionToGithubDatabaseVersion();
                     releaseTitle = ": " + frmMain.databaseMeta.Name;
+                }
+                else
+                {
+                    githubVersion = releases.Select(x => x).Where(x => x.Name.StartsWith("TagBot") && !x.Name.StartsWith("TagBot.Api")).FirstOrDefault().TagName;
                 }
                 ListViewItem item = new ListViewItem(new string[] { objectType + releaseTitle, localVersion, githubVersion });
 
