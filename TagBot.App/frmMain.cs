@@ -25,8 +25,8 @@ namespace TagBot.App
     {
         public string currentPath = "";
         public ShowSearchResponseContract showData;
-        public Dictionary<string, FlacFileInfo> originalMetadata;
-        public Dictionary<string, FlacFileInfo> proposedMetadata;
+        public Dictionary<string, AudioFileInfo> originalMetadata;
+        public Dictionary<string, AudioFileInfo> proposedMetadata;
         public DatabaseMeta databaseMeta;
         public TreeModel tvMatchFilesModel;
         public Formatter formatter = new Formatter(!string.IsNullOrEmpty(Settings.Default.customDateFormatter) ? Settings.Default.customDateFormatter : Settings.Default.defaultCustomDateFormatter);
@@ -236,7 +236,7 @@ namespace TagBot.App
 
             if (oldCurrentPath != newCurrentPath)
             {
-                clearFlacEditor();
+                clearTagEditor();
                 TreeNode newSelected = e.Node;
                 ucTextFiles.clearListView();
                 DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
@@ -288,52 +288,47 @@ namespace TagBot.App
 
         private void createContentionVariables(List<string> files)
         {
-            originalMetadata = new Dictionary<string, FlacFileInfo>();
-            proposedMetadata = new Dictionary<string, FlacFileInfo>();
+            originalMetadata = new Dictionary<string, AudioFileInfo>();
+            proposedMetadata = new Dictionary<string, AudioFileInfo>();
 
             foreach (string filename in files)
             {
                 FileInfo fileInfo = new FileInfo(filename);
-                FlacFileInfo flacInfo = new FlacFileInfo();
+                AudioFileInfo audioFileInfo = new AudioFileInfo();
                 if (fileInfo.Extension == ".flac")
                 {
-                    flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + filename);
+                    audioFileInfo = Flac.getFileInfo(this.currentPath + "\\" + filename);
                 }
                 else
                 {
-                    flacInfo = Mp3.getMp3FileInfo(this.currentPath + "\\" + filename);
+                    audioFileInfo = Mp3.getFileInfo(this.currentPath + "\\" + filename);
                 }
-                originalMetadata.Add(filename, flacInfo);
+                originalMetadata.Add(filename, audioFileInfo);
             }
 
             // cheap way to do a deep clone
-            proposedMetadata = Utility.DeserializeObject< Dictionary<string, FlacFileInfo>>(Utility.SerializeObject<Dictionary<string, FlacFileInfo>>(originalMetadata));
+            proposedMetadata = Utility.DeserializeObject< Dictionary<string, AudioFileInfo>>(Utility.SerializeObject<Dictionary<string, AudioFileInfo>>(originalMetadata));
         }
 
-        public void loadFlacTagsInEditor(FlacFileInfo flacInfo)
+        public void loadTagsInEditor(AudioFileInfo audioFileInfo)
         {
-            lblCurrentFile.Text = flacInfo.Filename;
-            lblEncoder.Text = flacInfo.Encoder;
-            lblBitrate.Text = flacInfo.Bitrate;
-            lblSampleRate.Text = flacInfo.SampleRate;
-            lblChannels.Text = flacInfo.Channels;
-            lblSize.Text = flacInfo.Size.ToString();
-            lblDuration.Text = flacInfo.Duration.ToString();
+            lblCurrentFile.Text = audioFileInfo.Filename;
+            lblEncoder.Text = audioFileInfo.Encoder;
+            lblBitrate.Text = audioFileInfo.Bitrate;
+            lblSampleRate.Text = audioFileInfo.SampleRate;
+            lblChannels.Text = audioFileInfo.Channels;
+            lblSize.Text = audioFileInfo.Size.ToString();
+            lblDuration.Text = audioFileInfo.Duration.ToString();
 
-            txtMetadataTitle.Text = flacInfo.Metadata.Title;
-            txtMetadataArtist.Text = flacInfo.Metadata.Artist;
-            txtMetadataAlbum.Text = flacInfo.Metadata.Album;
-            txtMetadataDate.Text = flacInfo.Metadata.Date;
-            txtMetadataTrackNumber.Text = flacInfo.Metadata.Tracknumber;
-            txtMetadataComment.Text = flacInfo.Metadata.Comment;
-
-            /*txtOverallAlbum.Text = string.Empty;
-            txtOverallArtist.Text = string.Empty;
-            txtOverallComment.Text = string.Empty;
-            txtOverallDate.Text = string.Empty;*/
+            txtMetadataTitle.Text = audioFileInfo.Metadata.Title;
+            txtMetadataArtist.Text = audioFileInfo.Metadata.Artist;
+            txtMetadataAlbum.Text = audioFileInfo.Metadata.Album;
+            txtMetadataDate.Text = audioFileInfo.Metadata.Date;
+            txtMetadataTrackNumber.Text = audioFileInfo.Metadata.Tracknumber;
+            txtMetadataComment.Text = audioFileInfo.Metadata.Comment;
         }
 
-        public void clearFlacEditor(bool clearOverall = true)
+        public void clearTagEditor(bool clearOverall = true)
         {
             lblCurrentFile.Text = string.Empty;
             lblEncoder.Text = string.Empty;
@@ -383,24 +378,7 @@ namespace TagBot.App
                 txtMetadataTrackNumber.Text = "";
             }
         }
-        #endregion
-
-        private List<string> _getAudioFilesInCurrentDirector(ListView.ListViewItemCollection files)
-        {
-            List<string> audioFiles = new List<string>();
-            foreach (ListViewItem f in files)
-            {
-                string fileName = f.Text;
-                string ext = fileName.Substring(Math.Max(0, fileName.Length - 5));
-                if (Utility.isSupportedAudio(ext))
-                {
-                    audioFiles.Add(fileName);
-                }
-            }
-
-            return audioFiles;
-        }
-        
+        #endregion        
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -628,7 +606,7 @@ namespace TagBot.App
             SongNode selectedTvMatchFilesNode = ucMatchFiles.currentSelectNoded();
             if (selectedTvMatchFilesNode != null)
             {
-                loadFlacTagsInEditor(proposedMetadata[selectedTvMatchFilesNode.Filename]);
+                loadTagsInEditor(proposedMetadata[selectedTvMatchFilesNode.Filename]);
             }
         }
 
@@ -737,7 +715,7 @@ namespace TagBot.App
 
             if (tag.MetadataTextboxType == MetadataTextboxType.Overall)
             {
-                foreach (KeyValuePair<string, FlacFileInfo> entry in proposedMetadata)
+                foreach (KeyValuePair<string, AudioFileInfo> entry in proposedMetadata)
                 {
                     entry.Value.Metadata[tag.FieldInMetadata] = ctrl.Text;
                 }

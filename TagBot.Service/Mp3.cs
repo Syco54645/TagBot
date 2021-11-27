@@ -8,9 +8,9 @@ namespace TagBot.Service
 {
     public static class Mp3
     {
-        public static FlacFileInfo getMp3FileInfo(string path)
+        public static AudioFileInfo getFileInfo(string path)
         {
-            FlacFileInfo response = new FlacFileInfo();
+            AudioFileInfo response = new AudioFileInfo();
             try
             {
                 var tfile = TagLib.File.Create(path);

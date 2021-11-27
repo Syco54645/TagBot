@@ -7,9 +7,9 @@ namespace TagBot.Service
 {
     public static class Flac
     {
-        public static FlacFileInfo getFlacFileInfo(string path)
+        public static AudioFileInfo getFileInfo(string path)
         {
-            FlacFileInfo response = new FlacFileInfo();
+            AudioFileInfo response = new AudioFileInfo();
             try
             {
                 using (FlacFile file = new FlacFile(path))
@@ -45,7 +45,7 @@ namespace TagBot.Service
             return response;
         }
 
-        public static bool writeFlacTags(string path, Metadata metadata)
+        public static bool writeTags(string path, Metadata metadata)
         {
             try
             {

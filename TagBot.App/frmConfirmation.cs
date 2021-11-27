@@ -100,7 +100,7 @@ namespace TagBot.App
 
                 if (fileInfo.Extension == ".flac")
                 {
-                    Flac.writeFlacTags(path, proposedMetadata);
+                    Flac.writeTags(path, proposedMetadata);
                 }
                 else
                 {

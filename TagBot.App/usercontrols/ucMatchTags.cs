@@ -103,7 +103,7 @@ namespace TagBot.App
                 SongNode selectedTvMatchFilesNode = frmMain.ucMatchFiles.currentSelectNoded();
                 if (selectedTvMatchFilesNode != null)
                 {
-                    frmMain.loadFlacTagsInEditor(frmMain.proposedMetadata[selectedTvMatchFilesNode.Filename]);
+                    frmMain.loadTagsInEditor(frmMain.proposedMetadata[selectedTvMatchFilesNode.Filename]);
                 }
             }
             else

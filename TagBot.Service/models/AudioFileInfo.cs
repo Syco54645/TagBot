@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TagBot.Service.models
 {
-    public class FlacFileInfo
+    public class AudioFileInfo
     {
         public string Filename { get; set; }
         public string Encoder { get; set; }
