@@ -1,4 +1,5 @@
 
+
 ## TagBot
 
 TagBot the free, open source software for tagging your live concert recordings.
@@ -20,3 +21,14 @@ In order to use TagBot you need a [database](https://github.com/Syco54645/TagBot
 A user guide is coming, till then please watch this [video](https://www.youtube.com/watch?v=VBDBH64MEhw) to learn the usage.
 
 [![TagBot Video Thumbnail](https://img.youtube.com/vi/VBDBH64MEhw/0.jpg)](https://www.youtube.com/watch?v=VBDBH64MEhw)
+
+## Artist Databases
+   * [Dave Matthews Band](https://github.com/Syco54645/TagBot.Database/releases?q=dmb&expanded=false)
+      * Dave Matthews Band
+      * Dave Matthews
+      * Dave & Tim
+      * Dave & Friends
+   * [The Grateful Dead](https://github.com/Syco54645/TagBot.Database/releases?q=dead&expanded=false)
+      * The Grateful Dead
+      * The Dead
+      * Dead & Company
