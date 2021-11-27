@@ -39,7 +39,7 @@ namespace TagBot.Service
             }
             catch (Exception e)
             {
-                // todo figure out a nice way to handle errors in the service.
+                throw e;
             }
            
             return response;
@@ -74,7 +74,7 @@ namespace TagBot.Service
             }
             catch (Exception e)
             {
-                // todo figure out a nice way to handle errors in the service.
+                throw e;
             }
 
             return true;

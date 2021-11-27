@@ -294,31 +294,38 @@ namespace TagBot.App
         {
             originalMetadata = new Dictionary<string, AudioFileInfo>();
             proposedMetadata = new Dictionary<string, AudioFileInfo>();
-
-            foreach (string filename in files)
+            try
             {
-                FileInfo fileInfo = new FileInfo(filename);
-                AudioFileInfo audioFileInfo = new AudioFileInfo();
-                if (fileInfo.Extension == ".flac")
+
+                foreach (string filename in files)
                 {
-                    audioFileInfo = Flac.getFileInfo(this.currentPath + "\\" + filename);
-                }
-                else
-                {
-                    if (Settings.Default.enableMp3)
+                    FileInfo fileInfo = new FileInfo(filename);
+                    AudioFileInfo audioFileInfo = new AudioFileInfo();
+                    if (fileInfo.Extension == ".flac")
                     {
-                        audioFileInfo = Mp3.getFileInfo(this.currentPath + "\\" + filename);
+                        audioFileInfo = Flac.getFileInfo(this.currentPath + "\\" + filename);
                     }
                     else
                     {
-                        log.AddErrorToRtf("Mp3 file detected and Mp3 mode is not enabled. Please enable it in preferences.");
+                        if (Settings.Default.enableMp3)
+                        {
+                            audioFileInfo = Mp3.getFileInfo(this.currentPath + "\\" + filename);
+                        }
+                        else
+                        {
+                            log.AddErrorToRtf("Mp3 file detected and Mp3 mode is not enabled. Please enable it in preferences.");
+                        }
                     }
+                    originalMetadata.Add(filename, audioFileInfo);
                 }
-                originalMetadata.Add(filename, audioFileInfo);
-            }
 
-            // cheap way to do a deep clone
-            proposedMetadata = Utility.DeserializeObject< Dictionary<string, AudioFileInfo>>(Utility.SerializeObject<Dictionary<string, AudioFileInfo>>(originalMetadata));
+                // cheap way to do a deep clone
+                proposedMetadata = Utility.DeserializeObject< Dictionary<string, AudioFileInfo>>(Utility.SerializeObject<Dictionary<string, AudioFileInfo>>(originalMetadata));
+            }
+            catch (Exception ex)
+            {
+                log.AddErrorToRtf(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
         }
 
         public void loadTagsInEditor(AudioFileInfo audioFileInfo)
