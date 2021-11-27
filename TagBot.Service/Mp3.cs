@@ -47,7 +47,7 @@ namespace TagBot.Service
                 var tfile = TagLib.File.Create(path);
                 tfile.Tag.Performers = new string[] { metadata.Artist };
                 tfile.Tag.Album = metadata.Album;
-                tfile.Tag.Year = Convert.ToUInt32(DateTime.Parse(metadata.Date).ToString("YYYY"));
+                tfile.Tag.Year = Convert.ToUInt32(DateTime.Parse(metadata.Date).ToString("yyyy"));
                 tfile.Tag.Title = metadata.Title;
                 tfile.Tag.Track = Convert.ToUInt32(metadata.Tracknumber);
                 tfile.Tag.Comment = metadata.Comment;
