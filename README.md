@@ -16,7 +16,7 @@ Syco54645
 
 ## Usage
 
-In order to use TagBot you need a [database](https://github.com/Syco54645/TagBot.Database/releases). After downloading a database run TagBot and load the database. 
+In order to use TagBot you need a [database](https://github.com/Syco54645/TagBot#artist-databases). After downloading a database run TagBot and load the database. 
 
 A user guide is coming, till then please watch this [video](https://www.youtube.com/watch?v=VBDBH64MEhw) to learn the usage.
 
