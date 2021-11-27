@@ -66,6 +66,7 @@ namespace Tagbot.Service
             List<string> supportedAudioFormats = new List<string>
             {
                 ".flac",
+                ".mp3",
             };
 
             return supportedAudioFormats.Contains(extension);

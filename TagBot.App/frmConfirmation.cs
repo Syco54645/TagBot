@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -95,7 +96,17 @@ namespace TagBot.App
                 string filename = item.Key;
                 Metadata proposedMetadata = item.Value.Metadata;
                 string path = frmMain.currentPath + "\\" + filename;
-                Flac.writeFlacTags(path, proposedMetadata);
+                FileInfo fileInfo = new FileInfo(filename);
+
+                if (fileInfo.Extension == ".flac")
+                {
+                    Flac.writeFlacTags(path, proposedMetadata);
+                }
+                else
+                {
+                    Mp3.writeTags(path, proposedMetadata);
+                }
+
                 int incrementAmount = 100 / frmMain.tvMatchFilesModel.Nodes.Count;
                 pbTagProgress.Increment(incrementAmount * (i));
                 i++;

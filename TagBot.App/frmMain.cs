@@ -293,7 +293,16 @@ namespace TagBot.App
 
             foreach (string filename in files)
             {
-                FlacFileInfo flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + filename);
+                FileInfo fileInfo = new FileInfo(filename);
+                FlacFileInfo flacInfo = new FlacFileInfo();
+                if (fileInfo.Extension == ".flac")
+                {
+                    flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + filename);
+                }
+                else
+                {
+                    flacInfo = Mp3.getMp3FileInfo(this.currentPath + "\\" + filename);
+                }
                 originalMetadata.Add(filename, flacInfo);
             }
 

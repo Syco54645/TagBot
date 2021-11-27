@@ -1,6 +1,7 @@
 ﻿using Aga.Controls.Tree;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,5 +16,13 @@ namespace TagBot.App.models
         public string Title { get; set; }
         public override string Text { get { return (Index + 1).ToString() + " - " + Filename; } }
         public string Tracknumber { get; set; }
+        public string FileType 
+        {
+            get
+            {
+                FileInfo info = new FileInfo(Filename);
+                return info.Extension;
+            }
+        }
     }
 }
