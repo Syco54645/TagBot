@@ -32,8 +32,8 @@ namespace TagBot.App
         private void btnUpdateContention_Click(object sender, EventArgs e)
         {
             frmMain.ucMatchFiles.updateContention();
-            rtfOriginalMetadata.Text = Utility.SerializeObject<Dictionary<string, FlacFileInfo>>(frmMain.originalMetadata, true);
-            rtfProposedMetadata.Text = Utility.SerializeObject<Dictionary<string, FlacFileInfo>>(frmMain.proposedMetadata, true);
+            rtfOriginalMetadata.Text = Utility.SerializeObject<Dictionary<string, AudioFileInfo>>(frmMain.originalMetadata, true);
+            rtfProposedMetadata.Text = Utility.SerializeObject<Dictionary<string, AudioFileInfo>>(frmMain.proposedMetadata, true);
         }
 
         private void btnRefreshTextBoxes_Click(object sender, EventArgs e)
@@ -44,8 +44,8 @@ namespace TagBot.App
         public void refreshTextBoxes()
         {
             rtfSearchResult.Text = Utility.SerializeObject<ShowSearchResponseContract>(frmMain.showData, true);
-            rtfOriginalMetadata.Text = Utility.SerializeObject<Dictionary<string, FlacFileInfo>>(frmMain.originalMetadata, true);
-            rtfProposedMetadata.Text = Utility.SerializeObject<Dictionary<string, FlacFileInfo>>(frmMain.proposedMetadata, true);
+            rtfOriginalMetadata.Text = Utility.SerializeObject<Dictionary<string, AudioFileInfo>>(frmMain.originalMetadata, true);
+            rtfProposedMetadata.Text = Utility.SerializeObject<Dictionary<string, AudioFileInfo>>(frmMain.proposedMetadata, true);
         }
 
         private void frmDebug_Load(object sender, EventArgs e)

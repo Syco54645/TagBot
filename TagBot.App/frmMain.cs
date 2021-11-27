@@ -25,8 +25,8 @@ namespace TagBot.App
     {
         public string currentPath = "";
         public ShowSearchResponseContract showData;
-        public Dictionary<string, FlacFileInfo> originalMetadata;
-        public Dictionary<string, FlacFileInfo> proposedMetadata;
+        public Dictionary<string, AudioFileInfo> originalMetadata;
+        public Dictionary<string, AudioFileInfo> proposedMetadata;
         public DatabaseMeta databaseMeta;
         public TreeModel tvMatchFilesModel;
         public Formatter formatter = new Formatter(!string.IsNullOrEmpty(Settings.Default.customDateFormatter) ? Settings.Default.customDateFormatter : Settings.Default.defaultCustomDateFormatter);
@@ -61,7 +61,7 @@ namespace TagBot.App
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            this.Text += " " + frmAbout.AssemblyVersion;
+            setApplicationTitle();
             log.rtf = srtfLog;
             ucMatchTags.frmMain = this;
             pnlTagView.Controls.Add(ucMatchTags);
@@ -219,7 +219,7 @@ namespace TagBot.App
             List<string> response = new List<string>();
             foreach (FileInfo file in files)
             {
-                if (Utility.isSupportedAudio(file.Extension))
+                if (Utility.isSupportedAudio(file.Extension, Settings.Default.enableMp3))
                 {
                     response.Add(file.Name);
                 }
@@ -236,7 +236,7 @@ namespace TagBot.App
 
             if (oldCurrentPath != newCurrentPath)
             {
-                clearFlacEditor();
+                clearTagEditor();
                 TreeNode newSelected = e.Node;
                 ucTextFiles.clearListView();
                 DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
@@ -261,7 +261,11 @@ namespace TagBot.App
                 foreach (FileInfo file in nodeDirInfo.GetFiles())
                 {
                     string extension = file.Extension;
-                    if (Utility.isSupportedAudio(extension))
+                    if (extension == ".mp3" && !Settings.Default.enableMp3)
+                    {
+                        log.AddErrorToRtf("Mp3 file detected and Mp3 mode is not enabled. Please enable it in preferences.");
+                    }
+                    if (Utility.isSupportedAudio(extension, Settings.Default.enableMp3))
                     {
                         item = new ListViewItem(file.Name, Utility.getIconType(extension));
                         subItems = new ListViewItem.ListViewSubItem[]
@@ -288,43 +292,61 @@ namespace TagBot.App
 
         private void createContentionVariables(List<string> files)
         {
-            originalMetadata = new Dictionary<string, FlacFileInfo>();
-            proposedMetadata = new Dictionary<string, FlacFileInfo>();
-
-            foreach (string filename in files)
+            originalMetadata = new Dictionary<string, AudioFileInfo>();
+            proposedMetadata = new Dictionary<string, AudioFileInfo>();
+            try
             {
-                FlacFileInfo flacInfo = Flac.getFlacFileInfo(this.currentPath + "\\" + filename);
-                originalMetadata.Add(filename, flacInfo);
+
+                foreach (string filename in files)
+                {
+                    FileInfo fileInfo = new FileInfo(filename);
+                    AudioFileInfo audioFileInfo = new AudioFileInfo();
+                    if (fileInfo.Extension == ".flac")
+                    {
+                        audioFileInfo = Flac.getFileInfo(this.currentPath + "\\" + filename);
+                    }
+                    else
+                    {
+                        if (Settings.Default.enableMp3)
+                        {
+                            audioFileInfo = Mp3.getFileInfo(this.currentPath + "\\" + filename);
+                        }
+                        else
+                        {
+                            log.AddErrorToRtf("Mp3 file detected and Mp3 mode is not enabled. Please enable it in preferences.");
+                        }
+                    }
+                    originalMetadata.Add(filename, audioFileInfo);
+                }
+
+                // cheap way to do a deep clone
+                proposedMetadata = Utility.DeserializeObject< Dictionary<string, AudioFileInfo>>(Utility.SerializeObject<Dictionary<string, AudioFileInfo>>(originalMetadata));
             }
-
-            // cheap way to do a deep clone
-            proposedMetadata = Utility.DeserializeObject< Dictionary<string, FlacFileInfo>>(Utility.SerializeObject<Dictionary<string, FlacFileInfo>>(originalMetadata));
+            catch (Exception ex)
+            {
+                log.AddErrorToRtf(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
         }
 
-        public void loadFlacTagsInEditor(FlacFileInfo flacInfo)
+        public void loadTagsInEditor(AudioFileInfo audioFileInfo)
         {
-            lblCurrentFile.Text = flacInfo.Filename;
-            lblEncoder.Text = flacInfo.Encoder;
-            lblBitrate.Text = flacInfo.Bitrate;
-            lblSampleRate.Text = flacInfo.SampleRate;
-            lblChannels.Text = flacInfo.Channels;
-            lblSize.Text = flacInfo.Size.ToString();
-            lblDuration.Text = flacInfo.Duration.ToString();
+            lblCurrentFile.Text = audioFileInfo.Filename;
+            lblEncoder.Text = audioFileInfo.Encoder;
+            lblBitrate.Text = audioFileInfo.Bitrate;
+            lblSampleRate.Text = audioFileInfo.SampleRate;
+            lblChannels.Text = audioFileInfo.Channels;
+            lblSize.Text = audioFileInfo.Size.ToString();
+            lblDuration.Text = audioFileInfo.Duration.ToString();
 
-            txtMetadataTitle.Text = flacInfo.Metadata.Title;
-            txtMetadataArtist.Text = flacInfo.Metadata.Artist;
-            txtMetadataAlbum.Text = flacInfo.Metadata.Album;
-            txtMetadataDate.Text = flacInfo.Metadata.Date;
-            txtMetadataTrackNumber.Text = flacInfo.Metadata.Tracknumber;
-            txtMetadataComment.Text = flacInfo.Metadata.Comment;
-
-            /*txtOverallAlbum.Text = string.Empty;
-            txtOverallArtist.Text = string.Empty;
-            txtOverallComment.Text = string.Empty;
-            txtOverallDate.Text = string.Empty;*/
+            txtMetadataTitle.Text = audioFileInfo.Metadata.Title;
+            txtMetadataArtist.Text = audioFileInfo.Metadata.Artist;
+            txtMetadataAlbum.Text = audioFileInfo.Metadata.Album;
+            txtMetadataDate.Text = audioFileInfo.Metadata.Date;
+            txtMetadataTrackNumber.Text = audioFileInfo.Metadata.Tracknumber;
+            txtMetadataComment.Text = audioFileInfo.Metadata.Comment;
         }
 
-        public void clearFlacEditor(bool clearOverall = true)
+        public void clearTagEditor(bool clearOverall = true)
         {
             lblCurrentFile.Text = string.Empty;
             lblEncoder.Text = string.Empty;
@@ -374,24 +396,7 @@ namespace TagBot.App
                 txtMetadataTrackNumber.Text = "";
             }
         }
-        #endregion
-
-        private List<string> _getAudioFilesInCurrentDirector(ListView.ListViewItemCollection files)
-        {
-            List<string> audioFiles = new List<string>();
-            foreach (ListViewItem f in files)
-            {
-                string fileName = f.Text;
-                string ext = fileName.Substring(Math.Max(0, fileName.Length - 5));
-                if (Utility.isSupportedAudio(ext))
-                {
-                    audioFiles.Add(fileName);
-                }
-            }
-
-            return audioFiles;
-        }
-        
+        #endregion        
 
         private void quitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -619,7 +624,7 @@ namespace TagBot.App
             SongNode selectedTvMatchFilesNode = ucMatchFiles.currentSelectNoded();
             if (selectedTvMatchFilesNode != null)
             {
-                loadFlacTagsInEditor(proposedMetadata[selectedTvMatchFilesNode.Filename]);
+                loadTagsInEditor(proposedMetadata[selectedTvMatchFilesNode.Filename]);
             }
         }
 
@@ -633,6 +638,7 @@ namespace TagBot.App
             formatter.albumFormatterString = !string.IsNullOrEmpty(Settings.Default.albumFormatterString) ? Settings.Default.albumFormatterString : Settings.Default.defaultAlbumFormatterString;
             formatter.titleFormatterString = !string.IsNullOrEmpty(Settings.Default.titleFormatterString) ? Settings.Default.titleFormatterString : Settings.Default.defaultTitleFormatterString;
             formatter.artistTransformationDict = !string.IsNullOrEmpty(Settings.Default.artistTransformation) ? Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation) : Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.defaultArtistTransformation);
+            setApplicationTitle();
         }
 
         /// <summary>
@@ -728,7 +734,7 @@ namespace TagBot.App
 
             if (tag.MetadataTextboxType == MetadataTextboxType.Overall)
             {
-                foreach (KeyValuePair<string, FlacFileInfo> entry in proposedMetadata)
+                foreach (KeyValuePair<string, AudioFileInfo> entry in proposedMetadata)
                 {
                     entry.Value.Metadata[tag.FieldInMetadata] = ctrl.Text;
                 }
@@ -762,6 +768,15 @@ namespace TagBot.App
         {
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X + (this.Width - form.Width) / 2, this.Location.Y + (this.Height - form.Height) / 2);
+        }
+
+        private void setApplicationTitle()
+        {
+            this.Text = "TagBot " + frmAbout.AssemblyVersion;
+            if (Settings.Default.enableMp3)
+            {
+                this.Text += " - Mp3 Mode Enaged!!!";
+            }
         }
     }
 }

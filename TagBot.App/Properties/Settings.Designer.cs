@@ -150,5 +150,17 @@ namespace TagBot.App.Properties {
                 return ((string)(this["requiredDatabaseMeta"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool enableMp3 {
+            get {
+                return ((bool)(this["enableMp3"]));
+            }
+            set {
+                this["enableMp3"] = value;
+            }
+        }
     }
 }

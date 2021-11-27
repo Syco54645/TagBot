@@ -55,7 +55,7 @@ namespace TagBot.App
         private void tvDirectoriesAdv_NodeMouseClick(object sender, TreeNodeAdvMouseEventArgs e)
         {
             SongNode node = (SongNode)frmMain.tvMatchFilesModel.Nodes[e.Node.Index];
-            frmMain.loadFlacTagsInEditor(frmMain.proposedMetadata[node.Filename]);
+            frmMain.loadTagsInEditor(frmMain.proposedMetadata[node.Filename]);
         }
 
         public SongNode currentSelectNoded()
@@ -218,7 +218,7 @@ namespace TagBot.App
                     lvItem.ForeColor = Color.LightGray;
                 }
             }
-            frmMain.clearFlacEditor(false);
+            frmMain.clearTagEditor(false);
             tvMatchFiles.EndUpdate();
             updateContention();
         }
@@ -251,7 +251,7 @@ namespace TagBot.App
             frmMain.tvMatchFilesModel = new TreeModel();
             tvMatchFiles.Model = frmMain.tvMatchFilesModel;
             
-            foreach (KeyValuePair<string, FlacFileInfo> entry in frmMain.originalMetadata)
+            foreach (KeyValuePair<string, AudioFileInfo> entry in frmMain.originalMetadata)
             {
                 Node rootNode = addRoot(entry.Key, entry.Value);
             }
@@ -289,16 +289,16 @@ namespace TagBot.App
         }
 
 
-        private Node addRoot(string text, FlacFileInfo flacFileInfo)
+        private Node addRoot(string text, AudioFileInfo audioFileInfo)
         {
             SongNode node = new SongNode();
             node.Text = text;
             node.Filename = text;
             node.Image = frmMain.imgListFileIcons.Images["audio"];
-            node.Artist = flacFileInfo.Metadata.Artist;
-            node.Title = flacFileInfo.Metadata.Title;
-            node.Tracknumber = flacFileInfo.Metadata.Tracknumber;
-            node.Album = flacFileInfo.Metadata.Album;
+            node.Artist = audioFileInfo.Metadata.Artist;
+            node.Title = audioFileInfo.Metadata.Title;
+            node.Tracknumber = audioFileInfo.Metadata.Tracknumber;
+            node.Album = audioFileInfo.Metadata.Album;
             frmMain.tvMatchFilesModel.Nodes.Add(node);
             return node;
         }

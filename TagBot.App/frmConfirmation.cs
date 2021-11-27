@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TagBot.App.Properties;
 using TagBot.Service;
 using TagBot.Service.models;
 
@@ -88,20 +90,44 @@ namespace TagBot.App
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            int i = 0;
-            pbTagProgress.Value = i;
-            foreach (var item in frmMain.proposedMetadata)
+            try
             {
-                string filename = item.Key;
-                Metadata proposedMetadata = item.Value.Metadata;
-                string path = frmMain.currentPath + "\\" + filename;
-                Flac.writeFlacTags(path, proposedMetadata);
-                int incrementAmount = 100 / frmMain.tvMatchFilesModel.Nodes.Count;
-                pbTagProgress.Increment(incrementAmount * (i));
-                i++;
+                int i = 0;
+                pbTagProgress.Value = i;
+                foreach (var item in frmMain.proposedMetadata)
+                {
+                    string filename = item.Key;
+                    Metadata proposedMetadata = item.Value.Metadata;
+                    string path = frmMain.currentPath + "\\" + filename;
+                    FileInfo fileInfo = new FileInfo(filename);
+
+                    if (fileInfo.Extension == ".flac")
+                    {
+                        Flac.writeTags(path, proposedMetadata);
+                    }
+                    else
+                    {
+                        if (Settings.Default.enableMp3)
+                        {
+                            Mp3.writeTags(path, proposedMetadata);
+                        }
+                        else
+                        {
+                            frmMain.log.AddErrorToRtf("Not sure how you got here because mp3 isn't enabled. Try to remember what you did and please report a bug.");
+                        }
+                    }
+
+                    int incrementAmount = 100 / frmMain.tvMatchFilesModel.Nodes.Count;
+                    pbTagProgress.Increment(incrementAmount * (i));
+                    i++;
+                }
+                MessageBox.Show("Tagging Complete");
+                this.Close();
             }
-            MessageBox.Show("Tagging Complete");
-            this.Close();
+            catch (Exception ex)
+            {
+                frmMain.log.AddErrorToRtf(ex.Message + Environment.NewLine + ex.StackTrace);
+            }
         }
     }
 }
