@@ -35,6 +35,7 @@ namespace TagBot.App
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnCheckForUpdate = new System.Windows.Forms.Button();
             this.btnDownload = new System.Windows.Forms.Button();
+            this.btnInfo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lvUpdates
@@ -70,7 +71,7 @@ namespace TagBot.App
             // btnCheckForUpdate
             // 
             this.btnCheckForUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckForUpdate.Location = new System.Drawing.Point(344, 127);
+            this.btnCheckForUpdate.Location = new System.Drawing.Point(344, 128);
             this.btnCheckForUpdate.Name = "btnCheckForUpdate";
             this.btnCheckForUpdate.Size = new System.Drawing.Size(115, 23);
             this.btnCheckForUpdate.TabIndex = 2;
@@ -81,7 +82,7 @@ namespace TagBot.App
             // btnDownload
             // 
             this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDownload.Location = new System.Drawing.Point(256, 127);
+            this.btnDownload.Location = new System.Drawing.Point(256, 128);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(75, 23);
             this.btnDownload.TabIndex = 3;
@@ -89,11 +90,22 @@ namespace TagBot.App
             this.btnDownload.UseVisualStyleBackColor = true;
             this.btnDownload.Click += new System.EventHandler(this.btnDownload_Click);
             // 
+            // btnInfo
+            // 
+            this.btnInfo.Location = new System.Drawing.Point(0, 128);
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.Size = new System.Drawing.Size(75, 23);
+            this.btnInfo.TabIndex = 4;
+            this.btnInfo.Text = "Info";
+            this.btnInfo.UseVisualStyleBackColor = true;
+            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
+            // 
             // frmUpdate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(461, 158);
+            this.Controls.Add(this.btnInfo);
             this.Controls.Add(this.btnDownload);
             this.Controls.Add(this.btnCheckForUpdate);
             this.Controls.Add(this.lvUpdates);
@@ -114,5 +126,6 @@ namespace TagBot.App
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Button btnDownload;
+        private System.Windows.Forms.Button btnInfo;
     }
 }

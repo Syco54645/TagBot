@@ -13,11 +13,20 @@ html {
     overflow-x: hidden
 }
 
+h1, 
 h2 {
     margin-top: 0;
     padding-top: 0;
     margin-bottom: 0;
     padding-bottom: 0;
+}
+
+h1 {
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+h2 {
     font-size: 13px;
 }
 

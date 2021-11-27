@@ -758,7 +758,7 @@ namespace TagBot.App
             frmUpdate.Show();
         }
 
-        private void centerToMainForm(Form form)
+        public void centerToMainForm(Form form)
         {
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X + (this.Width - form.Width) / 2, this.Location.Y + (this.Height - form.Height) / 2);

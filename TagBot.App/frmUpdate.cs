@@ -24,6 +24,7 @@ namespace TagBot.App
         private void frmUpdate_Load(object sender, EventArgs e)
         {
             btnDownload.Enabled = false;
+            btnInfo.Enabled = false;
             CheckGitHubNewerVersion();
         }
 
@@ -57,18 +58,21 @@ namespace TagBot.App
                 Uri repoUri = new Uri(getUpdateUrlForObject(objectType), UriKind.Absolute);
                 string[] urlParts = repoUri.LocalPath.TrimStart('/').Split('/');
                 IReadOnlyList<Release> releases = await client.Repository.Release.GetAll(urlParts[0], urlParts[1]);
+                List<Release> entityReleases;
 
                 string releaseTitle = string.Empty;
                 string githubVersion = string.Empty;
                 if (objectType == UpdateObjectType.Database)
                 {
                     githubVersion = releases.Select(x => x).Where(x => x.Name.StartsWith(frmMain.databaseMeta.Name)).FirstOrDefault().TagName;
+                    entityReleases = releases.Select(x => x).Where(x => x.Name.StartsWith(frmMain.databaseMeta.Name)).ToList();
                     localVersion = convertDataVersionToGithubDatabaseVersion();
                     releaseTitle = ": " + frmMain.databaseMeta.Name;
                 }
                 else
                 {
                     githubVersion = releases.Select(x => x).Where(x => x.Name.StartsWith("TagBot") && !x.Name.StartsWith("TagBot.Api")).FirstOrDefault().TagName;
+                    entityReleases = releases.Select(x => x).Where(x => x.Name.StartsWith("TagBot") && !x.Name.StartsWith("TagBot.Api")).ToList();
                 }
                 ListViewItem item = new ListViewItem(new string[] { objectType + releaseTitle, localVersion, githubVersion });
 
@@ -82,6 +86,8 @@ namespace TagBot.App
                     ObjectType = objectType,
                     UpdateAvailable = updateAvailable,
                     UpdateUrl = getUpdateUrlForObject(objectType),
+                    Changelog = entityReleases.TakeWhile(x => x.TagName != localVersion).ToDictionary(x => x.TagName, x => x.Body)
+                    //entityReleases.TakeWhile(x => x.TagName != localVersion).Select(x => x.Body).ToList(),
                 };
 
                 if (updateAvailable)
@@ -125,6 +131,7 @@ namespace TagBot.App
         private void lvUpdates_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnDownload.Enabled = false;
+            btnInfo.Enabled = false;
             ListView lv = (sender as ListView);
             if (lv.SelectedItems.Count == 0)
             {
@@ -133,6 +140,7 @@ namespace TagBot.App
             ListViewItem selectedItem = lv.SelectedItems[0];
             UpdateItem tag = (UpdateItem)selectedItem.Tag;
             btnDownload.Enabled = tag.UpdateAvailable;
+            btnInfo.Enabled = tag.Changelog.Count > 0;
             btnDownload.Tag = tag.UpdateUrl;
         }
 
@@ -153,6 +161,18 @@ namespace TagBot.App
             public bool UpdateAvailable { get; set; } = false;
             public UpdateObjectType ObjectType { get; set; }
             public string UpdateUrl { get; set; } = string.Empty;
+            public Dictionary<string, string> Changelog { get; set; } = new Dictionary<string, string>();
+        }
+
+        private void btnInfo_Click(object sender, EventArgs e)
+        {
+            if (lvUpdates.SelectedItems.Count > 0)
+            {
+                UpdateItem tag = (UpdateItem)lvUpdates.SelectedItems[0].Tag;
+                frmChangelog frmChangelog = new frmChangelog(tag.Changelog);
+                frmMain.centerToMainForm(frmChangelog);
+                frmChangelog.Show();
+            }
         }
     }
 }
