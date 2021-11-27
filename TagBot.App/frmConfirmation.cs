@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TagBot.App.Properties;
 using TagBot.Service;
 using TagBot.Service.models;
 
@@ -104,7 +105,14 @@ namespace TagBot.App
                 }
                 else
                 {
-                    Mp3.writeTags(path, proposedMetadata);
+                    if (Settings.Default.enableMp3)
+                    {
+                        Mp3.writeTags(path, proposedMetadata);
+                    }
+                    else
+                    {
+                        frmMain.log.AddErrorToRtf("Not sure how you got here because mp3 isn't enabled. Try to remember what you did and please report a bug.");
+                    }
                 }
 
                 int incrementAmount = 100 / frmMain.tvMatchFilesModel.Nodes.Count;

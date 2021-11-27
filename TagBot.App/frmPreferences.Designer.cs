@@ -29,7 +29,7 @@ namespace TagBot.App
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "dmb",
             "dm",
@@ -40,36 +40,48 @@ namespace TagBot.App
             this.grpAlbumFormatter = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rtfAlbumFormatterGuide = new System.Windows.Forms.RichTextBox();
-            this.lblAlbumFormatterDemo = new TagBot.App.LabelToolTip();
             this.txtCustomDateFormatter = new System.Windows.Forms.TextBox();
             this.grpCustomDate = new System.Windows.Forms.GroupBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.lblDateFormatterDemo = new TagBot.App.LabelToolTip();
             this.grpTitleFormatter = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rtfTitleFormatterGuide = new System.Windows.Forms.RichTextBox();
-            this.lblTitleModifierFormatterDemo = new TagBot.App.LabelToolTip();
-            this.lblTitleFormatterDemo = new TagBot.App.LabelToolTip();
             this.txtTitleFormatter = new System.Windows.Forms.TextBox();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flpFormatters = new System.Windows.Forms.FlowLayoutPanel();
             this.grpArtistTransformation = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lvArtists = new System.Windows.Forms.ListView();
             this.txtArtistTransformation = new System.Windows.Forms.TextBox();
             this.btnResetSettings = new System.Windows.Forms.Button();
+            this.tabPreferences = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.flpSettings = new System.Windows.Forms.FlowLayoutPanel();
+            this.grpMp3 = new System.Windows.Forms.GroupBox();
+            this.chkMp3ModeEnabled = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblDateFormatterDemo = new TagBot.App.LabelToolTip();
+            this.lblAlbumFormatterDemo = new TagBot.App.LabelToolTip();
+            this.lblTitleModifierFormatterDemo = new TagBot.App.LabelToolTip();
+            this.lblTitleFormatterDemo = new TagBot.App.LabelToolTip();
             this.grpAlbumFormatter.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.grpCustomDate.SuspendLayout();
             this.grpTitleFormatter.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.flpFormatters.SuspendLayout();
             this.grpArtistTransformation.SuspendLayout();
+            this.tabPreferences.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.flpSettings.SuspendLayout();
+            this.grpMp3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnApply
             // 
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApply.Location = new System.Drawing.Point(161, 464);
+            this.btnApply.Location = new System.Drawing.Point(187, 472);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 120;
@@ -80,7 +92,7 @@ namespace TagBot.App
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(246, 464);
+            this.btnCancel.Location = new System.Drawing.Point(272, 472);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 140;
@@ -131,15 +143,6 @@ namespace TagBot.App
             this.rtfAlbumFormatterGuide.Text = "%d - Format date in custom date format\n%v - Venue\n%c - City\n%s - State\n%a - Short" +
     " Artist Name\n%A - Full Artist Name";
             // 
-            // lblAlbumFormatterDemo
-            // 
-            this.lblAlbumFormatterDemo.AutoSize = true;
-            this.lblAlbumFormatterDemo.Location = new System.Drawing.Point(8, 48);
-            this.lblAlbumFormatterDemo.Name = "lblAlbumFormatterDemo";
-            this.lblAlbumFormatterDemo.Size = new System.Drawing.Size(35, 13);
-            this.lblAlbumFormatterDemo.TabIndex = 6;
-            this.lblAlbumFormatterDemo.Text = "label1";
-            // 
             // txtCustomDateFormatter
             // 
             this.txtCustomDateFormatter.Location = new System.Drawing.Point(8, 24);
@@ -173,15 +176,6 @@ namespace TagBot.App
             this.linkLabel1.Text = "Formatted using the C# date and time format strings.";
             this.linkLabel1.UseCompatibleTextRendering = true;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // lblDateFormatterDemo
-            // 
-            this.lblDateFormatterDemo.AutoSize = true;
-            this.lblDateFormatterDemo.Location = new System.Drawing.Point(8, 48);
-            this.lblDateFormatterDemo.Name = "lblDateFormatterDemo";
-            this.lblDateFormatterDemo.Size = new System.Drawing.Size(35, 13);
-            this.lblDateFormatterDemo.TabIndex = 7;
-            this.lblDateFormatterDemo.Text = "label1";
             // 
             // grpTitleFormatter
             // 
@@ -218,24 +212,6 @@ namespace TagBot.App
             this.rtfTitleFormatterGuide.TabStop = false;
             this.rtfTitleFormatterGuide.Text = "%t - Title\n%r - Title with article at the end\n%m - Modifier";
             // 
-            // lblTitleModifierFormatterDemo
-            // 
-            this.lblTitleModifierFormatterDemo.AutoSize = true;
-            this.lblTitleModifierFormatterDemo.Location = new System.Drawing.Point(8, 64);
-            this.lblTitleModifierFormatterDemo.Name = "lblTitleModifierFormatterDemo";
-            this.lblTitleModifierFormatterDemo.Size = new System.Drawing.Size(35, 13);
-            this.lblTitleModifierFormatterDemo.TabIndex = 7;
-            this.lblTitleModifierFormatterDemo.Text = "label1";
-            // 
-            // lblTitleFormatterDemo
-            // 
-            this.lblTitleFormatterDemo.AutoSize = true;
-            this.lblTitleFormatterDemo.Location = new System.Drawing.Point(8, 48);
-            this.lblTitleFormatterDemo.Name = "lblTitleFormatterDemo";
-            this.lblTitleFormatterDemo.Size = new System.Drawing.Size(35, 13);
-            this.lblTitleFormatterDemo.TabIndex = 6;
-            this.lblTitleFormatterDemo.Text = "label1";
-            // 
             // txtTitleFormatter
             // 
             this.txtTitleFormatter.Location = new System.Drawing.Point(8, 24);
@@ -244,17 +220,17 @@ namespace TagBot.App
             this.txtTitleFormatter.TabIndex = 60;
             this.txtTitleFormatter.TextChanged += new System.EventHandler(this.txtTitleFormatter_TextChanged);
             // 
-            // flowLayoutPanel1
+            // flpFormatters
             // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Controls.Add(this.grpCustomDate);
-            this.flowLayoutPanel1.Controls.Add(this.grpAlbumFormatter);
-            this.flowLayoutPanel1.Controls.Add(this.grpTitleFormatter);
-            this.flowLayoutPanel1.Controls.Add(this.grpArtistTransformation);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(344, 456);
-            this.flowLayoutPanel1.TabIndex = 8;
+            this.flpFormatters.AutoScroll = true;
+            this.flpFormatters.Controls.Add(this.grpCustomDate);
+            this.flpFormatters.Controls.Add(this.grpAlbumFormatter);
+            this.flpFormatters.Controls.Add(this.grpTitleFormatter);
+            this.flpFormatters.Controls.Add(this.grpArtistTransformation);
+            this.flpFormatters.Location = new System.Drawing.Point(0, 0);
+            this.flpFormatters.Name = "flpFormatters";
+            this.flpFormatters.Size = new System.Drawing.Size(344, 440);
+            this.flpFormatters.TabIndex = 8;
             // 
             // grpArtistTransformation
             // 
@@ -281,7 +257,7 @@ namespace TagBot.App
             // 
             this.lvArtists.HideSelection = false;
             this.lvArtists.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.lvArtists.Location = new System.Drawing.Point(8, 24);
             this.lvArtists.Name = "lvArtists";
             this.lvArtists.Size = new System.Drawing.Size(304, 56);
@@ -300,7 +276,7 @@ namespace TagBot.App
             // 
             // btnResetSettings
             // 
-            this.btnResetSettings.Location = new System.Drawing.Point(8, 464);
+            this.btnResetSettings.Location = new System.Drawing.Point(5, 472);
             this.btnResetSettings.Name = "btnResetSettings";
             this.btnResetSettings.Size = new System.Drawing.Size(75, 23);
             this.btnResetSettings.TabIndex = 9;
@@ -309,13 +285,122 @@ namespace TagBot.App
             this.btnResetSettings.UseVisualStyleBackColor = true;
             this.btnResetSettings.Click += new System.EventHandler(this.btnResetSettings_Click);
             // 
+            // tabPreferences
+            // 
+            this.tabPreferences.Controls.Add(this.tabPage1);
+            this.tabPreferences.Controls.Add(this.tabPage2);
+            this.tabPreferences.Location = new System.Drawing.Point(0, 0);
+            this.tabPreferences.Name = "tabPreferences";
+            this.tabPreferences.SelectedIndex = 0;
+            this.tabPreferences.Size = new System.Drawing.Size(352, 464);
+            this.tabPreferences.TabIndex = 141;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.flpFormatters);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(344, 438);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Formatters";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.flpSettings);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(344, 438);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Settings";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // flpSettings
+            // 
+            this.flpSettings.AutoScroll = true;
+            this.flpSettings.Controls.Add(this.grpMp3);
+            this.flpSettings.Location = new System.Drawing.Point(0, 0);
+            this.flpSettings.Name = "flpSettings";
+            this.flpSettings.Size = new System.Drawing.Size(344, 440);
+            this.flpSettings.TabIndex = 2;
+            // 
+            // grpMp3
+            // 
+            this.grpMp3.Controls.Add(this.chkMp3ModeEnabled);
+            this.grpMp3.Controls.Add(this.label3);
+            this.grpMp3.Location = new System.Drawing.Point(3, 3);
+            this.grpMp3.Name = "grpMp3";
+            this.grpMp3.Size = new System.Drawing.Size(333, 100);
+            this.grpMp3.TabIndex = 1;
+            this.grpMp3.TabStop = false;
+            this.grpMp3.Text = "Mp3 Support";
+            // 
+            // chkMp3ModeEnabled
+            // 
+            this.chkMp3ModeEnabled.AutoSize = true;
+            this.chkMp3ModeEnabled.Location = new System.Drawing.Point(8, 24);
+            this.chkMp3ModeEnabled.Name = "chkMp3ModeEnabled";
+            this.chkMp3ModeEnabled.Size = new System.Drawing.Size(113, 17);
+            this.chkMp3ModeEnabled.TabIndex = 0;
+            this.chkMp3ModeEnabled.Text = "Enable Mp3 Mode";
+            this.chkMp3ModeEnabled.UseVisualStyleBackColor = true;
+            this.chkMp3ModeEnabled.Click += new System.EventHandler(this.chkMp3ModeEnabled_CheckedChanged);
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(5, 53);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(304, 40);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Since Mp3 is frowned upon in online trading communities the disclaimer must be ma" +
+    "de that this is for personal use only and that you will not distribute the files" +
+    ".\r\n";
+            // 
+            // lblDateFormatterDemo
+            // 
+            this.lblDateFormatterDemo.AutoSize = true;
+            this.lblDateFormatterDemo.Location = new System.Drawing.Point(8, 48);
+            this.lblDateFormatterDemo.Name = "lblDateFormatterDemo";
+            this.lblDateFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblDateFormatterDemo.TabIndex = 7;
+            this.lblDateFormatterDemo.Text = "label1";
+            // 
+            // lblAlbumFormatterDemo
+            // 
+            this.lblAlbumFormatterDemo.AutoSize = true;
+            this.lblAlbumFormatterDemo.Location = new System.Drawing.Point(8, 48);
+            this.lblAlbumFormatterDemo.Name = "lblAlbumFormatterDemo";
+            this.lblAlbumFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblAlbumFormatterDemo.TabIndex = 6;
+            this.lblAlbumFormatterDemo.Text = "label1";
+            // 
+            // lblTitleModifierFormatterDemo
+            // 
+            this.lblTitleModifierFormatterDemo.AutoSize = true;
+            this.lblTitleModifierFormatterDemo.Location = new System.Drawing.Point(8, 64);
+            this.lblTitleModifierFormatterDemo.Name = "lblTitleModifierFormatterDemo";
+            this.lblTitleModifierFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblTitleModifierFormatterDemo.TabIndex = 7;
+            this.lblTitleModifierFormatterDemo.Text = "label1";
+            // 
+            // lblTitleFormatterDemo
+            // 
+            this.lblTitleFormatterDemo.AutoSize = true;
+            this.lblTitleFormatterDemo.Location = new System.Drawing.Point(8, 48);
+            this.lblTitleFormatterDemo.Name = "lblTitleFormatterDemo";
+            this.lblTitleFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblTitleFormatterDemo.TabIndex = 6;
+            this.lblTitleFormatterDemo.Text = "label1";
+            // 
             // frmPreferences
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(347, 502);
+            this.ClientSize = new System.Drawing.Size(353, 502);
+            this.Controls.Add(this.tabPreferences);
             this.Controls.Add(this.btnResetSettings);
-            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -334,9 +419,15 @@ namespace TagBot.App
             this.grpTitleFormatter.ResumeLayout(false);
             this.grpTitleFormatter.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flpFormatters.ResumeLayout(false);
             this.grpArtistTransformation.ResumeLayout(false);
             this.grpArtistTransformation.PerformLayout();
+            this.tabPreferences.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.flpSettings.ResumeLayout(false);
+            this.grpMp3.ResumeLayout(false);
+            this.grpMp3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -360,11 +451,18 @@ namespace TagBot.App
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RichTextBox rtfAlbumFormatterGuide;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flpFormatters;
         private System.Windows.Forms.GroupBox grpArtistTransformation;
         private System.Windows.Forms.TextBox txtArtistTransformation;
         private System.Windows.Forms.ListView lvArtists;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnResetSettings;
+        private System.Windows.Forms.TabControl tabPreferences;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.CheckBox chkMp3ModeEnabled;
+        private System.Windows.Forms.FlowLayoutPanel flpSettings;
+        private System.Windows.Forms.GroupBox grpMp3;
+        private System.Windows.Forms.Label label3;
     }
 }

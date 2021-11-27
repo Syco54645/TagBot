@@ -61,13 +61,17 @@ namespace Tagbot.Service
             return iconName;
         }
 
-        public static bool isSupportedAudio(string extension)
+        public static bool isSupportedAudio(string extension, bool mp3Mode = false)
         {
             List<string> supportedAudioFormats = new List<string>
             {
                 ".flac",
-                ".mp3",
             };
+
+            if (mp3Mode)
+            {
+                supportedAudioFormats.Add(".mp3");
+            }
 
             return supportedAudioFormats.Contains(extension);
         }

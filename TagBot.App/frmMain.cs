@@ -61,7 +61,7 @@ namespace TagBot.App
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            this.Text += " " + frmAbout.AssemblyVersion;
+            setApplicationTitle();
             log.rtf = srtfLog;
             ucMatchTags.frmMain = this;
             pnlTagView.Controls.Add(ucMatchTags);
@@ -219,7 +219,7 @@ namespace TagBot.App
             List<string> response = new List<string>();
             foreach (FileInfo file in files)
             {
-                if (Utility.isSupportedAudio(file.Extension))
+                if (Utility.isSupportedAudio(file.Extension, Settings.Default.enableMp3))
                 {
                     response.Add(file.Name);
                 }
@@ -261,7 +261,11 @@ namespace TagBot.App
                 foreach (FileInfo file in nodeDirInfo.GetFiles())
                 {
                     string extension = file.Extension;
-                    if (Utility.isSupportedAudio(extension))
+                    if (extension == ".mp3" && !Settings.Default.enableMp3)
+                    {
+                        log.AddErrorToRtf("Mp3 file detected and Mp3 mode is not enabled. Please enable it in preferences.");
+                    }
+                    if (Utility.isSupportedAudio(extension, Settings.Default.enableMp3))
                     {
                         item = new ListViewItem(file.Name, Utility.getIconType(extension));
                         subItems = new ListViewItem.ListViewSubItem[]
@@ -301,7 +305,14 @@ namespace TagBot.App
                 }
                 else
                 {
-                    audioFileInfo = Mp3.getFileInfo(this.currentPath + "\\" + filename);
+                    if (Settings.Default.enableMp3)
+                    {
+                        audioFileInfo = Mp3.getFileInfo(this.currentPath + "\\" + filename);
+                    }
+                    else
+                    {
+                        log.AddErrorToRtf("Mp3 file detected and Mp3 mode is not enabled. Please enable it in preferences.");
+                    }
                 }
                 originalMetadata.Add(filename, audioFileInfo);
             }
@@ -620,6 +631,7 @@ namespace TagBot.App
             formatter.albumFormatterString = !string.IsNullOrEmpty(Settings.Default.albumFormatterString) ? Settings.Default.albumFormatterString : Settings.Default.defaultAlbumFormatterString;
             formatter.titleFormatterString = !string.IsNullOrEmpty(Settings.Default.titleFormatterString) ? Settings.Default.titleFormatterString : Settings.Default.defaultTitleFormatterString;
             formatter.artistTransformationDict = !string.IsNullOrEmpty(Settings.Default.artistTransformation) ? Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.artistTransformation) : Utility.DeserializeObject<Dictionary<string, string>>(Settings.Default.defaultArtistTransformation);
+            setApplicationTitle();
         }
 
         /// <summary>
@@ -749,6 +761,15 @@ namespace TagBot.App
         {
             form.StartPosition = FormStartPosition.Manual;
             form.Location = new Point(this.Location.X + (this.Width - form.Width) / 2, this.Location.Y + (this.Height - form.Height) / 2);
+        }
+
+        private void setApplicationTitle()
+        {
+            this.Text = "TagBot " + frmAbout.AssemblyVersion;
+            if (Settings.Default.enableMp3)
+            {
+                this.Text += " - Mp3 Mode Enaged!!!";
+            }
         }
     }
 }

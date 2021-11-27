@@ -31,6 +31,12 @@ namespace TagBot.App
 
         private void frmPreferences_Load(object sender, EventArgs e)
         {
+            tabPreferences.SelectedIndex = 0;
+            flpFormatters.VerticalScroll.Value = 0;
+            flpFormatters.PerformLayout();
+            flpSettings.VerticalScroll.Value = 0;
+            flpSettings.PerformLayout();
+
             _dummyShow = new ShowSearchResponseContract()
             {
                 City = "Camden",
@@ -58,7 +64,8 @@ namespace TagBot.App
             artistTransformationDict = formatter.artistTransformationDict;
 
             lblAlbumFormatterDemo.Text = formatter.formatString(_dummyShow, FormatterType.Album);
-            
+            chkMp3ModeEnabled.Checked = Settings.Default.enableMp3;
+
             string formatterGuide = "";
             foreach (KeyValuePair<string, Service.FormatterInfo> entry in formatter.albumFormatterDict)
             {
@@ -113,6 +120,7 @@ namespace TagBot.App
             Settings.Default.albumFormatterString = txtAlbumFormatter.Text;
             Settings.Default.customDateFormatter = txtCustomDateFormatter.Text;
             Settings.Default.artistTransformation = Utility.SerializeObject<Dictionary<string, string>>(artistTransformationDict);
+            Settings.Default.enableMp3 = chkMp3ModeEnabled.Checked;
             Settings.Default.Save();
             frmMain.updateFormatterStrings();
             MessageBox.Show("Saved");
@@ -190,6 +198,21 @@ namespace TagBot.App
             }
         }
 
-
+        private void chkMp3ModeEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if ((sender as CheckBox).Checked)
+            {
+                string message = "Just to be certain, you wish to enable tagging of the inferior fidelity codec Mp3. Doing so may cause the space time continium to explode. By enabling this you certifiy that you will not distribute the resultant files and they are for personal use only. If your ears begin bleeding you have been warned." + Environment.NewLine + Environment.NewLine + "Do you wish to enable Tagging of Mp3?";
+                DialogResult dialogResult = MessageBox.Show(message, "Do you hate fideltiy?!?!", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.No)
+                {
+                    (sender as CheckBox).Checked = false;
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    //do something else
+                }
+            }
+        }
     }
 }
