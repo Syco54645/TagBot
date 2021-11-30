@@ -34,6 +34,7 @@ namespace TagBot.App
             lblArtistCount.Text = databaseMeta.Artists.Count.ToString();
             lblDataVersion.Text = databaseMeta.DisplayDataVersion();
             lblDatabaseUrl.Text = databaseMeta.DatabaseRepo + "/releases";
+            lbArtists.Items.Clear();
 
             foreach (string artist in databaseMeta.Artists)
             {
