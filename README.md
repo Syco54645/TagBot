@@ -32,3 +32,5 @@ A user guide is coming, till then please watch this [video](https://www.youtube.
       * The Grateful Dead
       * The Dead
       * Dead & Company
+   * [Phish](https://github.com/Syco54645/TagBot.Database/releases?q=phish&expanded=false)
+      * Phish
