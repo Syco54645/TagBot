@@ -168,6 +168,52 @@ namespace Tagbot.Service
             return stringResponse;
         }
 
+        public string getSongPerformances(string songName)
+        {
+            List<SongPerformanceResponseContract> songPerformances = new List<SongPerformanceResponseContract>();
+
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath))
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText =
+                @"
+                SELECT shw.* 
+                FROM song sng
+                JOIN show_song ss
+                ON sng.song_id = ss.song_id
+                JOIN show shw
+                ON shw.show_id = ss.show_id
+                WHERE title = $songName
+                ORDER BY date desc
+            ";
+
+                command.Parameters.AddWithValue("$songName", songName);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        SongPerformanceResponseContract temp = new SongPerformanceResponseContract()
+                        {
+                            Date = (string)reader["date"],
+                            Venue = (string)reader["venue"],
+                            City = (string)reader["city"],
+                            State = (string)reader["state"],
+                            Artist = (string)reader["artist"],
+                        };
+                        songPerformances.Add(temp);
+                    }
+                }
+            }
+            
+            
+            string stringResponse = Newtonsoft.Json.JsonConvert.SerializeObject(songPerformances);
+            return stringResponse;
+        }
+
+
         public string getDatabaseMeta(string requiredSchemaVersion)
         {
             DatabaseMeta meta = new DatabaseMeta();

@@ -96,6 +96,7 @@
   <ItemGroup>
     <Compile Include="contracts\DateCheckResponseContract.cs" />
     <Compile Include="contracts\ShowSearchRequestContract.cs" />
+    <Compile Include="contracts\SongPerformanceResponseContract.cs" />
     <Compile Include="contracts\ShowSearchResponseContract.cs" />
     <Compile Include="Mp3.cs" />
     <Compile Include="Flac.cs" />

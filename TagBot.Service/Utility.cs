@@ -98,6 +98,13 @@ namespace Tagbot.Service
             return str.First().ToString().ToUpper() + String.Join("", str.Skip(1));
         }
 
+        public static string getSongStats(int songId)
+        {
+
+            if (false) { }
+            return string.Empty;
+        }
+
         public static T DeserializeObject<T>(string json)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<T>(json);
@@ -112,9 +119,7 @@ namespace Tagbot.Service
             else
             {
                 return Newtonsoft.Json.JsonConvert.SerializeObject(obj);
-            }
-            
-            
+            }   
         }
     }
 }

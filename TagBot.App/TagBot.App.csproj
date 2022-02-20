@@ -113,6 +113,12 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMemories.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMemories.Designer.cs">
+      <DependentUpon>frmMemories.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMultipleShowsFound.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMemories.resx">
+      <DependentUpon>frmMemories.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMultipleShowsFound.resx">
       <DependentUpon>frmMultipleShowsFound.cs</DependentUpon>

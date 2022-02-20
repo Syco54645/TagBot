@@ -46,6 +46,7 @@ namespace TagBot.App
         frmMultipleShowsFound frmMultipleShowsFound = new frmMultipleShowsFound();
         frmUpdate frmUpdate = new frmUpdate();
         frmAbout frmAbout = new frmAbout();
+        frmMemories frmMemories = new frmMemories();
 
         public frmMain()
         {
@@ -777,6 +778,17 @@ namespace TagBot.App
             {
                 this.Text += " - Mp3 Mode Enaged!!!";
             }
+        }
+
+        private void makeSomeMemoriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (frmMemories.IsDisposed)
+            {
+                frmMemories = new frmMemories();
+            }
+            frmMemories.frmMain = this;
+            centerToMainForm(frmMemories);
+            frmMemories.Show();
         }
     }
 }
