@@ -29,6 +29,8 @@ namespace TagBot.App
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucMatchTags));
             this.tcFilename = new Aga.Controls.Tree.TreeColumn();
             this.tcNumber = new Aga.Controls.Tree.TreeColumn();
             this.tcTitle = new Aga.Controls.Tree.TreeColumn();
@@ -44,8 +46,14 @@ namespace TagBot.App
             this.btnMatchDone = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tslTagCount = new System.Windows.Forms.ToolStripLabel();
-            this.btnAutomate = new System.Windows.Forms.Button();
+            this.btnRapid = new System.Windows.Forms.Button();
+            this.splitMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.rapidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.basicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ilButton = new System.Windows.Forms.ImageList(this.components);
+            this.btnReset = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
+            this.splitMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcFilename
@@ -161,22 +169,62 @@ namespace TagBot.App
             this.tslTagCount.Size = new System.Drawing.Size(42, 22);
             this.tslTagCount.Text = "Tags: 0";
             // 
-            // btnAutomate
+            // btnRapid
             // 
-            this.btnAutomate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAutomate.Location = new System.Drawing.Point(208, 408);
-            this.btnAutomate.Name = "btnAutomate";
-            this.btnAutomate.Size = new System.Drawing.Size(75, 23);
-            this.btnAutomate.TabIndex = 10;
-            this.btnAutomate.Text = "Automate";
-            this.btnAutomate.UseVisualStyleBackColor = true;
-            this.btnAutomate.Click += new System.EventHandler(this.btnAutomate_Click);
+            this.btnRapid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRapid.Location = new System.Drawing.Point(200, 408);
+            this.btnRapid.Name = "btnRapid";
+            this.btnRapid.Size = new System.Drawing.Size(83, 23);
+            this.btnRapid.TabIndex = 12;
+            this.btnRapid.Text = "Automate";
+            this.btnRapid.UseVisualStyleBackColor = true;
+            this.btnRapid.Click += new System.EventHandler(this.btnRapid_Click);
+            // 
+            // splitMenuStrip
+            // 
+            this.splitMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rapidToolStripMenuItem,
+            this.basicToolStripMenuItem});
+            this.splitMenuStrip.Name = "splitMenuStrip";
+            this.splitMenuStrip.Size = new System.Drawing.Size(105, 48);
+            // 
+            // rapidToolStripMenuItem
+            // 
+            this.rapidToolStripMenuItem.Name = "rapidToolStripMenuItem";
+            this.rapidToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.rapidToolStripMenuItem.Text = "Rapid";
+            this.rapidToolStripMenuItem.Click += new System.EventHandler(this.rapidToolStripMenuItem_Click);
+            // 
+            // basicToolStripMenuItem
+            // 
+            this.basicToolStripMenuItem.Name = "basicToolStripMenuItem";
+            this.basicToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.basicToolStripMenuItem.Text = "Basic";
+            this.basicToolStripMenuItem.Click += new System.EventHandler(this.basicToolStripMenuItem_Click);
+            // 
+            // ilButton
+            // 
+            this.ilButton.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("ilButton.ImageStream")));
+            this.ilButton.TransparentColor = System.Drawing.Color.Transparent;
+            this.ilButton.Images.SetKeyName(0, "DownArrow");
+            // 
+            // btnReset
+            // 
+            this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnReset.Location = new System.Drawing.Point(8, 408);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.TabIndex = 13;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // ucMatchTags
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnAutomate);
+            this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.btnRapid);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.btnMatchDone);
             this.Controls.Add(this.lvMatchTags);
@@ -185,6 +233,7 @@ namespace TagBot.App
             this.Load += new System.EventHandler(this.ucMatchTags_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.splitMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,6 +255,11 @@ namespace TagBot.App
         private System.Windows.Forms.Button btnMatchDone;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel tslTagCount;
-        private System.Windows.Forms.Button btnAutomate;
+        private System.Windows.Forms.Button btnRapid;
+        private System.Windows.Forms.ContextMenuStrip splitMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem rapidToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem basicToolStripMenuItem;
+        private System.Windows.Forms.ImageList ilButton;
+        private System.Windows.Forms.Button btnReset;
     }
 }

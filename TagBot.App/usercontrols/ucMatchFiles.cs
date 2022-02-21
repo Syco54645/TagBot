@@ -69,9 +69,38 @@ namespace TagBot.App
 
         private void tvDirectoriesAdv_NodeMouseDoubleClick(object sender, TreeNodeAdvMouseEventArgs e)
         {
-            if (e.Control is NodeTextBox)
+            if (frmMain.rapid.Doing)
             {
-                MessageBox.Show(e.Node.Tag.ToString());
+                tvMatchFiles.BeginUpdate();
+
+                Point clickedPoint = new Point(e.X, e.Y);
+                TreeNodeAdv targetNode = tvMatchFiles.GetNodeAt(clickedPoint);
+
+                Track track = (Track)frmMain.ucMatchTags.lvMatchTags.Items[frmMain.rapid.Location].Tag;
+                string trackName = frmMain.formatter.formatString(track, Service.FormatterType.Track);
+                frmMain.tvMatchFilesModel.Nodes[targetNode.Index].Nodes.Add(new Node(trackName));
+                frmMain.ucMatchTags.cycleRapid();
+                frmMain.clearTagEditor(false);
+                tvMatchFiles.EndUpdate();
+                updateContention();
+                
+                // stop the double click from causing the node to expand/collapse
+                targetNode.Collapsed += tvDirectoriesAdv_Expanding;
+            }
+            else
+            {
+                if (e.Control is NodeTextBox)
+                {
+                    //MessageBox.Show(e.Node.Tag.ToString());
+                }
+            }
+        }
+
+        private void tvDirectoriesAdv_Expanding(object sender, TreeViewAdvEventArgs e)
+        {
+            if (frmMain.rapid.Doing)
+            {
+                e.Node.IsExpanded = true;
             }
         }
 

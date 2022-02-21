@@ -137,6 +137,7 @@
     <Compile Include="frmUpdate.Designer.cs">
       <DependentUpon>frmUpdate.cs</DependentUpon>
     </Compile>
+    <Compile Include="models\Rapid.cs" />
     <Compile Include="usercontrols\LabelToolTip.cs">
       <SubType>Component</SubType>
     </Compile>
