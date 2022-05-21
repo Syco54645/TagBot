@@ -41,6 +41,9 @@ namespace TagBot.App
             lvMatchTags.HeaderStyle = ColumnHeaderStyle.None;
             lvMatchTags.FullRowSelect = true;
             lvMatchTags.Columns.Add("", -2);
+            lvMatchTags.AllowDrop = true;
+            lvMatchTags.DragDrop += lvMatchTags_DragDrop;
+            lvMatchTags.DragOver += lvMatchTags_DragOver;
             this.Dock = DockStyle.Fill;
             btnRapid.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             btnRapid.Image = ilButton.Images["DownArrow"];
@@ -271,6 +274,39 @@ namespace TagBot.App
         private void skipRapidToolStripMenuItem_Click(object sender, EventArgs e)
         {
             skipRapid();
+        }
+
+        private void lvMatchTags_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])))
+            {
+                TreeNodeAdv[] drugNodes = (TreeNodeAdv[])e.Data.GetData(typeof(TreeNodeAdv[]));
+                TreeNodeAdv drugNode = drugNodes.FirstOrDefault();
+                if (drugNode.Level != 2)
+                {
+                    e.Effect = DragDropEffects.None;
+                    return;
+                }
+                e.Effect = DragDropEffects.Move;
+                return;
+            }
+        }
+
+        private void lvMatchTags_DragDrop(object sender, DragEventArgs e)
+        {
+            TreeNodeAdv[] drugNodes = (TreeNodeAdv[])e.Data.GetData(typeof(TreeNodeAdv[]));
+            TreeNodeAdv drugNode = drugNodes.FirstOrDefault();
+            string tagText = frmMain.ucMatchFiles.getTextFromTvMatchFilesNodeTag(drugNode);
+            int idx = getLvMatchTagsItemIndexFromText(tagText);
+            frmMain.ucMatchFiles.removeTagMatch(idx);
+            if (false) { }
+        }
+
+        public int getLvMatchTagsItemIndexFromText(string tagText)
+        {
+            IEnumerable<ListViewItem> lv = lvMatchTags.Items.Cast<ListViewItem>();
+            int idx = lv.Select((item, index) => new { item, index }).Where(ix => ix.item.Text == tagText).Select(ix => ix.index).FirstOrDefault();
+            return idx;
         }
     }
 }

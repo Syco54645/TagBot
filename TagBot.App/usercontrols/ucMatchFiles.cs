@@ -141,7 +141,7 @@ namespace TagBot.App
             {
 
             }*/
-            if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])) && tvMatchFiles.DropPosition.Node != null)
+            if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])) && tvMatchFiles.DropPosition.Node != null) // dragging within the Files
             {
                 TreeNodeAdv[] drugNodes = (TreeNodeAdv[])e.Data.GetData(typeof(TreeNodeAdv[]));
                 TreeNodeAdv drugNode = drugNodes.FirstOrDefault();
@@ -228,7 +228,7 @@ namespace TagBot.App
                     }
                 }
             }
-            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
+            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection))) // dropping a tag from the tags to the files
             {
                 Point targetPoint = tvMatchFiles.PointToClient(new Point(e.X, e.Y));
                 TreeNodeAdv targetNode = tvMatchFiles.GetNodeAt(targetPoint);
@@ -349,13 +349,19 @@ namespace TagBot.App
                     return;
                 }
 
-                IEnumerable<ListViewItem> lv = frmMain.ucMatchTags.lvMatchTags.Items.Cast<ListViewItem>();
-                string tagText = ((ListViewItem)((Node)tvMatchFiles.SelectedNode.Tag).Tag).Text;
-                int idx = lv.Select((item, index) => new { item, index }).Where(ix => ix.item.Text == tagText).Select(ix => ix.index).FirstOrDefault();
-                removeTagMatch(idx);            }
+                string tagText = getTextFromTvMatchFilesNodeTag(tvMatchFiles.SelectedNode);
+                int idx = frmMain.ucMatchTags.getLvMatchTagsItemIndexFromText(tagText);
+                removeTagMatch(idx);
+            }
         }
 
-        private void removeTagMatch(int idx)
+        public string getTextFromTvMatchFilesNodeTag(TreeNodeAdv selectedNode)
+        {
+            string tagText = ((ListViewItem)((Node)selectedNode.Tag).Tag).Text;
+            return tagText;
+        }
+
+        public void removeTagMatch(int idx)
         {
             frmMain.ucMatchTags.lvMatchTags.Items[idx].Font = new Font(frmMain.ucMatchTags.lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Bold);
             frmMain.ucMatchTags.lvMatchTags.Items[idx].ForeColor = Color.Black;

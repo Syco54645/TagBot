@@ -229,7 +229,7 @@ namespace TagBot.App
             this.skipRapidToolStripMenuItem,
             this.cancelRapidToolStripMenuItem});
             this.cmsAutomationCancelSkip.Name = "cmsAutomationCancelSkip";
-            this.cmsAutomationCancelSkip.Size = new System.Drawing.Size(181, 70);
+            this.cmsAutomationCancelSkip.Size = new System.Drawing.Size(111, 48);
             // 
             // skipRapidToolStripMenuItem
             // 
