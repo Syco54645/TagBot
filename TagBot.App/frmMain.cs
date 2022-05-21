@@ -126,7 +126,7 @@ namespace TagBot.App
             Sqlite sqlite = new Sqlite();
             sqlite.databasePath = Settings.Default.databaseLocation;
             string showDataJson = sqlite.getShow(txtDate.Text);
-            List<ShowSearchResponseContract> temp = Utility.DeserializeObject<List<ShowSearchResponseContract>>(showDataJson);
+            List<ShowSearchResponseContract> temp = Utility.DeserializeObject<List<ShowSearchResponseContract>>(showDataJson); 
             if (temp.Count == 0)
             {
                 MessageBox.Show("No show results found.", "No Data");

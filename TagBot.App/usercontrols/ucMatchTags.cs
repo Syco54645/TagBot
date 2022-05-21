@@ -118,7 +118,7 @@ namespace TagBot.App
 
         public void enableAutomateButton()
         {
-            splitMenuStrip.Items["basicToolStripMenuItem"].Enabled = frmMain.showData.Setlist.Count == frmMain.tvMatchFilesModel.Nodes.Count;
+            cmsAutomationMode.Items["basicToolStripMenuItem"].Enabled = frmMain.showData.Setlist.Count == frmMain.tvMatchFilesModel.Nodes.Count;
         }
 
         private void btnRapid_Click(object sender, EventArgs e)
@@ -131,7 +131,16 @@ namespace TagBot.App
             
             if (frmMain.rapid.Doing == true)
             {
-                cancelRapid();
+                
+                if (clickPos.X >= (btnRapid.Width - ilButton.Images["DownArrow"].Width - 5))
+                {
+                    //MessageBox.Show(clickPos.X.ToString());
+                    ShowMenuUnderControl();
+                }
+                else
+                {
+                    skipRapid();
+                }
             }
             else
             {
@@ -150,7 +159,14 @@ namespace TagBot.App
 
         public void ShowMenuUnderControl()
         {
-            splitMenuStrip.Show(this, new Point(btnRapid.Location.X, btnRapid.Location.Y + btnRapid.Height), ToolStripDropDownDirection.BelowRight);   
+            if (!frmMain.rapid.Doing)
+            {
+                cmsAutomationMode.Show(this, new Point(btnRapid.Location.X, btnRapid.Location.Y + btnRapid.Height), ToolStripDropDownDirection.BelowRight);   
+            }
+            else
+            {
+                cmsAutomationCancelSkip.Show(this, new Point(btnRapid.Location.X, btnRapid.Location.Y + btnRapid.Height), ToolStripDropDownDirection.BelowRight);
+            }
         }
 
         private void rapid()
@@ -158,7 +174,7 @@ namespace TagBot.App
             reset();
             frmMain.rapid.Doing = true;
             frmMain.rapid.Location = -1;
-            btnRapid.Text = "Cancel";
+            btnRapid.Text = "Skip";
             btnReset.Enabled = false;
             btnMatchDone.Enabled = false;
             //lvMatchTags.Enabled = false;
@@ -169,6 +185,11 @@ namespace TagBot.App
         {
             CompleteRapid();
             reset();
+        }
+
+        private void skipRapid()
+        {
+            cycleRapid(false);
         }
 
         private void CompleteRapid()
@@ -182,7 +203,7 @@ namespace TagBot.App
             lvMatchTags.Items[lvMatchTags.Items.Count - 1].ForeColor = Color.LightGray;
         }
 
-        public void cycleRapid()
+        public void cycleRapid(bool allowComplete = true)
         {
             if (frmMain.rapid.Location < (lvMatchTags.Items.Count - 1))
             {
@@ -196,7 +217,10 @@ namespace TagBot.App
             }
             else
             {
-                CompleteRapid();
+                if (allowComplete)
+                {
+                    CompleteRapid();
+                }
             }
         }
 
@@ -229,6 +253,16 @@ namespace TagBot.App
             resetLvMatchTags();
             frmMain.resetContentionVariables();
             frmMain.ucMatchFiles.populateTvMatchFiles();
+        }
+
+        private void cancelRapidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            cancelRapid();
+        }
+
+        private void skipRapidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            skipRapid();
         }
     }
 }

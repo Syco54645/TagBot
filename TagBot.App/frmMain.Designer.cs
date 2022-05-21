@@ -86,6 +86,7 @@ namespace TagBot.App
             this.tsDirectoryBrowser = new System.Windows.Forms.ToolStrip();
             this.tsbSelectDirectory = new System.Windows.Forms.ToolStripButton();
             this.tstbLocation = new System.Windows.Forms.ToolStripTextBox();
+            this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
             this.tvDirectories = new System.Windows.Forms.TreeView();
             this.pnlShowSearch = new System.Windows.Forms.Panel();
             this.pnlTagView = new System.Windows.Forms.Panel();
@@ -121,7 +122,6 @@ namespace TagBot.App
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tsbRefresh = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.grpCommonTags.SuspendLayout();
             this.grpFileTags.SuspendLayout();
@@ -724,16 +724,27 @@ namespace TagBot.App
             this.tsbSelectDirectory.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSelectDirectory.Name = "tsbSelectDirectory";
             this.tsbSelectDirectory.Size = new System.Drawing.Size(23, 22);
-            this.tsbSelectDirectory.Text = "toolStripButton1";
+            this.tsbSelectDirectory.Text = "Select Directory";
             this.tsbSelectDirectory.Click += new System.EventHandler(this.tsbSelectDirectory_Click);
             // 
             // tstbLocation
             // 
             this.tstbLocation.AutoSize = false;
             this.tstbLocation.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tstbLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tstbLocation.Name = "tstbLocation";
             this.tstbLocation.ReadOnly = true;
             this.tstbLocation.Size = new System.Drawing.Size(100, 25);
+            // 
+            // tsbRefresh
+            // 
+            this.tsbRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbRefresh.Image = ((System.Drawing.Image)(resources.GetObject("tsbRefresh.Image")));
+            this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbRefresh.Name = "tsbRefresh";
+            this.tsbRefresh.Size = new System.Drawing.Size(23, 22);
+            this.tsbRefresh.Text = "Refresh";
+            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
             // 
             // tvDirectories
             // 
@@ -1020,16 +1031,6 @@ namespace TagBot.App
             this.miniToolStrip.Name = "miniToolStrip";
             this.miniToolStrip.Size = new System.Drawing.Size(301, 25);
             this.miniToolStrip.TabIndex = 10;
-            // 
-            // tsbRefresh
-            // 
-            this.tsbRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbRefresh.Image = ((System.Drawing.Image)(resources.GetObject("tsbRefresh.Image")));
-            this.tsbRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbRefresh.Name = "tsbRefresh";
-            this.tsbRefresh.Size = new System.Drawing.Size(23, 22);
-            this.tsbRefresh.Text = "toolStripButton1";
-            this.tsbRefresh.Click += new System.EventHandler(this.tsbRefresh_Click);
             // 
             // frmMain
             // 

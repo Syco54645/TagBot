@@ -47,13 +47,17 @@ namespace TagBot.App
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tslTagCount = new System.Windows.Forms.ToolStripLabel();
             this.btnRapid = new System.Windows.Forms.Button();
-            this.splitMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsAutomationMode = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.rapidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.basicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ilButton = new System.Windows.Forms.ImageList(this.components);
             this.btnReset = new System.Windows.Forms.Button();
+            this.cmsAutomationCancelSkip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.skipRapidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cancelRapidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
-            this.splitMenuStrip.SuspendLayout();
+            this.cmsAutomationMode.SuspendLayout();
+            this.cmsAutomationCancelSkip.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcFilename
@@ -180,13 +184,13 @@ namespace TagBot.App
             this.btnRapid.UseVisualStyleBackColor = true;
             this.btnRapid.Click += new System.EventHandler(this.btnRapid_Click);
             // 
-            // splitMenuStrip
+            // cmsAutomationMode
             // 
-            this.splitMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsAutomationMode.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.rapidToolStripMenuItem,
             this.basicToolStripMenuItem});
-            this.splitMenuStrip.Name = "splitMenuStrip";
-            this.splitMenuStrip.Size = new System.Drawing.Size(105, 48);
+            this.cmsAutomationMode.Name = "splitMenuStrip";
+            this.cmsAutomationMode.Size = new System.Drawing.Size(105, 48);
             // 
             // rapidToolStripMenuItem
             // 
@@ -219,6 +223,28 @@ namespace TagBot.App
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // cmsAutomationCancelSkip
+            // 
+            this.cmsAutomationCancelSkip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.skipRapidToolStripMenuItem,
+            this.cancelRapidToolStripMenuItem});
+            this.cmsAutomationCancelSkip.Name = "cmsAutomationCancelSkip";
+            this.cmsAutomationCancelSkip.Size = new System.Drawing.Size(181, 70);
+            // 
+            // skipRapidToolStripMenuItem
+            // 
+            this.skipRapidToolStripMenuItem.Name = "skipRapidToolStripMenuItem";
+            this.skipRapidToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.skipRapidToolStripMenuItem.Text = "Skip";
+            this.skipRapidToolStripMenuItem.Click += new System.EventHandler(this.skipRapidToolStripMenuItem_Click);
+            // 
+            // cancelRapidToolStripMenuItem
+            // 
+            this.cancelRapidToolStripMenuItem.Name = "cancelRapidToolStripMenuItem";
+            this.cancelRapidToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cancelRapidToolStripMenuItem.Text = "Cancel";
+            this.cancelRapidToolStripMenuItem.Click += new System.EventHandler(this.cancelRapidToolStripMenuItem_Click);
+            // 
             // ucMatchTags
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -233,7 +259,8 @@ namespace TagBot.App
             this.Load += new System.EventHandler(this.ucMatchTags_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.splitMenuStrip.ResumeLayout(false);
+            this.cmsAutomationMode.ResumeLayout(false);
+            this.cmsAutomationCancelSkip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -256,10 +283,13 @@ namespace TagBot.App
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripLabel tslTagCount;
         private System.Windows.Forms.Button btnRapid;
-        private System.Windows.Forms.ContextMenuStrip splitMenuStrip;
+        private System.Windows.Forms.ContextMenuStrip cmsAutomationMode;
         private System.Windows.Forms.ToolStripMenuItem rapidToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem basicToolStripMenuItem;
         private System.Windows.Forms.ImageList ilButton;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.ContextMenuStrip cmsAutomationCancelSkip;
+        private System.Windows.Forms.ToolStripMenuItem skipRapidToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cancelRapidToolStripMenuItem;
     }
 }
