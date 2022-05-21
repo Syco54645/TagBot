@@ -43,6 +43,7 @@ namespace TagBot.App
             tvMatchFiles.ItemDrag += tvDirectoriesAdv_ItemDrag;
             tvMatchFiles.NodeMouseDoubleClick += tvDirectoriesAdv_NodeMouseDoubleClick;
             tvMatchFiles.NodeMouseClick += tvDirectoriesAdv_NodeMouseClick;
+            tvMatchFiles.KeyUp += tvMatchFiles_KeyUp;
             tvMatchFiles.AllowDrop = true;
             this.Dock = DockStyle.Fill;
         }
@@ -76,9 +77,14 @@ namespace TagBot.App
                 Point clickedPoint = new Point(e.X, e.Y);
                 TreeNodeAdv targetNode = tvMatchFiles.GetNodeAt(clickedPoint);
 
-                Track track = (Track)frmMain.ucMatchTags.lvMatchTags.Items[frmMain.rapid.Location].Tag;
+                ListViewItem lvItem = frmMain.ucMatchTags.lvMatchTags.Items[frmMain.rapid.Location];
+                Track track = (Track)lvItem.Tag;
                 string trackName = frmMain.formatter.formatString(track, Service.FormatterType.Track);
-                frmMain.tvMatchFilesModel.Nodes[targetNode.Index].Nodes.Add(new Node(trackName));
+
+                Node tempNode = new Node(trackName);
+                tempNode.Tag = lvItem;
+                frmMain.tvMatchFilesModel.Nodes[targetNode.Index].Nodes.Add(tempNode);
+
                 frmMain.ucMatchTags.cycleRapid();
                 frmMain.clearTagEditor(false);
                 tvMatchFiles.EndUpdate();
@@ -242,7 +248,9 @@ namespace TagBot.App
                     targetNode.Expand();
 
                     // lvItem.Remove();
-                    frmMain.tvMatchFilesModel.Nodes[targetNode.Index].Nodes.Add(new Node(trackName));
+                    Node tempNode = new Node(trackName);
+                    tempNode.Tag = lvItem;
+                    frmMain.tvMatchFilesModel.Nodes[targetNode.Index].Nodes.Add(tempNode);
                     lvItem.Font = new Font(frmMain.ucMatchTags.lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Regular);
                     lvItem.ForeColor = Color.LightGray;
                 }
@@ -330,6 +338,28 @@ namespace TagBot.App
             node.Album = audioFileInfo.Metadata.Album;
             frmMain.tvMatchFilesModel.Nodes.Add(node);
             return node;
+        }
+
+        private void tvMatchFiles_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (tvMatchFiles.SelectedNode.Level < 2)
+                {
+                    return;
+                }
+
+                IEnumerable<ListViewItem> lv = frmMain.ucMatchTags.lvMatchTags.Items.Cast<ListViewItem>();
+                string tagText = ((ListViewItem)((Node)tvMatchFiles.SelectedNode.Tag).Tag).Text;
+                int idx = lv.Select((item, index) => new { item, index }).Where(ix => ix.item.Text == tagText).Select(ix => ix.index).FirstOrDefault();
+                removeTagMatch(idx);            }
+        }
+
+        private void removeTagMatch(int idx)
+        {
+            frmMain.ucMatchTags.lvMatchTags.Items[idx].Font = new Font(frmMain.ucMatchTags.lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Bold);
+            frmMain.ucMatchTags.lvMatchTags.Items[idx].ForeColor = Color.Black;
+            frmMain.tvMatchFilesModel.Nodes[tvMatchFiles.SelectedNode.Parent.Index].Nodes.RemoveAt(tvMatchFiles.SelectedNode.Index);
         }
     }
 }

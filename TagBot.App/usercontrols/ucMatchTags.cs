@@ -189,7 +189,7 @@ namespace TagBot.App
 
         private void skipRapid()
         {
-            cycleRapid(false);
+            cycleRapid(true);
         }
 
         private void CompleteRapid()
@@ -203,21 +203,29 @@ namespace TagBot.App
             lvMatchTags.Items[lvMatchTags.Items.Count - 1].ForeColor = Color.LightGray;
         }
 
-        public void cycleRapid(bool allowComplete = true)
+        public void cycleRapid(bool skip = false)
         {
             if (frmMain.rapid.Location < (lvMatchTags.Items.Count - 1))
             {
                 if (frmMain.rapid.Location >= 0)
                 {
-                    lvMatchTags.Items[frmMain.rapid.Location].Font = new Font(lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Regular);
-                    lvMatchTags.Items[frmMain.rapid.Location].ForeColor = Color.LightGray;
+                    if (!skip)
+                    {
+                        lvMatchTags.Items[frmMain.rapid.Location].Font = new Font(lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Regular);
+                        lvMatchTags.Items[frmMain.rapid.Location].ForeColor = Color.LightGray;
+                    }
+                    else
+                    {
+                        lvMatchTags.Items[frmMain.rapid.Location].Font = new Font(lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Bold);
+                        lvMatchTags.Items[frmMain.rapid.Location].ForeColor = Color.Black;
+                    }
                 }
                 frmMain.rapid.Location++;
                 lvMatchTags.Items[frmMain.rapid.Location].ForeColor = Color.Red;
             }
             else
             {
-                if (allowComplete)
+                if (!skip)
                 {
                     CompleteRapid();
                 }
