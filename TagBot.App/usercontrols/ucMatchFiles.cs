@@ -363,9 +363,28 @@ namespace TagBot.App
 
         public void removeTagMatch(int idx)
         {
+            int parentIndex = tvMatchFiles.SelectedNode.Parent.Index;
+            string filename = ((SongNode)((Node)tvMatchFiles.SelectedNode.Tag).Parent).Filename;
             frmMain.ucMatchTags.lvMatchTags.Items[idx].Font = new Font(frmMain.ucMatchTags.lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Bold);
             frmMain.ucMatchTags.lvMatchTags.Items[idx].ForeColor = Color.Black;
-            frmMain.tvMatchFilesModel.Nodes[tvMatchFiles.SelectedNode.Parent.Index].Nodes.RemoveAt(tvMatchFiles.SelectedNode.Index);
+            frmMain.tvMatchFilesModel.Nodes[parentIndex].Nodes.RemoveAt(tvMatchFiles.SelectedNode.Index);
+
+            if (frmMain.tvMatchFilesModel.Nodes[parentIndex].Nodes.Count > 0)
+            {
+                frmMain.proposedMetadata[filename].Metadata.Title = "";
+                foreach (Node n in frmMain.tvMatchFilesModel.Nodes[parentIndex].Nodes)
+                {
+                    if (!String.IsNullOrEmpty(frmMain.proposedMetadata[filename].Metadata.Title)) {
+                        frmMain.proposedMetadata[filename].Metadata.Title += " > ";
+                    }
+                    frmMain.proposedMetadata[filename].Metadata.Title += n.Text;
+                }
+            }
+            else
+            {
+                // restore the metadata to what it once was
+                frmMain.proposedMetadata[filename] = frmMain.originalMetadata[filename];
+            }
         }
     }
 }
