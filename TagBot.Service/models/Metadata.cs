@@ -47,7 +47,6 @@ namespace TagBot.Service.models
                 }
                 catch (Exception e)
                 {
-                    if (false) { }
                     throw e;
                 }
                 

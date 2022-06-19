@@ -315,7 +315,6 @@ namespace TagBot.App
                         {
                             Size s = nc.MeasureSize(tna, _measureContext);
                             maxControlWidth = Math.Max(maxControlWidth, (s.Width + nc.LeftMargin));
-                            if (false) { }
                         }
                         newWidth += maxControlWidth;
                     }
