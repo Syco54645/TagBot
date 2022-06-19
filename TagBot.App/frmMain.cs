@@ -30,6 +30,7 @@ namespace TagBot.App
         public DatabaseMeta databaseMeta;
         public TreeModel tvMatchFilesModel;
         public Formatter formatter = new Formatter(!string.IsNullOrEmpty(Settings.Default.customDateFormatter) ? Settings.Default.customDateFormatter : Settings.Default.defaultCustomDateFormatter);
+        public Rapid rapid = new Rapid();
 
         public Logger log = new Logger(100u);
         private List<Color> _randomColors = new List<Color> { Color.Red, Color.SkyBlue, Color.Green };
@@ -74,6 +75,7 @@ namespace TagBot.App
             ucTextFiles.frmMain = this;
             tsbSelectDirectory.Image = imgListFileIcons.Images["folder"];
             tsbSave.Image = imgListFileIcons.Images["save"];
+            tsbRefresh.Image = imgListFileIcons.Images["refresh"];
 
             setupMetadataTextbox();
 
@@ -124,7 +126,7 @@ namespace TagBot.App
             Sqlite sqlite = new Sqlite();
             sqlite.databasePath = Settings.Default.databaseLocation;
             string showDataJson = sqlite.getShow(txtDate.Text);
-            List<ShowSearchResponseContract> temp = Utility.DeserializeObject<List<ShowSearchResponseContract>>(showDataJson);
+            List<ShowSearchResponseContract> temp = Utility.DeserializeObject<List<ShowSearchResponseContract>>(showDataJson); 
             if (temp.Count == 0)
             {
                 MessageBox.Show("No show results found.", "No Data");
@@ -166,6 +168,7 @@ namespace TagBot.App
                 GetDirectories(info.GetDirectories(), rootNode);
                 tvDirectories.Nodes.Add(rootNode);
             }
+            tvDirectories.ExpandAll();
         }
 
         private void GetDirectories(DirectoryInfo[] subDirs, TreeNode nodeToAddTo)
@@ -290,6 +293,12 @@ namespace TagBot.App
             }
         }
 
+        public void resetContentionVariables()
+        {
+            // cheap way to do a deep clone
+            proposedMetadata = Utility.DeserializeObject<Dictionary<string, AudioFileInfo>>(Utility.SerializeObject<Dictionary<string, AudioFileInfo>>(originalMetadata));
+        }
+
         private void createContentionVariables(List<string> files)
         {
             originalMetadata = new Dictionary<string, AudioFileInfo>();
@@ -319,8 +328,7 @@ namespace TagBot.App
                     originalMetadata.Add(filename, audioFileInfo);
                 }
 
-                // cheap way to do a deep clone
-                proposedMetadata = Utility.DeserializeObject< Dictionary<string, AudioFileInfo>>(Utility.SerializeObject<Dictionary<string, AudioFileInfo>>(originalMetadata));
+                resetContentionVariables();
             }
             catch (Exception ex)
             {
@@ -777,6 +785,11 @@ namespace TagBot.App
             {
                 this.Text += " - Mp3 Mode Enaged!!!";
             }
+        }
+
+        private void tsbRefresh_Click(object sender, EventArgs e)
+        {
+            PopulateTreeView();
         }
     }
 }

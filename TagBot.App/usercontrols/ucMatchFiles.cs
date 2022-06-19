@@ -43,6 +43,7 @@ namespace TagBot.App
             tvMatchFiles.ItemDrag += tvDirectoriesAdv_ItemDrag;
             tvMatchFiles.NodeMouseDoubleClick += tvDirectoriesAdv_NodeMouseDoubleClick;
             tvMatchFiles.NodeMouseClick += tvDirectoriesAdv_NodeMouseClick;
+            tvMatchFiles.KeyUp += tvMatchFiles_KeyUp;
             tvMatchFiles.AllowDrop = true;
             this.Dock = DockStyle.Fill;
         }
@@ -69,9 +70,43 @@ namespace TagBot.App
 
         private void tvDirectoriesAdv_NodeMouseDoubleClick(object sender, TreeNodeAdvMouseEventArgs e)
         {
-            if (e.Control is NodeTextBox)
+            if (frmMain.rapid.Doing)
             {
-                MessageBox.Show(e.Node.Tag.ToString());
+                tvMatchFiles.BeginUpdate();
+
+                Point clickedPoint = new Point(e.X, e.Y);
+                TreeNodeAdv targetNode = tvMatchFiles.GetNodeAt(clickedPoint);
+
+                ListViewItem lvItem = frmMain.ucMatchTags.lvMatchTags.Items[frmMain.rapid.Location];
+                Track track = (Track)lvItem.Tag;
+                string trackName = frmMain.formatter.formatString(track, Service.FormatterType.Track);
+
+                Node tempNode = new Node(trackName);
+                tempNode.Tag = lvItem;
+                frmMain.tvMatchFilesModel.Nodes[targetNode.Index].Nodes.Add(tempNode);
+
+                frmMain.ucMatchTags.cycleRapid();
+                frmMain.clearTagEditor(false);
+                tvMatchFiles.EndUpdate();
+                updateContention();
+                
+                // stop the double click from causing the node to expand/collapse
+                targetNode.Collapsed += tvDirectoriesAdv_Expanding;
+            }
+            else
+            {
+                if (e.Control is NodeTextBox)
+                {
+                    //MessageBox.Show(e.Node.Tag.ToString());
+                }
+            }
+        }
+
+        private void tvDirectoriesAdv_Expanding(object sender, TreeViewAdvEventArgs e)
+        {
+            if (frmMain.rapid.Doing)
+            {
+                e.Node.IsExpanded = true;
             }
         }
 
@@ -106,7 +141,7 @@ namespace TagBot.App
             {
 
             }*/
-            if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])) && tvMatchFiles.DropPosition.Node != null)
+            if (e.Data.GetDataPresent(typeof(TreeNodeAdv[])) && tvMatchFiles.DropPosition.Node != null) // dragging within the Files
             {
                 TreeNodeAdv[] drugNodes = (TreeNodeAdv[])e.Data.GetData(typeof(TreeNodeAdv[]));
                 TreeNodeAdv drugNode = drugNodes.FirstOrDefault();
@@ -193,7 +228,7 @@ namespace TagBot.App
                     }
                 }
             }
-            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
+            else if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection))) // dropping a tag from the tags to the files
             {
                 Point targetPoint = tvMatchFiles.PointToClient(new Point(e.X, e.Y));
                 TreeNodeAdv targetNode = tvMatchFiles.GetNodeAt(targetPoint);
@@ -213,7 +248,9 @@ namespace TagBot.App
                     targetNode.Expand();
 
                     // lvItem.Remove();
-                    frmMain.tvMatchFilesModel.Nodes[targetNode.Index].Nodes.Add(new Node(trackName));
+                    Node tempNode = new Node(trackName);
+                    tempNode.Tag = lvItem;
+                    frmMain.tvMatchFilesModel.Nodes[targetNode.Index].Nodes.Add(tempNode);
                     lvItem.Font = new Font(frmMain.ucMatchTags.lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Regular);
                     lvItem.ForeColor = Color.LightGray;
                 }
@@ -278,7 +315,6 @@ namespace TagBot.App
                         {
                             Size s = nc.MeasureSize(tna, _measureContext);
                             maxControlWidth = Math.Max(maxControlWidth, (s.Width + nc.LeftMargin));
-                            if (false) { }
                         }
                         newWidth += maxControlWidth;
                     }
@@ -301,6 +337,53 @@ namespace TagBot.App
             node.Album = audioFileInfo.Metadata.Album;
             frmMain.tvMatchFilesModel.Nodes.Add(node);
             return node;
+        }
+
+        private void tvMatchFiles_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (tvMatchFiles.SelectedNode.Level < 2)
+                {
+                    return;
+                }
+
+                string tagText = getTextFromTvMatchFilesNodeTag(tvMatchFiles.SelectedNode);
+                int idx = frmMain.ucMatchTags.getLvMatchTagsItemIndexFromText(tagText);
+                removeTagMatch(idx);
+            }
+        }
+
+        public string getTextFromTvMatchFilesNodeTag(TreeNodeAdv selectedNode)
+        {
+            string tagText = ((ListViewItem)((Node)selectedNode.Tag).Tag).Text;
+            return tagText;
+        }
+
+        public void removeTagMatch(int idx)
+        {
+            int parentIndex = tvMatchFiles.SelectedNode.Parent.Index;
+            string filename = ((SongNode)((Node)tvMatchFiles.SelectedNode.Tag).Parent).Filename;
+            frmMain.ucMatchTags.lvMatchTags.Items[idx].Font = new Font(frmMain.ucMatchTags.lvMatchTags.Items[0].SubItems[0].Font, FontStyle.Bold);
+            frmMain.ucMatchTags.lvMatchTags.Items[idx].ForeColor = Color.Black;
+            frmMain.tvMatchFilesModel.Nodes[parentIndex].Nodes.RemoveAt(tvMatchFiles.SelectedNode.Index);
+
+            if (frmMain.tvMatchFilesModel.Nodes[parentIndex].Nodes.Count > 0)
+            {
+                frmMain.proposedMetadata[filename].Metadata.Title = "";
+                foreach (Node n in frmMain.tvMatchFilesModel.Nodes[parentIndex].Nodes)
+                {
+                    if (!String.IsNullOrEmpty(frmMain.proposedMetadata[filename].Metadata.Title)) {
+                        frmMain.proposedMetadata[filename].Metadata.Title += " > ";
+                    }
+                    frmMain.proposedMetadata[filename].Metadata.Title += n.Text;
+                }
+            }
+            else
+            {
+                // restore the metadata to what it once was
+                frmMain.proposedMetadata[filename] = frmMain.originalMetadata[filename];
+            }
         }
     }
 }
