@@ -278,5 +278,99 @@ namespace Tagbot.Service
             string stringResponse = Newtonsoft.Json.JsonConvert.SerializeObject(meta);
             return stringResponse;
         }
+        public string getShowIds()
+        {
+            List<int> response = new List<int>();
+            try
+            {
+
+
+                using (var connection = new SQLiteConnection("Data Source=" + databasePath))
+                {
+                    connection.Open();
+
+                    var command = connection.CreateCommand();
+                    command.CommandText =
+                    @"
+                        select show_id from show
+                    ";
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (false) { }
+                            response.Add(Convert.ToInt32(reader["show_id"]));
+                        }
+                    }
+                }
+            } 
+            catch (Exception e)
+            {
+                if (false) { }
+            }
+            string stringResponse = Newtonsoft.Json.JsonConvert.SerializeObject(response);
+            return stringResponse;
+
+        }
+
+        public string getShowSongsForRepair(int showId)
+        {
+            List<TrackRepair> tracks = new List<TrackRepair>();
+            using (var connection = new SQLiteConnection("Data Source=" + databasePath))
+            {
+                connection.Open();
+
+                var command = connection.CreateCommand();
+                command.CommandText =
+                @"
+                    SELECT s.title, ss.track_number, ss.modifier, ss.show_song_id
+                    FROM song s
+                    JOIN show_song ss
+                    ON ss.song_id = s.song_id
+                    WHERE ss.show_id = $showId
+                    ORDER BY ss.show_song_id ASC
+                ";
+                command.Parameters.AddWithValue("$showId", showId);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        TrackRepair temp = new TrackRepair
+                        {
+                            TrackName = (string)reader["title"],
+                            TrackNumber = (decimal)reader["track_number"],
+                            Modifier = (string)reader["Modifier"],
+                            ShowSongId = Convert.ToInt32(reader["show_song_id"]),
+                        };
+                        tracks.Add(temp);
+                    }
+                }
+            }
+            string stringResponse = Newtonsoft.Json.JsonConvert.SerializeObject(tracks);
+            return stringResponse;
+        }
+
+        public void writeFixesToShowSongs(int showSongId, int trackNumber)
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection("Data Source=" + databasePath))
+                {
+                    connection.Open();
+
+                    var command = connection.CreateCommand();
+                    command.CommandText = string.Format("UPDATE show_song SET track_number = '{0}' WHERE show_song_id = '{1}'", trackNumber, showSongId);
+                    command.ExecuteNonQuery();
+
+                }
+            }
+            catch (Exception e)
+            {
+                if (false) { }
+            }
+            
+        }
     }
 }

@@ -38,6 +38,7 @@ namespace TagBot.App
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnRepairTrackNumbers = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -144,11 +145,24 @@ namespace TagBot.App
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Proposed Metadata";
             // 
+            // btnRepairTrackNumbers
+            // 
+            this.btnRepairTrackNumbers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRepairTrackNumbers.Location = new System.Drawing.Point(844, 408);
+            this.btnRepairTrackNumbers.Name = "btnRepairTrackNumbers";
+            this.btnRepairTrackNumbers.Size = new System.Drawing.Size(145, 23);
+            this.btnRepairTrackNumbers.TabIndex = 12;
+            this.btnRepairTrackNumbers.Text = "Repair Track Numbers";
+            this.btnRepairTrackNumbers.UseVisualStyleBackColor = true;
+            this.btnRepairTrackNumbers.Click += new System.EventHandler(this.btnRepairTrackNumbers_Click);
+            // 
             // frmDebug
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1001, 450);
+            this.Controls.Add(this.btnRepairTrackNumbers);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -176,5 +190,6 @@ namespace TagBot.App
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnRepairTrackNumbers;
     }
 }

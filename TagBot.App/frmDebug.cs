@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tagbot.Service;
 using Tagbot.Service.contracts;
+using Tagbot.Service.models;
+using TagBot.App.Properties;
 using TagBot.Service.models;
 
 namespace TagBot.App
@@ -51,6 +53,24 @@ namespace TagBot.App
         private void frmDebug_Load(object sender, EventArgs e)
         {
             refreshTextBoxes();
+        }
+
+        private void btnRepairTrackNumbers_Click(object sender, EventArgs e)
+        {
+            Sqlite sqlite = new Sqlite();
+            sqlite.databasePath = Settings.Default.databaseLocation;
+            var showIds = Utility.DeserializeObject<List<int>>(sqlite.getShowIds());
+            foreach (var id in showIds)
+            {
+                int trackNumber = 1;
+                var showSongs = Utility.DeserializeObject<List<TrackRepair>>(sqlite.getShowSongsForRepair(id));
+                foreach (var songs in showSongs)
+                {
+                    songs.TrackNumber = trackNumber;
+                    sqlite.writeFixesToShowSongs(songs.ShowSongId, trackNumber);
+                    trackNumber++;
+                }
+            }
         }
     }
 }
