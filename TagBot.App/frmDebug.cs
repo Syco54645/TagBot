@@ -57,6 +57,7 @@ namespace TagBot.App
 
         private void btnRepairTrackNumbers_Click(object sender, EventArgs e)
         {
+            return;
             Sqlite sqlite = new Sqlite();
             sqlite.databasePath = Settings.Default.databaseLocation;
             var showIds = Utility.DeserializeObject<List<int>>(sqlite.getShowIds());
