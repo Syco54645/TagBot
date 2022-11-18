@@ -68,6 +68,11 @@ namespace TagBot.App
             return null;
         }
 
+        public void clearSelectedNode()
+        {
+            tvMatchFiles.ClearSelection();
+        }
+
         private void tvDirectoriesAdv_NodeMouseDoubleClick(object sender, TreeNodeAdvMouseEventArgs e)
         {
             if (frmMain.rapid.Doing)

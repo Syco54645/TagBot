@@ -369,6 +369,7 @@ namespace TagBot.App
             txtMetadataAlbum.Text = string.Empty;
             txtMetadataDate.Text = string.Empty;
             txtMetadataTrackNumber.Text = string.Empty;
+            txtMetadataComment.Text = string.Empty;
             
             if (clearOverall)
             {
@@ -502,12 +503,12 @@ namespace TagBot.App
             {
                 if (ctrl is TextBox)
                 {
-                    (ctrl as TextBox).ReadOnly = enabled;
+                    /*(ctrl as TextBox).ReadOnly = enabled;
                     MetadataTextBox tag = (MetadataTextBox)ctrl.Tag;
                     if (!string.IsNullOrEmpty(tag.MutuallyExclusiveField))
                     {
                         (grpFileTags.Controls[tag.MutuallyExclusiveField] as TextBox).ReadOnly = !enabled;
-                    }
+                    }*/
                 }
                 else if (ctrl is Button)
                 {
@@ -618,22 +619,49 @@ namespace TagBot.App
 
         private void btnAutoFillCommonTags_Click(object sender, EventArgs e)
         {
+            _autoFillDate();
+            _autoFillAlbum();
+            _autoFillComment();
+            _autoFillArtist();
+
+            _autoFillPostHook();
+        }
+
+        private void _autoFillDate()
+        {
+            txtOverallDate.Text = formatter.formatDate(showData.Date);
+            _autoFillPostHook();
+        }
+
+        private void _autoFillAlbum()
+        {
             string albumTitle = formatter.formatString(showData, Service.FormatterType.Album);
             txtOverallAlbum.Text = albumTitle;
-            txtMetadataFieldEditor_TextChanged(txtOverallAlbum, e);
-            txtOverallDate.Text = formatter.formatDate(showData.Date);
-            txtMetadataFieldEditor_TextChanged(txtOverallDate, e);
+            _autoFillPostHook();
+        }
+
+        private void _autoFillComment()
+        {
             txtOverallComment.Text = "Source: " + new DirectoryInfo(currentPath).Name;
-            txtMetadataFieldEditor_TextChanged(txtOverallComment, e);
+            _autoFillPostHook();
+        }
+
+        private void _autoFillArtist()
+        {
             var artistTransformationDict = formatter.artistTransformationDict;
             txtOverallArtist.Text = (artistTransformationDict.ContainsKey(showData.Artist) && !string.IsNullOrEmpty(artistTransformationDict[showData.Artist])) ? artistTransformationDict[showData.Artist] : showData.Artist;
-            txtMetadataFieldEditor_TextChanged(txtOverallArtist, e);
+            _autoFillPostHook();
+        }
 
-            SongNode selectedTvMatchFilesNode = ucMatchFiles.currentSelectNoded();
+        private void _autoFillPostHook()
+        {
+            ucMatchFiles.clearSelectedNode();
+            clearTagEditor(false);
+            /*SongNode selectedTvMatchFilesNode = ucMatchFiles.currentSelectNoded();
             if (selectedTvMatchFilesNode != null)
             {
                 loadTagsInEditor(proposedMetadata[selectedTvMatchFilesNode.Filename]);
-            }
+            }*/
         }
 
         /// <summary>
@@ -790,6 +818,26 @@ namespace TagBot.App
         private void tsbRefresh_Click(object sender, EventArgs e)
         {
             PopulateTreeView();
+        }
+
+        private void btnAutofillDate_Click(object sender, EventArgs e)
+        {
+            _autoFillDate();
+        }
+
+        private void btnAutofillAlbum_Click(object sender, EventArgs e)
+        {
+            _autoFillAlbum();
+        }
+
+        private void btnAutofillArtist_Click(object sender, EventArgs e)
+        {
+            _autoFillArtist();
+        }
+
+        private void btnAutofillComment_Click(object sender, EventArgs e)
+        {
+            _autoFillComment();
         }
     }
 }
