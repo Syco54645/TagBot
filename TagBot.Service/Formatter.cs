@@ -85,6 +85,11 @@ namespace TagBot.Service
                 Regex rx = new Regex(@"\%0.*\%0");
                 formatter = rx.Replace(formatter, string.Empty).Trim();
             }
+            else if(track.Modifier == ">")
+            {
+                formatter = "%t %0%m%0";
+                formatter = formatter.Replace("%0", string.Empty).Trim();
+            }
             else
             {
                 formatter = formatter.Replace("%0", string.Empty).Trim();

@@ -20,17 +20,30 @@ namespace Tagbot.Service
         public static DateCheckResponseContract dateDir(string name)
         {
             bool gotDate = false;
-            var regEx = new Regex(@"\d{4}\-\d{1,2}\-\d{1,2}");
-            var text = regEx.Replace(name, "");
-            var date = regEx.Match(name);
-            DateTime parsedDateTime;
-            gotDate = DateTime.TryParseExact(date.ToString(), "yyyy-MM-dd", new CultureInfo("en-US"), DateTimeStyles.None, out parsedDateTime);
-            if (!gotDate)
+            Regex regEx;
+            Match date;
+            DateTime parsedDateTime = new DateTime();
+
+            Dictionary<string, Regex> formatStrings = new Dictionary<string, Regex>()
             {
-                regEx = new Regex(@"\d{4}\d{1,2}\d{1,2}");
+                { "yyyy-MM-dd", new Regex(@"\d{4}\-\d{1,2}\-\d{1,2}") },
+                { "yyyyMMdd", new Regex(@"\d{4}\d{1,2}\d{1,2}") },
+                { "dd-MM-yyyy", new Regex(@"\d{1,2}\-\d{1,2}\-\d{4}") },
+                { "ddMMyyyy", new Regex(@"\d{4}\d{1,2}\d{1,2}") },
+                { "yy-MM-dd", new Regex(@"\d{2}\-\d{1,2}\-\d{1,2}") },
+                { "yyMMdd", new Regex(@"\d{2}\d{1,2}\d{1,2}") },
+            };
+
+            int ct = 0;
+            while (!gotDate && ct < (formatStrings.Count - 1))
+            {
+                regEx = formatStrings.ElementAt(ct).Value;
+                string formatString = formatStrings.ElementAt(ct).Key;
                 date = regEx.Match(name);
-                gotDate = DateTime.TryParseExact(date.ToString(), "yyyyMMdd", new CultureInfo("en-US"), DateTimeStyles.None, out parsedDateTime);
+                gotDate = DateTime.TryParseExact(date.ToString(), formatString, new CultureInfo("en-US"), DateTimeStyles.None, out parsedDateTime);
+                ct++;
             }
+
             DateCheckResponseContract response = new DateCheckResponseContract()
             {
                 DirectoryName = name,
