@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -77,6 +78,9 @@ namespace TagBot.Service
 
         public string formatString(Track track, FormatterType formatterType)
         {
+            TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+
+            track.TrackName = textInfo.ToTitleCase(track.TrackName);
             this.track = track;
             string formatter = titleFormatterString;
             if (string.IsNullOrEmpty(track.Modifier))
