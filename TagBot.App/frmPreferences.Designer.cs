@@ -29,7 +29,7 @@ namespace TagBot.App
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "",
             "dmb",
             "dm",
@@ -40,12 +40,16 @@ namespace TagBot.App
             this.grpAlbumFormatter = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rtfAlbumFormatterGuide = new System.Windows.Forms.RichTextBox();
+            this.lblAlbumFormatterDemo = new TagBot.App.LabelToolTip();
             this.txtCustomDateFormatter = new System.Windows.Forms.TextBox();
             this.grpCustomDate = new System.Windows.Forms.GroupBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.lblDateFormatterDemo = new TagBot.App.LabelToolTip();
             this.grpTitleFormatter = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rtfTitleFormatterGuide = new System.Windows.Forms.RichTextBox();
+            this.lblTitleModifierFormatterDemo = new TagBot.App.LabelToolTip();
+            this.lblTitleFormatterDemo = new TagBot.App.LabelToolTip();
             this.txtTitleFormatter = new System.Windows.Forms.TextBox();
             this.flpFormatters = new System.Windows.Forms.FlowLayoutPanel();
             this.grpArtistTransformation = new System.Windows.Forms.GroupBox();
@@ -60,10 +64,9 @@ namespace TagBot.App
             this.grpMp3 = new System.Windows.Forms.GroupBox();
             this.chkMp3ModeEnabled = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblDateFormatterDemo = new TagBot.App.LabelToolTip();
-            this.lblAlbumFormatterDemo = new TagBot.App.LabelToolTip();
-            this.lblTitleModifierFormatterDemo = new TagBot.App.LabelToolTip();
-            this.lblTitleFormatterDemo = new TagBot.App.LabelToolTip();
+            this.grpExperimental = new System.Windows.Forms.GroupBox();
+            this.chkParallelSavingEnabled = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.grpAlbumFormatter.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.grpCustomDate.SuspendLayout();
@@ -76,6 +79,7 @@ namespace TagBot.App
             this.tabPage2.SuspendLayout();
             this.flpSettings.SuspendLayout();
             this.grpMp3.SuspendLayout();
+            this.grpExperimental.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnApply
@@ -143,6 +147,15 @@ namespace TagBot.App
             this.rtfAlbumFormatterGuide.Text = "%d - Format date in custom date format\n%v - Venue\n%c - City\n%s - State\n%a - Short" +
     " Artist Name\n%A - Full Artist Name";
             // 
+            // lblAlbumFormatterDemo
+            // 
+            this.lblAlbumFormatterDemo.AutoSize = true;
+            this.lblAlbumFormatterDemo.Location = new System.Drawing.Point(8, 48);
+            this.lblAlbumFormatterDemo.Name = "lblAlbumFormatterDemo";
+            this.lblAlbumFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblAlbumFormatterDemo.TabIndex = 6;
+            this.lblAlbumFormatterDemo.Text = "label1";
+            // 
             // txtCustomDateFormatter
             // 
             this.txtCustomDateFormatter.Location = new System.Drawing.Point(8, 24);
@@ -176,6 +189,15 @@ namespace TagBot.App
             this.linkLabel1.Text = "Formatted using the C# date and time format strings.";
             this.linkLabel1.UseCompatibleTextRendering = true;
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // lblDateFormatterDemo
+            // 
+            this.lblDateFormatterDemo.AutoSize = true;
+            this.lblDateFormatterDemo.Location = new System.Drawing.Point(8, 48);
+            this.lblDateFormatterDemo.Name = "lblDateFormatterDemo";
+            this.lblDateFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblDateFormatterDemo.TabIndex = 7;
+            this.lblDateFormatterDemo.Text = "label1";
             // 
             // grpTitleFormatter
             // 
@@ -211,6 +233,24 @@ namespace TagBot.App
             this.rtfTitleFormatterGuide.TabIndex = 8;
             this.rtfTitleFormatterGuide.TabStop = false;
             this.rtfTitleFormatterGuide.Text = "%t - Title\n%r - Title with article at the end\n%m - Modifier";
+            // 
+            // lblTitleModifierFormatterDemo
+            // 
+            this.lblTitleModifierFormatterDemo.AutoSize = true;
+            this.lblTitleModifierFormatterDemo.Location = new System.Drawing.Point(8, 64);
+            this.lblTitleModifierFormatterDemo.Name = "lblTitleModifierFormatterDemo";
+            this.lblTitleModifierFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblTitleModifierFormatterDemo.TabIndex = 7;
+            this.lblTitleModifierFormatterDemo.Text = "label1";
+            // 
+            // lblTitleFormatterDemo
+            // 
+            this.lblTitleFormatterDemo.AutoSize = true;
+            this.lblTitleFormatterDemo.Location = new System.Drawing.Point(8, 48);
+            this.lblTitleFormatterDemo.Name = "lblTitleFormatterDemo";
+            this.lblTitleFormatterDemo.Size = new System.Drawing.Size(35, 13);
+            this.lblTitleFormatterDemo.TabIndex = 6;
+            this.lblTitleFormatterDemo.Text = "label1";
             // 
             // txtTitleFormatter
             // 
@@ -257,7 +297,7 @@ namespace TagBot.App
             // 
             this.lvArtists.HideSelection = false;
             this.lvArtists.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.lvArtists.Location = new System.Drawing.Point(8, 24);
             this.lvArtists.Name = "lvArtists";
             this.lvArtists.Size = new System.Drawing.Size(304, 56);
@@ -321,6 +361,7 @@ namespace TagBot.App
             // 
             this.flpSettings.AutoScroll = true;
             this.flpSettings.Controls.Add(this.grpMp3);
+            this.flpSettings.Controls.Add(this.grpExperimental);
             this.flpSettings.Location = new System.Drawing.Point(0, 0);
             this.flpSettings.Name = "flpSettings";
             this.flpSettings.Size = new System.Drawing.Size(344, 440);
@@ -358,41 +399,35 @@ namespace TagBot.App
     "de that this is for personal use only and that you will not distribute the files" +
     ".\r\n";
             // 
-            // lblDateFormatterDemo
+            // grpExperimental
             // 
-            this.lblDateFormatterDemo.AutoSize = true;
-            this.lblDateFormatterDemo.Location = new System.Drawing.Point(8, 48);
-            this.lblDateFormatterDemo.Name = "lblDateFormatterDemo";
-            this.lblDateFormatterDemo.Size = new System.Drawing.Size(35, 13);
-            this.lblDateFormatterDemo.TabIndex = 7;
-            this.lblDateFormatterDemo.Text = "label1";
+            this.grpExperimental.Controls.Add(this.chkParallelSavingEnabled);
+            this.grpExperimental.Controls.Add(this.label2);
+            this.grpExperimental.Location = new System.Drawing.Point(3, 109);
+            this.grpExperimental.Name = "grpExperimental";
+            this.grpExperimental.Size = new System.Drawing.Size(333, 100);
+            this.grpExperimental.TabIndex = 5;
+            this.grpExperimental.TabStop = false;
+            this.grpExperimental.Text = "Experimental Features";
             // 
-            // lblAlbumFormatterDemo
+            // chkParallelSavingEnabled
             // 
-            this.lblAlbumFormatterDemo.AutoSize = true;
-            this.lblAlbumFormatterDemo.Location = new System.Drawing.Point(8, 48);
-            this.lblAlbumFormatterDemo.Name = "lblAlbumFormatterDemo";
-            this.lblAlbumFormatterDemo.Size = new System.Drawing.Size(35, 13);
-            this.lblAlbumFormatterDemo.TabIndex = 6;
-            this.lblAlbumFormatterDemo.Text = "label1";
+            this.chkParallelSavingEnabled.AutoSize = true;
+            this.chkParallelSavingEnabled.Location = new System.Drawing.Point(8, 24);
+            this.chkParallelSavingEnabled.Name = "chkParallelSavingEnabled";
+            this.chkParallelSavingEnabled.Size = new System.Drawing.Size(132, 17);
+            this.chkParallelSavingEnabled.TabIndex = 0;
+            this.chkParallelSavingEnabled.Text = "Enable Parallel Saving";
+            this.chkParallelSavingEnabled.UseVisualStyleBackColor = true;
             // 
-            // lblTitleModifierFormatterDemo
+            // label2
             // 
-            this.lblTitleModifierFormatterDemo.AutoSize = true;
-            this.lblTitleModifierFormatterDemo.Location = new System.Drawing.Point(8, 64);
-            this.lblTitleModifierFormatterDemo.Name = "lblTitleModifierFormatterDemo";
-            this.lblTitleModifierFormatterDemo.Size = new System.Drawing.Size(35, 13);
-            this.lblTitleModifierFormatterDemo.TabIndex = 7;
-            this.lblTitleModifierFormatterDemo.Text = "label1";
-            // 
-            // lblTitleFormatterDemo
-            // 
-            this.lblTitleFormatterDemo.AutoSize = true;
-            this.lblTitleFormatterDemo.Location = new System.Drawing.Point(8, 48);
-            this.lblTitleFormatterDemo.Name = "lblTitleFormatterDemo";
-            this.lblTitleFormatterDemo.Size = new System.Drawing.Size(35, 13);
-            this.lblTitleFormatterDemo.TabIndex = 6;
-            this.lblTitleFormatterDemo.Text = "label1";
+            this.label2.Location = new System.Drawing.Point(5, 53);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(304, 40);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "This should speed up saving quite a bit. It is experimental at this point so use " +
+    "at your own risk (I have had no issues with it). Progress bar is broken in this mode.";
             // 
             // frmPreferences
             // 
@@ -428,6 +463,8 @@ namespace TagBot.App
             this.flpSettings.ResumeLayout(false);
             this.grpMp3.ResumeLayout(false);
             this.grpMp3.PerformLayout();
+            this.grpExperimental.ResumeLayout(false);
+            this.grpExperimental.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -464,5 +501,8 @@ namespace TagBot.App
         private System.Windows.Forms.FlowLayoutPanel flpSettings;
         private System.Windows.Forms.GroupBox grpMp3;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox grpExperimental;
+        private System.Windows.Forms.CheckBox chkParallelSavingEnabled;
+        private System.Windows.Forms.Label label2;
     }
 }

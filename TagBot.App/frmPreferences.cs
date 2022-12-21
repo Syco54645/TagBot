@@ -121,6 +121,7 @@ namespace TagBot.App
             Settings.Default.customDateFormatter = txtCustomDateFormatter.Text;
             Settings.Default.artistTransformation = Utility.SerializeObject<Dictionary<string, string>>(artistTransformationDict);
             Settings.Default.enableMp3 = chkMp3ModeEnabled.Checked;
+            Settings.Default.parallelSaving = chkParallelSavingEnabled.Checked;
             Settings.Default.Save();
             frmMain.updateFormatterStrings();
             MessageBox.Show("Saved");
