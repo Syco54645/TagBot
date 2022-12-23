@@ -93,6 +93,13 @@ namespace TagBot.App
         private void btnAccept_Click(object sender, EventArgs e)
         {
             // todo clean this up and fix the progress bar
+            Settings.Default.disableConfirmation = chkDisableConfirmation.Checked;
+            Settings.Default.Save();
+            doSave();
+        }
+
+        public void doSave()
+        {
             if (Settings.Default.parallelSaving)
             {
                 parallelSave();

@@ -442,7 +442,14 @@ namespace TagBot.App
                     frmConfirmation = new frmConfirmation();
                 }
                 frmConfirmation.frmMain = this;
-                frmConfirmation.ShowDialog();
+                if (!Settings.Default.disableConfirmation)
+                {
+                    frmConfirmation.ShowDialog();
+                }
+                else
+                {
+                    frmConfirmation.doSave();
+                }
             }
             else
             {
