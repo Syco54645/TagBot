@@ -312,13 +312,13 @@ namespace TagBot.App
                     AudioFileInfo audioFileInfo = new AudioFileInfo();
                     if (fileInfo.Extension == ".flac")
                     {
-                        audioFileInfo = Flac.getFileInfo(this.currentPath + "\\" + filename);
+                        audioFileInfo = Tagger.getFileInfo(this.currentPath + "\\" + filename);
                     }
                     else
                     {
                         if (Settings.Default.enableMp3)
                         {
-                            audioFileInfo = Mp3.getFileInfo(this.currentPath + "\\" + filename);
+                            audioFileInfo = Tagger.getFileInfo(this.currentPath + "\\" + filename);
                         }
                         else
                         {

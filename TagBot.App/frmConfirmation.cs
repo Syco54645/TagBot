@@ -121,13 +121,13 @@ namespace TagBot.App
 
                     if (fileInfo.Extension == ".flac")
                     {
-                        Flac.writeTags(path, proposedMetadata);
+                        Tagger.writeTags(path, proposedMetadata);
                     }
                     else
                     {
                         if (Settings.Default.enableMp3)
                         {
-                            Mp3.writeTags(path, proposedMetadata);
+                            Tagger.writeTags(path, proposedMetadata);
                         }
                         else
                         {
@@ -164,13 +164,13 @@ namespace TagBot.App
 
                     if (fileInfo.Extension == ".flac")
                     {
-                        Flac.writeTags(path, proposedMetadata);
+                        Tagger.writeTags(path, proposedMetadata);
                     }
                     else
                     {
                         if (Settings.Default.enableMp3)
                         {
-                            Mp3.writeTags(path, proposedMetadata);
+                            Tagger.writeTags(path, proposedMetadata);
                         }
                         else
                         {
