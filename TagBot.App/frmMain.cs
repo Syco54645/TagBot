@@ -1,4 +1,6 @@
 ﻿using Aga.Controls.Tree;
+using LibVLCSharp.Shared;
+using LibVLCSharp.WinForms;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -48,11 +50,17 @@ namespace TagBot.App
         frmUpdate frmUpdate = new frmUpdate();
         frmAbout frmAbout = new frmAbout();
 
+        LibVLC libVLC;
+        MediaPlayer mp;
+        Media media;
+
         public frmMain()
         {
             InitializeComponent();
+            Core.Initialize();
 
             this.StartPosition = FormStartPosition.CenterScreen;
+            disablePlayerControls();
         }
 
         public string getAssemblyVersion()
@@ -845,6 +853,83 @@ namespace TagBot.App
         private void btnAutofillComment_Click(object sender, EventArgs e)
         {
             _autoFillComment();
+        }
+
+        public void enablePlayerControls()
+        {
+            tsbPlay.Enabled = true;
+            tsbStop.Enabled = true;
+            tsbSeekAhead.Enabled = true;
+            tsbSeekBack.Enabled = true;
+        }
+        public void disablePlayerControls()
+        {
+            tsbPlay.Enabled = false;
+            tsbStop.Enabled = false;
+            tsbSeekAhead.Enabled = false;
+            tsbSeekBack.Enabled = false;
+        }
+
+        private void tsbPlay_Click(object sender, EventArgs e)
+        {
+            var currentNode = ucMatchFiles.currentSelectNoded();
+            if (mp != null)
+            {
+                mp.Stop();
+            }
+
+            if(currentNode == null)
+            {
+                return;
+            }
+
+            libVLC = new LibVLC();
+            mp = new MediaPlayer(libVLC);
+            mp.Stop();
+            videoView1.MediaPlayer = mp;
+            media = new Media(libVLC, currentPath + "\\" + ucMatchFiles.currentSelectNoded().Filename, FromType.FromPath);
+            mp.Play(media);
+            videoView1.MediaPlayer.Play();
+        }
+
+        private void tsbStop_Click(object sender, EventArgs e)
+        {
+            mp.Stop();
+        }
+
+        private void tsbSeekAhead_Click(object sender, EventArgs e)
+        {
+            if (mp.IsPlaying)
+            {
+                float songLength = mp.Length / 1000;
+                float currentPosition = mp.Time / 1000;
+                float newPosition = currentPosition + 30;
+                if (newPosition > songLength)
+                {
+                    mp.Stop();
+                }
+                else
+                {
+                    mp.SeekTo(new TimeSpan(0, 0, Convert.ToInt32(newPosition)));
+                }
+            }
+        }
+
+        private void tsbSeekBack_Click(object sender, EventArgs e)
+        {
+            if (mp.IsPlaying)
+            {
+                float currentPosition = mp.Time / 1000;
+                float newPosition = currentPosition - 30;
+                if (newPosition < 0)
+                {
+                    mp.SeekTo(new TimeSpan(0, 0, 0));
+                }
+                else
+                {
+                    mp.SeekTo(new TimeSpan(0, 0, Convert.ToInt32(newPosition)));
+                }
+            }
         }
     }
 }

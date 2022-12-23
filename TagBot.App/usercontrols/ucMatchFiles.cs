@@ -55,6 +55,7 @@ namespace TagBot.App
         /// <param name="e"></param>
         private void tvDirectoriesAdv_NodeMouseClick(object sender, TreeNodeAdvMouseEventArgs e)
         {
+            frmMain.enablePlayerControls();
             SongNode node = (SongNode)frmMain.tvMatchFilesModel.Nodes[e.Node.Index];
             frmMain.loadTagsInEditor(frmMain.proposedMetadata[node.Filename]);
         }
@@ -70,6 +71,7 @@ namespace TagBot.App
 
         public void clearSelectedNode()
         {
+            frmMain.disablePlayerControls();
             tvMatchFiles.ClearSelection();
         }
 
@@ -105,6 +107,8 @@ namespace TagBot.App
                     //MessageBox.Show(e.Node.Tag.ToString());
                 }
             }
+            SongNode node = (SongNode)frmMain.tvMatchFilesModel.Nodes[e.Node.Index];
+            frmMain.loadTagsInEditor(frmMain.proposedMetadata[node.Filename]);
         }
 
         private void tvDirectoriesAdv_Expanding(object sender, TreeViewAdvEventArgs e)
