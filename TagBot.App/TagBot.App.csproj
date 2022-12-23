@@ -44,9 +44,6 @@
     <Reference Include="LibVLCSharp, Version=3.6.7.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LibVLCSharp.3.6.7\lib\net471\LibVLCSharp.dll</HintPath>
     </Reference>
-    <Reference Include="LibVLCSharp.WinForms, Version=3.6.7.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LibVLCSharp.WinForms.3.6.7\lib\net40\LibVLCSharp.WinForms.dll</HintPath>
-    </Reference>
     <Reference Include="Markdig, Version=0.26.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Markdig.0.26.0\lib\net452\Markdig.dll</HintPath>
     </Reference>

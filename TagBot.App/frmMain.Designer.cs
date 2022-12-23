@@ -94,14 +94,15 @@ namespace TagBot.App
             this.tvDirectories = new System.Windows.Forms.TreeView();
             this.pnlShowSearch = new System.Windows.Forms.Panel();
             this.pnlTagView = new System.Windows.Forms.Panel();
-            this.videoView1 = new LibVLCSharp.WinForms.VideoView();
             this.scFlacText = new System.Windows.Forms.SplitContainer();
             this.pnlTvMatchFiles = new System.Windows.Forms.Panel();
             this.tsAudioBrowser = new System.Windows.Forms.ToolStrip();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tslMatchFilesCount = new System.Windows.Forms.ToolStripLabel();
+            this.tsbSeekBack = new System.Windows.Forms.ToolStripButton();
             this.tsbPlay = new System.Windows.Forms.ToolStripButton();
             this.tsbStop = new System.Windows.Forms.ToolStripButton();
+            this.tsbSeekAhead = new System.Windows.Forms.ToolStripButton();
             this.tcFilename = new Aga.Controls.Tree.TreeColumn();
             this.tcNumber = new Aga.Controls.Tree.TreeColumn();
             this.tcTitle = new Aga.Controls.Tree.TreeColumn();
@@ -129,8 +130,6 @@ namespace TagBot.App
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.miniToolStrip = new System.Windows.Forms.ToolStrip();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tsbSeekAhead = new System.Windows.Forms.ToolStripButton();
-            this.tsbSeekBack = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.grpCommonTags.SuspendLayout();
             this.grpFileTags.SuspendLayout();
@@ -147,7 +146,6 @@ namespace TagBot.App
             this.pnlDirectoryBrowserToolbar.SuspendLayout();
             this.tsDirectoryBrowser.SuspendLayout();
             this.pnlShowSearch.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.videoView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.scFlacText)).BeginInit();
             this.scFlacText.Panel1.SuspendLayout();
             this.scFlacText.SuspendLayout();
@@ -731,7 +729,6 @@ namespace TagBot.App
             // 
             // scFileTagFlac.Panel2
             // 
-            this.scFileTagFlac.Panel2.Controls.Add(this.videoView1);
             this.scFileTagFlac.Panel2.Controls.Add(this.scFlacText);
             this.scFileTagFlac.Panel2.Controls.Add(this.tsAudioBrowser);
             this.scFileTagFlac.Size = new System.Drawing.Size(904, 457);
@@ -790,7 +787,6 @@ namespace TagBot.App
             // 
             this.tstbLocation.AutoSize = false;
             this.tstbLocation.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tstbLocation.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.tstbLocation.Name = "tstbLocation";
             this.tstbLocation.ReadOnly = true;
             this.tstbLocation.Size = new System.Drawing.Size(100, 25);
@@ -839,17 +835,6 @@ namespace TagBot.App
             this.pnlTagView.Name = "pnlTagView";
             this.pnlTagView.Size = new System.Drawing.Size(301, 457);
             this.pnlTagView.TabIndex = 1;
-            // 
-            // videoView1
-            // 
-            this.videoView1.BackColor = System.Drawing.Color.Black;
-            this.videoView1.Location = new System.Drawing.Point(521, 0);
-            this.videoView1.MediaPlayer = null;
-            this.videoView1.Name = "videoView1";
-            this.videoView1.Size = new System.Drawing.Size(75, 23);
-            this.videoView1.TabIndex = 9;
-            this.videoView1.Text = "videoView1";
-            this.videoView1.Visible = false;
             // 
             // scFlacText
             // 
@@ -905,6 +890,16 @@ namespace TagBot.App
             this.tslMatchFilesCount.Size = new System.Drawing.Size(42, 22);
             this.tslMatchFilesCount.Text = "Files: 0";
             // 
+            // tsbSeekBack
+            // 
+            this.tsbSeekBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSeekBack.Image = ((System.Drawing.Image)(resources.GetObject("tsbSeekBack.Image")));
+            this.tsbSeekBack.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSeekBack.Name = "tsbSeekBack";
+            this.tsbSeekBack.Size = new System.Drawing.Size(23, 22);
+            this.tsbSeekBack.Text = "toolStripButton1";
+            this.tsbSeekBack.Click += new System.EventHandler(this.tsbSeekBack_Click);
+            // 
             // tsbPlay
             // 
             this.tsbPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -924,6 +919,16 @@ namespace TagBot.App
             this.tsbStop.Size = new System.Drawing.Size(23, 22);
             this.tsbStop.Text = "Stop";
             this.tsbStop.Click += new System.EventHandler(this.tsbStop_Click);
+            // 
+            // tsbSeekAhead
+            // 
+            this.tsbSeekAhead.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbSeekAhead.Image = ((System.Drawing.Image)(resources.GetObject("tsbSeekAhead.Image")));
+            this.tsbSeekAhead.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSeekAhead.Name = "tsbSeekAhead";
+            this.tsbSeekAhead.Size = new System.Drawing.Size(23, 22);
+            this.tsbSeekAhead.Text = "toolStripButton1";
+            this.tsbSeekAhead.Click += new System.EventHandler(this.tsbSeekAhead_Click);
             // 
             // tcFilename
             // 
@@ -1126,26 +1131,6 @@ namespace TagBot.App
             this.miniToolStrip.Size = new System.Drawing.Size(301, 25);
             this.miniToolStrip.TabIndex = 10;
             // 
-            // tsbSeekAhead
-            // 
-            this.tsbSeekAhead.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbSeekAhead.Image = ((System.Drawing.Image)(resources.GetObject("tsbSeekAhead.Image")));
-            this.tsbSeekAhead.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSeekAhead.Name = "tsbSeekAhead";
-            this.tsbSeekAhead.Size = new System.Drawing.Size(23, 22);
-            this.tsbSeekAhead.Text = "toolStripButton1";
-            this.tsbSeekAhead.Click += new System.EventHandler(this.tsbSeekAhead_Click);
-            // 
-            // tsbSeekBack
-            // 
-            this.tsbSeekBack.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbSeekBack.Image = ((System.Drawing.Image)(resources.GetObject("tsbSeekBack.Image")));
-            this.tsbSeekBack.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbSeekBack.Name = "tsbSeekBack";
-            this.tsbSeekBack.Size = new System.Drawing.Size(23, 22);
-            this.tsbSeekBack.Text = "toolStripButton1";
-            this.tsbSeekBack.Click += new System.EventHandler(this.tsbSeekBack_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1182,7 +1167,6 @@ namespace TagBot.App
             this.tsDirectoryBrowser.PerformLayout();
             this.pnlShowSearch.ResumeLayout(false);
             this.pnlShowSearch.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.videoView1)).EndInit();
             this.scFlacText.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.scFlacText)).EndInit();
             this.scFlacText.ResumeLayout(false);
@@ -1293,7 +1277,6 @@ namespace TagBot.App
         private System.Windows.Forms.Button btnAutofillDate;
         private System.Windows.Forms.Button btnAutofillAlbum;
         private System.Windows.Forms.Button btnAutofillArtist;
-        private LibVLCSharp.WinForms.VideoView videoView1;
         private System.Windows.Forms.ToolStripButton tsbPlay;
         private System.Windows.Forms.ToolStripButton tsbStop;
         private System.Windows.Forms.ToolStripButton tsbSeekAhead;

@@ -1,6 +1,5 @@
 ﻿using Aga.Controls.Tree;
 using LibVLCSharp.Shared;
-using LibVLCSharp.WinForms;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -886,10 +885,10 @@ namespace TagBot.App
             libVLC = new LibVLC();
             mp = new MediaPlayer(libVLC);
             mp.Stop();
-            videoView1.MediaPlayer = mp;
+            //videoView1.MediaPlayer = mp;
             media = new Media(libVLC, currentPath + "\\" + ucMatchFiles.currentSelectNoded().Filename, FromType.FromPath);
             mp.Play(media);
-            videoView1.MediaPlayer.Play();
+            //videoView1.MediaPlayer.Play();
         }
 
         private void tsbStop_Click(object sender, EventArgs e)
