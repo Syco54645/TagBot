@@ -1,5 +1,6 @@
 ﻿using Aga.Controls.Tree;
-using LibVLCSharp.Shared;
+using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -49,14 +50,12 @@ namespace TagBot.App
         frmUpdate frmUpdate = new frmUpdate();
         frmAbout frmAbout = new frmAbout();
 
-        LibVLC libVLC;
-        MediaPlayer mp;
-        Media media;
+        private WaveOutEvent outputDevice;
+        private AudioFileReader audioFile;
 
         public frmMain()
         {
             InitializeComponent();
-            Core.Initialize();
 
             this.StartPosition = FormStartPosition.CenterScreen;
             disablePlayerControls();
@@ -872,62 +871,81 @@ namespace TagBot.App
         private void tsbPlay_Click(object sender, EventArgs e)
         {
             var currentNode = ucMatchFiles.currentSelectNoded();
-            if (mp != null)
-            {
-                mp.Stop();
-            }
 
-            if(currentNode == null)
+            if (currentNode == null)
             {
                 return;
             }
 
-            libVLC = new LibVLC();
-            mp = new MediaPlayer(libVLC);
-            mp.Stop();
-            //videoView1.MediaPlayer = mp;
-            media = new Media(libVLC, currentPath + "\\" + ucMatchFiles.currentSelectNoded().Filename, FromType.FromPath);
-            mp.Play(media);
-            //videoView1.MediaPlayer.Play();
+            if (outputDevice != null)
+            {
+                outputDevice.Dispose();
+                outputDevice = null;
+            }
+            if (audioFile != null)
+            {
+                audioFile.Dispose();
+                audioFile = null;
+            }
+
+            if (outputDevice == null)
+            {
+                outputDevice = new WaveOutEvent();
+                outputDevice.PlaybackStopped += OnPlaybackStopped;
+            }
+            if (audioFile == null)
+            {
+                audioFile = new AudioFileReader(currentPath + "\\" + ucMatchFiles.currentSelectNoded().Filename);
+                outputDevice.Init(audioFile);
+            }
+            outputDevice.Play();
+        }
+
+        private void OnPlaybackStopped(object sender, StoppedEventArgs args)
+        {
+            if (outputDevice?.PlaybackState == PlaybackState.Stopped)
+            {
+                if (outputDevice != null)
+                {
+                    outputDevice.Dispose();
+                    outputDevice = null;
+                }
+                if (audioFile != null)
+                {
+                    audioFile.Dispose();
+                    audioFile = null;
+                }
+            }
         }
 
         private void tsbStop_Click(object sender, EventArgs e)
         {
-            mp.Stop();
+            outputDevice?.Stop();
         }
 
         private void tsbSeekAhead_Click(object sender, EventArgs e)
         {
-            if (mp.IsPlaying)
+            if (outputDevice?.PlaybackState == PlaybackState.Playing)
             {
-                float songLength = mp.Length / 1000;
-                float currentPosition = mp.Time / 1000;
-                float newPosition = currentPosition + 30;
-                if (newPosition > songLength)
+                var newPosition = audioFile.Position + (audioFile.WaveFormat.AverageBytesPerSecond * 30);
+                if (audioFile.Length <= newPosition)
                 {
-                    mp.Stop();
+                    outputDevice?.Stop();
                 }
                 else
                 {
-                    mp.SeekTo(new TimeSpan(0, 0, Convert.ToInt32(newPosition)));
+                    audioFile.Position = newPosition;
                 }
             }
         }
 
         private void tsbSeekBack_Click(object sender, EventArgs e)
         {
-            if (mp.IsPlaying)
+            if (outputDevice?.PlaybackState == PlaybackState.Playing)
             {
-                float currentPosition = mp.Time / 1000;
-                float newPosition = currentPosition - 30;
-                if (newPosition < 0)
-                {
-                    mp.SeekTo(new TimeSpan(0, 0, 0));
-                }
-                else
-                {
-                    mp.SeekTo(new TimeSpan(0, 0, Convert.ToInt32(newPosition)));
-                }
+                var newPosition = audioFile.Position - (audioFile.WaveFormat.AverageBytesPerSecond * 30);
+                newPosition = newPosition < 0 ? 0 : newPosition;
+                audioFile.Position = newPosition;
             }
         }
     }
