@@ -1,4 +1,6 @@
 ﻿using Aga.Controls.Tree;
+using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -48,11 +50,15 @@ namespace TagBot.App
         frmUpdate frmUpdate = new frmUpdate();
         frmAbout frmAbout = new frmAbout();
 
+        private WaveOutEvent outputDevice;
+        private AudioFileReader audioFile;
+
         public frmMain()
         {
             InitializeComponent();
 
             this.StartPosition = FormStartPosition.CenterScreen;
+            disablePlayerControls();
         }
 
         public string getAssemblyVersion()
@@ -312,13 +318,13 @@ namespace TagBot.App
                     AudioFileInfo audioFileInfo = new AudioFileInfo();
                     if (fileInfo.Extension == ".flac")
                     {
-                        audioFileInfo = Flac.getFileInfo(this.currentPath + "\\" + filename);
+                        audioFileInfo = Tagger.getFileInfo(this.currentPath + "\\" + filename);
                     }
                     else
                     {
                         if (Settings.Default.enableMp3)
                         {
-                            audioFileInfo = Mp3.getFileInfo(this.currentPath + "\\" + filename);
+                            audioFileInfo = Tagger.getFileInfo(this.currentPath + "\\" + filename);
                         }
                         else
                         {
@@ -442,7 +448,14 @@ namespace TagBot.App
                     frmConfirmation = new frmConfirmation();
                 }
                 frmConfirmation.frmMain = this;
-                frmConfirmation.ShowDialog();
+                if (!Settings.Default.disableConfirmation)
+                {
+                    frmConfirmation.ShowDialog();
+                }
+                else
+                {
+                    frmConfirmation.doSave();
+                }
             }
             else
             {
@@ -838,6 +851,102 @@ namespace TagBot.App
         private void btnAutofillComment_Click(object sender, EventArgs e)
         {
             _autoFillComment();
+        }
+
+        public void enablePlayerControls()
+        {
+            tsbPlay.Enabled = true;
+            tsbStop.Enabled = true;
+            tsbSeekAhead.Enabled = true;
+            tsbSeekBack.Enabled = true;
+        }
+        public void disablePlayerControls()
+        {
+            tsbPlay.Enabled = false;
+            tsbStop.Enabled = false;
+            tsbSeekAhead.Enabled = false;
+            tsbSeekBack.Enabled = false;
+        }
+
+        private void tsbPlay_Click(object sender, EventArgs e)
+        {
+            var currentNode = ucMatchFiles.currentSelectNoded();
+
+            if (currentNode == null)
+            {
+                return;
+            }
+
+            if (outputDevice != null)
+            {
+                outputDevice.Dispose();
+                outputDevice = null;
+            }
+            if (audioFile != null)
+            {
+                audioFile.Dispose();
+                audioFile = null;
+            }
+
+            if (outputDevice == null)
+            {
+                outputDevice = new WaveOutEvent();
+                outputDevice.PlaybackStopped += OnPlaybackStopped;
+            }
+            if (audioFile == null)
+            {
+                audioFile = new AudioFileReader(currentPath + "\\" + ucMatchFiles.currentSelectNoded().Filename);
+                outputDevice.Init(audioFile);
+            }
+            outputDevice.Play();
+        }
+
+        private void OnPlaybackStopped(object sender, StoppedEventArgs args)
+        {
+            if (outputDevice?.PlaybackState == PlaybackState.Stopped)
+            {
+                if (outputDevice != null)
+                {
+                    outputDevice.Dispose();
+                    outputDevice = null;
+                }
+                if (audioFile != null)
+                {
+                    audioFile.Dispose();
+                    audioFile = null;
+                }
+            }
+        }
+
+        private void tsbStop_Click(object sender, EventArgs e)
+        {
+            outputDevice?.Stop();
+        }
+
+        private void tsbSeekAhead_Click(object sender, EventArgs e)
+        {
+            if (outputDevice?.PlaybackState == PlaybackState.Playing)
+            {
+                var newPosition = audioFile.Position + (audioFile.WaveFormat.AverageBytesPerSecond * 30);
+                if (audioFile.Length <= newPosition)
+                {
+                    outputDevice?.Stop();
+                }
+                else
+                {
+                    audioFile.Position = newPosition;
+                }
+            }
+        }
+
+        private void tsbSeekBack_Click(object sender, EventArgs e)
+        {
+            if (outputDevice?.PlaybackState == PlaybackState.Playing)
+            {
+                var newPosition = audioFile.Position - (audioFile.WaveFormat.AverageBytesPerSecond * 30);
+                newPosition = newPosition < 0 ? 0 : newPosition;
+                audioFile.Position = newPosition;
+            }
         }
     }
 }

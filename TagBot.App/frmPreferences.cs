@@ -66,6 +66,9 @@ namespace TagBot.App
             lblAlbumFormatterDemo.Text = formatter.formatString(_dummyShow, FormatterType.Album);
             chkMp3ModeEnabled.Checked = Settings.Default.enableMp3;
 
+            chkParallelSavingEnabled.Checked = Settings.Default.parallelSaving;
+            chkDisableConfirmation.Checked = Settings.Default.disableConfirmation;
+
             string formatterGuide = "";
             foreach (KeyValuePair<string, Service.FormatterInfo> entry in formatter.albumFormatterDict)
             {
@@ -122,6 +125,7 @@ namespace TagBot.App
             Settings.Default.artistTransformation = Utility.SerializeObject<Dictionary<string, string>>(artistTransformationDict);
             Settings.Default.enableMp3 = chkMp3ModeEnabled.Checked;
             Settings.Default.parallelSaving = chkParallelSavingEnabled.Checked;
+            Settings.Default.disableConfirmation = chkDisableConfirmation.Checked;
             Settings.Default.Save();
             frmMain.updateFormatterStrings();
             MessageBox.Show("Saved");

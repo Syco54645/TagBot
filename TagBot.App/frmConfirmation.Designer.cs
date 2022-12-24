@@ -37,6 +37,7 @@ namespace TagBot.App
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.pbTagProgress = new System.Windows.Forms.ProgressBar();
+            this.chkDisableConfirmation = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChanges)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,11 +110,22 @@ namespace TagBot.App
             this.pbTagProgress.Size = new System.Drawing.Size(800, 15);
             this.pbTagProgress.TabIndex = 29;
             // 
+            // chkDisableConfirmation
+            // 
+            this.chkDisableConfirmation.AutoSize = true;
+            this.chkDisableConfirmation.Location = new System.Drawing.Point(12, 404);
+            this.chkDisableConfirmation.Name = "chkDisableConfirmation";
+            this.chkDisableConfirmation.Size = new System.Drawing.Size(333, 17);
+            this.chkDisableConfirmation.TabIndex = 30;
+            this.chkDisableConfirmation.Text = "Disable Confirmation Screen (This can be undone in preferences)";
+            this.chkDisableConfirmation.UseVisualStyleBackColor = true;
+            // 
             // frmConfirmation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 439);
+            this.Controls.Add(this.chkDisableConfirmation);
             this.Controls.Add(this.pbTagProgress);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnAccept);
@@ -129,6 +141,7 @@ namespace TagBot.App
             this.Load += new System.EventHandler(this.frmConfirmation_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvChanges)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -142,5 +155,6 @@ namespace TagBot.App
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Button btnCancel;
         public System.Windows.Forms.ProgressBar pbTagProgress;
+        private System.Windows.Forms.CheckBox chkDisableConfirmation;
     }
 }

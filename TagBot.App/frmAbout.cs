@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TagBot.App.Properties;
+using System.Configuration;
 
 namespace TagBot.App
 {
@@ -46,7 +47,13 @@ namespace TagBot.App
                 string major = Assembly.GetExecutingAssembly().GetName().Version.Major.ToString();
                 string minor = Assembly.GetExecutingAssembly().GetName().Version.Minor.ToString();
                 string build = Assembly.GetExecutingAssembly().GetName().Version.Build.ToString();
-                return major + "." + minor + "." + build;
+                string revision = Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString();
+                var appSettings = ConfigurationManager.AppSettings;
+                if (appSettings.GetValues("releaseStage").FirstOrDefault() == "debug")
+                {
+                    revision += " Debug";
+                }
+                return major + "." + minor + "." + build + "." + revision;
             }
         }
 

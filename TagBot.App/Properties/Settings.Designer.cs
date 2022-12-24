@@ -174,5 +174,17 @@ namespace TagBot.App.Properties {
                 this["parallelSaving"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool disableConfirmation {
+            get {
+                return ((bool)(this["disableConfirmation"]));
+            }
+            set {
+                this["disableConfirmation"] = value;
+            }
+        }
     }
 }

@@ -67,6 +67,8 @@ namespace TagBot.App
             this.grpExperimental = new System.Windows.Forms.GroupBox();
             this.chkParallelSavingEnabled = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.chkDisableConfirmation = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.grpAlbumFormatter.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.grpCustomDate.SuspendLayout();
@@ -391,7 +393,7 @@ namespace TagBot.App
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(5, 53);
+            this.label3.Location = new System.Drawing.Point(5, 44);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(304, 40);
             this.label3.TabIndex = 4;
@@ -401,11 +403,13 @@ namespace TagBot.App
             // 
             // grpExperimental
             // 
+            this.grpExperimental.Controls.Add(this.chkDisableConfirmation);
+            this.grpExperimental.Controls.Add(this.label4);
             this.grpExperimental.Controls.Add(this.chkParallelSavingEnabled);
             this.grpExperimental.Controls.Add(this.label2);
             this.grpExperimental.Location = new System.Drawing.Point(3, 109);
             this.grpExperimental.Name = "grpExperimental";
-            this.grpExperimental.Size = new System.Drawing.Size(333, 100);
+            this.grpExperimental.Size = new System.Drawing.Size(333, 182);
             this.grpExperimental.TabIndex = 5;
             this.grpExperimental.TabStop = false;
             this.grpExperimental.Text = "Experimental Features";
@@ -422,12 +426,32 @@ namespace TagBot.App
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(5, 53);
+            this.label2.Location = new System.Drawing.Point(5, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(304, 40);
             this.label2.TabIndex = 4;
             this.label2.Text = "This should speed up saving quite a bit. It is experimental at this point so use " +
-    "at your own risk (I have had no issues with it). Progress bar is broken in this mode.";
+    "at your own risk (I have had no issues with it). Progress bar is broken in this " +
+    "mode.";
+            // 
+            // chkDisableConfirmation
+            // 
+            this.chkDisableConfirmation.AutoSize = true;
+            this.chkDisableConfirmation.Location = new System.Drawing.Point(8, 97);
+            this.chkDisableConfirmation.Name = "chkDisableConfirmation";
+            this.chkDisableConfirmation.Size = new System.Drawing.Size(159, 17);
+            this.chkDisableConfirmation.TabIndex = 5;
+            this.chkDisableConfirmation.Text = "Disable Confirmation Screen";
+            this.chkDisableConfirmation.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(5, 117);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(304, 40);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Disable the confirmation screen. This will go straight to writing the tags, allow" +
+    "ing you to save a click.";
             // 
             // frmPreferences
             // 
@@ -504,5 +528,7 @@ namespace TagBot.App
         private System.Windows.Forms.GroupBox grpExperimental;
         private System.Windows.Forms.CheckBox chkParallelSavingEnabled;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox chkDisableConfirmation;
+        private System.Windows.Forms.Label label4;
     }
 }

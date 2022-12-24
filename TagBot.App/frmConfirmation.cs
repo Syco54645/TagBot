@@ -93,6 +93,13 @@ namespace TagBot.App
         private void btnAccept_Click(object sender, EventArgs e)
         {
             // todo clean this up and fix the progress bar
+            Settings.Default.disableConfirmation = chkDisableConfirmation.Checked;
+            Settings.Default.Save();
+            doSave();
+        }
+
+        public void doSave()
+        {
             if (Settings.Default.parallelSaving)
             {
                 parallelSave();
@@ -121,13 +128,13 @@ namespace TagBot.App
 
                     if (fileInfo.Extension == ".flac")
                     {
-                        Flac.writeTags(path, proposedMetadata);
+                        Tagger.writeTags(path, proposedMetadata);
                     }
                     else
                     {
                         if (Settings.Default.enableMp3)
                         {
-                            Mp3.writeTags(path, proposedMetadata);
+                            Tagger.writeTags(path, proposedMetadata);
                         }
                         else
                         {
@@ -164,13 +171,13 @@ namespace TagBot.App
 
                     if (fileInfo.Extension == ".flac")
                     {
-                        Flac.writeTags(path, proposedMetadata);
+                        Tagger.writeTags(path, proposedMetadata);
                     }
                     else
                     {
                         if (Settings.Default.enableMp3)
                         {
-                            Mp3.writeTags(path, proposedMetadata);
+                            Tagger.writeTags(path, proposedMetadata);
                         }
                         else
                         {
