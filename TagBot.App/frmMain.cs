@@ -305,6 +305,21 @@ namespace TagBot.App
             proposedMetadata = Utility.DeserializeObject<Dictionary<string, AudioFileInfo>>(Utility.SerializeObject<Dictionary<string, AudioFileInfo>>(originalMetadata));
         }
 
+        public void refreshOriginalMetadata()
+        {
+            Dictionary<string, AudioFileInfo> temp = new Dictionary<string, AudioFileInfo>();
+            foreach (var o in originalMetadata)
+            {
+                string filename = o.Value.Filename;
+                FileInfo fileInfo = new FileInfo(filename);
+                AudioFileInfo audioFileInfo = new AudioFileInfo();
+                
+                audioFileInfo = Tagger.getFileInfo(this.currentPath + "\\" + filename);
+                temp.Add(filename, audioFileInfo);
+            }
+            originalMetadata = temp;
+        }
+
         private void createContentionVariables(List<string> files)
         {
             originalMetadata = new Dictionary<string, AudioFileInfo>();

@@ -108,6 +108,9 @@ namespace TagBot.App
             {
                 linearSave();
             }
+            frmMain.refreshOriginalMetadata();
+            frmMain.ucMatchFiles.updateContention();
+            frmMain.ucMatchFiles.populateTvMatchFiles();
         }
 
         private void linearSave()
