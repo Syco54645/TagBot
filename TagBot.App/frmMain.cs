@@ -949,7 +949,14 @@ namespace TagBot.App
                 }
                 else
                 {
-                    audioFile.Position = newPosition;
+                    try
+                    {
+                        audioFile.Position = newPosition;
+                    }
+                    catch(Exception ex)
+                    {
+                        log.AddErrorToRtf(ex.Message + Environment.NewLine + ex.StackTrace);
+                    }
                 }
             }
         }
