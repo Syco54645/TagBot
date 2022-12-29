@@ -303,6 +303,11 @@ namespace TagBot.App
         {
             // cheap way to do a deep clone
             proposedMetadata = Utility.DeserializeObject<Dictionary<string, AudioFileInfo>>(Utility.SerializeObject<Dictionary<string, AudioFileInfo>>(originalMetadata));
+            // we need to reload the overall tags when we do the reset. this may not work well in all cases, needs tested.
+            if (!string.IsNullOrEmpty(txtOverallArtist.Text)) txtMetadataFieldEditor_TextChanged(txtOverallArtist, EventArgs.Empty);
+            if (!string.IsNullOrEmpty(txtOverallAlbum.Text)) txtMetadataFieldEditor_TextChanged(txtOverallAlbum, EventArgs.Empty);
+            if (!string.IsNullOrEmpty(txtOverallDate.Text)) txtMetadataFieldEditor_TextChanged(txtOverallDate, EventArgs.Empty);
+            if (!string.IsNullOrEmpty(txtOverallComment.Text)) txtMetadataFieldEditor_TextChanged(txtOverallComment, EventArgs.Empty);
         }
 
         public void refreshOriginalMetadata()
@@ -685,11 +690,6 @@ namespace TagBot.App
         {
             ucMatchFiles.clearSelectedNode();
             clearTagEditor(false);
-            /*SongNode selectedTvMatchFilesNode = ucMatchFiles.currentSelectNoded();
-            if (selectedTvMatchFilesNode != null)
-            {
-                loadTagsInEditor(proposedMetadata[selectedTvMatchFilesNode.Filename]);
-            }*/
         }
 
         /// <summary>
@@ -868,6 +868,8 @@ namespace TagBot.App
             _autoFillComment();
         }
 
+        #region SoundPlayer
+
         public void enablePlayerControls()
         {
             tsbPlay.Enabled = true;
@@ -970,5 +972,6 @@ namespace TagBot.App
                 audioFile.Position = newPosition;
             }
         }
+        #endregion
     }
 }
