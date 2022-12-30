@@ -793,22 +793,33 @@ namespace TagBot.App
         /// <param name="e"></param>
         private void txtMetadataFieldEditor_TextChanged(object sender, EventArgs e)
         {
-            TextBox ctrl = (sender as TextBox);
-            MetadataTextBox tag = (MetadataTextBox)ctrl.Tag;
-
-            if (tag.MetadataTextboxType == MetadataTextboxType.Overall)
+            if (proposedMetadata == null)
             {
-                foreach (KeyValuePair<string, AudioFileInfo> entry in proposedMetadata)
+                return;
+            }
+            try
+            {
+                TextBox ctrl = (sender as TextBox);
+                MetadataTextBox tag = (MetadataTextBox)ctrl.Tag;
+
+                if (tag.MetadataTextboxType == MetadataTextboxType.Overall)
                 {
-                    entry.Value.Metadata[tag.FieldInMetadata] = ctrl.Text;
+                    foreach (KeyValuePair<string, AudioFileInfo> entry in proposedMetadata)
+                    {
+                        entry.Value.Metadata[tag.FieldInMetadata] = ctrl.Text;
+                    }
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(lblCurrentFile.Text))
+                    {
+                        proposedMetadata[lblCurrentFile.Text].Metadata[tag.FieldInMetadata] = ctrl.Text;
+                    }
                 }
             }
-            else
+            catch(Exception ex)
             {
-                if (!string.IsNullOrEmpty(lblCurrentFile.Text))
-                {
-                    proposedMetadata[lblCurrentFile.Text].Metadata[tag.FieldInMetadata] = ctrl.Text;
-                }
+                log.AddErrorToRtf(ex.Message + Environment.NewLine + ex.StackTrace);
             }
         }
 
