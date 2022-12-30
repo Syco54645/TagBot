@@ -83,6 +83,10 @@ namespace TagBot.App
 
                 Point clickedPoint = new Point(e.X, e.Y);
                 TreeNodeAdv targetNode = tvMatchFiles.GetNodeAt(clickedPoint);
+                if (targetNode.Level > 1)
+                {
+                    return;
+                }
 
                 ListViewItem lvItem = frmMain.ucMatchTags.lvMatchTags.Items[frmMain.rapid.Location];
                 Track track = (Track)lvItem.Tag;
