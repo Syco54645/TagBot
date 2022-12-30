@@ -49,11 +49,14 @@ namespace TagBot.App
                 string build = Assembly.GetExecutingAssembly().GetName().Version.Build.ToString();
                 string revision = Assembly.GetExecutingAssembly().GetName().Version.Revision.ToString();
                 var appSettings = ConfigurationManager.AppSettings;
+                string version = major + "." + minor + "." + build;
+
                 if (appSettings.GetValues("releaseStage").FirstOrDefault() == "debug")
                 {
-                    revision += " Debug";
+                    version += " Debug";
                 }
-                return major + "." + minor + "." + build + "." + revision;
+                
+                return version;
             }
         }
 
