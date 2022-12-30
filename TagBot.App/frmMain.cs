@@ -948,7 +948,16 @@ namespace TagBot.App
 
         private void tsbStop_Click(object sender, EventArgs e)
         {
+            StopPlayback();
+        }
+
+        public void StopPlayback()
+        {
             outputDevice?.Stop();
+            outputDevice?.Dispose();
+            outputDevice = null;
+            audioFile?.Dispose();
+            audioFile = null;
         }
 
         private void tsbSeekAhead_Click(object sender, EventArgs e)

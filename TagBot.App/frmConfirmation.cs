@@ -100,6 +100,7 @@ namespace TagBot.App
 
         public void doSave()
         {
+            frmMain.StopPlayback();
             if (Settings.Default.parallelSaving)
             {
                 parallelSave();
