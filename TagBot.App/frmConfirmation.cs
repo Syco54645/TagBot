@@ -114,6 +114,28 @@ namespace TagBot.App
             frmMain.ucMatchFiles.populateTvMatchFiles();
         }
 
+        private void tagFile(KeyValuePair<String, AudioFileInfo> item, int incrementAmount = 0)
+        {
+            string filename = item.Key;
+            Metadata proposedMetadata = item.Value.Metadata;
+            string path = frmMain.currentPath + "\\" + filename;
+            FileInfo fileInfo = new FileInfo(filename);
+
+            if (fileInfo.Extension == ".flac" || (fileInfo.Extension == ".mp3" && Settings.Default.enableMp3))
+            {
+                Tagger.writeTags(path, proposedMetadata);
+            }
+            else
+            {
+                frmMain.log.AddErrorToRtf(String.Format("Something bad happened. Report this. Ext: {0} enabledMp3: {1}", fileInfo.Extension, Settings.Default.enableMp3));
+            }
+
+            if (incrementAmount != 0)
+            {
+                pbTagProgress.Increment(incrementAmount);
+            }
+        }
+
         private void linearSave()
         {
             try
@@ -125,28 +147,7 @@ namespace TagBot.App
                 stopwatch.Start();
                 foreach (var item in frmMain.proposedMetadata)
                 {
-                    string filename = item.Key;
-                    Metadata proposedMetadata = item.Value.Metadata;
-                    string path = frmMain.currentPath + "\\" + filename;
-                    FileInfo fileInfo = new FileInfo(filename);
-
-                    if (fileInfo.Extension == ".flac")
-                    {
-                        Tagger.writeTags(path, proposedMetadata);
-                    }
-                    else
-                    {
-                        if (Settings.Default.enableMp3)
-                        {
-                            Tagger.writeTags(path, proposedMetadata);
-                        }
-                        else
-                        {
-                            frmMain.log.AddErrorToRtf("Not sure how you got here because mp3 isn't enabled. Try to remember what you did and please report a bug.");
-                        }
-                    }
-                    
-                    pbTagProgress.Increment(incrementAmount * (i));
+                    tagFile(item, (incrementAmount * (i)));
                     i++;
                 }
                 stopwatch.Stop();
@@ -168,26 +169,7 @@ namespace TagBot.App
                 stopwatch.Start();
                 Parallel.ForEach(frmMain.proposedMetadata, item =>
                 {
-                    string filename = item.Key;
-                    Metadata proposedMetadata = item.Value.Metadata;
-                    string path = frmMain.currentPath + "\\" + filename;
-                    FileInfo fileInfo = new FileInfo(filename);
-
-                    if (fileInfo.Extension == ".flac")
-                    {
-                        Tagger.writeTags(path, proposedMetadata);
-                    }
-                    else
-                    {
-                        if (Settings.Default.enableMp3)
-                        {
-                            Tagger.writeTags(path, proposedMetadata);
-                        }
-                        else
-                        {
-                            frmMain.log.AddErrorToRtf("Not sure how you got here because mp3 isn't enabled. Try to remember what you did and please report a bug.");
-                        }
-                    }
+                    tagFile(item);
                 });
                 stopwatch.Stop();
                 frmMain.log.AddNoticeToRtf(String.Format("Elapsed time is {0} ms", stopwatch.ElapsedMilliseconds));
