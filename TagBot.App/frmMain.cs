@@ -261,6 +261,7 @@ namespace TagBot.App
                 {
                     txtDate.Text = string.Empty;
                 }
+                formatter.setDirectorySourceInfo(nodeDirInfo.Name, dateCheck.DateFormat);
 
                 List<string> files = getAudioFilesInDirectory(nodeDirInfo.GetFiles());
                 

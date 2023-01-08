@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tagbot.Service;
 using Tagbot.Service.contracts;
@@ -52,6 +46,7 @@ namespace TagBot.App
                 TrackName = "Cornbread",
                 Modifier = "",
             };
+            formatter.setDirectorySourceInfo(@"gd1982-04-06.143050.fob.nak700.wise.miller.clugston.flac1648", new System.Text.RegularExpressions.Regex(@"\d{4}\-\d{1,2}\-\d{1,2}"));   
 
             formatter.customDateFormatter = !string.IsNullOrEmpty(Settings.Default.customDateFormatter) ? Settings.Default.customDateFormatter : Settings.Default.defaultCustomDateFormatter;
             formatter.albumFormatterString = !string.IsNullOrEmpty(Settings.Default.albumFormatterString) ? Settings.Default.albumFormatterString : Settings.Default.defaultAlbumFormatterString;
@@ -74,6 +69,7 @@ namespace TagBot.App
             {
                 formatterGuide += entry.Key + " - " + entry.Value.Description + Environment.NewLine;
             }
+            formatterGuide += "%0 - Surrounding text with this will cause the contents inside to be hidden if there is no title modifier";
             rtfAlbumFormatterGuide.Text = formatterGuide.TrimEnd(Environment.NewLine.ToCharArray());
 
             formatterGuide = "";

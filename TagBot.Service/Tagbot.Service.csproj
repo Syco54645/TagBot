@@ -97,6 +97,7 @@
     <Compile Include="contracts\DateCheckResponseContract.cs" />
     <Compile Include="contracts\ShowSearchRequestContract.cs" />
     <Compile Include="contracts\ShowSearchResponseContract.cs" />
+    <Compile Include="models\DirectorySourceInfo.cs" />
     <Compile Include="Tagger.cs" />
     <Compile Include="models\TrackRepair.cs" />
     <Compile Include="Formatter.cs" />

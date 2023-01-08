@@ -49,6 +49,7 @@ namespace Tagbot.Service
                 DirectoryName = name,
                 Date = parsedDateTime.ToString("yyyy-MM-dd"),
                 IsDate = parsedDateTime != DateTime.MinValue,
+                DateFormat = formatStrings.ElementAt(ct - 1).Value,
             };
             return response;
         }
