@@ -98,6 +98,7 @@ namespace TagBot.App
                 getDatabaseMeta();
             }
             this.tvDirectories.NodeMouseClick += new TreeNodeMouseClickEventHandler(this.tvDirectories_NodeMouseClick);
+            this.tvDirectories.KeyUp += TvDirectories_KeyUp;
 
             tsDirectoryBrowser_Resize(this, e);
             if (databaseMeta == null)
@@ -205,6 +206,14 @@ namespace TagBot.App
             UpdateCurrentPath(tag.FullName);
         }
 
+        private void UpdateCurrentPath(System.Windows.Forms.KeyEventArgs e)
+        {
+            TreeNode node = tvDirectories.SelectedNode;
+            var parentNodes = GetParentNodes(node);
+            DirectoryInfo tag = (DirectoryInfo)node.Tag;
+            UpdateCurrentPath(tag.FullName);
+        }
+
         private void UpdateCurrentPath(string path)
         {
             this.currentPath = path;
@@ -237,16 +246,29 @@ namespace TagBot.App
             return response;
         }
 
+        private void TvDirectories_KeyUp(object sender, KeyEventArgs e)
+        {
+            string oldCurrentPath = currentPath;
+            UpdateCurrentPath(e);
+            string newCurrentPath = currentPath;
+            TreeNode newSelected = tvDirectories.SelectedNode;
+            handleSelectingDirectory(oldCurrentPath, newCurrentPath, newSelected);
+        }
+
         private void tvDirectories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             string oldCurrentPath = currentPath;
             UpdateCurrentPath(e);
             string newCurrentPath = currentPath;
+            TreeNode newSelected = e.Node;
+            handleSelectingDirectory(oldCurrentPath, newCurrentPath, newSelected);
+        }
 
+        public void handleSelectingDirectory(string oldCurrentPath, string newCurrentPath, TreeNode newSelected)
+        {
             if (oldCurrentPath != newCurrentPath)
             {
                 clearTagEditor();
-                TreeNode newSelected = e.Node;
                 ucTextFiles.clearListView();
                 DirectoryInfo nodeDirInfo = (DirectoryInfo)newSelected.Tag;
                 ListViewItem.ListViewSubItem[] subItems;
@@ -264,7 +286,7 @@ namespace TagBot.App
                 formatter.setDirectorySourceInfo(nodeDirInfo.Name, dateCheck.DateFormat);
 
                 List<string> files = getAudioFilesInDirectory(nodeDirInfo.GetFiles());
-                
+
                 createContentionVariables(files);
                 tslMatchFilesCount.Text = "Files: " + originalMetadata.Count.ToString();
 
