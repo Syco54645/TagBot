@@ -910,6 +910,7 @@ namespace TagBot.App
             tsbStop.Enabled = true;
             tsbSeekAhead.Enabled = true;
             tsbSeekBack.Enabled = true;
+            tsbLastThirty.Enabled = true;
         }
         public void disablePlayerControls()
         {
@@ -917,6 +918,7 @@ namespace TagBot.App
             tsbStop.Enabled = false;
             tsbSeekAhead.Enabled = false;
             tsbSeekBack.Enabled = false;
+            tsbLastThirty.Enabled = false;
         }
 
         private void tsbPlay_Click(object sender, EventArgs e)
@@ -1016,5 +1018,29 @@ namespace TagBot.App
             }
         }
         #endregion
+
+        private void tsbLastThirty_Click(object sender, EventArgs e)
+        {
+            if (outputDevice?.PlaybackState == PlaybackState.Playing)
+            {
+                var newPosition = audioFile.Length - (audioFile.WaveFormat.AverageBytesPerSecond * 30);
+                
+                if (audioFile.Length <= newPosition)
+                {
+                    outputDevice?.Stop();
+                }
+                else
+                {
+                    try
+                    {
+                        audioFile.Position = newPosition;
+                    }
+                    catch (Exception ex)
+                    {
+                        log.AddErrorToRtf(ex.Message + Environment.NewLine + ex.StackTrace);
+                    }
+                }
+            }
+        }
     }
 }

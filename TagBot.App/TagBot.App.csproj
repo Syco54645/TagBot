@@ -218,6 +218,7 @@
       <DependentUpon>ucMatchTags.cs</DependentUpon>
     </Compile>
     <Content Include="icons\play-24.png" />
+    <Content Include="icons\skip to end 30.png" />
     <Content Include="icons\stop-24.png" />
     <Content Include="TagBot.ico" />
     <EmbeddedResource Include="frmAbout.resx">
